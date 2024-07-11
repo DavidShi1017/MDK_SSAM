@@ -1,0 +1,14 @@
+{
+    "mdk.i18n": {
+        "displayLanguages": "i18n_en"
+    },
+    "mdk.uieditor": {
+        "left": {
+            "visible": true
+        },
+        "right": {
+            "visible": true,
+            "width": 413
+        }
+    }
+}

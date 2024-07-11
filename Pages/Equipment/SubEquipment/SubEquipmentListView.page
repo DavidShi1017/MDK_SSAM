@@ -1,0 +1,98 @@
+{
+	"Controls": [
+		{
+			"FilterFeedbackBar": {
+				"ShowAllFilters": true,
+				"FastFilters": "/SAPAssetManager/Rules/Equipment/EquipmentFastFiltersItems.js",
+				"_Name": "FilterFeedback",
+				"_Type": "Control.Type.FilterFeedbackBar"
+			},
+			"_Type": "Control.Type.SectionedTable",
+			"_Name": "SectionedTable",
+			"Sections": [
+				{
+					"Header": {
+						"_Name": "SectionHeader0",
+						"AccessoryType": "None",
+						"UseTopPadding": false
+					},
+					"Separators": {
+						"TopSectionSeparator": false,
+						"BottomSectionSeparator": false,
+						"HeaderSeparator": false,
+						"FooterSeparator": false,
+						"ControlSeparator": false
+					},
+					"_Type": "Section.Type.ObjectTable",
+					"DataSubscriptions": [
+						"MyEquipments",
+						"MyEquipDocuments"
+					],
+					"Target": {
+						"Service": "/SAPAssetManager/Services/AssetManager.service",
+						"EntitySet": "/SAPAssetManager/Rules/Equipment/EquipmentListViewFormat.js",
+						"QueryOptions": "/SAPAssetManager/Rules/Equipment/EquipmentQueryOptions.js"
+					},
+					"_Name": "EquipmentListViewSection",
+					"Visible": true,
+					"EmptySection": {
+						"Caption": "$(L,no_equipments_available)",
+						"FooterVisible": false
+					},
+					"ObjectCell": {
+						"ContextMenu": {
+							"Items": [],
+							"PerformFirstActionWithFullSwipe": true,
+							"LeadingItems": [],
+							"TrailingItems": []
+						},
+						"Title": "{EquipDesc}",
+						"Subhead": "111",
+						"Footnote": "TTT",
+						"SubstatusText": "/SAPAssetManager/Rules/Equipment/EquipmentListViewFormat.js",
+						"AccessoryType": "None",
+						"Tags": [],
+						"AvatarStack": {
+							"ImageIsCircular": true,
+							"ImageHasBorder": false
+						},
+						"AvatarGrid": {
+							"ImageIsCircular": true
+						},
+						"Selected": false
+					},
+					"HighlightSelectedItem": false
+				}
+			],
+			"Filters": "/SAPAssetManager/Rules/Equipment/DefaultOrderByEquipmentId.js"
+		}
+	],
+	"_Type": "Page",
+	"_Name": "SubEquipmentListViewPage",
+	"Caption": "$(L,equipment)",
+	"PrefersLargeCaption": true,
+	"OnLoaded": "/SAPAssetManager/Rules/Equipment/SubEquipment/SubEquipmentListViewOnPageLoad.js",
+	"OnReturning": "/SAPAssetManager/Rules/Equipment/SubEquipment/SubEquipmentOnPageReturning.js",
+	"ActionBar": {
+		"Items": [
+			{
+				"Text": "...",
+				"_Name": "ActionBarItem0",
+				"Caption": "",
+				"Position": "right",
+				"IsIconCircular": false,
+				"Visible": "/SAPAssetManager/Rules/Equipment/SubEquipment/IsSubEquipmentPopoverVisible.js",
+				"OnPress": "/SAPAssetManager/Actions/Equipment/SubEquipmentPopover.action"
+			},
+			{
+				"_Name": "ActionBarItem1",
+				"Caption": "/SAPAssetManager/Rules/Filter/FilterButtonCaption.js",
+				"Icon": "$(PLT,'',/SAPAssetManager/Images/filter.android.png)",
+				"Position": "right",
+				"IsIconCircular": false,
+				"OnPress": "/SAPAssetManager/Actions/Equipment/SubEquipment/SubEquipmentFilter.action"
+			}
+		],
+		"_Name": "ActionBar1"
+	}
+}

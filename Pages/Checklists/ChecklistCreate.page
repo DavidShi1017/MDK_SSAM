@@ -1,0 +1,102 @@
+{
+	"Controls": [
+		{
+			"_Type": "Control.Type.FormCellContainer",
+			"_Name": "FormCellContainer",
+			"Sections": [
+				{
+					"Controls": [
+						{
+							"_Type": "Control.Type.FormCell.SimpleProperty",
+							"_Name": "ChecklistShortDesc",
+							"IsVisible": true,
+							"Caption": "$(L,description)",
+							"OnValueChange": "/SAPAssetManager/Rules/Common/Validation/ResetValidationOnInput.js",
+							"Enabled": true,
+							"IsEditable": true
+						},
+						{
+							"_Type": "Control.Type.FormCell.ListPicker",
+							"_Name": "TemplateLstPkr",
+							"IsVisible": true,
+							"AllowMultipleSelection": false,
+							"AllowEmptySelection": true,
+							"Caption": "$(L,template)",
+							"OnValueChange": "/SAPAssetManager/Rules/Common/Validation/ResetValidationOnInput.js",
+							"IsSelectedSectionEnabled": false,
+							"IsPickerDismissedOnSelection": true,
+							"IsSearchCancelledAfterSelection": true,
+							"AllowDefaultValueIfOneItem": false,
+							"IsEditable": true,
+							"Search": {
+								"Enabled": true,
+								"Placeholder": "$(L,search)",
+								"BarcodeScanner": true,
+								"Delay": 500,
+								"MinimumCharacterThreshold": 3
+							},
+							"PickerItems": {
+								"DisplayValue": "{{#Property:FormCategory}} - {{#Property:ShortDescription}}",
+								"ReturnValue": "{TemplateId}",
+								"Target": {
+									"EntitySet": "FormTemplateHeaders",
+									"Service": "/SAPAssetManager/Services/AssetManager.service"
+								}
+							}
+						},
+						{
+							"_Type": "Control.Type.FormCell.ListPicker",
+							"_Name": "CategoryLstPkr",
+							"IsVisible": true,
+							"AllowMultipleSelection": false,
+							"AllowEmptySelection": true,
+							"Caption": "$(L,category)",
+							"IsSelectedSectionEnabled": false,
+							"IsPickerDismissedOnSelection": true,
+							"IsSearchCancelledAfterSelection": true,
+							"AllowDefaultValueIfOneItem": false,
+							"IsEditable": true,
+							"Search": {
+								"Enabled": true,
+								"Placeholder": "$(L,search)",
+								"BarcodeScanner": true,
+								"Delay": 500,
+								"MinimumCharacterThreshold": 3
+							},
+							"PickerItems": {
+								"DisplayValue": "{{#Property:FormCategory}} - {{#Property:FormCategoryDesc}}",
+								"ReturnValue": "{FormCategory}",
+								"Target": {
+									"EntitySet": "ObjectFormCategories",
+									"Service": "/SAPAssetManager/Services/AssetManager.service",
+									"QueryOptions": ""
+								}
+							}
+						}
+					],
+					"_Name": "FormCellSection0",
+					"Visible": true
+				}
+			]
+		}
+	],
+	"_Type": "Page",
+	"_Name": "ChecklistCreatePage",
+	"Caption": "$(L,checklist_add)",
+	"OnLoaded": "/SAPAssetManager/Rules/Checklists/Create/CheckListCreateOnLoaded.js",
+	"OnActivityBackPressed": "/SAPAssetManager/Rules/WorkOrders/CreateUpdate/CancelCheckOnBackNavAndroid.js",
+	"ActionBar": {
+		"Items": [
+			"/SAPAssetManager/Pages/Fragments/CancelButton.fragment",
+			{
+				"_Name": "ActionBarItem0",
+				"Caption": "",
+				"SystemItem": "Done",
+				"Position": "right",
+				"IsIconCircular": false,
+				"OnPress": "/SAPAssetManager/Actions/Checklists/Create/ChecklistCreateRequired.action"
+			}
+		],
+		"_Name": "ActionBar1"
+	}
+}

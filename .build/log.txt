@@ -1,0 +1,2 @@
+Pass:
+Generated bundle file /home/user/projects/ASSETMGRMTADTA00P_5-70008341/.build/SAPAssetManager/.build/uploadBundle.zip
