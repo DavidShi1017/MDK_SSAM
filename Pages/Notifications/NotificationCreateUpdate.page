@@ -273,6 +273,26 @@
                     }
                 },
                 {
+                    "_Name": "PlanningPlantLstPkr",
+                    "_Type": "Control.Type.FormCell.ListPicker",
+                    "Caption": "/SAPAssetManager/Rules/WorkOrders/CreateUpdate/PlanningPlantFieldCaption.js",
+                    "AllowMultipleSelection": false,
+                    "AllowDefaultValueIfOneItem": false,
+                    "IsPickerDismissedOnSelection": true,
+                    "IsSearchCancelledAfterSelection": true,
+                    "Search": {
+                        "Enabled": true,
+                        "Delay": 500,
+                        "MinimumCharacterThreshold": 3,
+                        "Placeholder": "$(L,search)",
+                        "BarcodeScanner": true
+                    },
+                    "IsEditable": "/SAPAssetManager/Rules/WorkOrders/CreateUpdate/WorkOrderCreateUpdateEditable.js",
+                    "Value": "/SAPAssetManager/Rules/WorkOrders/CreateUpdate/WorkOrderCreateUpdateDefault.js",
+                    "OnValueChange": "/SAPAssetManager/Rules/WorkOrders/CreateUpdate/WorkOrderCreateUpdateOnChange.js",
+                    "PickerItems": "/SAPAssetManager/Rules/WorkOrders/CreateUpdate/WorkOrderCreateUpdateControlsPickerItems.js"
+                },
+                {
                     "_Name": "QMCodeGroupListPicker",
                     "_Type": "Control.Type.FormCell.ListPicker",
                     "AllowMultipleSelection": false,
@@ -297,6 +317,7 @@
                     },
                     "OnValueChange": "/SAPAssetManager/Rules/Notifications/CreateUpdate/NotificationCreateUpdateQMCodeGroupOnValueChange.js"
                 },
+                
                 {
                     "_Name": "QMCodeListPicker",
                     "_Type": "Control.Type.FormCell.ListPicker",
