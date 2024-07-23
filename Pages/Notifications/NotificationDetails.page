@@ -199,10 +199,6 @@
                     "Value": "/SAPAssetManager/Rules/Notifications/Details/NotificationDetailsPlannerGroup.js"
                 },
                 {
-                    "KeyName": "$(L,planning_plant)",
-                    "Value": "/SAPAssetManager/Rules/Notifications/Details/NotificationDetailsPlanningPlant.js"
-                },
-                {
                     "KeyName": "$(L,main_work_center)",
                     "Value": "/SAPAssetManager/Rules/Notifications/Details/NotificationDetailsMainWorkCenter.js"
                 },

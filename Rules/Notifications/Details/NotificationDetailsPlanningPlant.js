@@ -12,7 +12,7 @@ export default function NotificationDetailsPlannerGroup(context) {
     }
 
     let filterQuery = `$filter=PlannerGroup eq '${id}' and PlanningPlant eq '${binding.PlanningPlant}'`;
-    return context.read('/SAPAssetManager/Services/AssetManager.service', 'PlannerGroups', [], filterQuery).then(function(result) {
+    return context.read('/SAPAssetManager/Services/AssetManager.service', 'Plants', [], filterQuery).then(function(result) {
         if (result && result.length > 0) {
             return id + ' - ' + result.getItem(0).PlanningPlantName;
         }
