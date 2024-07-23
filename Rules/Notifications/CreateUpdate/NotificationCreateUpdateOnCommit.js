@@ -39,6 +39,7 @@ export default function NotificationCreateUpdateOnCommit(clientAPI) {
     ComLib.setStateVariable(clientAPI, 'NotificationType', type); // Saving type to later use for EAMOverallStatusConfigs
     let descr = clientAPI.getControls()[0].getControl('NotificationDescription').getValue();
     let plannerGroup = clientAPI.getControls()[0].getControl('PlannerGroupListPicker').getValue();
+    let PlanningPlant = clientAPI.getControls()[0].getControl('PlanningPlantLstPkr').getValue();
     let breakdownStart = ComLib.getControlProxy(clientAPI, 'BreakdownStartSwitch').getValue();
     let breakdownEnd = ComLib.getControlProxy(clientAPI, 'BreakdownEndSwitch').getValue();
     let notifCategoryPromise = NotificationLibrary.getNotificationCategory(clientAPI, type).then(notifCategory => {
@@ -73,7 +74,7 @@ export default function NotificationCreateUpdateOnCommit(clientAPI) {
 
                 let notificationCreateProperties = {
                     'PlanningGroup': plannerGroup.length ? plannerGroup[0].ReturnValue : '',
-                    'PlanningPlant': NotificationLibrary.NotificationCreateDefaultPlant(clientAPI),
+                    'PlanningPlant': PlanningPlant.length ? PlanningPlant[0].ReturnValue : '',
                     'NotificationNumber': notifNum,
                     'NotificationDescription': descr,
                     'NotificationType': type,
@@ -160,6 +161,7 @@ export default function NotificationCreateUpdateOnCommit(clientAPI) {
                 'HeaderEquipment': NotificationLibrary.NotificationCreateUpdateEquipmentLstPkrValue(clientAPI),
                 'BreakdownIndicator': BreakdownSwitchValue(clientAPI),
                 'PlanningGroup': plannerGroup.length ? plannerGroup[0].ReturnValue : '',
+                'PlanningPlant': PlanningPlant.length ? PlanningPlant[0].ReturnValue : '',
                 'MainWorkCenter': workcenter,
                 'MainWorkCenterPlant': NotificationLibrary.NotificationCreateMainWorkCenterPlant(clientAPI),
             };
