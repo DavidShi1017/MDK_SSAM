@@ -41,7 +41,7 @@ export default function NotificationCreateUpdateOnCommit(clientAPI) {
     let plannerGroup = clientAPI.getControls()[0].getControl('PlannerGroupListPicker').getValue();
     let PlanningPlant = clientAPI.getControls()[0].getControl('PlanningPlantLstPkr').getValue();
     let workCenterPlant = clientAPI.getControls()[0].getControl('WorkCenterPlantLstPkr').getValue();
-    
+    let mainWorkcenterPicker = context.getControls()[0].getControl('MainWorkCenterListPicker').getValue();
     let breakdownStart = ComLib.getControlProxy(clientAPI, 'BreakdownStartSwitch').getValue();
     let breakdownEnd = ComLib.getControlProxy(clientAPI, 'BreakdownEndSwitch').getValue();
     let notifCategoryPromise = NotificationLibrary.getNotificationCategory(clientAPI, type).then(notifCategory => {
@@ -84,7 +84,7 @@ export default function NotificationCreateUpdateOnCommit(clientAPI) {
                     'HeaderFunctionLocation': floc,
                     'HeaderEquipment': equip,
                     'BreakdownIndicator': BreakdownSwitchValue(clientAPI),
-                    'MainWorkCenter': workcenter,
+                    'MainWorkCenter': mainWorkcenterPicker.length ? mainWorkcenterPicker[0].ReturnValue : '',//workcenter,
                     'MainWorkCenterPlant': workCenterPlant.length ? workCenterPlant[0].ReturnValue : '',//NotificationLibrary.NotificationCreateMainWorkCenterPlant(clientAPI),
                     'ReportedBy': ComLib.getSapUserName(clientAPI),
                     'CreationDate': GetCurrentDate(clientAPI),
@@ -164,8 +164,8 @@ export default function NotificationCreateUpdateOnCommit(clientAPI) {
                 'BreakdownIndicator': BreakdownSwitchValue(clientAPI),
                 'PlanningGroup': plannerGroup.length ? plannerGroup[0].ReturnValue : '',
                 'PlanningPlant': PlanningPlant.length ? PlanningPlant[0].ReturnValue : '',
-                'MainWorkCenter': workcenter,
-                'MainWorkCenterPlant': workCenterPlant,
+                'MainWorkCenter': mainWorkcenterPicker.length? mainWorkcenterPicker[0].ReturnValue : '',//workcenter,
+                //'MainWorkCenterPlant': workCenterPlant,
                 'MainWorkCenterPlant': workCenterPlant.length ? workCenterPlant[0].ReturnValue : '',//NotificationLibrary.NotificationCreateMainWorkCenterPlant(clientAPI),
             };
 
