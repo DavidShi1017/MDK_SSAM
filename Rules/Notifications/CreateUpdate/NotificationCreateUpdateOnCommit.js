@@ -40,6 +40,8 @@ export default function NotificationCreateUpdateOnCommit(clientAPI) {
     let descr = clientAPI.getControls()[0].getControl('NotificationDescription').getValue();
     let plannerGroup = clientAPI.getControls()[0].getControl('PlannerGroupListPicker').getValue();
     let PlanningPlant = clientAPI.getControls()[0].getControl('PlanningPlantLstPkr').getValue();
+    let workCenterPlant = clientAPI.getControls()[0].getControl('WorkCenterPlantLstPkr').getValue();
+    
     let breakdownStart = ComLib.getControlProxy(clientAPI, 'BreakdownStartSwitch').getValue();
     let breakdownEnd = ComLib.getControlProxy(clientAPI, 'BreakdownEndSwitch').getValue();
     let notifCategoryPromise = NotificationLibrary.getNotificationCategory(clientAPI, type).then(notifCategory => {
@@ -83,7 +85,7 @@ export default function NotificationCreateUpdateOnCommit(clientAPI) {
                     'HeaderEquipment': equip,
                     'BreakdownIndicator': BreakdownSwitchValue(clientAPI),
                     'MainWorkCenter': workcenter,
-                    'MainWorkCenterPlant': NotificationLibrary.NotificationCreateMainWorkCenterPlant(clientAPI),
+                    'MainWorkCenterPlant': workCenterPlant,//NotificationLibrary.NotificationCreateMainWorkCenterPlant(clientAPI),
                     'ReportedBy': ComLib.getSapUserName(clientAPI),
                     'CreationDate': GetCurrentDate(clientAPI),
                     'ReferenceNumber': NotificationReferenceNumber(clientAPI),
@@ -163,7 +165,8 @@ export default function NotificationCreateUpdateOnCommit(clientAPI) {
                 'PlanningGroup': plannerGroup.length ? plannerGroup[0].ReturnValue : '',
                 'PlanningPlant': PlanningPlant.length ? PlanningPlant[0].ReturnValue : '',
                 'MainWorkCenter': workcenter,
-                'MainWorkCenterPlant': NotificationLibrary.NotificationCreateMainWorkCenterPlant(clientAPI),
+                'MainWorkCenterPlant': workCenterPlant,
+                //'MainWorkCenterPlant': NotificationLibrary.NotificationCreateMainWorkCenterPlant(clientAPI),
             };
 
             if (breakdownStart) {

@@ -288,10 +288,30 @@
                         "Placeholder": "$(L,search)",
                         "BarcodeScanner": true
                     },
-                    "IsEditable": "/SAPAssetManager/Rules/WorkOrders/CreateUpdate/WorkOrderCreateUpdateEditable.js",
+                    "IsEditable": true,
                     "Value": "/SAPAssetManager/Rules/WorkOrders/CreateUpdate/WorkOrderCreateUpdateDefault.js",
                     "OnValueChange": "/SAPAssetManager/Rules/WorkOrders/CreateUpdate/WorkOrderCreateUpdateOnChange.js",
                     "PickerItems": "/SAPAssetManager/Rules/WorkOrders/CreateUpdate/WorkOrderCreateUpdateControlsPickerItems.js"
+                },
+                {
+                    "AllowMultipleSelection": false,
+                    "IsPickerDismissedOnSelection": true,
+                    "IsSearchCancelledAfterSelection": true,
+                    "Search": {
+                        "Enabled": true,
+                        "Delay": 500,
+                        "MinimumCharacterThreshold": 3,
+                        "Placeholder": "$(L,search)",
+                        "BarcodeScanner": true
+                    },
+                    "Caption": "/SAPAssetManager/Rules/WorkOrders/CreateUpdate/WorkCenterPlantFieldCaption.js",
+                    "PlaceHolder": "",
+                    "Value": "/SAPAssetManager/Rules/WorkOrders/CreateUpdate/WorkOrderCreateUpdateDefault.js",
+                    "IsEditable": true,
+                    "OnValueChange": "/SAPAssetManager/Rules/WorkOrders/CreateUpdate/WorkOrderCreateUpdateOnChange.js",
+                    "PickerItems": "/SAPAssetManager/Rules/WorkOrders/CreateUpdate/WorkOrderCreateUpdateControlsPickerItems.js",
+                    "_Name": "WorkCenterPlantLstPkr",
+                    "_Type": "Control.Type.FormCell.ListPicker"
                 },
                 {
                     "_Name": "QMCodeGroupListPicker",
