@@ -3,8 +3,10 @@ import ValidationLibrary from '../../Common/Library/ValidationLibrary';
 import DocumentFieldsAddRequired from '../../Documents/Create/DocumentFieldsAddRequired';
 
 export default function RequiredFields(context) {
+
     const required = ['NotificationDescription', 'TypeLstPkr', 'EquipHierarchyExtensionControl'];
      //const required = ['NotificationDescription', 'TypeLstPkr','EquipHierarchyExtensionControl', 'MainWorkCenterListPicker', 'PlannerGroupListPicker','PlanningPlantLstPkr', 'WorkCenterPlantLstPkr'];
+
     // eslint-disable-next-line brace-style
     if ((function() { try { return context.evaluateTargetPathForAPI('#Control:PartnerPicker1').visible; } catch (exc) { return false; } })()) {
         required.push('PartnerPicker1');
