@@ -819,6 +819,21 @@ export default class {
         if (dict.TypeLstPkr) {
             dict.TypeLstPkr.clearValidation();
         }
+        if (dict.EquipHierarchyExtensionControl) {
+            dict.EquipHierarchyExtensionControl.clearValidation();
+        }
+        if (dict.MainWorkCenterListPicker) {
+            dict.MainWorkCenterListPicker.clearValidation();
+        }
+        if (dict.PlannerGroupListPicker) {
+            dict.PlannerGroupListPicker.clearValidation();
+        }
+        if (dict.PlanningPlantLstPkr) {
+            dict.PlanningPlantLstPkr.clearValidation();
+        }
+        if (dict.WorkCenterPlantLstPkr) {
+            dict.WorkCenterPlantLstPkr.clearValidation();
+        }
         let valPromises = [];
         valPromises.push(libThis.CharacterLimitValidation(context, dict.NotificationDescription));
         valPromises.push(libThis.ValidateNoteNotEmpty(context, dict.NotificationDescription));
