@@ -85,7 +85,7 @@ export default function NotificationCreateUpdateOnCommit(clientAPI) {
                     'HeaderEquipment': equip,
                     'BreakdownIndicator': BreakdownSwitchValue(clientAPI),
                     'MainWorkCenter': workcenter,
-                    'MainWorkCenterPlant': workCenterPlant,//NotificationLibrary.NotificationCreateMainWorkCenterPlant(clientAPI),
+                    'MainWorkCenterPlant': workCenterPlant.length ? workCenterPlant[0].ReturnValue : '',//NotificationLibrary.NotificationCreateMainWorkCenterPlant(clientAPI),
                     'ReportedBy': ComLib.getSapUserName(clientAPI),
                     'CreationDate': GetCurrentDate(clientAPI),
                     'ReferenceNumber': NotificationReferenceNumber(clientAPI),
@@ -166,7 +166,7 @@ export default function NotificationCreateUpdateOnCommit(clientAPI) {
                 'PlanningPlant': PlanningPlant.length ? PlanningPlant[0].ReturnValue : '',
                 'MainWorkCenter': workcenter,
                 'MainWorkCenterPlant': workCenterPlant,
-                //'MainWorkCenterPlant': NotificationLibrary.NotificationCreateMainWorkCenterPlant(clientAPI),
+                'MainWorkCenterPlant': workCenterPlant.length ? workCenterPlant[0].ReturnValue : '',//NotificationLibrary.NotificationCreateMainWorkCenterPlant(clientAPI),
             };
 
             if (breakdownStart) {
