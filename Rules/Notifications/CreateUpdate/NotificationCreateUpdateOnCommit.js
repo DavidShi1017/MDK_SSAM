@@ -41,7 +41,7 @@ export default function NotificationCreateUpdateOnCommit(clientAPI) {
     let plannerGroup = clientAPI.getControls()[0].getControl('PlannerGroupListPicker').getValue();
     let PlanningPlant = clientAPI.getControls()[0].getControl('PlanningPlantLstPkr').getValue();
     let workCenterPlant = clientAPI.getControls()[0].getControl('WorkCenterPlantLstPkr').getValue();
-    let mainWorkcenterPicker = context.getControls()[0].getControl('MainWorkCenterListPicker').getValue();
+    let mainWorkcenterPicker = clientAPI.getControls()[0].getControl('MainWorkCenterListPicker').getValue();
     let breakdownStart = ComLib.getControlProxy(clientAPI, 'BreakdownStartSwitch').getValue();
     let breakdownEnd = ComLib.getControlProxy(clientAPI, 'BreakdownEndSwitch').getValue();
     let notifCategoryPromise = NotificationLibrary.getNotificationCategory(clientAPI, type).then(notifCategory => {

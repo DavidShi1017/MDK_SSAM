@@ -235,16 +235,36 @@
 						"BarcodeScanner": true
                     },
                     "Caption": "$(L,main_work_center)",
-                    "Value": "/SAPAssetManager/Rules/Notifications/NotificationMainWorkCenterDefaultPkrDefault.js",
+                    "Value": "{WorkCenterId}",
                     "PickerItems": {
-                        "DisplayValue": "{ExternalWorkCenterId}",
-                        "ReturnValue": "{ExternalWorkCenterId}",
+                        "DisplayValue": "{ExternalWorkCenterId} - {PlantId}",
+                        "ReturnValue": "{WorkCenterId}",
                         "Target": {
                             "EntitySet": "WorkCenters",
                             "Service": "/SAPAssetManager/Services/AssetManager.service",
                             "QueryOptions": "/SAPAssetManager/Rules/Notifications/CreateUpdate/NotificationMainWorkCenterQueryOptions.js"
                         }
                     }
+                },
+                 {
+                    "AllowMultipleSelection": false,
+                    "IsPickerDismissedOnSelection": true,
+                    "IsSearchCancelledAfterSelection": true,
+                    "Search": {
+                        "Enabled": true,
+                        "Delay": 500,
+                        "MinimumCharacterThreshold": 3,
+                        "Placeholder": "$(L,search)",
+                        "BarcodeScanner": true
+                    },
+                    "Caption": "/SAPAssetManager/Rules/WorkOrders/CreateUpdate/WorkCenterPlantFieldCaption.js",
+                    "PlaceHolder": "",
+                    "Value": "/SAPAssetManager/Rules/WorkOrders/CreateUpdate/WorkOrderCreateUpdateDefault.js",
+                    "IsEditable": true,
+                    "OnValueChange": "/SAPAssetManager/Rules/WorkOrders/CreateUpdate/WorkOrderCreateUpdateOnChange.js",
+                    "PickerItems": "/SAPAssetManager/Rules/WorkOrders/CreateUpdate/WorkOrderCreateUpdateControlsPickerItems.js",
+                    "_Name": "WorkCenterPlantLstPkr",
+                    "_Type": "Control.Type.FormCell.ListPicker"
                 },
                 {
                     "_Name": "PlannerGroupListPicker",
@@ -263,7 +283,7 @@
                     "Caption": "$(L,planner_group)",
                     "Value": "{PlanningGroup}",
                     "PickerItems": {
-                        "DisplayValue": "{{#Property:PlannerGroup}} - {{#Property:PlannerGroupName}}",
+                        "DisplayValue": "{{#Property:PlannerGroup}} - {{#Property:PlannerGroupName}} - {{#Property:PlanningPlant}}",
                         "ReturnValue": "{PlannerGroup}",
                         "Target": {
                             "EntitySet": "PlannerGroups",
@@ -293,26 +313,7 @@
                     "OnValueChange": "/SAPAssetManager/Rules/WorkOrders/CreateUpdate/WorkOrderCreateUpdateOnChange.js",
                     "PickerItems": "/SAPAssetManager/Rules/WorkOrders/CreateUpdate/WorkOrderCreateUpdateControlsPickerItems.js"
                 },
-                {
-                    "AllowMultipleSelection": false,
-                    "IsPickerDismissedOnSelection": true,
-                    "IsSearchCancelledAfterSelection": true,
-                    "Search": {
-                        "Enabled": true,
-                        "Delay": 500,
-                        "MinimumCharacterThreshold": 3,
-                        "Placeholder": "$(L,search)",
-                        "BarcodeScanner": true
-                    },
-                    "Caption": "/SAPAssetManager/Rules/WorkOrders/CreateUpdate/WorkCenterPlantFieldCaption.js",
-                    "PlaceHolder": "",
-                    "Value": "/SAPAssetManager/Rules/WorkOrders/CreateUpdate/WorkOrderCreateUpdateDefault.js",
-                    "IsEditable": true,
-                    "OnValueChange": "/SAPAssetManager/Rules/WorkOrders/CreateUpdate/WorkOrderCreateUpdateOnChange.js",
-                    "PickerItems": "/SAPAssetManager/Rules/WorkOrders/CreateUpdate/WorkOrderCreateUpdateControlsPickerItems.js",
-                    "_Name": "WorkCenterPlantLstPkr",
-                    "_Type": "Control.Type.FormCell.ListPicker"
-                },
+               
                 {
                     "_Name": "QMCodeGroupListPicker",
                     "_Type": "Control.Type.FormCell.ListPicker",
