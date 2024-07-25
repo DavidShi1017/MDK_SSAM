@@ -713,10 +713,11 @@ export default class {
         }
 
         if (mainWorkcenter) {
-            return context.read('/SAPAssetManager/Services/AssetManager.service', 'WorkCenters', [], "$filter=ExternalWorkCenterId eq '" + mainWorkcenter + "'")
-                .then(function(result) {
-                    return result.getItem(0).WorkCenterId;
-                });
+            // return context.read('/SAPAssetManager/Services/AssetManager.service', 'WorkCenters', [], "$filter=ExternalWorkCenterId eq '" + mainWorkcenter + "'")
+            //     .then(function(result) {
+            //         return result.getItem(0).WorkCenterId;
+            //     });
+            return mainWorkcenter;
         } else {
             return '';
         }
