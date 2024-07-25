@@ -235,7 +235,8 @@
 						"BarcodeScanner": true
                     },
                     "Caption": "$(L,main_work_center)",
-                    "Value": "{WorkCenterId}",
+                    //"Value": "{WorkCenterId}",
+                    "Value": "/SAPAssetManager/Rules/Notifications/NotificationMainWorkCenterDefaultPkrDefault.js",
                     "PickerItems": {
                         "DisplayValue": "{ExternalWorkCenterId} - {PlantId}",
                         "ReturnValue": "{WorkCenterId}",
