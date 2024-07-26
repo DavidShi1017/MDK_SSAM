@@ -267,33 +267,6 @@
                     "_Type": "Control.Type.FormCell.ListPicker"
                 },
                 {
-                    "_Name": "PlannerGroupListPicker",
-                    "_Type": "Control.Type.FormCell.ListPicker",
-                    "AllowMultipleSelection": false,
-                    "IsPickerDismissedOnSelection": true,
-                    "AllowDefaultValueIfOneItem": true,
-                    "IsSearchCancelledAfterSelection": true,
-                    "Search": {
-                        "Enabled": true,
-                        "Delay": 500,
-                        "MinimumCharacterThreshold": 3,
-                        "Placeholder": "$(L,search)",
-                        "BarcodeScanner": true
-                    },
-                    "Caption": "$(L,planner_group)",
-                    "Value": "/SAPAssetManager/Rules/Notifications/NotificationMainPlannerGoupDefaultPkrDefault.js",
-                    "PickerItems": {
-                        "DisplayValue": "{{#Property:PlannerGroup}} - {{#Property:PlannerGroupName}} - {{#Property:PlanningPlant}}",
-                        "ReturnValue": "{{#Property:PlannerGroup}}-{{#Property:PlanningPlant}}",
-                        "Target": {
-                            "EntitySet": "PlannerGroups",
-                            "Service": "/SAPAssetManager/Services/AssetManager.service",
-                            "QueryOptions": "$orderby=PlannerGroup"
-                        }
-                    }
-                },
-                
-                {
                     "_Name": "PlanningPlantLstPkr",
                     "_Type": "Control.Type.FormCell.ListPicker",
                     "Caption": "/SAPAssetManager/Rules/WorkOrders/CreateUpdate/PlanningPlantFieldCaption.js",
@@ -310,9 +283,37 @@
                     },
                     "IsEditable": true,
                     "Value": "/SAPAssetManager/Rules/WorkOrders/CreateUpdate/WorkOrderCreateUpdateDefault.js",
-                    "OnValueChange": "/SAPAssetManager/Rules/WorkOrders/CreateUpdate/WorkOrderCreateUpdateOnChange.js",
+                    "OnValueChange": "/SAPAssetManager/Rules/Notifications/NotificationMainPlannerGoupDefaultPkrDefault.js",
                     "PickerItems": "/SAPAssetManager/Rules/WorkOrders/CreateUpdate/WorkOrderCreateUpdateControlsPickerItems.js"
                 },
+                {
+                    "_Name": "PlannerGroupListPicker",
+                    "_Type": "Control.Type.FormCell.ListPicker",
+                    "AllowMultipleSelection": false,
+                    "IsPickerDismissedOnSelection": true,
+                    "AllowDefaultValueIfOneItem": true,
+                    "IsSearchCancelledAfterSelection": true,
+                    "Search": {
+                        "Enabled": true,
+                        "Delay": 500,
+                        "MinimumCharacterThreshold": 3,
+                        "Placeholder": "$(L,search)",
+                        "BarcodeScanner": true
+                    },
+                    "Caption": "$(L,planner_group)",
+                    "Value": "{PlannerGroup}",
+                    "PickerItems": {
+                        "DisplayValue": "{{#Property:PlannerGroup}} - {{#Property:PlannerGroupName}} - {{#Property:PlanningPlant}}",
+                        "ReturnValue": "{{#Property:PlannerGroup}}",
+                        "Target": {
+                            "EntitySet": "PlannerGroups",
+                            "Service": "/SAPAssetManager/Services/AssetManager.service",
+                            "QueryOptions": "$orderby=PlannerGroup"
+                        }
+                    }
+                },
+                
+
                
                 {
                     "_Name": "QMCodeGroupListPicker",
