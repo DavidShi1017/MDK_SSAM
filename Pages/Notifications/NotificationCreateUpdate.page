@@ -263,7 +263,7 @@
                     "Value": "/SAPAssetManager/Rules/WorkOrders/CreateUpdate/WorkOrderCreateUpdateDefault.js",
                     "IsEditable": true,
                     "OnValueChange": "/SAPAssetManager/Rules/WorkOrders/CreateUpdate/WorkOrderCreateUpdateOnChange.js",
-                    "PickerItems": "/SAPAssetManager/Rules/WorkOrders/CreateUpdate/WorkOrderCreateUpdateControlsPickerItems.js",
+                    "PickerItems": "/SAPAssetManager/Rules/Notifications/CreateUpdate/NotificationCreateUpdateWorkcenterPlantItems.js",
                     "_Name": "WorkCenterPlantLstPkr",
                     "_Type": "Control.Type.FormCell.ListPicker"
                 },
