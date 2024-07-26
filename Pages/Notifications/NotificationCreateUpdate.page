@@ -284,7 +284,7 @@
                     "Value": "{PlanningGroup} - {PlanningPlant}",
                     "PickerItems": {
                         "DisplayValue": "{{#Property:PlannerGroup}} - {{#Property:PlannerGroupName}} - {{#Property:PlanningPlant}}",
-                        "ReturnValue": "{PlanningGroup} - {PlanningPlant}",
+                        "ReturnValue": "{{#Property:PlannerGroup}} - {{#Property:PlannerGroupName}} - {{#Property:PlanningPlant}}",
                         "Target": {
                             "EntitySet": "PlannerGroups",
                             "Service": "/SAPAssetManager/Services/AssetManager.service",
