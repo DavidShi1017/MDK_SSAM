@@ -74,6 +74,8 @@ export default function NotificationCreateUpdateOnCommit(clientAPI) {
                 floc = results[4];
                 equip = results[5];
                 let group = plannerGroup.length ? plannerGroup[0].ReturnValue : '';
+                Logger.debug("group------>" + group.indexOf('-'));
+                Logger.debug("group------>" + group.substring(group.indexOf('-') + 1)); 
                 let notificationCreateProperties = {
                     'PlanningGroup': group,
                     'PlanningPlant': PlanningPlant.length ? PlanningPlant[0].ReturnValue : '',
