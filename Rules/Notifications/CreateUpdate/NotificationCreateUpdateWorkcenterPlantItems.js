@@ -10,6 +10,7 @@ export default function NotificationCreateUpdateWorkcenterPlantItems(clientAPI, 
 
    // let value = formCellContainer.getControl('MainWorkCenterListPicker').getValue();
     let filter = "$filter=WorkcenterId eq '" + "111" + "'" + "&$orderby=PlantId";
+
     return controlProxy.read('/SAPAssetManager/Services/AssetManager.service', 'WorkCenters', [], filter).then(function(obArray) {
         var jsonResult = [];
         obArray.forEach(function(element) {

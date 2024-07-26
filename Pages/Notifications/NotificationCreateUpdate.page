@@ -262,7 +262,7 @@
                     "Value": "/SAPAssetManager/Rules/WorkOrders/CreateUpdate/WorkOrderCreateUpdateDefault.js",
                     "IsEditable": true,
                     "OnValueChange": "/SAPAssetManager/Rules/WorkOrders/CreateUpdate/WorkOrderCreateUpdateOnChange.js",
-                    "PickerItems": "/SAPAssetManager/Rules/Notifications/CreateUpdate/NotificationCreateUpdateWorkcenterPlantItems.js",
+                    "PickerItems": "/SAPAssetManager/Rules/WorkOrders/CreateUpdate/WorkOrderCreateUpdateControlsPickerItems.js",
                     "_Name": "WorkCenterPlantLstPkr",
                     "_Type": "Control.Type.FormCell.ListPicker"
                 },
@@ -281,10 +281,10 @@
                         "BarcodeScanner": true
                     },
                     "Caption": "$(L,planner_group)",
-                    "Value": "{PlanningGroup}",
+                    "Value": "{PlanningGroup} - {PlanningPlant}",
                     "PickerItems": {
                         "DisplayValue": "{{#Property:PlannerGroup}} - {{#Property:PlannerGroupName}} - {{#Property:PlanningPlant}}",
-                        "ReturnValue": "{PlannerGroup}",
+                        "ReturnValue": "{PlanningGroup} - {PlanningPlant}",
                         "Target": {
                             "EntitySet": "PlannerGroups",
                             "Service": "/SAPAssetManager/Services/AssetManager.service",
