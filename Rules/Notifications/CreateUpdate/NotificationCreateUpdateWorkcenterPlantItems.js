@@ -3,9 +3,11 @@ import libVal from '../../Common/Library/ValidationLibrary';
 import updateSoldToPartyPickers from './NotificationCreateUpdateSoldToPartyPickers';
 import Logger from '../../Log/Logger';
 
+
 export default function NotificationCreateUpdateWorkcenterPlantItems(clientAPI, controlProxy) {
     let formCellContainer = clientAPI.getControl('FormCellContainer');
     //let formCellContainer = context.getControl('FormCellContainer');
+
     let value = formCellContainer.getControl('MainWorkCenterListPicker').getValue();
     filter = "$filter=WorkcenterId eq '" + "111" + "'" + "&$orderby=PlantId";
     return controlProxy.read('/SAPAssetManager/Services/AssetManager.service', 'WorkCenters', [], filter).then(function(obArray) {
