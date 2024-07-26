@@ -74,8 +74,9 @@ export default function NotificationCreateUpdateOnCommit(clientAPI) {
                 floc = results[4];
                 equip = results[5];
                 let group = plannerGroup.length ? plannerGroup[0].ReturnValue : '';
-                Logger.debug("group------>" + group.indexOf('-'));
-                Logger.debug("group------>" + group.substring(group.indexOf('-') + 1)); 
+                if(group.length > group.indexOf('-')){
+                    group = group.substring(group.indexOf('-') + 1); 
+                }
                 let notificationCreateProperties = {
                     'PlanningGroup': group,
                     'PlanningPlant': PlanningPlant.length ? PlanningPlant[0].ReturnValue : '',
@@ -156,7 +157,10 @@ export default function NotificationCreateUpdateOnCommit(clientAPI) {
 
         return Promise.all(promises).then(results => {
             let workcenter = results.length >= 2 ? results[2] : '';
-
+            let group = plannerGroup.length ? plannerGroup[0].ReturnValue : '';
+            if(group.length > group.indexOf('-')){
+                group = group.substring(group.indexOf('-') + 1); 
+            }
             let notificationUpdateProperties = {
                 'NotificationDescription': descr,
                 'NotificationType': type,
@@ -164,7 +168,7 @@ export default function NotificationCreateUpdateOnCommit(clientAPI) {
                 'HeaderFunctionLocation': NotificationLibrary.NotificationCreateUpdateFunctionalLocationLstPkrValue(clientAPI),
                 'HeaderEquipment': NotificationLibrary.NotificationCreateUpdateEquipmentLstPkrValue(clientAPI),
                 'BreakdownIndicator': BreakdownSwitchValue(clientAPI),
-                'PlanningGroup': plannerGroup.length ? plannerGroup[0].ReturnValue : '',
+                'PlanningGroup': group,
                 'PlanningPlant': PlanningPlant.length ? PlanningPlant[0].ReturnValue : '',
                 'MainWorkCenter': mainWorkcenterPicker.length? mainWorkcenterPicker[0].ReturnValue : '',//workcenter,
                 //'MainWorkCenterPlant': workCenterPlant,
