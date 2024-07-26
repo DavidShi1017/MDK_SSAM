@@ -1,6 +1,6 @@
 import libVal from '../Common/Library/ValidationLibrary';
 
-export default function NotificationMainWorkCenterDefaultPkrDefault(context) {
+export default function NotificationMainPlannerGoupDefaultPkrDefault(context) {
     let binding = context.binding;
     if (libVal.evalIsEmpty(binding.PlanningGroup)) {
         return null;
