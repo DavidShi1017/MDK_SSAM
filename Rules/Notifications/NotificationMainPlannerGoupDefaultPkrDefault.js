@@ -6,7 +6,7 @@ export default function NotificationMainPlannerGoupDefaultPkrDefault(context) {
         return null;
     }
 
-    let filterQuery = `$filter=PlanningGroup eq '${binding.PlanningGroup}'`;
+    let filterQuery = `$filter=PlannerGroup eq '${binding.PlanningGroup}'`;
     return context.read('/SAPAssetManager/Services/AssetManager.service', 'PlannerGroups', [], filterQuery).then(function(result) {
         if (result && result.length > 0) {
             return result.getItem(0).PlanningGroup + "-" + result.getItem(0).PlanningPlant;
