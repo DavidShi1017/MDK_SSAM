@@ -15,7 +15,6 @@ export default function NotificationMainPlannerGoupDefaultPkrDefault(context) {
         
         if (result && result.length > 0) {
             Logger.debug("result---->  " + result.getItem(0).PlanningPlant);
-            Logger.debug("result---->  " + JSON.parse(result));
             return result.getItem(0).PlanningGroup + "-" + result.getItem(0).PlanningPlant;
         }
         return null;
