@@ -75,8 +75,9 @@ export default function NotificationCreateUpdateOnCommit(clientAPI) {
                 equip = results[5];
                 let group = plannerGroup.length ? plannerGroup[0].ReturnValue : '';
                 if(group.length > group.indexOf('-')){
-                    group = group.substring(group.indexOf('-') + 1); 
+                    group = group.substring(0, group.indexOf('-')); 
                 }
+                Logger.debug("group----->" + group);
                 let notificationCreateProperties = {
                     'PlanningGroup': group,
                     'PlanningPlant': PlanningPlant.length ? PlanningPlant[0].ReturnValue : '',
@@ -159,7 +160,7 @@ export default function NotificationCreateUpdateOnCommit(clientAPI) {
             let workcenter = results.length >= 2 ? results[2] : '';
             let group = plannerGroup.length ? plannerGroup[0].ReturnValue : '';
             if(group.length > group.indexOf('-')){
-                group = group.substring(group.indexOf('-') + 1); 
+                group = group.substring(0, group.indexOf('-')); 
             }
             let notificationUpdateProperties = {
                 'NotificationDescription': descr,
