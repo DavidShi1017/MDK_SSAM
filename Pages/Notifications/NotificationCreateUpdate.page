@@ -281,10 +281,10 @@
                         "BarcodeScanner": true
                     },
                     "Caption": "$(L,planner_group)",
-                    "Value": "{PlanningGroup} - {PlanningPlant}",
+                    "Value": "{PlanningGroup}-{PlanningPlant}",
                     "PickerItems": {
                         "DisplayValue": "{{#Property:PlannerGroup}} - {{#Property:PlannerGroupName}} - {{#Property:PlanningPlant}}",
-                        "ReturnValue": "{{#Property:PlannerGroup}} - {{#Property:PlannerGroupName}} - {{#Property:PlanningPlant}}",
+                        "ReturnValue": "{{#Property:PlannerGroup}}-{{#Property:PlanningPlant}}",
                         "Target": {
                             "EntitySet": "PlannerGroups",
                             "Service": "/SAPAssetManager/Services/AssetManager.service",

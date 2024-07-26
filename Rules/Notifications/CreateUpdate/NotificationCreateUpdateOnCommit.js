@@ -73,9 +73,9 @@ export default function NotificationCreateUpdateOnCommit(clientAPI) {
                 qmcatalog = results[2];
                 floc = results[4];
                 equip = results[5];
-
+                let group = plannerGroup.length ? plannerGroup[0].ReturnValue : '';
                 let notificationCreateProperties = {
-                    'PlanningGroup': plannerGroup.length ? plannerGroup[0].ReturnValue : '',
+                    'PlanningGroup': group,
                     'PlanningPlant': PlanningPlant.length ? PlanningPlant[0].ReturnValue : '',
                     'NotificationNumber': notifNum,
                     'NotificationDescription': descr,
