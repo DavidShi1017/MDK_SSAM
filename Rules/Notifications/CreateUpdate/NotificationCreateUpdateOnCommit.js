@@ -73,13 +73,13 @@ export default function NotificationCreateUpdateOnCommit(clientAPI) {
                 qmcatalog = results[2];
                 floc = results[4];
                 equip = results[5];
-                let group = plannerGroup.length ? plannerGroup[0].ReturnValue : '';
-                if(group.length > group.indexOf('-')){
-                    group = group.substring(0, group.indexOf('-')); 
-                }
+                // let group = plannerGroup.length ? plannerGroup[0].ReturnValue : '';
+                // if(group.length > group.indexOf('-')){
+                //     group = group.substring(0, group.indexOf('-')); 
+                // }
                 Logger.debug("group----->" + group);
                 let notificationCreateProperties = {
-                    'PlanningGroup': group,
+                    'PlanningGroup': plannerGroup.length ? plannerGroup[0].ReturnValue : '',
                     'PlanningPlant': PlanningPlant.length ? PlanningPlant[0].ReturnValue : '',
                     'NotificationNumber': notifNum,
                     'NotificationDescription': descr,

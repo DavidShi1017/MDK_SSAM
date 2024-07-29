@@ -301,7 +301,7 @@
                         "BarcodeScanner": true
                     },
                     "Caption": "$(L,planner_group)",
-                    "Value": "{PlanningGroup}",
+                    "Value": "{PlannerGroups}",
                     "PickerItems": {
                         "DisplayValue": "{{#Property:PlannerGroup}} - {{#Property:PlannerGroupName}} - {{#Property:PlanningPlant}}",
                         "ReturnValue": "{PlannerGroup}",
