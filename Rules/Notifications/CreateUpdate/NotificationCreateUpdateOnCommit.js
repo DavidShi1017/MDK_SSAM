@@ -159,9 +159,9 @@ export default function NotificationCreateUpdateOnCommit(clientAPI) {
         return Promise.all(promises).then(results => {
             let workcenter = results.length >= 2 ? results[2] : '';
             let group = plannerGroup.length ? plannerGroup[0].ReturnValue : '';
-            if(group.length > group.indexOf('-')){
-                group = group.substring(0, group.indexOf('-')); 
-            }
+            // if(group.length > group.indexOf('-')){
+            //     group = group.substring(0, group.indexOf('-')); 
+            // }
             let notificationUpdateProperties = {
                 'NotificationDescription': descr,
                 'NotificationType': type,

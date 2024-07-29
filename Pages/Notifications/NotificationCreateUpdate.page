@@ -236,6 +236,7 @@
                     },
                     "Caption": "$(L,main_work_center)",
                     "Value": "/SAPAssetManager/Rules/Notifications/NotificationMainWorkCenterDefaultPkrDefault.js",
+                    "OnValueChange": "/SAPAssetManager/Rules/Notifications/NotificationMainWorkcenterPlantDefaultPkrDefault.js",
                     "PickerItems": {
                         "DisplayValue": "{ExternalWorkCenterId} - {PlantId}",
                         "ReturnValue": "{WorkCenterId}",
