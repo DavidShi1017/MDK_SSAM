@@ -15,7 +15,7 @@ export default function NotificationMainPlannerGoupDefaultPkrDefault(context) {
             plannerGroupListPickerSpecifier.setEntitySet('PlannerGroups');
             plannerGroupListPickerSpecifier.setQueryOptions(plannerGroupQueryOptions);
             plannerGroupListPickerSpecifier.setReturnValue('{PlannerGroup}');
-            plannerGroupListPickerSpecifier.DisplayValue('{PlannerGroup} - {PlannerGroupName} - {PlanningPlant}');
+            plannerGroupListPickerSpecifier.setDisplayValue('{PlannerGroup} - {PlannerGroupName} - {PlanningPlant}');
             plannerGroupListPicker.setTargetSpecifier(plannerGroupListPickerSpecifier);
         }
         return true;
