@@ -221,6 +221,26 @@
                     }
                 },
                 {
+                    "AllowMultipleSelection": false,
+                    "IsPickerDismissedOnSelection": true,
+                    "IsSearchCancelledAfterSelection": true,
+                    "Search": {
+                        "Enabled": true,
+                        "Delay": 500,
+                        "MinimumCharacterThreshold": 3,
+                        "Placeholder": "$(L,search)",
+                        "BarcodeScanner": true
+                    },
+                    "Caption": "/SAPAssetManager/Rules/WorkOrders/CreateUpdate/WorkCenterPlantFieldCaption.js",
+                    "PlaceHolder": "",
+                    "Value": "/SAPAssetManager/Rules/WorkOrders/CreateUpdate/WorkOrderCreateUpdateDefault.js",
+                    "IsEditable": true,
+                    "OnValueChange": "/SAPAssetManager/Rules/Notifications/NotificationMainWorkcenterPlantDefaultPkrDefault.js",
+                    "PickerItems": "/SAPAssetManager/Rules/WorkOrders/CreateUpdate/WorkOrderCreateUpdateControlsPickerItems.js",
+                    "_Name": "WorkCenterPlantLstPkr",
+                    "_Type": "Control.Type.FormCell.ListPicker"
+                },
+                {
                     "_Name": "MainWorkCenterListPicker",
                     "_Type": "Control.Type.FormCell.ListPicker",
                     "AllowMultipleSelection": false,
@@ -236,7 +256,7 @@
                     },
                     "Caption": "$(L,main_work_center)",
                     "Value": "/SAPAssetManager/Rules/Notifications/NotificationMainWorkCenterDefaultPkrDefault.js",
-                    "OnValueChange": "/SAPAssetManager/Rules/Notifications/NotificationMainWorkcenterPlantDefaultPkrDefault.js",
+                    
                     "PickerItems": {
                         "DisplayValue": "{ExternalWorkCenterId} - {PlantId}",
                         "ReturnValue": "{WorkCenterId}",
@@ -247,26 +267,7 @@
                         }
                     }
                 },
-                 {
-                    "AllowMultipleSelection": false,
-                    "IsPickerDismissedOnSelection": true,
-                    "IsSearchCancelledAfterSelection": true,
-                    "Search": {
-                        "Enabled": true,
-                        "Delay": 500,
-                        "MinimumCharacterThreshold": 3,
-                        "Placeholder": "$(L,search)",
-                        "BarcodeScanner": true
-                    },
-                    "Caption": "/SAPAssetManager/Rules/WorkOrders/CreateUpdate/WorkCenterPlantFieldCaption.js",
-                    "PlaceHolder": "",
-                    "Value": "/SAPAssetManager/Rules/WorkOrders/CreateUpdate/WorkOrderCreateUpdateDefault.js",
-                    "IsEditable": true,
-                    "OnValueChange": "/SAPAssetManager/Rules/WorkOrders/CreateUpdate/WorkOrderCreateUpdateOnChange.js",
-                    "PickerItems": "/SAPAssetManager/Rules/WorkOrders/CreateUpdate/WorkOrderCreateUpdateControlsPickerItems.js",
-                    "_Name": "WorkCenterPlantLstPkr",
-                    "_Type": "Control.Type.FormCell.ListPicker"
-                },
+                 
                 {
                     "_Name": "PlanningPlantLstPkr",
                     "_Type": "Control.Type.FormCell.ListPicker",

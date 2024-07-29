@@ -9,13 +9,13 @@ export default function NotificationMainWorkcenterPlantDefaultPkrDefault(context
 
         if (context.getValue().length > 0) {
             plant = context.getValue()[0].ReturnValue;
-            let plannerGroupListPicker = context.getPageProxy().evaluateTargetPathForAPI('#Control:WorkCenterPlantLstPkr');
+            let plannerGroupListPicker = context.getPageProxy().evaluateTargetPathForAPI('#Control:MainWorkCenterListPicker');
             let plannerGroupListPickerSpecifier = plannerGroupListPicker.getTargetSpecifier();
             let plannerGroupQueryOptions = `$orderby=PlantId&$filter=PlantId eq '${plant}' `;
             plannerGroupListPickerSpecifier.setEntitySet('WorkCenters');
             plannerGroupListPickerSpecifier.setQueryOptions(plannerGroupQueryOptions);
-            plannerGroupListPickerSpecifier.setReturnValue('{PlantId}');
-            plannerGroupListPickerSpecifier.setDisplayValue('{PlantId} - {WorkCenterName}');
+            plannerGroupListPickerSpecifier.setReturnValue('{WorkCenterId}');
+            plannerGroupListPickerSpecifier.setDisplayValue('{ExternalWorkCenterId} - {PlantId}');
             plannerGroupListPicker.setTargetSpecifier(plannerGroupListPickerSpecifier);
         }
         return true;
