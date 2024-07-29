@@ -77,7 +77,7 @@ export default function NotificationCreateUpdateOnCommit(clientAPI) {
                 // if(group.length > group.indexOf('-')){
                 //     group = group.substring(0, group.indexOf('-')); 
                 // }
-                Logger.debug("group----->" + group);
+                //Logger.debug("group----->" + group);
                 let notificationCreateProperties = {
                     'PlanningGroup': plannerGroup.length ? plannerGroup[0].ReturnValue : '',
                     'PlanningPlant': PlanningPlant.length ? PlanningPlant[0].ReturnValue : '',
