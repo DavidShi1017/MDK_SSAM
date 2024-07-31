@@ -92,7 +92,9 @@ export default function OperationChangeStatusOptions(context) {
             const isClockedIn = (libClock.isBusinessObjectClockedIn(context) && libClock.allowClockInOverride(context, mobileStatus));
             let entitySet = context.binding['@odata.readLink'] + '/OperationMobileStatus_Nav/OverallStatusCfg_Nav/OverallStatusSeq_Nav';
             let queryOptions = `$expand=NextOverallStatusCfg_Nav&$filter=UserPersona eq '${personaLib.getActivePersona(context)}' and ToEAMOverallStatusProfile eq '${orderEAMStatusProfile}'`;
-
+            let binding = context.binding;
+            let confirmations = binding.WOHeader.Confirmations;
+            let orderType = binding.WOHeader.OrderType;
             if (isClockedIn && mobileStatus !== STARTED) { //User is clocked in, but mobile status is not STARTED because another user has changed it.  We will use the next available statuses for STARTED
                 entitySet = 'EAMOverallStatusSeqs';
                 queryOptions += " and OverallStatusCfg_Nav/MobileStatus eq 'STARTED' and OverallStatusCfg_Nav/ObjectType eq 'WO_OPERATION'";
@@ -156,7 +158,22 @@ export default function OperationChangeStatusOptions(context) {
                                                 popoverItems.push({'Status': statusElement.MobileStatus, 'Title': transitionText, 'OnPress': '/SAPAssetManager/Rules/MobileStatus/OperationRejectCreateRejectReasonNav.js', 'TransitionType': transitionType}); // add reject reason as a note
                                             } else if (statusElement.MobileStatus === REVIEW && element.RoleType === userRoleType) {
                                                 if (review) { //Review required for tech
-                                                    popoverItems.push({'Status': statusElement.MobileStatus, 'Title': transitionText, 'OnPress': '/SAPAssetManager/Rules/WorkOrders/Operations/NavOnCompleteOperationPage.js', 'TransitionType': transitionType});
+                                                    if('KM01' === orderType){
+                                                        Logger.debug("The order type is KM01, need to check data...");
+                                                        if(confirmations.length == 0){
+                                                            Logger.debug("No confirmations in order...");
+                                                            popoverItems.push({'Status': statusElement.MobileStatus, 'Title': transitionText, 'TransitionType': transitionType, 'OnPress': {
+                                                                'Name': '/SAPAssetManager/Actions/Common/GenericErrorDialog.action',
+                                                                'Properties': {
+                                                                    'Title': context.localizeText('validation_warning'),
+                                                                    'Message': 'No confirmations in order...',
+                                                                    'OKCaption': context.localizeText('ok'),
+                                                                },
+                                                            }});
+                                                        }
+                                                    }else{
+                                                        popoverItems.push({'Status': statusElement.MobileStatus, 'Title': transitionText, 'OnPress': '/SAPAssetManager/Rules/WorkOrders/Operations/NavOnCompleteOperationPage.js', 'TransitionType': transitionType});
+                                                    }
                                                 }
                                             } else if (statusElement.MobileStatus === COMPLETE && element.RoleType === userRoleType && mobileStatus !== REVIEW) {
                                                 let isCompleteVisible = (!userRoleType || userRoleType === 'S' || (userRoleType === 'T' && !review)); //Allow complete if not using supervisor feature or supervisor or if technician and WO does not require review
