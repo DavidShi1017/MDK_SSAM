@@ -168,8 +168,8 @@ export default function OperationChangeStatusOptions(context) {
                                                                 'Name': '/SAPAssetManager/Actions/Common/GenericErrorDialog.action',
                                                                 'Properties': {
                                                                     'Title': context.localizeText('validation_warning'),
-                                                                    'Message': 'No confirmations in order...',
-                                                                    'OKCaption': context.localizeText('ok'),
+                                                                    'Message': 'Confirmations is Missing',
+                                                                    'OKCaption': context.localizeText('close'),
                                                                 },
                                                             }});
                                                         }else{
@@ -177,12 +177,37 @@ export default function OperationChangeStatusOptions(context) {
                                                             let value = context.read('/SAPAssetManager/Services/AssetManager.service', `MyNotificationHeaders('${binding.NotifNum}')`, [], '$expand=Items,Items/ItemCauses').then(results => {
                                                                 if (results && results.length > 0) {
                                                                     let notif = results.getItem(0);
-                                                                    if(notif){
-
+                                                                    if(notif && notif.Items && notif.Items.length > 0){
+                                                                        let item = notif.Items[0];
+                                                                        if(item.DamageCode === ''){
+                                                                            return false;
+                                                                        }
+                                                                        if(item.ObjectPartCodeGroup === ''){
+                                                                            return false;
+                                                                        }
+                                                                        let cause = item.ItemCauses[0]
+                                                                        if(cause.CauseCode === ''){
+                                                                            return false;
+                                                                        }
+                                                                    }else{
+                                                                        return false;
                                                                     }
+                                                                    return true;
                                                                 }
-                                                                return "";
+                                                                return false;
                                                             });
+                                                            if(value){
+                                                                popoverItems.push({'Status': statusElement.MobileStatus, 'Title': transitionText, 'OnPress': '/SAPAssetManager/Rules/WorkOrders/Operations/NavOnCompleteOperationPage.js', 'TransitionType': transitionType});
+                                                            }else{
+                                                                popoverItems.push({'Status': statusElement.MobileStatus, 'Title': transitionText, 'TransitionType': transitionType, 'OnPress': {
+                                                                    'Name': '/SAPAssetManager/Actions/Common/GenericErrorDialog.action',
+                                                                    'Properties': {
+                                                                        'Title': context.localizeText('validation_warning'),
+                                                                        'Message': 'Notification Damage / Cause / Object Part Code is Missing',
+                                                                        'OKCaption': context.localizeText('close'),
+                                                                    },
+                                                                }});
+                                                            }
                                                         }
                                                     }else{
                                                         popoverItems.push({'Status': statusElement.MobileStatus, 'Title': transitionText, 'OnPress': '/SAPAssetManager/Rules/WorkOrders/Operations/NavOnCompleteOperationPage.js', 'TransitionType': transitionType});
