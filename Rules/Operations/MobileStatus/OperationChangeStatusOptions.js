@@ -174,10 +174,12 @@ export default function OperationChangeStatusOptions(context) {
                                                             }});
                                                         }else{
                                                 
-                                                            let value = context.read('/SAPAssetManager/Services/AssetManager.service', `MyNotificationHeaders('${binding.NotifNum}')`, [], '$expand=Equipment/NotifHistory_Nav,FunctionalLocation/NotifHistory_Nav,NotifHistory_Nav').then(results => {
+                                                            let value = context.read('/SAPAssetManager/Services/AssetManager.service', `MyNotificationHeaders('${binding.NotifNum}')`, [], '$expand=Items,Items/ItemCauses').then(results => {
                                                                 if (results && results.length > 0) {
                                                                     let notif = results.getItem(0).Notification;
-                                                                    
+                                                                    if(notif){
+
+                                                                    }
                                                                 }
                                                                 return "";
                                                             });
