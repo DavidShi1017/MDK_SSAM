@@ -95,7 +95,7 @@ export default function OperationChangeStatusOptions(context) {
 
             let binding = context.binding;
 
-            let confirmations = binding.WOHeader.Confirmations;
+            let confirmations = binding.Confirmations;
             let orderType = binding.WOHeader.OrderType;
             if (isClockedIn && mobileStatus !== STARTED) { //User is clocked in, but mobile status is not STARTED because another user has changed it.  We will use the next available statuses for STARTED
                 entitySet = 'EAMOverallStatusSeqs';
@@ -173,18 +173,14 @@ export default function OperationChangeStatusOptions(context) {
                                                                 },
                                                             }});
                                                         }else{
-                                                           
-                                                            return context.read('/SAPAssetManager/Services/AssetManager.service', `MyNotificationHeaders('${binding.NotifNum}')`, [], '$expand=Equipment/NotifHistory_Nav,FunctionalLocation/NotifHistory_Nav,NotifHistory_Nav').then(results => {
+                                                
+                                                            let value = context.read('/SAPAssetManager/Services/AssetManager.service', `MyNotificationHeaders('${binding.NotifNum}')`, [], '$expand=Equipment/NotifHistory_Nav,FunctionalLocation/NotifHistory_Nav,NotifHistory_Nav').then(results => {
                                                                 if (results && results.length > 0) {
                                                                     let notif = results.getItem(0).Notification;
-                                                                    let complete = libCommon.getAppParam(context, 'MOBILESTATUS', context.getGlobalDefinition('/SAPAssetManager/Globals/MobileStatus/ParameterNames/CompleteParameterName.global').getValue());
-                                                                    if (notif && notif.NotifMobileStatus_Nav && notif.NotifMobileStatus_Nav.MobileStatus !== complete) {  // Notification is not already complete
-                                                                        return Promise.resolve(notif);
-                                                                    }
+                                                                    
                                                                 }
-                                                                return Promise.resolve(false);
+                                                                return "";
                                                             });
-                                                            
                                                         }
                                                     }else{
                                                         popoverItems.push({'Status': statusElement.MobileStatus, 'Title': transitionText, 'OnPress': '/SAPAssetManager/Rules/WorkOrders/Operations/NavOnCompleteOperationPage.js', 'TransitionType': transitionType});
