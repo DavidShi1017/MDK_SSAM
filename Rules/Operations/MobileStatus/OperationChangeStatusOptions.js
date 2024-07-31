@@ -180,21 +180,21 @@ export default function OperationChangeStatusOptions(context) {
                                                                     if(notif && notif.Items && notif.Items.length > 0){
                                                                         let item = notif.Items[0];
                                                                         if(item.DamageCode === ''){
-                                                                            Promise.resolve(false);                                                             
+                                                                            return Promise.resolve(false);                                                             
                                                                         }
                                                                         if(item.ObjectPartCodeGroup === ''){
-                                                                            Promise.resolve(false);    
+                                                                            return Promise.resolve(false);    
                                                                         }
                                                                         let cause = item.ItemCauses[0]
                                                                         if(cause.CauseCode === ''){
-                                                                            Promise.resolve(false);    
+                                                                            return Promise.resolve(false);    
                                                                         }
                                                                     }else{
-                                                                        Promise.resolve(false);    
+                                                                        return Promise.resolve(false);    
                                                                     }
-                                                                    Promise.resolve(true);    
+                                                                    return Promise.resolve(true);    
                                                                 }
-                                                                Promise.resolve(false);    
+                                                                return Promise.resolve(false);    
                                                             });
                                                             if(value){
                                                                 popoverItems.push({'Status': statusElement.MobileStatus, 'Title': transitionText, 'OnPress': '/SAPAssetManager/Rules/WorkOrders/Operations/NavOnCompleteOperationPage.js', 'TransitionType': transitionType});
