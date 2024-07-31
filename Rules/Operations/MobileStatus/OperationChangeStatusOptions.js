@@ -92,7 +92,9 @@ export default function OperationChangeStatusOptions(context) {
             const isClockedIn = (libClock.isBusinessObjectClockedIn(context) && libClock.allowClockInOverride(context, mobileStatus));
             let entitySet = context.binding['@odata.readLink'] + '/OperationMobileStatus_Nav/OverallStatusCfg_Nav/OverallStatusSeq_Nav';
             let queryOptions = `$expand=NextOverallStatusCfg_Nav&$filter=UserPersona eq '${personaLib.getActivePersona(context)}' and ToEAMOverallStatusProfile eq '${orderEAMStatusProfile}'`;
+
             let binding = context.binding;
+
             let confirmations = binding.WOHeader.Confirmations;
             let orderType = binding.WOHeader.OrderType;
             if (isClockedIn && mobileStatus !== STARTED) { //User is clocked in, but mobile status is not STARTED because another user has changed it.  We will use the next available statuses for STARTED
