@@ -176,7 +176,7 @@ export default function OperationChangeStatusOptions(context) {
                                                 
                                                             let value = context.read('/SAPAssetManager/Services/AssetManager.service', `MyNotificationHeaders('${binding.NotifNum}')`, [], '$expand=Items,Items/ItemCauses').then(results => {
                                                                 if (results && results.length > 0) {
-                                                                    let notif = results.getItem(0).Notification;
+                                                                    let notif = results.getItem(0);
                                                                     if(notif){
 
                                                                     }
