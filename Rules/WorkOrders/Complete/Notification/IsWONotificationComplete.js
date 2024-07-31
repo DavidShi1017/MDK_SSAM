@@ -1,17 +1,28 @@
 import libCommon from '../../../Common/Library/CommonLibrary';
 
-export default function IsWONotificationVisible(context, woBinding, expandPath) {
-    if (woBinding && woBinding.NotificationNumber) {
-        let readLink = woBinding['@odata.readLink'];
-        return context.read('/SAPAssetManager/Services/AssetManager.service', readLink, [], '$expand=' + expandPath + '/NotifMobileStatus_Nav').then(results => {
+export default function IsWONotificationComplete(context, binding) {
+    if (binding) {
+        return context.read('/SAPAssetManager/Services/AssetManager.service', `MyNotificationHeaders('${binding.NotifNum}')`, [], '$expand=Items,Items/ItemCauses').then(results => {
             if (results && results.length > 0) {
-                let notif = results.getItem(0).Notification;
-                let complete = libCommon.getAppParam(context, 'MOBILESTATUS', context.getGlobalDefinition('/SAPAssetManager/Globals/MobileStatus/ParameterNames/CompleteParameterName.global').getValue());
-                if (notif && notif.NotifMobileStatus_Nav && notif.NotifMobileStatus_Nav.MobileStatus !== complete) {  // Notification is not already complete
-                    return Promise.resolve(notif);
+                let notif = results.getItem(0);
+                if(notif && notif.Items && notif.Items.length > 0){
+                    let item = notif.Items[0];
+                    if(item.DamageCode === ''){
+                        return Promise.resolve(false);                                                             
+                    }
+                    if(item.ObjectPartCodeGroup === ''){
+                        return Promise.resolve(false);    
+                    }
+                    let cause = item.ItemCauses[0]
+                    if(cause.CauseCode === ''){
+                        return Promise.resolve(false);    
+                    }
+                }else{
+                    return Promise.resolve(false);    
                 }
+                return Promise.resolve(true);    
             }
-            return Promise.resolve(false);
+            return Promise.resolve(false);    
         });
     }
 
