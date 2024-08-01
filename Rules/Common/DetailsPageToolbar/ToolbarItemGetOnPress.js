@@ -13,14 +13,20 @@ export default function ToolbarItemGetOnPress(context) {
     let toolbar = pageToolbar.getInstance();
     let possibleActions = toolbar.getToolbarItems(context);
 
-    if (!common.isDefined(possibleActions)) {
-        let getStatusOptionsPromise = ToolbarGetStatusOptions(context);
+    // if (!common.isDefined(possibleActions)) {
+    //     let getStatusOptionsPromise = ToolbarGetStatusOptions(context);
+    //     return getStatusOptionsPromise.then(items => {
+    //         return toolbar.generatePossibleToolbarItems(context, items).then(() => {
+    //             return context.executeAction(toolbar.getToolbarItemOnPressAction(context, buttonName));
+    //         });
+    //     });
+    // } else {
+    //     return context.executeAction(toolbar.getToolbarItemOnPressAction(context, buttonName));
+    // }
+    let getStatusOptionsPromise = ToolbarGetStatusOptions(context);
         return getStatusOptionsPromise.then(items => {
             return toolbar.generatePossibleToolbarItems(context, items).then(() => {
                 return context.executeAction(toolbar.getToolbarItemOnPressAction(context, buttonName));
             });
         });
-    } else {
-        return context.executeAction(toolbar.getToolbarItemOnPressAction(context, buttonName));
-    }
 }
