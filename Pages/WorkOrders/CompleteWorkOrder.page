@@ -162,11 +162,11 @@
                         },
                         {
                             "SimplePropertyCell": {
-                                "KeyName" : "$(L,notes)",
+                                "_Name": "SupervisorName",
+                                "KeyName" : "$(L,supervisor_name)",
                                 "Value": "/SAPAssetManager/Rules/WorkOrders/Complete/Note/NoteValue.js",
                                 "OnPress": "/SAPAssetManager/Rules/WorkOrders/Complete/Note/ChangeNote.js",
                                 "Visible": "/SAPAssetManager/Rules/WorkOrders/Complete/Note/SetWONoteVisible.js",
-                                "AccessoryType": "disclosureIndicator"
                             }
                         },
                         {
