@@ -98,6 +98,30 @@ export default function OperationChangeStatusOptions(context) {
 
             let confirmations = binding.Confirmations;
             let orderType = binding.WOHeader.OrderType;
+            let value = false;
+            value = await context.read('/SAPAssetManager/Services/AssetManager.service', `MyNotificationHeaders('${binding.NotifNum}')`, [], '$expand=Items,Items/ItemCauses').then(results => {
+                if (results && results.length > 0) {
+                    let notif = results.getItem(0);
+                    if(notif && notif.Items && notif.Items.length > 0){
+                        let item = notif.Items[0];
+                        if(item.DamageCode === ''){
+                            return false;                                                           
+                        }
+                        if(item.ObjectPartCodeGroup === ''){
+                            return false;     
+                        }
+                        let cause = item.ItemCauses[0]
+                        if(cause.CauseCode === ''){
+                            return false;     
+                        }
+                    }else{
+                        return false;   
+                    }
+                    return true;
+                }
+                return false;    
+            });
+            Logger.debug("value------->" + value);
             if (isClockedIn && mobileStatus !== STARTED) { //User is clocked in, but mobile status is not STARTED because another user has changed it.  We will use the next available statuses for STARTED
                 entitySet = 'EAMOverallStatusSeqs';
                 queryOptions += " and OverallStatusCfg_Nav/MobileStatus eq 'STARTED' and OverallStatusCfg_Nav/ObjectType eq 'WO_OPERATION'";
@@ -189,6 +213,7 @@ export default function OperationChangeStatusOptions(context) {
                                                                     }});
                                                                     return popoverItems;
                                                                 }
+                                                                return popoverItems;
                                                             });
                                                             
                                                         }
