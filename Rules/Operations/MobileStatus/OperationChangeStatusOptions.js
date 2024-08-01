@@ -187,6 +187,7 @@ export default function OperationChangeStatusOptions(context) {
                                                                             'OKCaption': context.localizeText('close'),
                                                                         },
                                                                     }});
+                                                                    return popoverItems;
                                                                 }
                                                             });
                                                             
