@@ -6,7 +6,7 @@ export default function FinalizeCompletePageMessage(context) {
     let binding = context.getPageProxy().binding;
     let title = 'completion_WO_title';
     let message = 'meter_action_has_not_been_performed_for_wo';
-
+    let descr = context.getControls()[0].getControl('SupervisorName').getValue();
     let noStatusMessage = 'meter_action_has_not_been_performed_for_wo_no_status';
     if (WorkOrderCompletionLibrary.getInstance().isOperationFlow()) {
         message = 'meter_action_has_not_been_performed_for_operation_no_status';
