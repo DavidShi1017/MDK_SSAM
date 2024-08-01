@@ -197,25 +197,19 @@ export default function OperationChangeStatusOptions(context) {
                                                                     'OKCaption': context.localizeText('close'),
                                                                 },
                                                             }});
-                                                        }else{
-                                                
-                                                            return IsWONotificationComplete(context, binding).then((value) => {
-                                                                if(value){
-                                                                    popoverItems.push({'Status': statusElement.MobileStatus, 'Title': transitionText, 'OnPress': '/SAPAssetManager/Rules/WorkOrders/Operations/NavOnCompleteOperationPage.js', 'TransitionType': transitionType});
-                                                                }else{
-                                                                    popoverItems.push({'Status': statusElement.MobileStatus, 'Title': transitionText, 'TransitionType': transitionType, 'OnPress': {
-                                                                        'Name': '/SAPAssetManager/Actions/Common/GenericErrorDialog.action',
-                                                                        'Properties': {
-                                                                            'Title': context.localizeText('validation_warning'),
-                                                                            'Message': 'Notification Damage / Cause / Object Part Code is Missing',
-                                                                            'OKCaption': context.localizeText('close'),
-                                                                        },
-                                                                    }});
-                                                                    return popoverItems;
-                                                                }
-                                                                return popoverItems;
-                                                            });
-                                                            
+                                                        }else{                                                
+                                                            if(value){
+                                                                popoverItems.push({'Status': statusElement.MobileStatus, 'Title': transitionText, 'OnPress': '/SAPAssetManager/Rules/WorkOrders/Operations/NavOnCompleteOperationPage.js', 'TransitionType': transitionType});
+                                                            }else{
+                                                                popoverItems.push({'Status': statusElement.MobileStatus, 'Title': transitionText, 'TransitionType': transitionType, 'OnPress': {
+                                                                    'Name': '/SAPAssetManager/Actions/Common/GenericErrorDialog.action',
+                                                                    'Properties': {
+                                                                        'Title': context.localizeText('validation_warning'),
+                                                                        'Message': 'Notification Damage / Cause / Object Part Code is Missing',
+                                                                        'OKCaption': context.localizeText('close'),
+                                                                    },
+                                                                }});
+                                                            }                                                      
                                                         }
                                                     }else{
                                                         popoverItems.push({'Status': statusElement.MobileStatus, 'Title': transitionText, 'OnPress': '/SAPAssetManager/Rules/WorkOrders/Operations/NavOnCompleteOperationPage.js', 'TransitionType': transitionType});
