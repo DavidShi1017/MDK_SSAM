@@ -26,7 +26,7 @@ export default function FinalizeCompletePageMessage(context) {
         if(page === 'Complete Operation'){
             let descr = context.currentPage.controls[0].sections[1].value.items[1].value;
             if(descr === ''){
-                showMessageErrorDialg(context);
+                return showMessageErrorDialg(context);
             }
         }
     }
