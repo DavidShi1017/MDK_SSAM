@@ -10,18 +10,25 @@ export default function FinalizeCompletePageMessage(context) {
     let title = 'completion_WO_title';
     let message = 'meter_action_has_not_been_performed_for_wo';
     
-    let mobileStatus = getOperationMobileStatus(context);
-    // checkNote = SupervisorLibrary.checkReviewRequired(context, binding).then((isReviewRequired) => { 
-    //     if (isReviewRequired) {
-    //         Logger.debug("isReviewRequired------->" + isReviewRequired);
-    //     } else {
-    //         let descr = context.currentPage.controls[0].sections[1].value.items[1].value;
-    //     }
-    // });
+    // let mobileStatus = getOperationMobileStatus(context);
+    //  return checkNote = SupervisorLibrary.checkReviewRequired(context, binding).then((isReviewRequired) => { 
+    //      if (isReviewRequired) {
+    //          Logger.debug("isReviewRequired------->" + isReviewRequired);
+    //      } else {
+    //          let descr = context.currentPage.controls[0].sections[1].value.items[1].value;
+    //      }
+    //  });
     let noStatusMessage = 'meter_action_has_not_been_performed_for_wo_no_status';
     if (WorkOrderCompletionLibrary.getInstance().isOperationFlow()) {
         message = 'meter_action_has_not_been_performed_for_operation_no_status';
         noStatusMessage = 'meter_action_has_not_been_performed_for_operation';
+        let page = context.currentPage._resolvedCaption;
+        if(page === 'Complete Operation'){
+            let descr = context.currentPage.controls[0].sections[1].value.items[1].value;
+            if(descr === ''){
+                showMessageErrorDialg(context);
+            }
+        }
     }
     if (WorkOrderCompletionLibrary.getInstance().isSubOperationFlow()) {
         title = 'completion_sub_operation_title';
@@ -206,6 +213,19 @@ function showMessageDialg(context, title, message) {
                 'OKCaption': context.localizeText('ok'),
                 'CancelCaption': context.localizeText('cancel'),
                 'OnOK': '/SAPAssetManager/Rules/WorkOrders/Complete/FinalizeCompletePage.js',
+            },
+        },
+    );
+}
+
+function showMessageErrorDialg(context) {
+    return context.executeAction(
+        {
+            'Name': '/SAPAssetManager/Actions/Common/GenericErrorDialog.action',
+            'Properties': {
+                'Title': context.localizeText('validation_warning'),
+                'Message': 'Supervisor Name is required',
+                'OKCaption': context.localizeText('close'),
             },
         },
     );
