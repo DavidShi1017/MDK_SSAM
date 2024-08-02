@@ -163,7 +163,7 @@
                         {
                             "SimplePropertyCell": {
                                 "_Name": "SupervisorName",
-                                "KeyName" : "/SAPAssetManager/Rules/WorkOrders/Complete/note/NoteCaption.js",
+                                "KeyName" : "/SAPAssetManager/Rules/WorkOrders/Complete/Note/NoteCaption.js",
                                 "Value": "/SAPAssetManager/Rules/WorkOrders/Complete/Note/NoteValue.js",
                                 "OnPress": "/SAPAssetManager/Rules/WorkOrders/Complete/Note/ChangeNote.js",
                                 "Visible": "/SAPAssetManager/Rules/WorkOrders/Complete/Note/SetWONoteVisible.js",
