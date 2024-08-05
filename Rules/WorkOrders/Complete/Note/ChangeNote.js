@@ -27,11 +27,23 @@ export default function ChangeNote(context) {
 
         if (note && note.NewTextString) {
             libCommon.setStateVariable(context, Constants.noteStateVariable, note); 
-            return context.executeAction('/SAPAssetManager/Actions/Notes/NoteUpdateNav.action');
+            let page = context.currentPage._resolvedCaption;
+            if(page === 'Complete Operation'){
+                return context.executeAction('/SAPAssetManager/Actions/Notes/NoteNameUpdateNav.action');
+            }else{
+                return context.executeAction('/SAPAssetManager/Actions/Notes/NoteUpdateNav.action');
+            }
+            
         } else {
             libCommon.setOnCreateUpdateFlag(context, 'CREATE');
             libCommon.setOnChangesetFlag(context, false);
-            return context.executeAction('/SAPAssetManager/Actions/Notes/NoteCreateNav.action');
+            let page = context.currentPage._resolvedCaption;
+            if(page === 'Complete Operation'){
+                return context.executeAction('/SAPAssetManager/Actions/Notes/NoteNameCreateNav.action');
+            }else{
+                return context.executeAction('/SAPAssetManager/Actions/Notes/NoteCreateNav.action');
+            }
+           
         }
     });
 }
