@@ -3,6 +3,7 @@
     "OnUnloaded": "/SAPAssetManager/Rules/Notes/NoteCreateUpdateOnPageUnloaded.js",
     "Caption" : "$(L,add_supervisor_name)",
 
+
     "OnActivityBackPressed": "/SAPAssetManager/Rules/WorkOrders/CreateUpdate/CancelCheckOnBackNavAndroid.js",
     "ActionBar": {
         "Items": [
