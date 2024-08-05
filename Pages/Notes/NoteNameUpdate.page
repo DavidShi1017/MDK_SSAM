@@ -1,5 +1,5 @@
 {
-    "Caption": "$(L,edit_note)",
+    "Caption": "$(L,edit_supervisor_name)",
     "OnLoaded": "/SAPAssetManager/Rules/Notes/NoteOnLoad.js",
     "OnActivityBackPressed": "/SAPAssetManager/Rules/WorkOrders/CreateUpdate/CancelCheckOnBackNavAndroid.js",
     "ActionBar": {
@@ -24,7 +24,7 @@
                 {
                     "Controls": [
                         {
-                            "Caption" : "/SAPAssetManager/Rules/Supervisor/TechnicianRole/NoteFieldCaption.js",
+                            "Caption" : "$(L,supervisor_name)",
                             "Value": "/SAPAssetManager/Rules/Notes/Update/NoteUpdateLocalText.js",
                             "_Name": "LongTextNote",
                             "_Type": "Control.Type.FormCell.Note",
@@ -52,5 +52,5 @@
         }
     ],
     "_Type": "Page",
-    "_Name": "NoteUpdate"
+    "_Name": "NoteNameUpdate"
 }

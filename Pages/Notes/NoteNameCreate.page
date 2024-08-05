@@ -1,7 +1,8 @@
 {
-    "OnLoaded": "/SAPAssetManager/Rules/Notes/NoteCreateUpdateOnPageLoad.js",
+    "OnLoaded": "/SAPAssetManager/Rules/Notes/NoteNameCreateUpdateOnPageLoad.js",
     "OnUnloaded": "/SAPAssetManager/Rules/Notes/NoteCreateUpdateOnPageUnloaded.js",
-    "Caption" : "Add name",
+    "Caption" : "$(L,add_supervisor_name)",
+
     "OnActivityBackPressed": "/SAPAssetManager/Rules/WorkOrders/CreateUpdate/CancelCheckOnBackNavAndroid.js",
     "ActionBar": {
         "Items": [
@@ -24,12 +25,16 @@
             "Sections": [
                 {
                     "Header": {
+
                         "Caption" : "$(PLT,/SAPAssetManager/Rules/Supervisor/TechnicianRole/NoteFieldCaption.js,'')"
+
                     },
                     "Controls": [
                         {
                             "Caption" : "$(L,supervisor_name)",
+
                             "PlaceHolder":  "$(L,supervisor_name)",
+
                             "Value": "",
                             "_Name": "LongTextNote",
                             "_Type": "Control.Type.FormCell.Note",
@@ -44,5 +49,7 @@
         }
     ],
     "_Type": "Page",
+
     "_Name": "NoteNameAdd"
+
 }
