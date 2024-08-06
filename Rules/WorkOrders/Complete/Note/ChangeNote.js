@@ -28,7 +28,7 @@ export default function ChangeNote(context) {
         if (note && note.NewTextString) {
             libCommon.setStateVariable(context, Constants.noteStateVariable, note); 
             let page = context.currentPage._resolvedCaption;
-            if(page === 'Complete Operation'){
+            if(page === context.localizeText('complete_operation')){
                 return context.executeAction('/SAPAssetManager/Actions/Notes/NoteNameUpdateNav.action');
             }else{
                 return context.executeAction('/SAPAssetManager/Actions/Notes/NoteUpdateNav.action');
@@ -38,7 +38,7 @@ export default function ChangeNote(context) {
             libCommon.setOnCreateUpdateFlag(context, 'CREATE');
             libCommon.setOnChangesetFlag(context, false);
             let page = context.currentPage._resolvedCaption;
-            if(page === 'Complete Operation'){
+            if(page === context.localizeText('complete_operation')){
                 return context.executeAction('/SAPAssetManager/Actions/Notes/NoteNameCreateNav.action');
             }else{
                 return context.executeAction('/SAPAssetManager/Actions/Notes/NoteCreateNav.action');

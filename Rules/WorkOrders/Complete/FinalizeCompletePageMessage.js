@@ -23,7 +23,7 @@ export default function FinalizeCompletePageMessage(context) {
         message = 'meter_action_has_not_been_performed_for_operation_no_status';
         noStatusMessage = 'meter_action_has_not_been_performed_for_operation';
         let page = context.currentPage._resolvedCaption;
-        if(page === 'Complete Operation'){
+        if(page === context.localizeText('complete_operation')){
             let descr = context.currentPage.controls[0].sections[1].value.items[1].value;
             if(descr === ''){
                 return showMessageErrorDialg(context);
