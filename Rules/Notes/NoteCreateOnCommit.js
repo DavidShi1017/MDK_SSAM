@@ -9,7 +9,7 @@ export default function NoteCreateOnCommit(clientAPI) {
     if (!type) {
         throw new TypeError('Note Transaction Type must be defined');
     }
-    let note = libCommon.getStateVariable(clientAPI, Constants.noteStateVariable);
+    let note = libCommon.getStateVariable(clientAPI, Constants.longTextNoteFieldKey);
     if (note) {
         if (IsCompleteAction(clientAPI)) {
             WorkOrderCompletionLibrary.updateStepState(clientAPI, 'note', {
