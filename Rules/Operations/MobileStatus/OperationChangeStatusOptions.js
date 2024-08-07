@@ -99,6 +99,12 @@ export default function OperationChangeStatusOptions(context) {
             let confirmations = binding.Confirmations;
             let orderType = binding.WOHeader.OrderType;
             let value = false;
+            let noConfirmations = true;
+            if(confirmations.length > 0){
+                noConfirmations = false;
+            }else if(context.currentPage.context._clientData.confirmationArgs){
+                noConfirmations = false;
+            }
             if('KM01' === orderType){
                 value = await context.read('/SAPAssetManager/Services/AssetManager.service', `MyNotificationHeaders('${binding.NotifNum}')`, [], '$expand=Items,Items/ItemCauses').then(results => {
                     if (results && results.length > 0) {
@@ -190,7 +196,7 @@ export default function OperationChangeStatusOptions(context) {
                                                 if (review) { //Review required for tech
                                                     if('KM01' === orderType){
                                                         Logger.debug("The order type is KM01, need to check data...");
-                                                        if(confirmations.length == 0){
+                                                        if(noConfirmations){
                                                             Logger.debug("No confirmations in order...");
                                                             popoverItems.push({'Status': statusElement.MobileStatus, 'Title': transitionText, 'TransitionType': transitionType, 'OnPress': {
                                                                 'Name': '/SAPAssetManager/Actions/Common/GenericErrorDialog.action',
@@ -216,7 +222,7 @@ export default function OperationChangeStatusOptions(context) {
                                                         }
                                                     }else if('KM05' === orderType){
                                                         Logger.debug("The order type is KM05, need to check data...");
-                                                        if(confirmations.length == 0){
+                                                        if(noConfirmations){
                                                             Logger.debug("No confirmations in order...");
                                                             popoverItems.push({'Status': statusElement.MobileStatus, 'Title': transitionText, 'TransitionType': transitionType, 'OnPress': {
                                                                 'Name': '/SAPAssetManager/Actions/Common/GenericErrorDialog.action',
