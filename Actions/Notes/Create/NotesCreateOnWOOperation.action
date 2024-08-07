@@ -15,7 +15,7 @@
         "OfflineOData.TransactionID": "#Property:OrderId"
     },
     "OnSuccess": "/SAPAssetManager/Rules/Notes/NoteCreateOnSuccess.js",
-    "OnFailure": "/SAPAssetManager/Actions/Notes/NoteCreateFailureMessage.action",
+    "OnFailure": "/SAPAssetManager/Rules/Notes/NoteCreateOnSuccess.js",
     "CreateLinks": "/SAPAssetManager/Rules/Notes/NoteCreateLinks.js"
 
 }
