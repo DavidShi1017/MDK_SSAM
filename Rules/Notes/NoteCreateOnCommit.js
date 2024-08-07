@@ -3,13 +3,14 @@ import libCommon from '../Common/Library/CommonLibrary';
 import Constants from '../Common/Library/ConstantsLibrary';
 import IsCompleteAction from '../WorkOrders/Complete/IsCompleteAction';
 import WorkOrderCompletionLibrary from '../WorkOrders/Complete/WorkOrderCompletionLibrary';
+import Logger from '../Log/Logger';
 
 export default function NoteCreateOnCommit(clientAPI) {
     let type = NoteLib.getNoteTypeTransactionFlag(clientAPI);
     if (!type) {
         throw new TypeError('Note Transaction Type must be defined');
     }
-    let note = libCommon.getStateVariable(clientAPI, Constants.longTextNoteFieldKey);
+    let note = libCommon.getStateVariable(clientAPI, Constants.noteStateVariable);
     if (note) {
         if (IsCompleteAction(clientAPI)) {
             WorkOrderCompletionLibrary.updateStepState(clientAPI, 'note', {
@@ -27,6 +28,7 @@ export default function NoteCreateOnCommit(clientAPI) {
         }
     } else if (type.noteCreateAction) {
         return clientAPI.executeAction(type.noteCreateAction).then((result) => {
+            Logger.debug("result-----" + result);
             if (IsCompleteAction(clientAPI)) {
                 WorkOrderCompletionLibrary.updateStepState(clientAPI, 'note', {
                     data: result.data,
