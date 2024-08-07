@@ -275,6 +275,7 @@ export default class {
     * Get a state variable on the given page
     */
     static getStateVariable(clientAPI, key, pageName) {
+        Logger.debug("key-----" + key);
         if (key === 'StatusStartDate' || key === 'StatusEndDate') {
             return new Date(ApplicationSettings.getString(clientAPI, key));
         } else {

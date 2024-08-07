@@ -10,6 +10,7 @@ export default function NoteCreateOnCommit(clientAPI) {
     if (!type) {
         throw new TypeError('Note Transaction Type must be defined');
     }
+    Logger.debug("Constants.noteStateVariable-----" + Constants.noteStateVariable);
     let note = libCommon.getStateVariable(clientAPI, Constants.noteStateVariable);
     if (note) {
         if (IsCompleteAction(clientAPI)) {
