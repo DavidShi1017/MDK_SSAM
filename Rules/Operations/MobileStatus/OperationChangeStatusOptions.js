@@ -130,7 +130,7 @@ export default function OperationChangeStatusOptions(context) {
                 });
                 Logger.debug("value------->" + value);
             }
-            
+            value = true;
             if (isClockedIn && mobileStatus !== STARTED) { //User is clocked in, but mobile status is not STARTED because another user has changed it.  We will use the next available statuses for STARTED
                 entitySet = 'EAMOverallStatusSeqs';
                 queryOptions += " and OverallStatusCfg_Nav/MobileStatus eq 'STARTED' and OverallStatusCfg_Nav/ObjectType eq 'WO_OPERATION'";
