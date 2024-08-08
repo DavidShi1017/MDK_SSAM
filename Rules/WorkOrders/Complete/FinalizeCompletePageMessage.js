@@ -62,6 +62,10 @@ export default async function FinalizeCompletePageMessage(context) {
                     return false;    
                 });
                 Logger.debug("value------->" + value);
+                if(!value){
+                    errorMessage = 'Notification Damage / Cause / Object Part Code is Missing';
+                    return showMessageErrorDialg(context, errorMessage);  
+                }
             }
         }
     }
