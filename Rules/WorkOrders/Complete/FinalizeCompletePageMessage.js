@@ -26,11 +26,16 @@ export default async function FinalizeCompletePageMessage(context) {
     
         let page = context.currentPage._resolvedCaption;
         if(page === context.localizeText('complete_operation')){
-            let descr = context.currentPage.controls[0].sections[1].value.items[1].value;
-            if(descr === ''){
-                errorMessage = 'Supervisor Name is required';
-                return showMessageErrorDialg(context, errorMessage);
-            }
+            context.currentPage.controls[0].sections[1].value.items.forEach(item => {
+                if(item.value === 'SupervisorName'){
+                    let descr = item.value;
+                    if(descr === ''){
+                        errorMessage = 'Supervisor Name is required';
+                        return showMessageErrorDialg(context, errorMessage);
+                    }
+                }
+            });
+            
         }else{
             let orderType = binding.WOHeader.OrderType;
             if('KM01' === orderType){
