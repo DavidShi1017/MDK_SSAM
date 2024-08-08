@@ -5,11 +5,11 @@ import Logger from '../../Log/Logger';
 import SupervisorLibrary from '../../Supervisor/SupervisorLibrary';
 import libCom from '../../Common/Library/CommonLibrary';
 
-export default function FinalizeCompletePageMessage(context) {
+export default async function FinalizeCompletePageMessage(context) {
     let binding = context.getPageProxy().binding;
     let title = 'completion_WO_title';
     let message = 'meter_action_has_not_been_performed_for_wo';
-    
+    let errorMessage = '';
     // let mobileStatus = getOperationMobileStatus(context);
     //  return checkNote = SupervisorLibrary.checkReviewRequired(context, binding).then((isReviewRequired) => { 
     //      if (isReviewRequired) {
@@ -19,14 +19,48 @@ export default function FinalizeCompletePageMessage(context) {
     //      }
     //  });
     let noStatusMessage = 'meter_action_has_not_been_performed_for_wo_no_status';
+    let value = false;
     if (WorkOrderCompletionLibrary.getInstance().isOperationFlow()) {
         message = 'meter_action_has_not_been_performed_for_operation_no_status';
         noStatusMessage = 'meter_action_has_not_been_performed_for_operation';
+    
         let page = context.currentPage._resolvedCaption;
         if(page === context.localizeText('complete_operation')){
             let descr = context.currentPage.controls[0].sections[1].value.items[1].value;
             if(descr === ''){
-                return showMessageErrorDialg(context);
+                errorMessage = 'Supervisor Name is required';
+                return showMessageErrorDialg(context, errorMessage);
+            }
+        }else{
+            if('KM01' === orderType){
+                value = await context.read('/SAPAssetManager/Services/AssetManager.service', `MyNotificationHeaders('${binding.NotifNum}')`, [], '$expand=Items,Items/ItemCauses').then(results => {
+                    if (results && results.length > 0) {
+                        let notif = results.getItem(0);
+                        if(notif && notif.Items && notif.Items.length > 0){
+                            let item = notif.Items[0];
+                            if(item.DamageCode === ''){
+                                return showMessageErrorDialg(context, errorMessage);                                               
+                            }
+                            if(item.ObjectPartCodeGroup === ''){
+                                return false;     
+                            }
+                            let cause = item.ItemCauses[0];
+                            if(cause){
+                                if(cause.CauseCode === ''){
+                                    return false;     
+                                }
+                            }else{
+                                return false;     
+                            }
+                           
+                        }else{
+                            return false;   
+                        }
+                        return true;
+                    }
+                    return false;    
+                });
+                Logger.debug("value------->" + value);
             }
         }
     }
@@ -218,7 +252,7 @@ function showMessageDialg(context, title, message) {
     );
 }
 
-function showMessageErrorDialg(context) {
+function showMessageErrorDialg(context, message) {
     return context.executeAction(
         {
             'Name': '/SAPAssetManager/Actions/Common/GenericErrorDialog.action',

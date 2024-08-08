@@ -98,44 +98,15 @@ export default function OperationChangeStatusOptions(context) {
 
             let confirmations = binding.Confirmations;
             let orderType = binding.WOHeader.OrderType;
-            let value = false;
+            //let value = false;
             let noConfirmations = true;
             if(confirmations.length > 0){
                 noConfirmations = false;
             }else if(context.currentPage.context._clientData.confirmationArgs){
                 noConfirmations = false;
             }
-            if('KM01' === orderType){
-                value = await context.read('/SAPAssetManager/Services/AssetManager.service', `MyNotificationHeaders('${binding.NotifNum}')`, [], '$expand=Items,Items/ItemCauses').then(results => {
-                    if (results && results.length > 0) {
-                        let notif = results.getItem(0);
-                        if(notif && notif.Items && notif.Items.length > 0){
-                            let item = notif.Items[0];
-                            if(item.DamageCode === ''){
-                                return false;                                                           
-                            }
-                            if(item.ObjectPartCodeGroup === ''){
-                                return false;     
-                            }
-                            let cause = item.ItemCauses[0];
-                            if(cause){
-                                if(cause.CauseCode === ''){
-                                    return false;     
-                                }
-                            }else{
-                                return false;     
-                            }
-                           
-                        }else{
-                            return false;   
-                        }
-                        return true;
-                    }
-                    return false;    
-                });
-                Logger.debug("value------->" + value);
-            }
-            value = true;
+            
+            //value = true;
             if (isClockedIn && mobileStatus !== STARTED) { //User is clocked in, but mobile status is not STARTED because another user has changed it.  We will use the next available statuses for STARTED
                 entitySet = 'EAMOverallStatusSeqs';
                 queryOptions += " and OverallStatusCfg_Nav/MobileStatus eq 'STARTED' and OverallStatusCfg_Nav/ObjectType eq 'WO_OPERATION'";
@@ -211,19 +182,20 @@ export default function OperationChangeStatusOptions(context) {
                                                                     'OKCaption': context.localizeText('close'),
                                                                 },
                                                             }});
-                                                        }else{                                                
-                                                            if(value){
-                                                                popoverItems.push({'Status': statusElement.MobileStatus, 'Title': transitionText, 'OnPress': '/SAPAssetManager/Rules/WorkOrders/Operations/NavOnCompleteOperationPage.js', 'TransitionType': transitionType});
-                                                            }else{
-                                                                popoverItems.push({'Status': statusElement.MobileStatus, 'Title': transitionText, 'TransitionType': transitionType, 'OnPress': {
-                                                                    'Name': '/SAPAssetManager/Actions/Common/GenericErrorDialog.action',
-                                                                    'Properties': {
-                                                                        'Title': context.localizeText('validation_warning'),
-                                                                        'Message': 'Notification Damage / Cause / Object Part Code is Missing',
-                                                                        'OKCaption': context.localizeText('close'),
-                                                                    },
-                                                                }});
-                                                            }                                                      
+                                                        }else{       
+                                                            popoverItems.push({'Status': statusElement.MobileStatus, 'Title': transitionText, 'OnPress': '/SAPAssetManager/Rules/WorkOrders/Operations/NavOnCompleteOperationPage.js', 'TransitionType': transitionType});                                         
+                                                            // if(value){
+                                                                
+                                                            // }else{
+                                                            //     popoverItems.push({'Status': statusElement.MobileStatus, 'Title': transitionText, 'TransitionType': transitionType, 'OnPress': {
+                                                            //         'Name': '/SAPAssetManager/Actions/Common/GenericErrorDialog.action',
+                                                            //         'Properties': {
+                                                            //             'Title': context.localizeText('validation_warning'),
+                                                            //             'Message': 'Notification Damage / Cause / Object Part Code is Missing',
+                                                            //             'OKCaption': context.localizeText('close'),
+                                                            //         },
+                                                            //     }});
+                                                            // }                                                      
                                                         }
                                                     }else if('KM05' === orderType){
                                                         Logger.debug("The order type is KM05, need to check data...");
