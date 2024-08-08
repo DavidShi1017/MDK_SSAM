@@ -263,7 +263,7 @@ function showMessageErrorDialg(context, message) {
             'Name': '/SAPAssetManager/Actions/Common/GenericErrorDialog.action',
             'Properties': {
                 'Title': context.localizeText('validation_warning'),
-                'Message': 'Supervisor Name is required',
+                'Message': message,
                 'OKCaption': context.localizeText('close'),
             },
         },
