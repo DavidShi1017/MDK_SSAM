@@ -117,10 +117,15 @@ export default function OperationChangeStatusOptions(context) {
                             if(item.ObjectPartCodeGroup === ''){
                                 return false;     
                             }
-                            let cause = item.ItemCauses[0]
-                            if(cause.CauseCode === ''){
+                            let cause = item.ItemCauses[0];
+                            if(cause){
+                                if(cause.CauseCode === ''){
+                                    return false;     
+                                }
+                            }else{
                                 return false;     
                             }
+                           
                         }else{
                             return false;   
                         }
