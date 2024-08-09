@@ -10,6 +10,8 @@ export default async function FinalizeCompletePageMessage(context) {
     let title = 'completion_WO_title';
     let message = 'meter_action_has_not_been_performed_for_wo';
     let errorMessage = '';
+    let notification = WorkOrderCompletionLibrary.getStepValue(context, 'notification')
+    let notificationData = WorkOrderCompletionLibrary.getStepData(context, 'notification')
     // let mobileStatus = getOperationMobileStatus(context);
     //  return checkNote = SupervisorLibrary.checkReviewRequired(context, binding).then((isReviewRequired) => { 
     //      if (isReviewRequired) {

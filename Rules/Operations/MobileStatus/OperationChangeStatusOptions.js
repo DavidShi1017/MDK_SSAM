@@ -95,7 +95,7 @@ export default function OperationChangeStatusOptions(context) {
             let queryOptions = `$expand=NextOverallStatusCfg_Nav&$filter=UserPersona eq '${personaLib.getActivePersona(context)}' and ToEAMOverallStatusProfile eq '${orderEAMStatusProfile}'`;
 
             let binding = context.binding;
-            let notification = WorkOrderCompletionLibrary.getStepValue(context, 'notification')
+            
             let confirmations = binding.Confirmations;
             let orderType = binding.WOHeader.OrderType;
             //let value = false;
