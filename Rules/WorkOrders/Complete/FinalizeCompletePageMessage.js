@@ -27,7 +27,7 @@ export default async function FinalizeCompletePageMessage(context) {
         let page = context.currentPage._resolvedCaption;
         if(page === context.localizeText('complete_operation')){
             context.currentPage.controls[0].sections[1].value.items.forEach(item => {
-                if(item.keyName === '"Supervisor Name"'){
+                if(item.keyName === 'Supervisor Name'){
                     let descr = item.value;
                     if(descr === ''){
                         errorMessage = 'Supervisor Name is required';
