@@ -45,7 +45,7 @@ export default async function FinalizeCompletePageMessage(context) {
                         if(notif && notif.Items && notif.Items.length > 0){
                             let item = notif.Items[0];
                             if(item.DamageCode === ''){
-                                return showMessageErrorDialg(context, errorMessage);                                               
+                                return false;                                             
                             }
                             if(item.ObjectPartCodeGroup === ''){
                                 return false;     
