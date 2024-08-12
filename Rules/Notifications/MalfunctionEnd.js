@@ -174,7 +174,7 @@ export default function MalfunctionEnd(context) {
         }
     }).then(actionResult => {
         // If actionResult is null, no don't create a Cause
-        if (causeDescription && actionResult) {
+        if (actionResult) {
             return createCause(actionResult);
         } else {
             return Promise.resolve();
