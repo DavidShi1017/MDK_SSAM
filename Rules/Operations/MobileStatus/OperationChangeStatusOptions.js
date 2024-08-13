@@ -233,7 +233,23 @@ export default function OperationChangeStatusOptions(context) {
                                                     isCompleteVisible = false; //Supervisor can only transition from DISAPPROVE to COMPLETE if status change is local
                                                 }
                                                 if (isCompleteVisible) {
-                                                    popoverItems.push({'Status': statusElement.MobileStatus, 'Title': transitionText, 'OnPress': '/SAPAssetManager/Rules/WorkOrders/Operations/NavOnCompleteOperationPage.js', 'TransitionType': transitionType});
+                                                    if('KM01' === orderType){
+                                                        Logger.debug("The order type is KM01, need to check data...");
+                                                        if(noConfirmations){
+                                                            Logger.debug("No confirmations in order...");
+                                                            popoverItems.push({'Status': statusElement.MobileStatus, 'Title': transitionText, 'TransitionType': transitionType, 'OnPress': {
+                                                                'Name': '/SAPAssetManager/Actions/Common/GenericErrorDialog.action',
+                                                                'Properties': {
+                                                                    'Title': context.localizeText('validation_warning'),
+                                                                    'Message': 'Time Confirmation has not been added. Please Check',
+                                                                    'OKCaption': context.localizeText('close'),
+                                                                },
+                                                            }});
+                                                        }else{       
+                                                            popoverItems.push({'Status': statusElement.MobileStatus, 'Title': transitionText, 'OnPress': '/SAPAssetManager/Rules/WorkOrders/Operations/NavOnCompleteOperationPage.js', 'TransitionType': transitionType});                                             
+                                                        }
+                                                    }
+                                                    
                                                 }
                                             } else if (statusElement.MobileStatus === TRANSFER && (element.RoleType === userRoleType || personaLib.isFieldServiceTechnician(context) || !libSuper.isSupervisorFeatureEnabled(context))) {
                                                 // Prepend warning dialog to transfer status change
