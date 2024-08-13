@@ -124,6 +124,10 @@ export default function MalfunctionEnd(context) {
                     'OnFailure' : '',
                 },
             }).then(causeResult => {
+                if(causeResult){
+
+                }
+                let resulet = causeResult;
                 let causeData = JSON.parse(causeResult.data);
                 // eslint-disable-next-line brace-style
                 let causeNote = (function() { try { return context.evaluateTargetPath('#Control:CauseNote/#Value'); } catch (exc) { return ''; } })();
