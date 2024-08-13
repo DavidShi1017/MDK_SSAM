@@ -99,7 +99,7 @@ export default function MalfunctionEnd(context) {
                         'NotificationNumber': data.NotificationNumber,
                         'ItemNumber' : data.ItemNumber,
                         'CauseSequenceNumber' : promises[0],
-                        'CauseText' : (function() { try { return context.evaluateTargetPath('#Control:CauseDescription/#Value'); } catch (e) {return '';} })(),
+                        'CauseText' : '',
                         // eslint-disable-next-line brace-style
                         'CauseCodeGroup': (function() { try { return context.evaluateTargetPath('#Control:CauseGroupLstPkr/#SelectedValue'); } catch (e) {return '';} })(),
                         // eslint-disable-next-line brace-style
