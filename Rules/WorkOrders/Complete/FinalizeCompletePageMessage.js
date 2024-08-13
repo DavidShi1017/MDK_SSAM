@@ -38,43 +38,43 @@ export default async function FinalizeCompletePageMessage(context) {
                 }
             });
             
-        }else{
-            let orderType = binding.WOHeader.OrderType;
-            if('KM01' === orderType){
-                value = await context.read('/SAPAssetManager/Services/AssetManager.service', `MyNotificationHeaders('${binding.NotifNum}')`, [], '$expand=Items,Items/ItemCauses').then(results => {
-                    if (results && results.length > 0) {
-                        let notif = results.getItem(0);
-                        if(notif && notif.Items && notif.Items.length > 0){
-                            let item = notif.Items[0];
-                            if(item.DamageCode === ''){
-                                return false;                                             
-                            }
-                            if(item.ObjectPartCodeGroup === ''){
-                                return false;     
-                            }
-                            let cause = item.ItemCauses[0];
-                            if(cause){
-                                if(cause.CauseCode === ''){
-                                    return false;     
-                                }
-                            }else{
-                                return false;     
-                            }
-                           
-                        }else{
-                            return false;   
+        }
+        let orderType = binding.WOHeader.OrderType;
+        if('KM01' === orderType){
+            value = await context.read('/SAPAssetManager/Services/AssetManager.service', `MyNotificationHeaders('${binding.NotifNum}')`, [], '$expand=Items,Items/ItemCauses').then(results => {
+                if (results && results.length > 0) {
+                    let notif = results.getItem(0);
+                    if(notif && notif.Items && notif.Items.length > 0){
+                        let item = notif.Items[0];
+                        if(item.DamageCode === ''){
+                            return false;                                             
                         }
-                        return true;
+                        if(item.ObjectPartCodeGroup === ''){
+                            return false;     
+                        }
+                        let cause = item.ItemCauses[0];
+                        if(cause){
+                            if(cause.CauseCode === ''){
+                                return false;     
+                            }
+                        }else{
+                            return false;     
+                        }
+                        
+                    }else{
+                        return false;   
                     }
-                    return false;    
-                });
-                Logger.debug("value------->" + value);
-                if(!value){
-                    errorMessage = 'Notification Damage / Cause / Object Part Code is Missing';
-                    return showMessageErrorDialg(context, errorMessage);  
+                    return true;
                 }
+                return false;    
+            });
+            Logger.debug("value------->" + value);
+            if(!value){
+                errorMessage = 'Notification Damage / Cause / Object Part Code is Missing';
+                return showMessageErrorDialg(context, errorMessage);  
             }
         }
+        
     }
     if(errorMessage === ''){
         if (WorkOrderCompletionLibrary.getInstance().isSubOperationFlow()) {
