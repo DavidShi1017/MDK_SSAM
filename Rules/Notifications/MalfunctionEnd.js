@@ -89,6 +89,7 @@ export default function MalfunctionEnd(context) {
         let data = JSON.parse(actionResult.data);
         let localCauseNum = GenerateLocalID(context, `${data['@odata.readLink']}/ItemCauses`, 'CauseSequenceNumber', '0000', '', '');
         let sortNum = GenerateLocalID(context, `${data['@odata.readLink']}/ItemCauses`, 'CauseSortNumber', '0000', '', '');
+        let causeDescription = context.evaluateTargetPath('#Control:CauseDescription/#Value');
         return Promise.all([localCauseNum, sortNum]).then(function(promises) {
             return context.executeAction({
                 'Name': '/SAPAssetManager/Actions/Notifications/Item/NotificationItemCauseCreate.action',
@@ -98,7 +99,7 @@ export default function MalfunctionEnd(context) {
                         'NotificationNumber': data.NotificationNumber,
                         'ItemNumber' : data.ItemNumber,
                         'CauseSequenceNumber' : promises[0],
-                        'CauseText' : context.evaluateTargetPath('#Control:CauseDescription/#Value'),
+                        'CauseText' : causeDescription,
                         // eslint-disable-next-line brace-style
                         'CauseCodeGroup': (function() { try { return context.evaluateTargetPath('#Control:CauseGroupLstPkr/#SelectedValue'); } catch (e) {return '';} })(),
                         // eslint-disable-next-line brace-style
