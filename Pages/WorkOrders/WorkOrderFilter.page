@@ -103,7 +103,7 @@
                 },
                 "Value": "{OrderType}",
                 "PickerItems": {
-                    "DisplayValue": "/SAPAssetManager/Rules/Inventory/MaterialDocument/FilterType.js",
+                    "DisplayValue": "{{#Property:OrderType}} - {{#Property:OrderTypeDesc}} - {{#Property:PlanningPlant}} - {{#Property:PlantDescription}}",
                     "ReturnValue": "{OrderType}",
                     "Target": {
                         "EntitySet": "OrderTypes",
