@@ -76,7 +76,7 @@
                 "PlaceHolder": "",
                 "Value": "{ExternalWorkCenterId}",
                 "PickerItems": {
-                    "DisplayValue": "{ExternalWorkCenterId}",
+                    "DisplayValue": "{ExternalWorkCenterId} - {PlantId}",
                     "ReturnValue": "{WorkCenterId}",
                     "Target": {
                         "EntitySet": "WorkCenters",
