@@ -103,7 +103,7 @@
                 },
                 "Value": "{OrderType}",
                 "PickerItems": {
-                    "DisplayValue": "/SAPAssetManager/Rules/Common/FilterTypeValue.js",
+                    "DisplayValue": "/SAPAssetManager/Rules/Inventory/MaterialDocument/MovementTypeItemsInfo.js",
                     "ReturnValue": "{OrderType}",
                     "Target": {
                         "EntitySet": "OrderTypes",
