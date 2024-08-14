@@ -103,7 +103,7 @@
                 },
                 "Value": "{OrderType}",
                 "PickerItems": {
-                    "DisplayValue": "{{#Property:OrderType}} - {{#Property:OrderTypeDesc}} - {{#Property:PlanningPlant}}",
+                    "DisplayValue": "/SAPAssetManager/Rules/Common/FilterTypeValue.js",
                     "ReturnValue": "{OrderType}",
                     "Target": {
                         "EntitySet": "OrderTypes",
