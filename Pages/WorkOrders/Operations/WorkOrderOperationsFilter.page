@@ -116,7 +116,7 @@
                 },
                 "Value": "{OrderType}",
                 "PickerItems": {
-                    "DisplayValue": "{{#Property:OrderType}} - {{#Property:OrderTypeDesc}} - {{#Property:PlanningPlant}}",
+                    "DisplayValue": "{{#Property:OrderType}} - {{#Property:OrderTypeDesc}} - {{#Property:PlanningPlant}} - {{#Property:PlantDescription}}",
                     "ReturnValue": "{OrderType}",
                     "Target": {
                         "EntitySet": "OrderTypes",

@@ -72,7 +72,7 @@
                 "PlaceHolder": "",
                 "Value": "{ExternalWorkCenterId}",
                 "PickerItems": {
-                    "DisplayValue": "{ExternalWorkCenterId} - {PlantId}",
+                    "DisplayValue": "/SAPAssetManager/Rules/Inventory/MaterialDocument/FilterType.js",
                     "ReturnValue": "{WorkCenterId}",
                     "Target": {
                         "EntitySet": "WorkCenters",
