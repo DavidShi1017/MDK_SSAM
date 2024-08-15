@@ -172,7 +172,7 @@ export default function MalfunctionEnd(context) {
     let causeDescription = (function() { try { return context.evaluateTargetPath('#Control:CauseDescription/#Value'); } catch (e) {return '';} })();
 
     let causeCodeGroup = (function() { try { return context.evaluateTargetPath('#Control:CauseGroupLstPkr/#SelectedValue');} catch (e) {return '';} })();
-    let causeCode = (function() { try { context.evaluateTargetPath('#Control:CodeLstPkr/#SelectedValue');} catch (e) {return '';} })();
+    let causeCode = (function() { try { return context.evaluateTargetPath('#Control:CodeLstPkr/#SelectedValue');} catch (e) {return '';} })();
     let objectPartCodeGroup = (function() { try { return context.evaluateTargetPath('#Control:PartGroupLstPkr/#SelectedValue');} catch (e) {return '';} })();
     let objectPart = (function() { try { return context.evaluateTargetPath('#Control:PartDetailsLstPkr/#SelectedValue');} catch (e) {return '';} })();
     let codeGroup = (function() { try { return context.evaluateTargetPath('#Control:DamageGroupLstPkr/#SelectedValue');} catch (e) {return '';} })();
