@@ -173,10 +173,10 @@ export default function MalfunctionEnd(context) {
 
     let causeCodeGroup = (function() { try { return context.evaluateTargetPath('#Control:CauseGroupLstPkr/#SelectedValue');} catch (e) {return '';} })();
     let causeCode = (function() { try { context.evaluateTargetPath('#Control:CodeLstPkr/#SelectedValue');} catch (e) {return '';} })();
-    let objectPartCodeGroup = (function() { try { context.evaluateTargetPath('#Control:PartGroupLstPkr/#SelectedValue');} catch (e) {return '';} })();
-    let objectPart = (function() { try { context.evaluateTargetPath('#Control:PartDetailsLstPkr/#SelectedValue');} catch (e) {return '';} })();
-    let codeGroup = (function() { try { context.evaluateTargetPath('#Control:DamageGroupLstPkr/#SelectedValue');} catch (e) {return '';} })();
-    let damageCode = (function() { try { context.evaluateTargetPath('#Control:DamageDetailsLstPkr/#SelectedValue');} catch (e) {return '';} })(); 
+    let objectPartCodeGroup = (function() { try { return context.evaluateTargetPath('#Control:PartGroupLstPkr/#SelectedValue');} catch (e) {return '';} })();
+    let objectPart = (function() { try { return context.evaluateTargetPath('#Control:PartDetailsLstPkr/#SelectedValue');} catch (e) {return '';} })();
+    let codeGroup = (function() { try { return context.evaluateTargetPath('#Control:DamageGroupLstPkr/#SelectedValue');} catch (e) {return '';} })();
+    let damageCode = (function() { try { return context.evaluateTargetPath('#Control:DamageDetailsLstPkr/#SelectedValue');} catch (e) {return '';} })(); 
     if(itemDescription && causeCodeGroup && causeCode && objectPartCodeGroup && objectPart && codeGroup && damageCode){
         return context.executeAction('/SAPAssetManager/Actions/Notifications/CreateUpdate/NotificationUpdateMalfunctionEnd.action').then(actionResult => {
             if (itemDescription) {
