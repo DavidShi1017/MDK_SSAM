@@ -13,6 +13,7 @@ import PhaseLibrary from '../../PhaseModel/PhaseLibrary';
 import WorkOrderCompletionLibrary from '../../WorkOrders/Complete/WorkOrderCompletionLibrary';
 import libVal from '../../Common/Library/ValidationLibrary';
 import IsWONotificationComplete from '../../WorkOrders/Complete/Notification/IsWONotificationComplete';
+import libVal from '../../Common/Library/ValidationLibrary';
 
 export default function OperationChangeStatusOptions(context) {
     const READY = 'READY'; // Don't bother adding this to the config panel. EAM Team needs to fix their hardcoded app transitions first. See TODO below.
@@ -106,17 +107,18 @@ export default function OperationChangeStatusOptions(context) {
                 noConfirmations = false;
             }
             let pointCount = 0;
-            let totalPointCount = 0;
+            let totalCount = 0;
+
             if(orderType === 'KM05'){
-                let filter = '$filter=Valuation ne \'\'';
-                if(binding.InspectionPoint_Nav && binding.InspectionPoint_Nav.length > 0){
-                    let entityset = binding.InspectionPoint_Nav[0]["@odata.readLink"] + "/InspectionChar_Nav";
-                    await context.count('/SAPAssetManager/Services/AssetManager.service', entityset, '').then(async function(totalcount) {
-                        totalPointCount = totalcount;
-                        await context.count('/SAPAssetManager/Services/AssetManager.service', entityset, filter).then(function(emptycount) {
-                            pointCount = emptycount;
-                        });
-                    });
+                if(binding.InspectionPoints_Nav && binding.InspectionPoints_Nav.length > 0){
+                    totalCount = binding.InspectionPoints_Nav.length;
+                }
+                var points = context.binding.InspectionPoints_Nav;
+
+                for (let i = 0; i < points.length; i++) {
+                    if (!libVal.evalIsEmpty(points[i].ValuationStatus)) {
+                        pointCount++;
+                    }
                 }
             }
             
@@ -224,7 +226,7 @@ export default function OperationChangeStatusOptions(context) {
                                                                 },
                                                             }});
                                                         }else{
-                                                            if(pointCount === totalPointCount){
+                                                            if(pointCount === totalCount){
                                                                 popoverItems.push({'Status': statusElement.MobileStatus, 'Title': transitionText, 'OnPress': '/SAPAssetManager/Rules/WorkOrders/Operations/NavOnCompleteOperationPage.js', 'TransitionType': transitionType});
                                                             }else{
                                                                 popoverItems.push({'Status': statusElement.MobileStatus, 'Title': transitionText, 'TransitionType': transitionType, 'OnPress': {
