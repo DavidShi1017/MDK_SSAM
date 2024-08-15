@@ -90,6 +90,8 @@ export default function MalfunctionEnd(context) {
         let localCauseNum = GenerateLocalID(context, `${data['@odata.readLink']}/ItemCauses`, 'CauseSequenceNumber', '0000', '', '');
         let sortNum = GenerateLocalID(context, `${data['@odata.readLink']}/ItemCauses`, 'CauseSortNumber', '0000', '', '');
         let causeDescription = context.evaluateTargetPath('#Control:CauseDescription/#Value');
+       
+
         if(!causeDescription){
             causeDescription = '';
         }
@@ -127,10 +129,7 @@ export default function MalfunctionEnd(context) {
                     'OnFailure' : '',
                 },
             }).then(causeResult => {
-                if(causeResult){
 
-                }
-                let resulet = causeResult;
                 let causeData = JSON.parse(causeResult.data);
                 // eslint-disable-next-line brace-style
                 let causeNote = (function() { try { return context.evaluateTargetPath('#Control:CauseNote/#Value'); } catch (exc) { return ''; } })();
@@ -172,58 +171,82 @@ export default function MalfunctionEnd(context) {
     // eslint-disable-next-line brace-style
     let causeDescription = (function() { try { return context.evaluateTargetPath('#Control:CauseDescription/#Value'); } catch (e) {return '';} })();
 
-    return context.executeAction('/SAPAssetManager/Actions/Notifications/CreateUpdate/NotificationUpdateMalfunctionEnd.action').then(actionResult => {
-        if (itemDescription) {
-            // Create Item
-            return createItem(actionResult);
-        } else {
-            // Resolve promise but don't pass an action result
-            return Promise.resolve();
-        }
-    }).then(actionResult => {
-        // If actionResult is null, no don't create a Cause
-        if (actionResult) {
-            return createCause(actionResult);
-        } else {
-            return Promise.resolve();
-        }
-    }).then(() => {
-        // Update attachments -- Copied verbatim from DocumentCreateDelete.js because
-        // the success message hardcoded into the rule screws things up
-
-        //*************DELETE DOCUMENTS *********************/
-        const attachmentFormcell = context.getControl('FormCellContainer').getControl('Attachment');
-        const deletedAttachments = attachmentFormcell.getClientData().DeletedAttachments;
-        // create an rray with all the readLinks to process
-        context.getClientData().DeletedDocReadLinks = deletedAttachments.map((deletedAttachment) => {
-            return deletedAttachment.readLink;
-        });
-
-        let deletes = deletedAttachments.map(() => {
-            //call the delete doc delete action
-            return context.executeAction('/SAPAssetManager/Actions/Documents/DocumentDeleteBDS.action');
-        });
-
-        return Promise.all(deletes).then(() => {
-        //*************CREATE DOCUMENTS *********************/
-            const attachmentCount = DocLib.validationAttachmentCount(context);
-            if (attachmentCount > 0) {
-                return documentValidateCreate(context,'',attachmentFormcell);
+    let causeCodeGroup = context.evaluateTargetPath('#Control:CauseGroupLstPkr/#SelectedValue');
+    let causeCode = context.evaluateTargetPath('#Control:CodeLstPkr/#SelectedValue');
+    let objectPartCodeGroup = context.evaluateTargetPath('#Control:PartGroupLstPkr/#SelectedValue');
+    let objectPart = context.evaluateTargetPath('#Control:PartDetailsLstPkr/#SelectedValue');
+    let codeGroup = context.evaluateTargetPath('#Control:DamageGroupLstPkr/#SelectedValue');
+    let damageCode = context.evaluateTargetPath('#Control:DamageDetailsLstPkr/#SelectedValue');
+    if(itemDescription && causeCodeGroup && causeCode && objectPartCodeGroup && objectPart && codeGroup && damageCode){
+        return context.executeAction('/SAPAssetManager/Actions/Notifications/CreateUpdate/NotificationUpdateMalfunctionEnd.action').then(actionResult => {
+            if (itemDescription) {
+                // Create Item
+                return createItem(actionResult);
+            } else {
+                // Resolve promise but don't pass an action result
+                return Promise.resolve();
             }
-            return Promise.resolve();
-        });
-    }).then(() => {
-        if (IsCompleteAction(context)) {
-            WorkOrderCompletionLibrary.updateStepState(context, 'notification', {
-                data: JSON.stringify(context.binding),
-                value: context.localizeText('done'),
-                link: context.binding['@odata.editLink'],
+        }).then(actionResult => {
+            // If actionResult is null, no don't create a Cause
+            if (actionResult) {
+                return createCause(actionResult);
+            } else {
+                return Promise.resolve();
+            }
+        }).then(() => {
+            // Update attachments -- Copied verbatim from DocumentCreateDelete.js because
+            // the success message hardcoded into the rule screws things up
+    
+            //*************DELETE DOCUMENTS *********************/
+            const attachmentFormcell = context.getControl('FormCellContainer').getControl('Attachment');
+            const deletedAttachments = attachmentFormcell.getClientData().DeletedAttachments;
+            // create an rray with all the readLinks to process
+            context.getClientData().DeletedDocReadLinks = deletedAttachments.map((deletedAttachment) => {
+                return deletedAttachment.readLink;
             });
-            return WorkOrderCompletionLibrary.getInstance().openMainPage(context);
-        }
-        return ExecuteActionWithAutoSync(context, '/SAPAssetManager/Actions/CreateUpdateDelete/UpdateEntitySuccessMessage.action');
-    }).catch(() => {
-        // Failure occurred
-        return context.executeAction('/SAPAssetManager/Actions/CreateUpdateDelete/UpdateEntityFailureMessage.action');
-    });
+    
+            let deletes = deletedAttachments.map(() => {
+                //call the delete doc delete action
+                return context.executeAction('/SAPAssetManager/Actions/Documents/DocumentDeleteBDS.action');
+            });
+    
+            return Promise.all(deletes).then(() => {
+            //*************CREATE DOCUMENTS *********************/
+                const attachmentCount = DocLib.validationAttachmentCount(context);
+                if (attachmentCount > 0) {
+                    return documentValidateCreate(context,'',attachmentFormcell);
+                }
+                return Promise.resolve();
+            });
+        }).then(() => {
+            if (IsCompleteAction(context)) {
+                WorkOrderCompletionLibrary.updateStepState(context, 'notification', {
+                    data: JSON.stringify(context.binding),
+                    value: context.localizeText('done'),
+                    link: context.binding['@odata.editLink'],
+                });
+                return WorkOrderCompletionLibrary.getInstance().openMainPage(context);
+            }
+            return ExecuteActionWithAutoSync(context, '/SAPAssetManager/Actions/CreateUpdateDelete/UpdateEntitySuccessMessage.action');
+        }).catch(() => {
+            // Failure occurred
+            return context.executeAction('/SAPAssetManager/Actions/CreateUpdateDelete/UpdateEntityFailureMessage.action');
+        });
+    }else{
+        let errorMessage = 'Notification Item Description Damage / Cause / Object Part Code is Missing';
+        return showMessageErrorDialg(context, errorMessage);  
+    }
+}
+
+function showMessageErrorDialg(context, message) {
+    return context.executeAction(
+        {
+            'Name': '/SAPAssetManager/Actions/Common/GenericErrorDialog.action',
+            'Properties': {
+                'Title': context.localizeText('validation_warning'),
+                'Message': message,
+                'OKCaption': context.localizeText('close'),
+            },
+        },
+    );
 }
