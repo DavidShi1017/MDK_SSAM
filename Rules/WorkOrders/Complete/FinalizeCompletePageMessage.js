@@ -70,13 +70,17 @@ export default async function FinalizeCompletePageMessage(context) {
             });
             Logger.debug("value------->" + value);
             if(!value){
-                if(item.keyName === context.localizeText('update_notification')){
-                    let descr = item.value;
-                    if(descr === ''){                     
-                        errorMessage = 'Notification Damage / Cause / Object Part Code is Missing';
-                        return showMessageErrorDialg(context, errorMessage);  
-                    }
-                }
+                // context.currentPage.controls[0].sections[1].value.items.forEach(item => {
+                //     if(item.keyName === context.localizeText('update_notification')){
+                //         let descr = item.value;
+                //         if(descr === ''){                     
+                //             errorMessage = 'Notification Damage / Cause / Object Part Code is Missing';
+                //             return showMessageErrorDialg(context, errorMessage);  
+                //         }
+                //     }
+                // });
+                errorMessage = 'Notification Damage / Cause / Object Part Code is Missing';
+                return showMessageErrorDialg(context, errorMessage);  
             }
         }
         
