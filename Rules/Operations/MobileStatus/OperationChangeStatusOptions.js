@@ -105,6 +105,19 @@ export default function OperationChangeStatusOptions(context) {
             }else if(context.currentPage.context._clientData.confirmationArgs){
                 noConfirmations = false;
             }
+            let pointCount = 0;
+            let totalPointCount = 0;
+            if(orderType === 'KM05'){
+                if(binding.InspectionPoint_Nav && binding.InspectionPoint_Nav.length > 0){
+                    let entityset = binding.InspectionPoint_Nav[0]["@odata.readLink"] + "/InspectionChar_Nav";
+                    await context.count('/SAPAssetManager/Services/AssetManager.service', entityset, '').then(async function(totalcount) {
+                        totalPointCount = totalcount;
+                        await context.count('/SAPAssetManager/Services/AssetManager.service', entityset, filter).then(function(emptycount) {
+                            pointCount = emptycount;
+                        });
+                    });
+                }
+            }
             
             //value = true;
             if (isClockedIn && mobileStatus !== STARTED) { //User is clocked in, but mobile status is not STARTED because another user has changed it.  We will use the next available statuses for STARTED
@@ -210,7 +223,7 @@ export default function OperationChangeStatusOptions(context) {
                                                                 },
                                                             }});
                                                         }else{
-                                                            if(binding.InspectionPoint_Nav && binding.InspectionPoint_Nav.length === binding.NumberOfCapacities){
+                                                            if(pointCount === totalPointCount){
                                                                 popoverItems.push({'Status': statusElement.MobileStatus, 'Title': transitionText, 'OnPress': '/SAPAssetManager/Rules/WorkOrders/Operations/NavOnCompleteOperationPage.js', 'TransitionType': transitionType});
                                                             }else{
                                                                 popoverItems.push({'Status': statusElement.MobileStatus, 'Title': transitionText, 'TransitionType': transitionType, 'OnPress': {
