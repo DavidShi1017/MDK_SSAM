@@ -108,6 +108,7 @@ export default function OperationChangeStatusOptions(context) {
             let pointCount = 0;
             let totalPointCount = 0;
             if(orderType === 'KM05'){
+                let filter = '$filter=Valuation ne \'\'';
                 if(binding.InspectionPoint_Nav && binding.InspectionPoint_Nav.length > 0){
                     let entityset = binding.InspectionPoint_Nav[0]["@odata.readLink"] + "/InspectionChar_Nav";
                     await context.count('/SAPAssetManager/Services/AssetManager.service', entityset, '').then(async function(totalcount) {
