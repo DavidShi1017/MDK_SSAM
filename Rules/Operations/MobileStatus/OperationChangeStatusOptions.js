@@ -110,15 +110,15 @@ export default function OperationChangeStatusOptions(context) {
             let totalCount = 0;
 
             if(orderType === 'KM05'){
-                if(binding.InspectionPoints_Nav && binding.InspectionPoints_Nav.length > 0){
-                    totalCount = binding.InspectionPoints_Nav.length;
-                }
-                var points = context.binding.InspectionPoints_Nav;
+                if(binding.InspectionPoint_Nav && binding.InspectionPoint_Nav.length > 0){
+                    totalCount = binding.InspectionPoint_Nav.length;
+                    var points = binding.InspectionPoint_Nav;
 
                 for (let i = 0; i < points.length; i++) {
                     if (!libVal.evalIsEmpty(points[i].ValuationStatus)) {
                         pointCount++;
                     }
+                }
                 }
             }
             
