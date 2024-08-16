@@ -29,7 +29,7 @@ export default function ChangeNote(context) {
             libCommon.setStateVariable(context, Constants.noteStateVariable, note); 
             let page = context.currentPage._resolvedCaption;
             
-            if(page === context.localizeText('complete_operation') && context.binding.WOHeader.OrderType === 'KM05'){
+            if(page === context.localizeText('complete_operation') && (context.binding.WOHeader.OrderType === 'KM05' || context.binding.WOHeader.OrderType === 'KM02')){
                 return context.executeAction('/SAPAssetManager/Actions/Notes/NoteNameUpdateNav.action');
             }else{
                 return context.executeAction('/SAPAssetManager/Actions/Notes/NoteUpdateNav.action');
@@ -39,7 +39,7 @@ export default function ChangeNote(context) {
             libCommon.setOnCreateUpdateFlag(context, 'CREATE');
             libCommon.setOnChangesetFlag(context, false);
             let page = context.currentPage._resolvedCaption;
-            if(page === context.localizeText('complete_operation') && context.binding.WOHeader.OrderType === 'KM05'){
+            if(page === context.localizeText('complete_operation') && (context.binding.WOHeader.OrderType === 'KM05' || context.binding.WOHeader.OrderType === 'KM02')){
                 return context.executeAction('/SAPAssetManager/Actions/Notes/NoteNameCreateNav.action');
             }else{
                 return context.executeAction('/SAPAssetManager/Actions/Notes/NoteCreateNav.action');

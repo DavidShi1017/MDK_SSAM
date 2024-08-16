@@ -109,7 +109,7 @@ export default function OperationChangeStatusOptions(context) {
             let pointCount = 0;
             let totalCount = 0;
 
-            if(orderType === 'KM05'){
+            if(orderType === 'KM05' || orderType === 'KM02'){
                 if(binding.InspectionPoint_Nav && binding.InspectionPoint_Nav.length > 0){
                     totalCount = binding.InspectionPoint_Nav.length;
                     var points = binding.InspectionPoint_Nav;
@@ -186,7 +186,7 @@ export default function OperationChangeStatusOptions(context) {
                                                 popoverItems.push({'Status': statusElement.MobileStatus, 'Title': transitionText, 'OnPress': '/SAPAssetManager/Rules/MobileStatus/OperationRejectCreateRejectReasonNav.js', 'TransitionType': transitionType}); // add reject reason as a note
                                             } else if (statusElement.MobileStatus === REVIEW && element.RoleType === userRoleType) {
                                                 if (review) { //Review required for tech
-                                                    if('KM01' === orderType){
+                                                    if('KM01' === orderType || 'KM03' === orderType){
                                                         Logger.debug("The order type is KM01, need to check data...");
                                                         if(noConfirmations){
                                                             Logger.debug("No confirmations in order...");
@@ -213,7 +213,7 @@ export default function OperationChangeStatusOptions(context) {
                                                             //     }});
                                                             // }                                                      
                                                         }
-                                                    }else if('KM05' === orderType){
+                                                    }else if('KM05' === orderType || 'KM02' === orderType){
                                                         Logger.debug("The order type is KM05, need to check data...");
                                                         if(noConfirmations){
                                                             Logger.debug("No confirmations in order...");
@@ -249,7 +249,7 @@ export default function OperationChangeStatusOptions(context) {
                                                     isCompleteVisible = false; //Supervisor can only transition from DISAPPROVE to COMPLETE if status change is local
                                                 }
                                                 if (isCompleteVisible) {
-                                                    if('KM01' === orderType){
+                                                    if('KM01' === orderType || 'KM03' === orderType){
                                                         Logger.debug("The order type is KM01, need to check data...");
                                                         if(noConfirmations){
                                                             Logger.debug("No confirmations in order...");

@@ -40,7 +40,7 @@ export default async function FinalizeCompletePageMessage(context) {
             
         }
         let orderType = binding.WOHeader.OrderType;
-        if('KM01' === orderType){
+        if('KM01' === orderType || 'KM03' === orderType){
             value = await context.read('/SAPAssetManager/Services/AssetManager.service', `MyNotificationHeaders('${binding.NotifNum}')`, [], '$expand=Items,Items/ItemCauses').then(results => {
                 if (results && results.length > 0) {
                     let notif = results.getItem(0);
