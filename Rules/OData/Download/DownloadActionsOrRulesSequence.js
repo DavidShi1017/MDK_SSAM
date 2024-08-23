@@ -42,10 +42,6 @@ export default function DownloadActionsOrRulesSequence(context) {
             'Action': '/SAPAssetManager/Actions/ApplicationStartupMessage.action',
             'Caption': '',
         },
-        {
-            'Rule': '/SAPAssetManager/Rules/Common/SetAppLaunchFinished.js',
-            'Caption': '',
-        },
         ];
     }
 
@@ -112,10 +108,6 @@ export default function DownloadActionsOrRulesSequence(context) {
         },
         {
             'Rule': '/SAPAssetManager/Rules/UserPreferences/ShowNewHomeScreenInfoMessage.js',
-            'Caption': '',
-        },
-        {
-            'Rule': '/SAPAssetManager/Rules/Common/SetAppLaunchFinished.js',
             'Caption': '',
         },
     ];
