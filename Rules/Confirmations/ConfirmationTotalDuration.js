@@ -61,6 +61,19 @@ export default function ConfirmationTotalDuration(context, passedDate = undefine
         
         let lowerBound = bounds[0];
         let upperBound = bounds[1];
+        const currentDate = new Date();
+
+        // 获取当前月的第一天
+        const firstDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+    
+        // 获取当前月的最后一天
+        const lastDay = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
+        Logger.debug("firstDay------>" + firstDay);
+    
+        let odataFirstDate = new ODataDate(firstDay).toDBDateString(context);
+        Logger.debug("odataFirstDate------>" + odataFirstDate);
+        let odataLastDate = new ODataDate(lastDay).toDBDateString(context);
+        
 
         filter = "StartTimeStamp ge datetime'" + lowerBound + "' and StartTimeStamp le datetime'" + upperBound + "'"; 
 
