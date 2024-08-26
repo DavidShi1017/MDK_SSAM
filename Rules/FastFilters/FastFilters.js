@@ -363,6 +363,15 @@ export default class FastFilters {
             lastDate = lastDate.setDate(date.getDate() + (7 - date.getDay()) - 7 + 1);  // to this monday (excl.)
         }
 
+        // 获取当前日期
+        const currentDate = new Date();
+
+        // 获取当前月的第一天
+        const firstDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+
+        // 获取当前月的最后一天
+        const lastDay = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
+
         let odataFirstDate = new ODataDate(firstDate).toDBDateString(context);
         let odataLastDate = new ODataDate(lastDate).toDBDateString(context);
         return { start: odataFirstDate, end: odataLastDate };
