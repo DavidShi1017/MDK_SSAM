@@ -15,5 +15,15 @@ export default function ConfirmationDateBounds(date) {
     let upperBound = (new ODataDate(tmp)).toDBDateTimeString();
     bounds.push(lowerBound);
     bounds.push(upperBound);
+    const currentDate = new Date();
+
+    // 获取当前月的第一天
+    const firstDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+
+    // 获取当前月的最后一天
+    const lastDay = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
+
+    let odataFirstDate = new ODataDate(firstDay).toDBDateString(context);
+    let odataLastDate = new ODataDate(lastDay).toDBDateString(context);
     return bounds;
 }
