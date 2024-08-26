@@ -1,4 +1,5 @@
 import ODataDate from '../Common/Date/ODataDate';
+import Logger from '../Log/Logger';
 
 export default function ConfirmationDateBounds(date) {
     /**
@@ -22,8 +23,10 @@ export default function ConfirmationDateBounds(date) {
 
     // 获取当前月的最后一天
     const lastDay = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
+    Logger.debug("firstDay------>" + firstDay);
 
     let odataFirstDate = new ODataDate(firstDay).toDBDateString(context);
     let odataLastDate = new ODataDate(lastDay).toDBDateString(context);
+    Logger.debug("odataFirstDate------>" + odataFirstDate);
     return bounds;
 }
