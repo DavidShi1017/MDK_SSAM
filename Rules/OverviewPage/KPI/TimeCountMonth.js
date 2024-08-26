@@ -2,11 +2,11 @@ import TimeCaptureTypeHelper from '../TimeCaptureSection/TimeCaptureTypeHelper';
 import TimeSheetTodayHoursForCrew from '../../Crew/TimeSheets/CrewTimeSheetsTodaysHours';
 import TimeSheetTodayHours from '../../TimeSheets/TimeSheetsTodaysHours';
 import ODataDate from '../../Common/Date/ODataDate';
-import ConfirmationTotalDuration from '../../Confirmations/ConfirmationTotalDuration';
+import ConfirmationTotalDurationMonth from '../../Confirmations/ConfirmationTotalDurationMonth';
 import userFeaturesLib from '../../UserFeatures/UserFeaturesLibrary';
 import ConvertDoubleToHourString from '../../Confirmations/ConvertDoubleToHourString';
 
-export default function TimeCount(context) {
+export default function TimeCountMonth(context) {
     const defaultPlaceholder = context.localizeText('kpi_time_hours_minutes', ['0', '00']);
     return TimeCaptureTypeHelper(context, ConfirmationTodayHours.bind(null, context, defaultPlaceholder), TimeSheetsTodayHours, defaultPlaceholder);
 }
@@ -15,7 +15,7 @@ export function ConfirmationTodayHours(context, defaultPlaceholder) {
     try {
         let odataDate = new ODataDate();
         let date = new Date(odataDate.toDBDateString());
-        return ConfirmationTotalDuration(context, date).then(results => {
+        return ConfirmationTotalDurationMonth(context, date).then(results => {
             return FormatResult(context, results);
         });
     } catch {
