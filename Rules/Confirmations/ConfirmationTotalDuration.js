@@ -68,11 +68,12 @@ export default function ConfirmationTotalDuration(context, passedDate = undefine
     
         // 获取当前月的最后一天
         const lastDay = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
-        Logger.debug("firstDay------>" + firstDay);
-    
-        let odataFirstDate = new ODataDate(firstDay).toDBDateString(context);
-        Logger.debug("odataFirstDate------>" + odataFirstDate);
-        let odataLastDate = new ODataDate(lastDay).toDBDateString(context);
+        
+        let firstDayString = formatDate(firstDay);
+        Logger.debug("firstDayString------>" + firstDayString);
+      
+
+        
         
 
         filter = "StartTimeStamp ge datetime'" + lowerBound + "' and StartTimeStamp le datetime'" + upperBound + "'"; 
@@ -99,6 +100,13 @@ export default function ConfirmationTotalDuration(context, passedDate = undefine
     } else {
         return executeFetchRequest(context, queryBuilder, doFormat);
     }   
+}
+
+const formatDate = (date) => {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // 月份从0开始，需要加1
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
 }
 
 function getOperationsStateConfirmations(context) {
