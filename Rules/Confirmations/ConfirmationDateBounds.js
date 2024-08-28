@@ -1,4 +1,5 @@
 import ODataDate from '../Common/Date/ODataDate';
+import Logger from '../Log/Logger';
 
 export default function ConfirmationDateBounds(date) {
     /**
@@ -15,5 +16,6 @@ export default function ConfirmationDateBounds(date) {
     let upperBound = (new ODataDate(tmp)).toDBDateTimeString();
     bounds.push(lowerBound);
     bounds.push(upperBound);
+   
     return bounds;
 }
