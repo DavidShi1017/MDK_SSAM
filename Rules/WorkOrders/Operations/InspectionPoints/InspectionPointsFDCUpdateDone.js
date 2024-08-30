@@ -13,8 +13,8 @@ export default function InspectionPointsFDCUpdateDone(context) {
         if (validationPass.every(value => value === true)) {
             return fdcHelper.run(async sectionBinding => {
                 let createLinks = [];
-                let data = sectionBinding.ClientData;
-                Logger.debug("data-----" + data);
+                let client_data = sectionBinding.ClientData;
+                Logger.debug("client_data-----" + client_data);
                 let plant = sectionBinding.Plant;
                 Logger.debug("plant-----" + plant);
                 if (Object.prototype.hasOwnProperty.call(sectionBinding,'InspCode_Nav') && libVal.evalIsEmpty(sectionBinding.InspCode_Nav)) {
@@ -22,7 +22,7 @@ export default function InspectionPointsFDCUpdateDone(context) {
                         'Property': 'InspCode_Nav',
                         'Target': {
                             'EntitySet': 'InspectionCodes',
-                            'ReadLink': `InspectionCodes(Plant='${sectionBinding.ClientData.Plant}',SelectedSet='${sectionBinding.ClientData.ValSelectedSet}',Catalog='${sectionBinding.ClientData.ValCatalog}',CodeGroup='${sectionBinding.ClientData.ValCodeGroup}',Code='${sectionBinding.ClientData.ValCode}')`,
+                            'ReadLink': `InspectionCodes(Plant='${sectionBinding.Plant}',SelectedSet='${sectionBinding.ValSelectedSet}',Catalog='${sectionBinding.ValCatalog}',CodeGroup='${sectionBinding.ValCodeGroup}',Code='${sectionBinding.ValCode}')`,
                         },
                     });
                 }
