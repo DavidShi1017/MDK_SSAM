@@ -22,7 +22,7 @@ export default function InspectionPointsFDCUpdateDone(context) {
                         'Property': 'InspCode_Nav',
                         'Target': {
                             'EntitySet': 'InspectionCodes',
-                            'ReadLink': `InspectionCodes(Plant='${sectionBinding.Plant}',SelectedSet='${sectionBinding.ValSelectedSet}',Catalog='${sectionBinding.ValCatalog}',CodeGroup='${sectionBinding.ValCodeGroup}',Code='${sectionBinding.ValCode}')`,
+                            'ReadLink': `InspectionCodes(Plant='${sectionBinding.ClientData.Plant}',SelectedSet='${sectionBinding.ClientData.ValSelectedSet}',Catalog='${sectionBinding.ClientData.ValCatalog}',CodeGroup='${sectionBinding.ClientData.ValCodeGroup}',Code='${sectionBinding.ClientData.ValCode}')`,
                         },
                     });
                 }
