@@ -1,4 +1,4 @@
-/// version: MDK SDK 24.4
+/// version: MDK SDK 24.7
 
 /**
  * A designer-facing interface that provides access to a context.
@@ -755,6 +755,50 @@ interface IControlProxy extends IClientAPI {
 }
 
 /**
+ * A designer-facing interface that provides access to a element.
+ * 
+ * It is passed to rules to provide access to an element for
+ * application specific customizations.
+ */
+interface IElementProxy extends IClientAPI {
+  /**
+   * @returns {IPageProxy} the Page, which the element belongs to 
+   */
+  getPageProxy(): IPageProxy;
+
+  /**
+  * Get element name
+  * @return {string} the name of the button
+  */
+  getName(): string;
+
+  /**
+  * This method returns parent proxy
+  * @return {any}
+  */
+  getParent(): any;
+
+  /**
+  * Get index
+  * @return {number}
+  */
+  getIndex(): number;
+}
+
+/**
+ * A designer-facing interface that provides access to a card element.
+ * 
+ * It is passed to rules to provide access to a card element for
+ * application specific customizations.
+ */
+interface ICardElementProxy extends IElementProxy {
+  /**
+   * This method returns CardCollectionSection proxy
+   * @return {ICardCollectionSectionProxy}
+   */
+  getSectionProxy(): ICardCollectionSectionProxy;
+}
+/**
  * A designer-facing interface that provides access to a control container.
  * 
  * It is passed to rules to provide access to a container for 
@@ -903,6 +947,11 @@ interface IFormCellProxy extends IControlProxy {
    * - AlwaysHide
    */
   setFocus(keyboardVisibility: string): void;
+
+  /**
+   * Clear focus and close keyboard
+   */
+  clearFocus(): void;
 
   /**
    * Reset the FormCell control. The function will resolve the FormCell's properties and redraw it
@@ -1302,7 +1351,7 @@ interface ISignatureCaptureFormCellProxy extends IFormCellProxy {
 /**
  * A designer-facing interface that provides access to an item of attachmen control.
  */
-interface IAttachmentEntryProxy extends IClientAPI {
+interface IAttachmentEntryProxy extends IElementProxy {
   /**
    * Get item value (Read-Only).
    * The value is in accordance with the interface [IAttachment](../../../reference/apidoc/interfaces/iattachment.html) definition.
@@ -1470,6 +1519,18 @@ interface ITitleFormCellProxy extends IFormCellProxy {
    * @return {string}
    */
   getPlaceHolder(): string;
+}
+
+/**
+ * A designer-facing interface that provides access to a Extension control and allows customizations.
+ * In addition it provides access to the IFormCellProxy interface.
+ */
+interface IExtensionFormCellProxy extends IFormCellProxy {
+  /**
+   * Returns the instance of extension that this control is using.
+   * @return {IView}
+   */
+  getExtension(): IView;
 }
 
 /**
@@ -1991,6 +2052,18 @@ interface ISectionedTableProxy extends IControlProxy {
    * @return {IControlProxy[]} The controls for this container 
    */
   getControls(): IControlProxy[];
+  /**
+   * This method returns filter query string of the FilterCriteria for the section table
+   * 
+   * @return {string} Resolved OData $filter query string of the FilterCriteria for the section table
+   */
+  getFilterActionResult(): string;
+  /**
+   * This method returns sorter query string of the FilterCriteria for the section table
+   * 
+   * @return {string} Resolved OData $orderby query string of the FilterCriteria for the section table
+   */
+  getSorterActionResult(): string;
 }
 
 /**
@@ -2049,10 +2122,15 @@ interface ISectionProxy {
    */
   isStaticSection(): boolean;
   /**
-   * Returns the extensions the section is using.
+   * Returns the extensions the section is using. Deprecated and will always return an empty array.
    * @returns {IView[]}
    */
   getExtensions(): IView[];
+  /**
+   * Get the section header proxy of associated section
+   * @returns {ISectionHeaderProxy} Returns the section header proxy of associated section
+   */
+  getHeader(): ISectionHeaderProxy;
   /**
    * Sets the interacte object cell indicator's state in the section
    * 
@@ -2114,7 +2192,232 @@ interface ISectionProxy {
      */
     setTargetSpecifier(target: ITargetProxy, redraw?: boolean): Promise<any>;
   }
+/**
+ * A designer-facing interface that provides access to card.
+ */
+interface ICardProxy extends ICardElementProxy {
+  /**
+   * This method returns CardCollectionSection proxy
+   * @return {ICardCollectionSectionProxy}
+   */
+  getParent(): ICardCollectionSectionProxy;
 
+  /**
+   * This method returns card header proxy
+   * @return {ICardHeaderProxy}
+   */
+  getHeader(): ICardHeaderProxy;
+
+  /**
+   * This method returns card media proxy
+   * @return {ICardMediaProxy}
+   */
+  getMedia(): ICardMediaProxy;
+
+  /**
+   * This method returns card footer proxy
+   * @return {ICardFooterProxy}
+   */
+  getFooter(): ICardFooterProxy;
+}
+
+/**
+ * A designer-facing interface that provides access to action button in card.
+ */
+interface ICardHeaderActionButtonProxy extends ICardElementProxy {
+  /**
+   * This method returns card header proxy
+   * @return {ICardHeaderProxy}
+   */
+  getParent(): ICardHeaderProxy;
+
+  /**
+   * This method returns card action button overflow items proxy
+   * @return {ICardHeaderActionButtonOverflowButtonProxy[]}
+   */
+  getOverflowItems(): ICardHeaderActionButtonOverflowButtonProxy[];
+}
+
+/**
+ * A designer-facing interface that provides access to overflow button in card action button.
+ */
+interface ICardHeaderActionButtonOverflowButtonProxy extends ICardElementProxy {
+  /**
+   * Get button title
+   * @return {string} the title of the button
+   */
+  getTitle(): string;
+
+  /**
+   * This method returns card action button proxy
+   * @return {ICardHeaderActionButtonProxy}
+   */
+  getParent(): ICardHeaderActionButtonProxy;
+
+  /**
+   * Get item index
+   * @return {number}
+   */
+  getItemIndex(): number;
+}
+
+/**
+ * A designer-facing interface that provides access to a button in card footer.
+ */
+interface ICardFooterButtonProxy extends ICardElementProxy {
+  /**
+   * Get button title
+   * @return {string} the title of the button
+   */
+  getTitle(): string;
+
+  /**
+   * This method returns card footer proxy
+   * @return {ICardFooterProxy}
+   */
+  getParent(): ICardFooterProxy;
+}
+
+/**
+ * A designer-facing interface that provides access to card header properties.
+ */
+interface ICardHeaderProxy extends ICardElementProxy {
+  /**
+   * Get header title
+   * @return {string} the title of the header
+   */
+  getTitle(): string;
+
+  /**
+   * This method returns CardProxy
+   * @return {ICardProxy}
+   */
+  getParent(): ICardProxy;
+
+  /**
+   * This method returns CardHeaderActionButton proxy
+   * @return {ICardHeaderActionButtonProxy}
+   */
+  getActionButton(): ICardHeaderActionButtonProxy;
+
+  /**
+   * This method returns array of CardHeaderExtendedHeader proxy
+   * @return {ICardHeaderExtendedHeaderProxy[]}
+   */
+  getExtendedHeaders(): ICardHeaderExtendedHeaderProxy[];
+}
+
+
+/**
+ * A designer-facing interface that provides access to card header extended header properties.
+ */
+interface ICardHeaderExtendedHeaderProxy extends ICardElementProxy {
+  /**
+   * This method returns CardHeaderProxy
+   * @return {ICardHeaderProxy}
+   */
+  getParent(): ICardHeaderProxy;
+
+  /**
+   * This method returns array of card header extended header item proxy
+   * @return {ICardHeaderExtendedHeaderItemProxy[]}
+   */
+  getItems(): ICardHeaderExtendedHeaderItemProxy[];
+
+  /**
+   * Get item index
+   * @return {number}
+   */
+  getItemIndex(): number;
+}
+
+
+/**
+ * A designer-facing interface that provides access to card header extended header item properties.
+ */
+interface ICardHeaderExtendedHeaderItemProxy extends ICardElementProxy {
+  /**
+   * This method returns CardHeaderExtendedHeaderProxy
+   * @return {ICardHeaderExtendedHeaderProxy}
+   */
+  getParent(): ICardHeaderExtendedHeaderProxy;
+
+  /**
+   * Get item index
+   * @return {number}
+   */
+  getItemIndex(): number;
+}
+
+
+/**
+ * A designer-facing interface that provides access to card header KPI view properties.
+ */
+interface ICardHeaderKPIViewProxy extends ICardElementProxy {
+  /**
+   * This method returns CardHeaderProxy
+   * @return {ICardHeaderProxy}
+   */
+  getParent(): ICardHeaderProxy;
+}
+
+/**
+ * A designer-facing interface that provides access to card media properties.
+ */
+interface ICardMediaProxy extends ICardElementProxy {
+  /**
+   * This method returns CardProxy
+   * @return {ICardProxy}
+   */
+  getParent(): ICardProxy;
+
+  /**
+   * Get row index
+   * @return {number}
+   */
+  getIndex(): number;
+
+}
+
+
+/**
+ * A designer-facing interface that provides access to card footer properties.
+ */
+interface ICardFooterProxy extends ICardElementProxy {
+  /**
+   * This method returns CardProxy
+   * @return {ICardProxy}
+   */
+  getParent(): ICardProxy;
+
+  /**
+   * This method returns card footer button proxy
+   * @return {ICardFooterButtonProxy}
+   */
+  getPrimaryAction(): ICardFooterButtonProxy;
+
+  /**
+   * This method returns card footer button proxy
+   * @return {ICardFooterButtonProxy}
+   */
+  getSecondaryAction(): ICardFooterButtonProxy;
+}
+  interface IButtonTableProxy extends ISectionProxy {
+    /**
+     * This method returns buttons for this section
+     *
+     * @return {IButtonTableButtonProxy[]} The buttons for this section
+     */
+    getButtons();
+  
+    /**
+     * 
+     * @param name takes in _Name property of the button
+     * @returns {IButtonTableButtonProxy} returns the ButtonTableButtonProxy
+     * instance of the item by the name
+     */
+    getButton(name: string): IButtonTableButtonProxy;
+  }
   /**
  * A ICalendarProxy can get/set the section's calendar dates, as well as scroll to a given date.
  */
@@ -2225,7 +2528,52 @@ interface IDataTableSectionProxy extends IBindableSectionProxy {
    */
   getCell(rowIndex: number, columnIndex: number): IDataTableCellProxy;
 }
+
+/**
+ * A designer-facing interface that provides access to a ExtensionSection in a sectioned table.
+ * 
+ * It is passed to rules to provide access to a ExtensionSection 
+ * for application-specific customizations.
+ */
+interface IExtensionSectionProxy extends IBindableSectionProxy {
+  /**
+   * Returns the instance of extension that this section is using.
+   * @returns {IView}
+   */
+  getExtension(): IView;
+}
+
+/**
+ * A designer-facing interface that provides access to a ObjectCollectionSection in a sectioned table.
+ * 
+ * It is passed to rules to provide access to a ObjectCollectionSection 
+ * for application-specific customizations.
+ */
+interface IObjectCollectionSectionProxy extends IBindableSectionProxy  {
+  /**
+   * This method returns an array holding the instances of extensions that this section is using. 
+   * Each element in the array represents the instance of an extension bound to the row corresponding to the index.
+   * @returns {IView[]}
+   */
+  getExtensions(): IView[];
+}
+
+/**
+ * A designer-facing interface that provides access to a ObjectHeaderSection in a sectioned table.
+ * 
+ * It is passed to rules to provide access to a ObjectHeaderSection 
+ * for application-specific customizations.
+ */
+interface IObjectHeaderSectionProxy extends IBindableSectionProxy {
   
+  /**
+   * This method returns an array holding the instances of extensions that this section is using. 
+   * Currently it will always contain at most one extension.
+   * @returns {IView[]}
+   */
+  // Will be moved to DetailContentContainerProxy in the future
+  getExtensions(): IView[];
+}  
   /**
    * An IResetableSectionProxy can reset the controls in the section. 
    * 
@@ -2240,6 +2588,12 @@ interface IDataTableSectionProxy extends IBindableSectionProxy {
      reset(): Promise<any>;
   }
 
+/*
+ * CardCollectionSectionProxy is mainly for CardCollectionSection operations. 
+*/
+interface ICardCollectionSectionProxy extends IBindableSectionProxy {
+  //
+}
 /**
  * A designer-facing interface that construct a Link object to be used by Odata create or update entity
  * 
@@ -2483,11 +2837,11 @@ interface IFioriToolbarItemIconControlProxy extends IFioriToolbarItemProxy {
 
 
 /**
- * FioriToolbarItemButtonControlProxy is a developer-facing interface that provides access to a
+ * FioriToolbarButtonProxy is a developer-facing interface that provides access to a
  * button control and allows customizations.
  * In addition it provides access to the IFioriToolbarItemProxy interface.
  */
-interface IFioriToolbarItemButtonControlProxy extends IFioriToolbarItemProxy {
+export interface IFioriToolbarButtonProxy extends IFioriToolbarItemProxy {
   
   /**
    * Sets the ButtonType property of the control.
@@ -2603,6 +2957,123 @@ interface ITabItemProxy extends IControlProxy {
   setCaption(newCaption: string);
 }
 
+/**
+ * A designer-facing interface that provides access to a button item in a button section
+ * 
+ * It is passed to rules to provide access to a button item
+ * for application specific customizations.
+ */
+interface IButtonTableButtonProxy extends IControlProxy {
+  /**
+   * Redraw control is not supported. Instead, the parent section redraw is triggered.
+   */
+  redraw(): Promise<any>;
+}
+
+/**
+ * A designer-facing interface that provides access to the section footer in a section
+ * 
+ * It is passed to rules to provide access to a section footer
+ * for application specific customizations.
+ */
+interface ISectionFooterProxy extends IControlProxy {
+  /**
+   * Redraw control is not supported. Instead, the parent section redraw is triggered.
+   */
+  redraw(): Promise<any>;
+}
+
+/**
+ * A designer-facing interface that provides access to the section header in a section
+ * 
+ * It is passed to rules to provide access to a section header
+ * for application specific customizations.
+ */
+interface ISectionHeaderProxy extends IControlProxy {
+  /**
+   * This method returns the items for the section header
+   *
+   * @return {ISectionHeaderItemProxy[]} The items for this section header
+   */
+  getItems();
+
+  /**
+   * 
+   * @param name takes in _Name property of the section header item
+   * @returns {ISectionHeaderItemProxy} returns the SectionHeaderItemProxy
+   * instance of the item by the name
+   */
+  getItem(name: string): ISectionHeaderItemProxy;
+
+  /**
+   * Redraw control is not supported. Instead, the parent section redraw is triggered.
+   */
+  redraw(): Promise<any>;
+}
+
+/**
+ * A designer-facing interface that provides access to a section header item
+ * 
+ * It is passed to rules to provide access to a section header item
+ * for application specific customizations.
+ */
+interface ISectionHeaderItemProxy extends IControlProxy {
+  /**
+   * Redraw control is not supported. Instead, the parent section redraw is triggered.
+   */
+  redraw(): Promise<any>;
+  /**
+   * Returns the visible property value of the SectionHeaderItem.
+   * @return {boolean} returns true if the SectionHeaderItem is visible otherwise false.
+   */
+  getVisible(): boolean;
+
+
+  /**
+   * Sets the SectionHeaderItem's visible state with redraw
+   * @param value visible state
+   * @param redraw true if redraw after set the visible state
+   */
+  setVisible(value: boolean, redraw: boolean);
+}
+
+/**
+ * A designer-facing interface that provides access to a section header button item
+ * 
+ * It is passed to rules to provide access to a section header button item
+ * for application specific customizations.
+ */
+interface ISectionHeaderButtonProxy extends ISectionHeaderItemProxy {
+  /**
+   * Returns the enabled property value of the SectionHeaderButtonItem.
+   * @return {boolean} returns true if the SectionHeaderButtonItem is enabled otherwise false.
+   */
+  getEnabled(): boolean;
+
+  /**
+   * Sets the SectionHeaderItem's enabled state with redraw.
+   * @param {boolean} isEnabled true enables and false disables.
+   */
+  setEnabled(isEnabled: boolean);
+}
+
+/**
+ * A designer-facing interface that provides access to a section header icon item
+ * 
+ * It is passed to rules to provide access to a section header icon item
+ * for application specific customizations.
+ */
+interface ISectionHeaderIconProxy extends ISectionHeaderItemProxy {
+}
+
+/**
+ * A designer-facing interface that provides access to a section header label item
+ * 
+ * It is passed to rules to provide access to a section label label item
+ * for application specific customizations.
+ */
+interface ISectionHeaderLabelProxy extends ISectionHeaderItemProxy {
+}
 /**
  * A designer-facing interface that that provides access to action results 
  */
@@ -2750,6 +3221,64 @@ interface IODataProviderProxy {
    * @return {boolean}
    */
   isDraftEnabled(entitySet: string): Boolean;
+
+  /**
+   * Returns the proxy of the $metadata associated with the data provider if available. Otherwise, it will be null.
+   * Any $metadata changes happening on the backend server after initializing the data service for the first time
+   * will not be reflected unless the users restart the application or call the refreshMetadata API.
+   * @return {ICsdlDocumentProxy}
+   */
+  getMetadata(): ICsdlDocumentProxy;
+  
+  /**
+   * Reloads the latest $metadata from the backend server.
+   * It checks the compatibility between the current $metadata and the $metadata from the backend server, 
+   * then updates the $metadata associated with the data provider if there is no conflict.
+   * @return {Promise<boolean>} a promise with a boolean result indicating whether the $metadata was updated successfully.
+   */
+  refreshMetadata(): Promise<boolean>;
+}
+
+/**
+ * A designer-facing interface that provides access to the $metadata of a odata provider.
+ */
+interface ICsdlDocumentProxy {
+  /**
+   * Returns the original $metadata content as a minified XML string with unnecessary information removed if 
+   * `retainOriginalText` in the [CSDLOptions](../../../reference/schemadoc/definitions/CSDLOptions.schema.html) is enabled. 
+   * Otherwise, an error message indicating the missing CSDL option will be returned.
+   * @return {string}
+   */
+  getCompactXML(): string;
+
+  /**
+   * Returns the original $metadata content as a XML string if 
+   * `retainOriginalText` in the [CSDLOptions](../../../reference/schemadoc/definitions/CSDLOptions.schema.html) is enabled. 
+   * Otherwise, an error message indicating the missing CSDL option will be returned.
+   * @return {string}
+   */
+  getOriginalText(): string;
+  
+  /**
+   * Returns the resolved $metadata content as a XML string, with inline references and expanded aliases, if 
+   * `retainResolvedText` in the [CSDLOptions](../../../reference/schemadoc/definitions/CSDLOptions.schema.html) is enabled. 
+   * Otherwise, an error message indicating the missing CSDL option will be returned.
+   * @return {string}
+   */
+  getResolvedText(): string;
+
+  /**
+   * Returns code for the OData version, e.g. 400. If the OData version is considered as a decimal number (e.g. 4.0), 
+   * then multiplying by 100 will give the code (e.g. 400).
+   * @return {number}
+   */
+  getVersionCode(): number;
+
+  /**
+   * Returns text for the OData version, e.g. "4.0".
+   * @return {string}
+   */
+  getVersionText(): string;
 }
 
 /**
