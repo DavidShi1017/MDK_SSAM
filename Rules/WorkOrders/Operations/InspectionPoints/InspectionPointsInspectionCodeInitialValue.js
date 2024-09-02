@@ -1,5 +1,5 @@
 import libVal from '../../../Common/Library/ValidationLibrary';
-
+import InspectionLotSetUsageQueryOptions from '../../InspectionLot/SetUsage/InspectionLotSetUsageQueryOptions';
 export default async function InspectionPointsInspectionCodeInitialValue(context) {
     if (Object.prototype.hasOwnProperty.call(context.binding,'InspCode_Nav') && !libVal.evalIsEmpty(context.binding.InspCode_Nav)) {
         let ClientData = {};
