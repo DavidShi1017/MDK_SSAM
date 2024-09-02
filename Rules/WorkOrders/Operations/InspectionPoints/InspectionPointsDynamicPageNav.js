@@ -30,6 +30,7 @@ export default function InspectionPointsDynamicPageNav(context) {
                     'Placeholder': '$(L,search)',
                     'BarcodeScanner': true,
                 },
+                'SelectedIndex': 1,
                 'Caption': '$(L,valuation_proposal)',
                 'IsEditable': true,
                 'Value': '/SAPAssetManager/Rules/WorkOrders/Operations/InspectionPoints/InspectionPointsInspectionCodeInitialValue.js',
