@@ -366,7 +366,7 @@
                     "Target": {
                         "EntitySet": "{{#Property:@odata.readLink}}/InspectionPoint_Nav",
                         "Service": "/SAPAssetManager/Services/AssetManager.service",
-                        "QueryOptions": "$expand=WOOperation_Nav/WOHeader/OrderMobileStatus_Nav,Equip_Nav,InspValuation_Nav,InspCode_Nav,InspectionChar_Nav,InspectionLot_Nav,FuncLoc_Nav"
+                        "QueryOptions": "$expand=WOOperation_Nav/WOHeader/OrderMobileStatus_Nav,WOOperation_Nav/WOHeader/EAMChecklist_Nav,Equip_Nav,InspValuation_Nav,InspCode_Nav,InspectionChar_Nav,InspectionLot_Nav,FuncLoc_Nav"
                     },
                     "_Name": "InspectionPointsObjectTable",
                     "_Type": "Section.Type.ObjectTable",

@@ -1,6 +1,7 @@
 {
 	"MainPage": "/SAPAssetManager/Pages/SideMenuDrawer.page",
 	"OnLaunch": [
+		"/SAPAssetManager/Rules/Common/SetAppLaunchStarted.js",
 		"/SAPAssetManager/Rules/Log/InitializeLoggerAndNativeScriptObject.js",
 		"/SAPAssetManager/Rules/Common/PerformAppUpdateCheck.js",
 		"/SAPAssetManager/Rules/Sync/InitializeSyncState.js",

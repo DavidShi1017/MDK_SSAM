@@ -6,6 +6,7 @@ import Logger from '../../Log/Logger';
 import IsSyncInProgress from '../../Sync/IsSyncInProgress';
 import SyncDataInBackground from '../SyncData';
 import self from './AutoSyncLibrary';
+import ApplicationSettings from '../../Common/Library/ApplicationSettings';
 
 export default class AutoSyncLibrary {
 
@@ -21,7 +22,7 @@ export default class AutoSyncLibrary {
                 return false;
             }
             
-            if (!IsSyncInProgress(context)) {
+            if (!IsSyncInProgress(context) && !ApplicationSettings.getBoolean(context, 'onAppLaunch')) {
                 self.setAutoSyncInProgress(context, true);
 
                 let syncAction = self.showSyncBanner(context) ? 
@@ -171,11 +172,15 @@ export default class AutoSyncLibrary {
         CommonLib.setStateVariable(context, 'IsAutoSync', flag);
         const currentPageName = CommonLib.getPageName(context);
         const overviewPageName = PersonaLib.getPersonaOverviewStateVariablePage(context); 
-        let overviewPage = context.evaluateTargetPathForAPI('#Page:' + overviewPageName); 
-        
-        // change action bar item manually as we don't want to redraw overview page
-        overviewPage.setActionBarItemVisible('AutoSync', flag);
-        overviewPage.setActionBarItemVisible('Sync', !flag);
+        try {
+            let overviewPage = context.evaluateTargetPathForAPI('#Page:' + overviewPageName); 
+            // change action bar item manually as we don't want to redraw overview page
+            overviewPage.setActionBarItemVisible('AutoSync', flag);
+            overviewPage.setActionBarItemVisible('Sync', !flag);
+        } catch (error) {
+            Logger.error('setAutoSyncInProgress', error);
+        }
+
         if (currentPageName !== overviewPageName) { 
             context.redraw();
         }

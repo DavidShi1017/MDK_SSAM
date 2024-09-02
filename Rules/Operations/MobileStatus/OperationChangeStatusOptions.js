@@ -226,19 +226,18 @@ export default function OperationChangeStatusOptions(context) {
                                                                 },
                                                             }});
                                                         }else{
-                                                            // if(pointCount === totalCount){
-                                                            //     popoverItems.push({'Status': statusElement.MobileStatus, 'Title': transitionText, 'OnPress': '/SAPAssetManager/Rules/WorkOrders/Operations/NavOnCompleteOperationPage.js', 'TransitionType': transitionType});
-                                                            // }else{
-                                                            //     popoverItems.push({'Status': statusElement.MobileStatus, 'Title': transitionText, 'TransitionType': transitionType, 'OnPress': {
-                                                            //         'Name': '/SAPAssetManager/Actions/Common/GenericErrorDialog.action',
-                                                            //         'Properties': {
-                                                            //             'Title': context.localizeText('validation_warning'),
-                                                            //             'Message': 'There is a missing Inspection Point. Please Check',
-                                                            //             'OKCaption': context.localizeText('close'),
-                                                            //         },
-                                                            //     }});
-                                                            // }
-                                                            popoverItems.push({'Status': statusElement.MobileStatus, 'Title': transitionText, 'OnPress': '/SAPAssetManager/Rules/WorkOrders/Operations/NavOnCompleteOperationPage.js', 'TransitionType': transitionType});
+                                                            if(pointCount === totalCount){
+                                                                popoverItems.push({'Status': statusElement.MobileStatus, 'Title': transitionText, 'OnPress': '/SAPAssetManager/Rules/WorkOrders/Operations/NavOnCompleteOperationPage.js', 'TransitionType': transitionType});
+                                                            }else{
+                                                                popoverItems.push({'Status': statusElement.MobileStatus, 'Title': transitionText, 'TransitionType': transitionType, 'OnPress': {
+                                                                    'Name': '/SAPAssetManager/Actions/Common/GenericErrorDialog.action',
+                                                                    'Properties': {
+                                                                        'Title': context.localizeText('validation_warning'),
+                                                                        'Message': 'There is a missing Inspection Point. Please Check',
+                                                                        'OKCaption': context.localizeText('close'),
+                                                                    },
+                                                                }});
+                                                            }
                                                         }
                                                     }else{
                                                         popoverItems.push({'Status': statusElement.MobileStatus, 'Title': transitionText, 'OnPress': '/SAPAssetManager/Rules/WorkOrders/Operations/NavOnCompleteOperationPage.js', 'TransitionType': transitionType});

@@ -26,7 +26,7 @@ export default function InspectionCharacteristicsChangeSetOnSuccessEDT(context) 
                 if (count === 0) { //get the count for required Characteristics
                     //proceed to Inspection Points
                     if (userFeaturesLib.isFeatureEnabled(context, context.getGlobalDefinition('/SAPAssetManager/Globals/Features/QM.global').getValue())) {
-                        var woInfo = context.binding.WOHeader_Nav;
+                        var woInfo = context.binding.WOHeader_Nav || context.binding.WOOperation_Nav?.WOHeader  || undefined;
                         if (!userFeaturesLib.isFeatureEnabled(context, context.getGlobalDefinition('/SAPAssetManager/Globals/Features/Checklist.global').getValue()) || (woInfo && !woInfo.EAMChecklist_Nav.length > 0)) {
                             return InspectionPointsDynamicPageNav(context);
                         } 
