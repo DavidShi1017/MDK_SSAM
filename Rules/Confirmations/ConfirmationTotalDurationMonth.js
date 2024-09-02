@@ -11,7 +11,7 @@ import PersonaLibrary from '../Persona/PersonaLibrary';
 import WorkOrdersFSMQueryOption from '../WorkOrders/ListView/WorkOrdersFSMQueryOption';
 import ValidationLibrary from '../Common/Library/ValidationLibrary';
 
-export default function ConfirmationTotalDuration(context, passedDate = undefined, doFormat=true) {
+export default function ConfirmationTotalDurationMonth(context, passedDate = undefined, doFormat=true) {
 
     let queryBuilder = new QueryBuilder();
     let orderId;
@@ -61,8 +61,22 @@ export default function ConfirmationTotalDuration(context, passedDate = undefine
         
         let lowerBound = bounds[0];
         let upperBound = bounds[1];
-   
-        filter = "StartTimeStamp ge datetime'" + lowerBound + "' and StartTimeStamp le datetime'" + upperBound + "'"; 
+        const currentDate = new Date();
+
+        // 获取当前月的第一天
+        const firstDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+    
+        // 获取当前月的最后一天
+        const lastDay = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1);
+        
+        let firstDayString = formatDate(firstDay);
+
+        let lastDayString = formatDate(lastDay);
+
+        firstDayString = firstDayString + "T00:00:00";
+        lastDayString = lastDayString + "T00:00:00";
+
+        filter = "StartTimeStamp ge datetime'" + firstDayString + "' and StartTimeStamp le datetime'" + lastDayString + "'"; 
 
         queryBuilder.addFilter(filter);
     }

@@ -2,6 +2,7 @@ import {FDCSectionHelper} from '../../../FDC/DynamicPageGenerator';
 import InspectionPointUpdateValidation from './InspectionPointUpdateValidation';
 import InspectionPointsChangeSetOnSuccess from './InspectionPointsChangeSetOnSuccess';
 import libVal from '../../../Common/Library/ValidationLibrary';
+import Logger from '../../../Log/Logger';
 export default function InspectionPointsFDCUpdateDone(context) {
     let fdcHelper = new FDCSectionHelper(context);
     // Validate all sections first
@@ -12,6 +13,10 @@ export default function InspectionPointsFDCUpdateDone(context) {
         if (validationPass.every(value => value === true)) {
             return fdcHelper.run(async sectionBinding => {
                 let createLinks = [];
+                let client_data = sectionBinding.ClientData;
+                Logger.debug("client_data-----" + client_data);
+                let plant = sectionBinding.Plant;
+                Logger.debug("plant-----" + plant);
                 if (Object.prototype.hasOwnProperty.call(sectionBinding,'InspCode_Nav') && libVal.evalIsEmpty(sectionBinding.InspCode_Nav)) {
                     createLinks.push({
                         'Property': 'InspCode_Nav',

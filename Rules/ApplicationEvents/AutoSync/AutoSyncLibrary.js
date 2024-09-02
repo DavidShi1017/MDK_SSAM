@@ -172,9 +172,8 @@ export default class AutoSyncLibrary {
         CommonLib.setStateVariable(context, 'IsAutoSync', flag);
         const currentPageName = CommonLib.getPageName(context);
         const overviewPageName = PersonaLib.getPersonaOverviewStateVariablePage(context); 
-        let overviewPage = context.evaluateTargetPathForAPI('#Page:' + overviewPageName); 
-        
         try {
+            let overviewPage = context.evaluateTargetPathForAPI('#Page:' + overviewPageName); 
             // change action bar item manually as we don't want to redraw overview page
             overviewPage.setActionBarItemVisible('AutoSync', flag);
             overviewPage.setActionBarItemVisible('Sync', !flag);
