@@ -1,5 +1,5 @@
 import libCommon from '../Common/Library/CommonLibrary';
-
+import Logger from '../Log/Logger';
 /**
 * Get list of InspectionCodes and sort by code
 * @param {IClientAPI} context
@@ -21,6 +21,8 @@ export default function InspectionCodesSortedPickerItems(context, queryOptions) 
         });
 
         return sortedItems.map((item) => {
+            let readLink = libCommon.decodeReadLink(item['@odata.readLink']);
+            Logger.debug("readLink----->" + readLink);
             return {
                 'DisplayValue': item.CodeDesc,
                 'ReturnValue': libCommon.decodeReadLink(item['@odata.readLink']),

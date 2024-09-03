@@ -1,6 +1,7 @@
 import libVal from '../../../Common/Library/ValidationLibrary';
 import InspectionLotSetUsageQueryOptions from '../../InspectionLot/SetUsage/InspectionLotSetUsageQueryOptions';
 import libCommon from '../../../Common/Library/CommonLibrary';
+import Logger from '../../../Log/Logger';
 
 export default async function InspectionPointsInspectionCodeInitialValue(context) {
     if (Object.prototype.hasOwnProperty.call(context.binding,'InspCode_Nav') && !libVal.evalIsEmpty(context.binding.InspCode_Nav)) {
@@ -47,6 +48,8 @@ export default async function InspectionPointsInspectionCodeInitialValue(context
             ClientData.ValCodeGroup=sortedItems.getItem(0).CodeGroup;
             ClientData.Plant=sortedItems.getItem(0).Plant;
             binding.ClientData = ClientData;
+            let link = libCommon.decodeReadLink(sortedItems.getItem(0)['@odata.readLink']);
+            Logger.debug("link----->" + link);
             return 'Pass';//libCommon.decodeReadLink(sortedItems.getItem(0)['@odata.readLink']);
         }else{
             ClientData.Valuation = sortedItems.getItem(1).ValuationStatus;
@@ -56,6 +59,8 @@ export default async function InspectionPointsInspectionCodeInitialValue(context
             ClientData.ValCodeGroup=sortedItems.getItem(1).CodeGroup;
             ClientData.Plant=sortedItems.getItem(1).Plant;
             binding.ClientData = ClientData;
+            let link = libCommon.decodeReadLink(sortedItems.getItem(0)['@odata.readLink']);
+            Logger.debug("link----->" + link);
             return 'Fail';//libCommon.decodeReadLink(sortedItems.getItem(1)['@odata.readLink']);
         }
     }
