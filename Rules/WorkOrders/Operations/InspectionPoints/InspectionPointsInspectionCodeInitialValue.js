@@ -41,29 +41,29 @@ export default async function InspectionPointsInspectionCodeInitialValue(context
         });
         let ClientData = {};
         if(isPass){
-            ClientData.Valuation = sortedItems.getItem(0).ValuationStatus;
-            ClientData.ValSelectedSet=sortedItems.getItem(0).SelectedSet;
-            ClientData.ValCatalog=sortedItems.getItem(0).Catalog;
-            ClientData.ValCode=sortedItems.getItem(0).Code;
-            ClientData.ValCodeGroup=sortedItems.getItem(0).CodeGroup;
-            ClientData.Plant=sortedItems.getItem(0).Plant;
+            ClientData.Valuation = sortedItems(0).ValuationStatus;
+            ClientData.ValSelectedSet = sortedItems(0).SelectedSet;
+            ClientData.ValCatalog = sortedItems(0).Catalog;
+            ClientData.ValCode = sortedItems(0).Code;
+            ClientData.ValCodeGroup = sortedItems(0).CodeGroup;
+            ClientData.Plant = sortedItems(0).Plant;
             binding.ClientData = ClientData;
-            Logger.debug("ValuationStatus----->" + sortedItems.getItem(0).ValuationStatus);
-            Logger.debug("@odata.readLink----->" + sortedItems.getItem(0)['@odata.readLink']);
-            let link = libCommon.decodeReadLink(sortedItems.getItem(0)['@odata.readLink']);
+            Logger.debug("ValuationStatus----->" + sortedItems(0).ValuationStatus);
+            Logger.debug("@odata.readLink----->" + sortedItems(0)['@odata.readLink']);
+            let link = libCommon.decodeReadLink(sortedItems(0)['@odata.readLink']);
             Logger.debug("link----->" + link);
-            return 'Pass';//libCommon.decodeReadLink(sortedItems.getItem(0)['@odata.readLink']);
+            return libCommon.decodeReadLink(sortedItems(0)['@odata.readLink']);
         }else{
-            ClientData.Valuation = sortedItems.getItem(1).ValuationStatus;
-            ClientData.ValSelectedSet=sortedItems.getItem(1).SelectedSet;
-            ClientData.ValCatalog=sortedItems.getItem(1).Catalog;
-            ClientData.ValCode=sortedItems.getItem(1).Code;
-            ClientData.ValCodeGroup=sortedItems.getItem(1).CodeGroup;
-            ClientData.Plant=sortedItems.getItem(1).Plant;
+            ClientData.Valuation = sortedItems(1).ValuationStatus;
+            ClientData.ValSelectedSet = sortedItems(1).SelectedSet;
+            ClientData.ValCatalog = sortedItems(1).Catalog;
+            ClientData.ValCode = sortedItems(1).Code;
+            ClientData.ValCodeGroup = sortedItems(1).CodeGroup;
+            ClientData.Plant = sortedItems(1).Plant;
             binding.ClientData = ClientData;
-            let link = libCommon.decodeReadLink(sortedItems.getItem(0)['@odata.readLink']);
+            let link = libCommon.decodeReadLink(sortedItems(1)['@odata.readLink']);
             Logger.debug("link----->" + link);
-            return 'Fail';//libCommon.decodeReadLink(sortedItems.getItem(1)['@odata.readLink']);
+            return libCommon.decodeReadLink(sortedItems(1)['@odata.readLink']);
         }
     }
 }
