@@ -24,14 +24,10 @@ export default async function InspectionPointsInspectionCodeInitialValue(context
         });
         const queryOptions = await InspectionLotSetUsageQueryOptions(context);
         let sortedItems ;
-        let pass;
-        let fail;
         sortedItems = await context.read('/SAPAssetManager/Services/AssetManager.service', 'InspectionCodes', [], queryOptions).then((result) => {
             sortedItems = [...result].sort((a,b) => {
                 const codeA = a.Code;
                 const codeB = b.Code;
-                pass = a;
-                fail = b;
                 // compare as strings if one of items not numeric or or numeric with prefix 0 ('0001' and '1'), otherwise compare as numbers
                 if (`${+codeA}` !== codeA || `${+codeB}` !== codeB) {
                     return codeA.localeCompare(codeB);
@@ -42,32 +38,33 @@ export default async function InspectionPointsInspectionCodeInitialValue(context
     
             return sortedItems;
         });
+
         let ClientData = {};
-        Logger.debug("ValuationStatus----->" + pass.ValuationStatus);
+        
         if(isPass){
-            ClientData.Valuation = sortedItems(0).ValuationStatus;
-            ClientData.ValSelectedSet = sortedItems(0).SelectedSet;
-            ClientData.ValCatalog = sortedItems(0).Catalog;
-            ClientData.ValCode = sortedItems(0).Code;
-            ClientData.ValCodeGroup = sortedItems(0).CodeGroup;
-            ClientData.Plant = sortedItems(0).Plant;
+            ClientData.Valuation = sortedItems[0].ValuationStatus;
+            ClientData.ValSelectedSet = sortedItems[0].SelectedSet;
+            ClientData.ValCatalog = sortedItems[0].Catalog;
+            ClientData.ValCode = sortedItems[0].Code;
+            ClientData.ValCodeGroup = sortedItems[0].CodeGroup;
+            ClientData.Plant = sortedItems[0].Plant;
             context.binding.ClientData = ClientData;
-            Logger.debug("ValuationStatus----->" + sortedItems(0).ValuationStatus);
-            Logger.debug("@odata.readLink----->" + sortedItems(0)['@odata.readLink']);
-            let link = libCommon.decodeReadLink(sortedItems(0)['@odata.readLink']);
+            Logger.debug("ValuationStatus----->" + sortedItems[0].ValuationStatus);
+            Logger.debug("@odata.readLink----->" + sortedItems[0]['@odata.readLink']);
+            let link = libCommon.decodeReadLink(sortedItems[0]['@odata.readLink']);
             Logger.debug("link----->" + link);
-            return libCommon.decodeReadLink(sortedItems(0)['@odata.readLink']);
+            return libCommon.decodeReadLink(sortedItems[0]['@odata.readLink']);
         }else{
-            ClientData.Valuation = sortedItems(1).ValuationStatus;
-            ClientData.ValSelectedSet = sortedItems(1).SelectedSet;
-            ClientData.ValCatalog = sortedItems(1).Catalog;
-            ClientData.ValCode = sortedItems(1).Code;
-            ClientData.ValCodeGroup = sortedItems(1).CodeGroup;
-            ClientData.Plant = sortedItems(1).Plant;
+            ClientData.Valuation = sortedItems[1].ValuationStatus;
+            ClientData.ValSelectedSet = sortedItems[1].SelectedSet;
+            ClientData.ValCatalog = sortedItems[1].Catalog;
+            ClientData.ValCode = sortedItems[1].Code;
+            ClientData.ValCodeGroup = sortedItems[1].CodeGroup;
+            ClientData.Plant = sortedItems[1].Plant;
             context.binding.ClientData = ClientData;
-            let link = libCommon.decodeReadLink(sortedItems(1)['@odata.readLink']);
+            let link = libCommon.decodeReadLink(sortedItems[1]['@odata.readLink']);
             Logger.debug("link----->" + link);
-            return libCommon.decodeReadLink(sortedItems(1)['@odata.readLink']);
+            return libCommon.decodeReadLink(sortedItems[1]['@odata.readLink']);
         }
     }
 }
