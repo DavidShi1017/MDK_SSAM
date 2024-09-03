@@ -48,6 +48,8 @@ export default async function InspectionPointsInspectionCodeInitialValue(context
             ClientData.ValCodeGroup=sortedItems.getItem(0).CodeGroup;
             ClientData.Plant=sortedItems.getItem(0).Plant;
             binding.ClientData = ClientData;
+            Logger.debug("ValuationStatus----->" + sortedItems.getItem(0).ValuationStatus);
+            Logger.debug("@odata.readLink----->" + sortedItems.getItem(0)['@odata.readLink']);
             let link = libCommon.decodeReadLink(sortedItems.getItem(0)['@odata.readLink']);
             Logger.debug("link----->" + link);
             return 'Pass';//libCommon.decodeReadLink(sortedItems.getItem(0)['@odata.readLink']);
