@@ -5,16 +5,20 @@ import Logger from '../../../Log/Logger';
 
 export default async function InspectionPointsInspectionCodeInitialValue(context) {
     if (Object.prototype.hasOwnProperty.call(context.binding,'InspCode_Nav') && !libVal.evalIsEmpty(context.binding.InspCode_Nav)) {
-        let ClientData = {};
-        ClientData.Valuation = context.binding.InspCode_Nav.ValuationStatus;
-        ClientData.ValSelectedSet=context.binding.InspCode_Nav.SelectedSet;
-        ClientData.ValCatalog=context.binding.InspCode_Nav.Catalog;
-        ClientData.ValCode=context.binding.InspCode_Nav.Code;
-        ClientData.ValCodeGroup=context.binding.InspCode_Nav.CodeGroup;
-        ClientData.Plant=context.binding.InspCode_Nav.Plant;
-        context.binding.ClientData = ClientData;
-        return context.binding.InspCode_Nav['@odata.readLink'];
+        // let ClientData = {};
+        // ClientData.Valuation = context.binding.InspCode_Nav.ValuationStatus;
+        // ClientData.ValSelectedSet=context.binding.InspCode_Nav.SelectedSet;
+        // ClientData.ValCatalog=context.binding.InspCode_Nav.Catalog;
+        // ClientData.ValCode=context.binding.InspCode_Nav.Code;
+        // ClientData.ValCodeGroup=context.binding.InspCode_Nav.CodeGroup;
+        // ClientData.Plant=context.binding.InspCode_Nav.Plant;
+        // context.binding.ClientData = ClientData;
+        // return context.binding.InspCode_Nav['@odata.readLink'];
+        return getDefaultValue();
     }else{
+        return getDefaultValue();
+    }
+    async function  getDefaultValue(){
         let inspectionChar = context.binding.InspectionChar_Nav;
         let isPass = true;
         inspectionChar.map((item) => {
