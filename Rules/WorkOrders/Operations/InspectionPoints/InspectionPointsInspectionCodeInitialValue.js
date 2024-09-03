@@ -47,7 +47,7 @@ export default async function InspectionPointsInspectionCodeInitialValue(context
             ClientData.ValCodeGroup=sortedItems.getItem(0).CodeGroup;
             ClientData.Plant=sortedItems.getItem(0).Plant;
             binding.ClientData = ClientData;
-            return 'pass';//libCommon.decodeReadLink(sortedItems.getItem(0)['@odata.readLink']);
+            return 'Pass';//libCommon.decodeReadLink(sortedItems.getItem(0)['@odata.readLink']);
         }else{
             ClientData.Valuation = sortedItems.getItem(1).ValuationStatus;
             ClientData.ValSelectedSet=sortedItems.getItem(1).SelectedSet;
@@ -56,7 +56,7 @@ export default async function InspectionPointsInspectionCodeInitialValue(context
             ClientData.ValCodeGroup=sortedItems.getItem(1).CodeGroup;
             ClientData.Plant=sortedItems.getItem(1).Plant;
             binding.ClientData = ClientData;
-            return 'fail';//libCommon.decodeReadLink(sortedItems.getItem(1)['@odata.readLink']);
+            return 'Fail';//libCommon.decodeReadLink(sortedItems.getItem(1)['@odata.readLink']);
         }
     }
 }

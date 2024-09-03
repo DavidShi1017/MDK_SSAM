@@ -32,7 +32,7 @@ export default function InspectionPointsDynamicPageNav(context) {
                 },
                 'Caption': '$(L,valuation_proposal)',
                 'IsEditable': true,
-                'Value': 'pass',
+                'Value': '/SAPAssetManager/Rules/WorkOrders/Operations/InspectionPoints/InspectionPointsInspectionCodeInitialValue.js',
                 'PickerItems': '/SAPAssetManager/Rules/WorkOrders/InspectionLot/SetUsage/InspectionLotSetUsageInspectionCodesPickerItems.js',
                 '_Name': 'Valuation',
                 '_Type': 'Control.Type.FormCell.ListPicker',
