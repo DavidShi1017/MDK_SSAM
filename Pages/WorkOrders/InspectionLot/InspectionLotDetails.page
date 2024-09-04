@@ -1,6 +1,7 @@
 {
     "Caption": "$(L, inspection_lot)",
     "OnReturning" : "/SAPAssetManager/Rules/WorkOrders/InspectionLot/InspectionLotDetailsOnReturning.js",
+    "OnActivityBackPressed": "/SAPAssetManager/Rules/WorkOrders/InspectionLot/InspectionLotDetailsOnBackPress.js",
     "ActionBar": {
         "Items": [
             {
