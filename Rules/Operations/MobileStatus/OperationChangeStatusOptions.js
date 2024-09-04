@@ -111,15 +111,28 @@ export default function OperationChangeStatusOptions(context) {
 
             if(orderType === 'KM05' || orderType === 'KM02'){
                 let returnedData = context.getClientData().inspectionPointNav;
+                
                 if(binding.InspectionPoint_Nav && binding.InspectionPoint_Nav.length > 0){
                     totalCount = binding.InspectionPoint_Nav.length;
                     var points = binding.InspectionPoint_Nav;
 
-                for (let i = 0; i < points.length; i++) {
-                    if (!libVal.evalIsEmpty(points[i].ValuationStatus)) {
-                        pointCount++;
+                    for (let i = 0; i < points.length; i++) {
+                        if (!libVal.evalIsEmpty(points[i].ValuationStatus)) {
+                            pointCount++;
+                        }
                     }
-                }
+                }else{
+                    if(returnedData && returnedData._array.length > 0 && returnedData._array[0]){
+                        let inspectionPoint_Nav = returnedData._array[0].InspectionPoints_Nav
+                        totalCount = inspectionPoint_Nav.length;
+                        var points = inspectionPoint_Nav;
+    
+                        for (let i = 0; i < points.length; i++) {
+                            if (!libVal.evalIsEmpty(points[i].ValuationStatus)) {
+                                pointCount++;
+                            }
+                        }
+                    }
                 }
             }
             
