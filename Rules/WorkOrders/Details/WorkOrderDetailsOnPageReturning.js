@@ -4,7 +4,7 @@ import ProgressTrackerOnDataChanged from '../../TimelineControl/ProgressTrackerO
 import WorkOrderDetailsToolbarVisibility from './WorkOrderDetailsToolbarVisibility';
 
 export default function WorkOrderDetailsOnPageReturning(context) {
-    let returnedData = context.getClientData().inspectionPointNav;
+    
     return ToolbarRefresh(context).then(() => {
         return WorkOrderDetailsToolbarVisibility(context).then(visibility => {
             try {
