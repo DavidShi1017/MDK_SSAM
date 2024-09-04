@@ -27,7 +27,7 @@ export default function MyWorkSectionQueryOption(context) {
             if (IsOperationLevelAssigmentType(context)) {
                 //My Operation Query
                 orderBy = '$orderby=OperationMobileStatus_Nav/MobileStatus desc,PersonNum,WOHeader/DueDate';
-                expand = '$expand=Confirmations,OperationMobileStatus_Nav,OperationMobileStatus_Nav/OverallStatusCfg_Nav/OverallStatusSeq_Nav/NextOverallStatusCfg_Nav,OperationLongText,WOHeader,UserTimeEntry_Nav,WOHeader/WOPriority,EquipmentOperation,EquipmentOperation/Location_Nav,FunctionalLocationOperation,FunctionalLocationOperation/Location_Nav,Tools,WOOprDocuments_Nav';
+                expand = '$expand=InspectionPoint_Nav,Confirmations,OperationMobileStatus_Nav,OperationMobileStatus_Nav/OverallStatusCfg_Nav/OverallStatusSeq_Nav/NextOverallStatusCfg_Nav,OperationLongText,WOHeader,UserTimeEntry_Nav,WOHeader/WOPriority,EquipmentOperation,EquipmentOperation/Location_Nav,FunctionalLocationOperation,FunctionalLocationOperation/Location_Nav,Tools,WOOprDocuments_Nav';
                 entitySet = 'MyWorkOrderOperations';
                 if (UserFeaturesLibrary.isFeatureEnabled(context, context.getGlobalDefinition('/SAPAssetManager/Globals/Features/Meter.global').getValue())) {
                     expand += ',WOHeader/OrderISULinks,WOHeader/DisconnectActivity_Nav';
