@@ -4,7 +4,7 @@ import documentValidateCreate from '../Documents/DocumentValidation';
 import IsCompleteAction from '../WorkOrders/Complete/IsCompleteAction';
 import WorkOrderCompletionLibrary from '../WorkOrders/Complete/WorkOrderCompletionLibrary';
 import ExecuteActionWithAutoSync from '../ApplicationEvents/AutoSync/ExecuteActionWithAutoSync';
-
+import CommonLibrary from '../Common/Library/CommonLibrary';
 /**
 * Run all actions pertaining to Malfunction End/Work Order Complete
 * @param {IClientAPI} context
@@ -178,6 +178,15 @@ export default function MalfunctionEnd(context) {
     let codeGroup = (function() { try { return context.evaluateTargetPath('#Control:DamageGroupLstPkr/#SelectedValue');} catch (e) {return '';} })();
     let damageCode = (function() { try { return context.evaluateTargetPath('#Control:DamageDetailsLstPkr/#SelectedValue');} catch (e) {return '';} })(); 
     if(itemDescription && causeCodeGroup && causeCode && objectPartCodeGroup && objectPart && codeGroup && damageCode){
+        let NotificationItem = {};
+        NotificationItem.itemDescription = itemDescription;
+        NotificationItem.causeCodeGroup = causeCodeGroup;
+        NotificationItem.objectPartCodeGroup = objectPartCodeGroup;
+        NotificationItem.objectPart = objectPart;
+        NotificationItem.codeGroup = codeGroup;
+        NotificationItem.damageCode = damageCode;
+        CommonLibrary.setStateVariable(context, context.binding.OrderId + '-' + context.binding.NotifNum, NotificationItem);
+
         return context.executeAction('/SAPAssetManager/Actions/Notifications/CreateUpdate/NotificationUpdateMalfunctionEnd.action').then(actionResult => {
             if (itemDescription) {
                 // Create Item

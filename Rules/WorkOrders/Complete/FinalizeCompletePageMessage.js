@@ -69,6 +69,15 @@ export default async function FinalizeCompletePageMessage(context) {
                 return false;    
             });
             Logger.debug("value------->" + value);
+            let notificationItem = CommonLibrary.getStateVariable(context, context.binding.OrderId + '-' + context.binding.NotifNum);
+            if(notificationItem){
+                if(notificationItem.itemDescription && notificationItem.causeCodeGroup 
+                    && notificationItem.causeCode && notificationItem.objectPartCodeGroup 
+                    && notificationItem.objectPart && notificationItem.codeGroup && notificationItem.damageCode){
+                        Logger.debug("notificationItem----fully--->");
+                }
+            }
+            
             if(!value){
                 context.currentPage.controls[0].sections[1].value.items.forEach(item => {
                     if(item.keyName === context.localizeText('update_notification')){
