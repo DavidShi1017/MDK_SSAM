@@ -4,6 +4,8 @@ import WorkOrderOperationDetailsToolbarVisibility from '../WorkOrders/Operations
 import Logger from '../Log/Logger';
 
 export default function WorkOrderOperationDetailsOnReturning(context) {
+    let ClientData = context.getClientData().inspectionPointNav;
+    context.binding.ClientData = ClientData;
     return ToolbarRefresh(context).then(() => {
         return WorkOrderOperationDetailsToolbarVisibility(context).then(visibility => {
             try {
