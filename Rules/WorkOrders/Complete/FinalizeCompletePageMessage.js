@@ -69,7 +69,7 @@ export default async function FinalizeCompletePageMessage(context) {
                 return false;    
             });
             Logger.debug("value------->" + value);
-            let notificationItem = CommonLibrary.getStateVariable(context, context.binding.OrderId + '-' + context.binding.NotifNum);
+            let notificationItem = libCom.getStateVariable(context, context.binding.OrderId + '-' + context.binding.NotifNum);
             if(notificationItem){
                 if(notificationItem.itemDescription && notificationItem.causeCodeGroup 
                     && notificationItem.causeCode && notificationItem.objectPartCodeGroup 
