@@ -13,7 +13,7 @@ import PhaseLibrary from '../../PhaseModel/PhaseLibrary';
 import WorkOrderCompletionLibrary from '../../WorkOrders/Complete/WorkOrderCompletionLibrary';
 import libVal from '../../Common/Library/ValidationLibrary';
 import IsWONotificationComplete from '../../WorkOrders/Complete/Notification/IsWONotificationComplete';
-
+import CommonLibrary from '../../Common/Library/CommonLibrary';
 
 export default function OperationChangeStatusOptions(context) {
     const READY = 'READY'; // Don't bother adding this to the config panel. EAM Team needs to fix their hardcoded app transitions first. See TODO below.
