@@ -110,7 +110,8 @@ export default function OperationChangeStatusOptions(context) {
             let totalCount = 0;
 
             if(orderType === 'KM05' || orderType === 'KM02'){
-                let returnedData = context.getClientData().inspectionPointNav;
+                let returnedData = CommonLibrary.getStateVariable(context, binding.OrderId, inspectionLotObject);
+                //let returnedData = context.getClientData().inspectionPointNav;
                 if(returnedData && returnedData._array.length > 0 && returnedData._array[0]){
                     let inspectionPoint_Nav = returnedData._array[0].InspectionPoints_Nav
                     totalCount = inspectionPoint_Nav.length;
