@@ -79,14 +79,11 @@ export default async function FinalizeCompletePageMessage(context) {
                         && notificationItem.causeCode && notificationItem.objectPartCodeGroup 
                         && notificationItem.objectPart && notificationItem.codeGroup && notificationItem.damageCode){
                             Logger.debug("notificationItem----fully--->");
-                            value = true;
                     }else{
-                        value = false;
                         errorMessage = 'Notification Damage / Cause / Object Part Code is Missing';
                         return showMessageErrorDialg(context, errorMessage);  
                     }
                 }else{
-                    value = false;
                     errorMessage = 'Notification Damage / Cause / Object Part Code is Missing';
                     return showMessageErrorDialg(context, errorMessage); 
                 }
