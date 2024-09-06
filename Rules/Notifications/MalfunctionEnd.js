@@ -181,6 +181,7 @@ export default function MalfunctionEnd(context) {
         let NotificationItem = {};
         NotificationItem.itemDescription = itemDescription;
         NotificationItem.causeCodeGroup = causeCodeGroup;
+        NotificationItem.causeCode = causeCode;
         NotificationItem.objectPartCodeGroup = objectPartCodeGroup;
         NotificationItem.objectPart = objectPart;
         NotificationItem.codeGroup = codeGroup;
