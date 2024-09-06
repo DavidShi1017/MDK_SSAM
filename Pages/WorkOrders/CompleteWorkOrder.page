@@ -146,7 +146,7 @@
                             "SimplePropertyCell": {
                                 "KeyName" : "$(L,update_notification)",
                                 "Value": "/SAPAssetManager/Rules/WorkOrders/Complete/Notification/NotificationValue.js",
-                                "Visible": true,
+                                "Visible": "/SAPAssetManager/Rules/WorkOrders/Complete/Notification/SetWONotificationVisible.js",
                                 "AccessoryType": "disclosureIndicator",
                                 "OnPress": "/SAPAssetManager/Rules/WorkOrders/Complete/Notification/ChangeNotification.js"
                             }
