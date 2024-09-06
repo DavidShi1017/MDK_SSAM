@@ -186,7 +186,7 @@ export default function MalfunctionEnd(context) {
         NotificationItem.objectPart = objectPart;
         NotificationItem.codeGroup = codeGroup;
         NotificationItem.damageCode = damageCode;
-        CommonLibrary.setStateVariable(context, context.binding.OrderId + '-' + context.binding.NotifNum, NotificationItem);
+        CommonLibrary.setStateVariable(context, context.binding.OrderId + '-' + context.binding.NotificationNumber, NotificationItem);
 
         return context.executeAction('/SAPAssetManager/Actions/Notifications/CreateUpdate/NotificationUpdateMalfunctionEnd.action').then(actionResult => {
             if (itemDescription) {
