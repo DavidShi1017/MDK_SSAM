@@ -13,7 +13,7 @@ import PhaseLibrary from '../../PhaseModel/PhaseLibrary';
 import WorkOrderCompletionLibrary from '../../WorkOrders/Complete/WorkOrderCompletionLibrary';
 import libVal from '../../Common/Library/ValidationLibrary';
 import IsWONotificationComplete from '../../WorkOrders/Complete/Notification/IsWONotificationComplete';
-
+import CommonLibrary from '../../Common/Library/CommonLibrary';
 
 export default function OperationChangeStatusOptions(context) {
     const READY = 'READY'; // Don't bother adding this to the config panel. EAM Team needs to fix their hardcoded app transitions first. See TODO below.
@@ -110,16 +110,29 @@ export default function OperationChangeStatusOptions(context) {
             let totalCount = 0;
 
             if(orderType === 'KM05' || orderType === 'KM02'){
-                let returnedData = context.getClientData().inspectionPointNav;
-                if(binding.InspectionPoint_Nav && binding.InspectionPoint_Nav.length > 0){
-                    totalCount = binding.InspectionPoint_Nav.length;
-                    var points = binding.InspectionPoint_Nav;
+                let returnedData = CommonLibrary.getStateVariable(context, binding.OrderId);
+                //let returnedData = context.getClientData().inspectionPointNav;
+                if(returnedData && returnedData._array.length > 0 && returnedData._array[0]){
+                    let inspectionPoint_Nav = returnedData._array[0].InspectionPoints_Nav
+                    totalCount = inspectionPoint_Nav.length;
+                    var points = inspectionPoint_Nav;
 
-                for (let i = 0; i < points.length; i++) {
-                    if (!libVal.evalIsEmpty(points[i].ValuationStatus)) {
-                        pointCount++;
+                    for (let i = 0; i < points.length; i++) {
+                        if (!libVal.evalIsEmpty(points[i].ValuationStatus)) {
+                            pointCount++;
+                        }
                     }
-                }
+                }else{
+                    if(binding.InspectionPoint_Nav && binding.InspectionPoint_Nav.length > 0){
+                        totalCount = binding.InspectionPoint_Nav.length;
+                        var points = binding.InspectionPoint_Nav;
+    
+                        for (let i = 0; i < points.length; i++) {
+                            if (!libVal.evalIsEmpty(points[i].ValuationStatus)) {
+                                pointCount++;
+                            }
+                        }
+                    }
                 }
             }
             

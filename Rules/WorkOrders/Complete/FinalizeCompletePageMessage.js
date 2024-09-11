@@ -70,18 +70,35 @@ export default async function FinalizeCompletePageMessage(context) {
             });
             Logger.debug("value------->" + value);
             if(!value){
-                // context.currentPage.controls[0].sections[1].value.items.forEach(item => {
-                //     if(item.keyName === context.localizeText('update_notification')){
-                //         let descr = item.value;
-                //         if(descr === ''){                     
-                //             errorMessage = 'Notification Damage / Cause / Object Part Code is Missing';
-                //             return showMessageErrorDialg(context, errorMessage);  
-                //         }
-                //     }
-                // });
-                errorMessage = 'Notification Damage / Cause / Object Part Code is Missing';
-                return showMessageErrorDialg(context, errorMessage);  
+               
+                //errorMessage = 'Notification Damage / Cause / Object Part Code is Missing';
+                //return showMessageErrorDialg(context, errorMessage);  
+                let notificationItem = libCom.getStateVariable(context, context.binding.OrderId + '-' + context.binding.NotifNum);
+                if(notificationItem){
+                    if(notificationItem.itemDescription && notificationItem.causeCodeGroup 
+                        && notificationItem.causeCode && notificationItem.objectPartCodeGroup 
+                        && notificationItem.objectPart && notificationItem.codeGroup && notificationItem.damageCode){
+                            Logger.debug("notificationItem----fully--->");
+                    }else{
+                        errorMessage = 'Notification Damage / Cause / Object Part Code is Missing';
+                        return showMessageErrorDialg(context, errorMessage);  
+                    }
+                }else{
+                    errorMessage = 'Notification Damage / Cause / Object Part Code is Missing';
+                    return showMessageErrorDialg(context, errorMessage); 
+                }
             }
+            // if(!value){
+            //     context.currentPage.controls[0].sections[1].value.items.forEach(item => {
+            //         if(item.keyName === context.localizeText('update_notification')){
+            //             let descr = item.value;
+            //             if(descr === ''){                     
+            //                 errorMessage = 'Notification Damage / Cause / Object Part Code is Missing';
+            //                 return showMessageErrorDialg(context, errorMessage);  
+            //             }
+            //         }
+            //     });
+            // }
         }
         
     }

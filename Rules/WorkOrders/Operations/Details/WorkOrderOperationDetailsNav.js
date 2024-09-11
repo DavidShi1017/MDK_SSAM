@@ -34,7 +34,8 @@ export default function WorkOrderOperationDetailsNav(sectionedTableProxy) {
 
 function generateStatusItemsAndNavigate(pageProxy) {
     let bindingOriginal = pageProxy.binding;
-    pageProxy._context.binding = pageProxy.getActionBinding(); // replace binding with action binding so that we can use OperationChangeStatusOptions before we navigated to the page
+    pageProxy._context.binding = pageProxy.getActionBinding(); 
+    // replace binding with action binding so that we can use OperationChangeStatusOptions before we navigated to the page
     return OperationChangeStatusOptions(pageProxy).then(items => {
         pageProxy._context.binding = bindingOriginal; // revert to original binding 
         return pageToolbar.getInstance().generatePossibleToolbarItems(pageProxy, items, 'WorkOrderOperationDetailsPage').then(() => {
