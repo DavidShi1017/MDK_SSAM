@@ -820,9 +820,9 @@ export default class {
         if (dict.TypeLstPkr) {
             dict.TypeLstPkr.clearValidation();
         }
-        if (dict.EquipHierarchyExtensionControl) {
-            dict.EquipHierarchyExtensionControl.clearValidation();
-        }
+        // if (dict.EquipHierarchyExtensionControl) {
+        //     dict.EquipHierarchyExtensionControl.clearValidation();
+        // }
         if (dict.MainWorkCenterListPicker) {
             dict.MainWorkCenterListPicker.clearValidation();
         }
