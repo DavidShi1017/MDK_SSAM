@@ -81,7 +81,7 @@ export default async function InspectionPointsInspectionCodeInitialValue(context
             ClientData.ValCodeGroup = sortedItems[0].CodeGroup;
             ClientData.Plant = sortedItems[0].Plant;
             context.binding.ClientData = ClientData;
-            return libCommon.decodeReadLink(sortedItems[0]['@odata.readLink']);
+            return '';
         }
     }
 }
