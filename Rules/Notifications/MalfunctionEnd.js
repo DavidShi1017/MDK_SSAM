@@ -5,11 +5,18 @@ import IsCompleteAction from '../WorkOrders/Complete/IsCompleteAction';
 import WorkOrderCompletionLibrary from '../WorkOrders/Complete/WorkOrderCompletionLibrary';
 import ExecuteActionWithAutoSync from '../ApplicationEvents/AutoSync/ExecuteActionWithAutoSync';
 import CommonLibrary from '../Common/Library/CommonLibrary';
+import { isControlPopulated } from './CreateUpdate/RequiredFields';
+import libVal from '../Common/Library/ValidationLibrary';
 /**
 * Run all actions pertaining to Malfunction End/Work Order Complete
 * @param {IClientAPI} context
 */
 export default function MalfunctionEnd(context) {
+
+    let formCellContainer = context.getControl('FormCellContainer');
+    if (libVal.evalIsEmpty(context.binding)) {
+        context._context.binding = formCellContainer.binding;
+    }
 
     // Create Item Function
     let createItem = function(actionResult) {
@@ -24,7 +31,7 @@ export default function MalfunctionEnd(context) {
                 {
                     'NotificationNumber': data.NotificationNumber,
                     'ItemNumber' : promises[0],
-                    'ItemText' : context.evaluateTargetPath('#Control:ItemDescription/#Value'),
+                    'ItemText' : context.evaluateTargetPath('#Control:ItemDescription/#Value') || '',
                     'ObjectPartCodeGroup': context.evaluateTargetPath('#Control:PartGroupLstPkr/#SelectedValue'),
                     'ObjectPart' : context.evaluateTargetPath('#Control:PartDetailsLstPkr/#SelectedValue'),
                     'CodeGroup': context.evaluateTargetPath('#Control:DamageGroupLstPkr/#SelectedValue'),
@@ -89,12 +96,6 @@ export default function MalfunctionEnd(context) {
         let data = JSON.parse(actionResult.data);
         let localCauseNum = GenerateLocalID(context, `${data['@odata.readLink']}/ItemCauses`, 'CauseSequenceNumber', '0000', '', '');
         let sortNum = GenerateLocalID(context, `${data['@odata.readLink']}/ItemCauses`, 'CauseSortNumber', '0000', '', '');
-        let causeDescription = (function() { try { context.evaluateTargetPath('#Control:CauseDescription/#Value');} catch (e) {return '';} })(); 
-       
-
-        if(!causeDescription){
-            causeDescription = '';
-        }
         return Promise.all([localCauseNum, sortNum]).then(function(promises) {
             return context.executeAction({
                 'Name': '/SAPAssetManager/Actions/Notifications/Item/NotificationItemCauseCreate.action',
@@ -104,7 +105,7 @@ export default function MalfunctionEnd(context) {
                         'NotificationNumber': data.NotificationNumber,
                         'ItemNumber' : data.ItemNumber,
                         'CauseSequenceNumber' : promises[0],
-                        'CauseText' : causeDescription,
+                        'CauseText' : context.evaluateTargetPath('#Control:CauseDescription/#Value') || '',
                         // eslint-disable-next-line brace-style
                         'CauseCodeGroup': (function() { try { return context.evaluateTargetPath('#Control:CauseGroupLstPkr/#SelectedValue'); } catch (e) {return '';} })(),
                         // eslint-disable-next-line brace-style
@@ -169,7 +170,12 @@ export default function MalfunctionEnd(context) {
     // eslint-disable-next-line brace-style
     let itemDescription = (function() { try { return context.evaluateTargetPath('#Control:ItemDescription/#Value'); } catch (e) {return '';} })();
     // eslint-disable-next-line brace-style
-    let causeDescription = (function() { try { return context.evaluateTargetPath('#Control:CauseDescription/#Value'); } catch (e) {return '';} })();
+    //let causeDescription = (function() { try { return context.evaluateTargetPath('#Control:CauseDescription/#Value'); } catch (e) {return '';} })();
+
+    const isItemPopulated = isControlPopulated('ItemDescription', formCellContainer) || [['PartGroupLstPkr', 'PartDetailsLstPkr'], ['DamageGroupLstPkr', 'DamageDetailsLstPkr']]
+                        .some(([parentName, childName]) => isControlPopulated(parentName, formCellContainer) && isControlPopulated(childName, formCellContainer));
+    
+    const isCausePopulated = ['CodeLstPkr', 'CauseGroupLstPkr'].every(pickerName => isControlPopulated(pickerName, formCellContainer));            
 
     let causeCodeGroup = (function() { try { return context.evaluateTargetPath('#Control:CauseGroupLstPkr/#SelectedValue');} catch (e) {return '';} })();
     let causeCode = (function() { try { return context.evaluateTargetPath('#Control:CodeLstPkr/#SelectedValue');} catch (e) {return '';} })();
@@ -189,7 +195,7 @@ export default function MalfunctionEnd(context) {
         CommonLibrary.setStateVariable(context, context.binding.OrderId + '-' + context.binding.NotificationNumber, NotificationItem);
 
         return context.executeAction('/SAPAssetManager/Actions/Notifications/CreateUpdate/NotificationUpdateMalfunctionEnd.action').then(actionResult => {
-            if (itemDescription) {
+            if (isItemPopulated) {
                 // Create Item
                 return createItem(actionResult);
             } else {
@@ -198,7 +204,7 @@ export default function MalfunctionEnd(context) {
             }
         }).then(actionResult => {
             // If actionResult is null, no don't create a Cause
-            if (actionResult) {
+            if (isCausePopulated && actionResult) {
                 return createCause(actionResult);
             } else {
                 return Promise.resolve();
