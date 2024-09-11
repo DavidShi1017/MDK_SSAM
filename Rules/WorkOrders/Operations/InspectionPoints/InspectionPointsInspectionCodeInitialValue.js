@@ -4,6 +4,11 @@ import libCommon from '../../../Common/Library/CommonLibrary';
 import Logger from '../../../Log/Logger';
 
 export default async function InspectionPointsInspectionCodeInitialValue(context) {
+    let code = context.binding.InspCode_Nav.Code;
+    let codeGroup = context.binding.InspCode_Nav.CodeGroup;
+    let catalog = context.binding.InspCode_Nav.Catalog;
+    let plat = context.binding.InspCode_Nav.Plant;
+    let selectedSet = context.binding.InspCode_Nav.SelectedSet;
     if (Object.prototype.hasOwnProperty.call(context.binding,'InspCode_Nav') && !libVal.evalIsEmpty(context.binding.InspCode_Nav)) {
         // let ClientData = {};
         // ClientData.Valuation = context.binding.InspCode_Nav.ValuationStatus;
@@ -75,11 +80,11 @@ export default async function InspectionPointsInspectionCodeInitialValue(context
             return libCommon.decodeReadLink(sortedItems[1]['@odata.readLink']);
         }else{
             ClientData.Valuation = '';
-            ClientData.ValSelectedSet = sortedItems[0].SelectedSet;
-            ClientData.ValCatalog = sortedItems[0].Catalog;
-            ClientData.ValCode = '';
-            ClientData.ValCodeGroup = sortedItems[0].CodeGroup;
-            ClientData.Plant = sortedItems[0].Plant;
+            ClientData.ValSelectedSet = selectedSet;
+            ClientData.ValCatalog = catalog;
+            ClientData.ValCode = code;
+            ClientData.ValCodeGroup = codeGroup;
+            ClientData.Plant = plant;
             context.binding.ClientData = ClientData;
             return '';
         }
