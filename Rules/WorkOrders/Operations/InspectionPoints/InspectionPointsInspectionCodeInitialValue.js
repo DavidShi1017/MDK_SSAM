@@ -20,12 +20,16 @@ export default async function InspectionPointsInspectionCodeInitialValue(context
     }
     async function  getDefaultValue(){
         let inspectionChar = context.binding.InspectionChar_Nav;
-        let isPass = true;
-        inspectionChar.map((item) => {
-            if(item.Valuation !== 'A'){
-                isPass = false;
+        let isPass = 'Y';
+        for (let i = 0; i < inspectionChar.length; i++) {
+            if (inspectionChar[i].Valuation === '') {
+                isPass = '';
+                break; 
             }
-        });
+            if (inspectionChar[i].Valuation !== 'A') {
+                isPass = 'N';
+            }
+        }
         const queryOptions = await InspectionLotSetUsageQueryOptions(context);
         let sortedItems ;
         sortedItems = await context.read('/SAPAssetManager/Services/AssetManager.service', 'InspectionCodes', [], queryOptions).then((result) => {
@@ -45,7 +49,7 @@ export default async function InspectionPointsInspectionCodeInitialValue(context
 
         let ClientData = {};
         
-        if(isPass){
+        if(isPass === 'Y'){
             ClientData.Valuation = sortedItems[0].ValuationStatus;
             ClientData.ValSelectedSet = sortedItems[0].SelectedSet;
             ClientData.ValCatalog = sortedItems[0].Catalog;
@@ -58,7 +62,7 @@ export default async function InspectionPointsInspectionCodeInitialValue(context
             let link = libCommon.decodeReadLink(sortedItems[0]['@odata.readLink']);
             Logger.debug("link----->" + link);
             return libCommon.decodeReadLink(sortedItems[0]['@odata.readLink']);
-        }else{
+        }else if(isPass === 'N'){
             ClientData.Valuation = sortedItems[1].ValuationStatus;
             ClientData.ValSelectedSet = sortedItems[1].SelectedSet;
             ClientData.ValCatalog = sortedItems[1].Catalog;
@@ -69,6 +73,15 @@ export default async function InspectionPointsInspectionCodeInitialValue(context
             let link = libCommon.decodeReadLink(sortedItems[1]['@odata.readLink']);
             Logger.debug("link----->" + link);
             return libCommon.decodeReadLink(sortedItems[1]['@odata.readLink']);
+        }else{
+            ClientData.Valuation = '';
+            ClientData.ValSelectedSet = sortedItems[0].SelectedSet;
+            ClientData.ValCatalog = sortedItems[0].Catalog;
+            ClientData.ValCode = '';
+            ClientData.ValCodeGroup = sortedItems[0].CodeGroup;
+            ClientData.Plant = sortedItems[0].Plant;
+            context.binding.ClientData = ClientData;
+            return libCommon.decodeReadLink(sortedItems[0]['@odata.readLink']);
         }
     }
 }
