@@ -199,7 +199,9 @@ export default function OperationChangeStatusOptions(context) {
                                                             }});
                                                         }else{
                                                             if(pointCount === totalCount){
-                                                                popoverItems.push({'Status': statusElement.MobileStatus, 'Title': transitionText, 'OnPress': '/SAPAssetManager/Rules/WorkOrders/Operations/NavOnCompleteOperationPage.js', 'TransitionType': transitionType});
+                                                                WorkOrderCompletionLibrary.getInstance().setIsAutoCompleteOnApprovalFlag(context, true);
+                                                                postUpdateRule = '/SAPAssetManager/Rules/Supervisor/ApprovalPostUpdate.js';
+                                                                popoverItems.push({'Status': statusElement.MobileStatus, 'Title': transitionText, 'OnPress': mobileStatusOverride(context, statusElement, 'OperationMobileStatus_Nav', postUpdateRule), 'TransitionType': transitionType});
                                                             }else{
                                                                 popoverItems.push({'Status': statusElement.MobileStatus, 'Title': transitionText, 'TransitionType': transitionType, 'OnPress': {
                                                                     'Name': '/SAPAssetManager/Actions/Common/GenericErrorDialog.action',
@@ -212,14 +214,16 @@ export default function OperationChangeStatusOptions(context) {
                                                             }
                                                         }
                                                     }else{
-                                                        popoverItems.push({'Status': statusElement.MobileStatus, 'Title': transitionText, 'OnPress': '/SAPAssetManager/Rules/WorkOrders/Operations/NavOnCompleteOperationPage.js', 'TransitionType': transitionType});
+                                                        WorkOrderCompletionLibrary.getInstance().setIsAutoCompleteOnApprovalFlag(context, true);
+                                                        postUpdateRule = '/SAPAssetManager/Rules/Supervisor/ApprovalPostUpdate.js';
+                                                        popoverItems.push({'Status': statusElement.MobileStatus, 'Title': transitionText, 'OnPress': mobileStatusOverride(context, statusElement, 'OperationMobileStatus_Nav', postUpdateRule), 'TransitionType': transitionType});
                                                     }
-                                                    WorkOrderCompletionLibrary.getInstance().setIsAutoCompleteOnApprovalFlag(context, true);
-                                                    postUpdateRule = '/SAPAssetManager/Rules/Supervisor/ApprovalPostUpdate.js';
+                                                    
                                                 } else {
                                                     postUpdateRule = '/SAPAssetManager/Rules/MobileStatus/OperationMobileStatusPostUpdate.js';
+                                                    popoverItems.push({'Status': statusElement.MobileStatus, 'Title': transitionText, 'OnPress': mobileStatusOverride(context, statusElement, 'OperationMobileStatus_Nav', postUpdateRule), 'TransitionType': transitionType});
                                                 }
-                                                popoverItems.push({'Status': statusElement.MobileStatus, 'Title': transitionText, 'OnPress': mobileStatusOverride(context, statusElement, 'OperationMobileStatus_Nav', postUpdateRule), 'TransitionType': transitionType});
+                                                
                                             } else if (statusElement.MobileStatus === DISAPPROVE && element.RoleType === userRoleType) {
                                                 common.setStateVariable(context, 'PhaseModelStatusElement', statusElement);
                                                 popoverItems.push({'Status': statusElement.MobileStatus, 'Title': transitionText, 'OnPress': '/SAPAssetManager/Rules/Supervisor/Reject/RejectReasonPhaseModelNav.js', 'TransitionType': transitionType});
