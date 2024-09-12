@@ -185,7 +185,36 @@ export default function OperationChangeStatusOptions(context) {
                                             } else if (statusElement.MobileStatus === APPROVE && element.RoleType === userRoleType) {
                                                 let postUpdateRule;
                                                 if (libSuper.isAutoCompleteOnApprovalEnabled(context)) {
-                                                    if('KM05' === orderType || 'KM02' === orderType){
+                                                    if('KM01' === orderType || 'KM03' === orderType){
+                                                        Logger.debug("The order type is KM01, need to check data...");
+                                                        if(noConfirmations){
+                                                            Logger.debug("No confirmations in order...");
+                                                            popoverItems.push({'Status': statusElement.MobileStatus, 'Title': transitionText, 'TransitionType': transitionType, 'OnPress': {
+                                                                'Name': '/SAPAssetManager/Actions/Common/GenericErrorDialog.action',
+                                                                'Properties': {
+                                                                    'Title': context.localizeText('validation_warning'),
+                                                                    'Message': 'Time Confirmation has not been added. Please Check',
+                                                                    'OKCaption': context.localizeText('close'),
+                                                                },
+                                                            }});
+                                                        }else{       
+                                                            WorkOrderCompletionLibrary.getInstance().setIsAutoCompleteOnApprovalFlag(context, true);
+                                                            postUpdateRule = '/SAPAssetManager/Rules/Supervisor/ApprovalPostUpdate.js';
+                                                            popoverItems.push({'Status': statusElement.MobileStatus, 'Title': transitionText, 'OnPress': mobileStatusOverride(context, statusElement, 'OperationMobileStatus_Nav', postUpdateRule), 'TransitionType': transitionType});
+                                                            // if(value){
+                                                                
+                                                            // }else{
+                                                            //     popoverItems.push({'Status': statusElement.MobileStatus, 'Title': transitionText, 'TransitionType': transitionType, 'OnPress': {
+                                                            //         'Name': '/SAPAssetManager/Actions/Common/GenericErrorDialog.action',
+                                                            //         'Properties': {
+                                                            //             'Title': context.localizeText('validation_warning'),
+                                                            //             'Message': 'Notification Damage / Cause / Object Part Code is Missing',
+                                                            //             'OKCaption': context.localizeText('close'),
+                                                            //         },
+                                                            //     }});
+                                                            // }                                                      
+                                                        }
+                                                    }else if('KM05' === orderType || 'KM02' === orderType){
                                                         Logger.debug("The order type is KM05, need to check data...");
                                                         if(noConfirmations){
                                                             Logger.debug("No confirmations in order...");
