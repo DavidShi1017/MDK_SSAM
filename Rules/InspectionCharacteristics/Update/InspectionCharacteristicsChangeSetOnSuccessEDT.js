@@ -12,7 +12,7 @@ export default function InspectionCharacteristicsChangeSetOnSuccessEDT(context) 
     }
 
     let readlink = `InspectionLots('${context.binding.InspectionLot}')` + '/InspectionChars_Nav';
-    let filter = "$filter=CharCategory eq 'X' and Valuation eq '' &$expand=InspectionLot_Nav/WOHeader_Nav";
+    let filter = "$filter=CharCategory eq 'X' and Valuation eq ''";
 
     if (context.binding['@odata.type'] === '#sap_mobile.MyWorkOrderOperation') {
         readlink = context.binding.InspectionPoint_Nav[0]['@odata.readLink'] + '/InspectionChars_Nav';
@@ -27,6 +27,10 @@ export default function InspectionCharacteristicsChangeSetOnSuccessEDT(context) 
                     //proceed to Inspection Points
                     if (userFeaturesLib.isFeatureEnabled(context, context.getGlobalDefinition('/SAPAssetManager/Globals/Features/QM.global').getValue())) {
                         var woInfo = context.binding.WOHeader_Nav || context.binding.WOOperation_Nav?.WOHeader  || undefined;
+                        if(!woInfo){
+                            woInfo = CommonLibrary.getStateVariable(context, binding.OrderId + "-" + binding.InspectionLot);
+                            context.binding.WOHeader_Nav = woInfo;
+                        }
                         if (!userFeaturesLib.isFeatureEnabled(context, context.getGlobalDefinition('/SAPAssetManager/Globals/Features/Checklist.global').getValue()) || (woInfo && !woInfo.EAMChecklist_Nav.length > 0)) {
                             return InspectionPointsDynamicPageNav(context);
                         } 
