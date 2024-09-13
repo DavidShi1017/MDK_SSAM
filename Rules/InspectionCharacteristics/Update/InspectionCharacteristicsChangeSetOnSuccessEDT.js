@@ -12,7 +12,7 @@ export default function InspectionCharacteristicsChangeSetOnSuccessEDT(context) 
     }
 
     let readlink = `InspectionLots('${context.binding.InspectionLot}')` + '/InspectionChars_Nav';
-    let filter = "$filter=CharCategory eq 'X' and Valuation eq ''";
+    let filter = "$filter=CharCategory eq 'X' and Valuation eq '' &$expand=InspectionLot_Nav/WOHeader_Nav";
 
     if (context.binding['@odata.type'] === '#sap_mobile.MyWorkOrderOperation') {
         readlink = context.binding.InspectionPoint_Nav[0]['@odata.readLink'] + '/InspectionChars_Nav';
