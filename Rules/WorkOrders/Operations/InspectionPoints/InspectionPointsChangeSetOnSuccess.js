@@ -25,7 +25,7 @@ export default function InspectionPointsChangeSetOnSuccess(context) {
     }
 
     return context.count('/SAPAssetManager/Services/AssetManager.service', readlink, filter).then(function(count) {
-        if (true) { //get the count for points
+        if (count === 0) { //get the count for points
             return context.executeAction('/SAPAssetManager/Actions/Page/ClosePage.action').then(() => {
                 //proceed to set usage
                 return ExecuteActionWithAutoSync(context, '/SAPAssetManager/Actions/WorkOrders/Operations/InspectionPoints/InspectionPointsUpdateSuccess.action').then(() => {
