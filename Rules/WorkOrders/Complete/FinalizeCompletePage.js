@@ -54,8 +54,10 @@ export default function FinalizeCompletePage(context) {
                                         WorkOrderCompletionLibrary.getInstance().setIsAutoCompleteOnApprovalFlag(pageContext, false);
                                         WorkOrderCompletionLibrary.getInstance().setCompleteFlag(pageContext, false);
                                         WorkOrderCompletionLibrary.getInstance().deleteBinding(pageContext);
-                                        CommonLibrary.removeStateVariable(context, context.binding.OrderId + '-' + context.binding.NotifNum);
-                                        CommonLibrary.removeStateVariable(context, context.binding.OrderId);
+                                        libCom.removeStateVariable(context, context.binding.OrderId + '-' + context.binding.NotifNum);
+                                        libCom.removeStateVariable(context, context.binding.OrderId);
+                                        libCom.removeStateVariable(context, context, context.binding.OrderId + "-" + context.binding.InspectionLot);
+                                        
                                         return completeAction.executeCheckWorkOrderCompleted(pageContext, completeAction).then(() => {
                                             return libAutoSync.autoSyncOnStatusChange(context);
                                         });
