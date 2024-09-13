@@ -18,22 +18,22 @@ export default async function InspectionCharacteristicsUpdateValidationEDT(conte
         if (quantitativeCell) {
             quantitativeCell.clearValidation();
             if (inspCharLib.isRequired(binding) && libVal.evalIsEmpty(quantitativeCell.getValue())) {
-                quantitativeCell.applyValidation(context.localizeText('field_is_required'));
-                return false;
+                //quantitativeCell.applyValidation(context.localizeText('field_is_required'));
+                return true;
             }
         }
         if (qualitativeCell) {
             qualitativeCell.clearValidation();
             if (inspCharLib.isRequired(binding) && libVal.evalIsEmpty(qualitativeCell.getValue())) {
-                qualitativeCell.applyValidation(context.localizeText('field_is_required'));
-                return false;
+                //qualitativeCell.applyValidation(context.localizeText('field_is_required'));
+                return true;
             }
         }
         if (calculateCell) {
             calculateCell.clearValidation();
             if (inspCharLib.isRequired(binding) && libVal.evalIsEmpty(calculateCell.getValue())) {
-                calculateCell.applyValidation(context.localizeText('field_is_required'));
-                return false;
+                //calculateCell.applyValidation(context.localizeText('field_is_required'));
+                return true;
             }
         }
 
