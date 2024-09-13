@@ -23,7 +23,7 @@ export default function InspectionCharacteristicsChangeSetOnSuccessEDT(context) 
     return context.executeAction('/SAPAssetManager/Actions/Page/ClosePage.action').then(() => {
         return ExecuteActionWithAutoSync(context, '/SAPAssetManager/Actions/InspectionCharacteristics/Update/InspectionCharacteristicsUpdateSuccess.action').then(() => {
             return context.count('/SAPAssetManager/Services/AssetManager.service', readlink, filter).then(function(count) {
-                if (count === 0) { //get the count for required Characteristics
+                if (true) { //get the count for required Characteristics
                     //proceed to Inspection Points
                     if (userFeaturesLib.isFeatureEnabled(context, context.getGlobalDefinition('/SAPAssetManager/Globals/Features/QM.global').getValue())) {
                         var woInfo = context.binding.WOHeader_Nav || context.binding.WOOperation_Nav?.WOHeader  || undefined;
