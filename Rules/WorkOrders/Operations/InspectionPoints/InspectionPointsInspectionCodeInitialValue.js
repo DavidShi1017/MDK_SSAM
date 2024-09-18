@@ -84,6 +84,11 @@ export default async function InspectionPointsInspectionCodeInitialValue(context
             Logger.debug("link----->" + link);
             return libCommon.decodeReadLink(sortedItems[1]['@odata.readLink']);
         }else{
+            if (Object.prototype.hasOwnProperty.call(context.binding,'InspCode_Nav') && !libVal.evalIsEmpty(context.binding.InspCode_Nav)) {
+                binding.InspCode_Nav.CodeDesc = '';
+                binding.InspCode_Nav.ValuationStatus = '';
+            }
+            
             ClientData.Valuation = '';
             ClientData.ValSelectedSet = selectedSet;
             ClientData.ValCatalog = catalog;
