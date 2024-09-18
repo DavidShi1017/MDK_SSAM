@@ -45,6 +45,11 @@ export default function InspectionPointsFDCUpdateDone(context) {
                             'EntitySet': 'InspectionCodes',
                             'ReadLink': `InspectionCodes(Plant='${sectionBinding.ClientData.Plant}',SelectedSet='${sectionBinding.ClientData.ValSelectedSet}',Catalog='${sectionBinding.ClientData.ValCatalog}',CodeGroup='${sectionBinding.ClientData.ValCodeGroup}',Code='${sectionBinding.ClientData.ValCode}')`,
                         },
+                        'Properties':
+                        {
+                            'CodeDesc': sectionBinding.InspCode_Nav.CodeDesc,
+                            'ValuationStatus': sectionBinding.InspCode_Nav.ValuationStatus,
+                        },
                     });
                 }
                 if (Object.prototype.hasOwnProperty.call(sectionBinding,'InspCode_Nav') && !libVal.evalIsEmpty(sectionBinding.InspValuation_Nav)) {
