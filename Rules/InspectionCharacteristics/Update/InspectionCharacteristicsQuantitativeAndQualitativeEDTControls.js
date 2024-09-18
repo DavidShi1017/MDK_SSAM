@@ -65,8 +65,8 @@ export default function InspectionCharacteristicsQuantitativeAndQualitativeEDTCo
         let listPickerValue = '';
         let listPickerDisplayValue = '';
         if(libVal.evalIsEmpty(binding.Valuation)){
-            listPickerValue = `InspectionCodes(Plant='${binding.SelectedSetPlant}',SelectedSet='${binding.SelectedSet}',Catalog='${binding.Catalog}',CodeGroup='${binding.CodeGroup}',Code='${binding.Code}')`;
-            isMandatory = true;
+            //listPickerValue = `InspectionCodes(Plant='${binding.SelectedSetPlant}',SelectedSet='${binding.SelectedSet}',Catalog='${binding.Catalog}',CodeGroup='${binding.CodeGroup}',Code='${binding.Code}')`;
+            //isMandatory = true;
         }else{
             if (!libVal.evalIsEmpty(binding.InspectionCode_Nav) && !libVal.evalIsEmpty(binding.InspectionCode_Nav.CodeDesc)) {
                 //if (!libVal.evalIsEmpty(binding.SelectedSetPlant) && !libVal.evalIsEmpty(binding.SelectedSet) && !libVal.evalIsEmpty(binding.Catalog) && !libVal.evalIsEmpty(binding.CodeGroup) && !libVal.evalIsEmpty(binding.Code)) {
