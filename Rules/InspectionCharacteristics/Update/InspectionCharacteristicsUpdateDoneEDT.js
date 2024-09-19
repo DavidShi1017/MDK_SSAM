@@ -140,7 +140,7 @@ export default async function InspectionCharacteristicsUpdateDoneEDT(context) {
                                         }
                                         //if (Code) { //Cannot set non-nullable property 'CodeGroup' of type 'string', because the value is unexpectedly null - So currently inspection code cannot be reverted to empty using deletelinks
                                             var createLinks = [];
-                                            if (libVal.evalIsEmpty(row.OdataBinding.InspValuation_Nav) && !libVal.evalIsEmpty(valuation)) {
+                                            if (libVal.evalIsEmpty(row.OdataBinding.InspValuation_Nav)) {
                                                 createLinks.push({
                                                     'Property': 'InspValuation_Nav',
                                                     'Target':
@@ -161,7 +161,7 @@ export default async function InspectionCharacteristicsUpdateDoneEDT(context) {
                                                 });
                                             }
                                             var updateLinks = [];
-                                            if (!libVal.evalIsEmpty(row.OdataBinding.InspValuation_Nav) && !libVal.evalIsEmpty(valuation)) {
+                                            if (!libVal.evalIsEmpty(row.OdataBinding.InspValuation_Nav)) {
                                                 updateLinks.push({
                                                     'Property': 'InspValuation_Nav',
                                                     'Target':
