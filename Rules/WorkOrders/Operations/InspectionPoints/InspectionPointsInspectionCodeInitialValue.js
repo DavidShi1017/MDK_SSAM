@@ -90,12 +90,12 @@ export default async function InspectionPointsInspectionCodeInitialValue(context
             }
             
             ClientData.Valuation = '';
-            ClientData.ValSelectedSet = selectedSet;
-            ClientData.ValCatalog = catalog;
-            ClientData.ValCode = code;
-            ClientData.ValCodeGroup = codeGroup;
-            ClientData.Plant = plant;
-            context.binding.ClientData = ClientData;
+            ClientData.ValSelectedSet = "";
+            ClientData.ValCatalog = "";
+            ClientData.ValCode = "";
+            ClientData.ValCodeGroup = "";
+            ClientData.Plant = "";
+            context.binding.ClientData = "";
             return '';
         }
     }
