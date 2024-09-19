@@ -89,7 +89,7 @@ export default async function InspectionPointsInspectionCodeInitialValue(context
                 context.binding.InspCode_Nav.ValuationStatus = '';
             }
             
-            ClientData.Valuation = sortedItems[1].ValuationStatus;
+            ClientData.Valuation = '';
             ClientData.ValSelectedSet = sortedItems[1].SelectedSet;
             ClientData.ValCatalog = sortedItems[1].Catalog;
             ClientData.ValCode = sortedItems[1].Code;
