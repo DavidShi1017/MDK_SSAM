@@ -39,22 +39,17 @@ export default function InspectionPointsFDCUpdateDone(context) {
 
                 let updateLinks = [];
                 if (Object.prototype.hasOwnProperty.call(sectionBinding,'InspCode_Nav') && !libVal.evalIsEmpty(sectionBinding.InspCode_Nav)) {
-                    let plant = libVal.evalIsEmpty(sectionBinding.ClientData.Plant)? sectionBinding.Plant : sectionBinding.ClientData.Plant;
-                    let valSelectedSet = libVal.evalIsEmpty(sectionBinding.ClientData.ValSelectedSet)? sectionBinding.ValSelectedSet : sectionBinding.ClientData.ValSelectedSet;
-                    let valCatalog = libVal.evalIsEmpty(sectionBinding.ClientData.ValCatalog)? sectionBinding.ValCatalog : sectionBinding.ClientData.ValCatalog;
-                    let valCodeGroup = libVal.evalIsEmpty(sectionBinding.ClientData.ValCodeGroup)? sectionBinding.ValCodeGroup : sectionBinding.ClientData.ValCodeGroup;
-                    let valCode = libVal.evalIsEmpty(sectionBinding.ClientData.ValCode)? sectionBinding.ValCode : sectionBinding.ClientData.ValCode;
                     updateLinks.push({
                         'Property': 'InspCode_Nav',
                         'Target': {
                             'EntitySet': 'InspectionCodes',
-                            'ReadLink': `InspectionCodes(Plant='${plant}',SelectedSet='${valSelectedSet}',Catalog='${valCatalog}',CodeGroup='${valCodeGroup}',Code='${valCode}')`,
+                            'ReadLink': `InspectionCodes(Plant='${sectionBinding.ClientData.Plant}',SelectedSet='${sectionBinding.ClientData.ValSelectedSet}',Catalog='${sectionBinding.ClientData.ValCatalog}',CodeGroup='${sectionBinding.ClientData.ValCodeGroup}',Code='${sectionBinding.ClientData.ValCode}')`,
                         },
-                        // 'Properties':
-                        // {
-                        //     'CodeDesc': sectionBinding.InspCode_Nav.CodeDesc,
-                        //     'ValuationStatus': sectionBinding.InspCode_Nav.ValuationStatus,
-                        // },
+                        'Properties':
+                        {
+                            'CodeDesc': sectionBinding.InspCode_Nav.CodeDesc,
+                            'ValuationStatus': sectionBinding.InspCode_Nav.ValuationStatus,
+                        },
                     });
                 }
                 if (Object.prototype.hasOwnProperty.call(sectionBinding,'InspCode_Nav') && !libVal.evalIsEmpty(sectionBinding.InspValuation_Nav)) {
@@ -90,7 +85,6 @@ export default function InspectionPointsFDCUpdateDone(context) {
                     'ValidationRule': '',
                     'CreateLinks': createLinks,
                     'UpdateLinks': updateLinks,
-                    //'DeleteLinks': updateLinks,
                 }}).catch(() => {
                     return Promise.resolve();
                 });

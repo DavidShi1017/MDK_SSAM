@@ -89,12 +89,12 @@ export default async function InspectionPointsInspectionCodeInitialValue(context
                 context.binding.InspCode_Nav.ValuationStatus = '';
             }
             
-            ClientData.Valuation = '';
-            ClientData.ValSelectedSet = "";
-            ClientData.ValCatalog = "";
-            ClientData.ValCode = "";
-            ClientData.ValCodeGroup = "";
-            ClientData.Plant = "";
+            ClientData.Valuation = sortedItems[1].ValuationStatus;
+            ClientData.ValSelectedSet = sortedItems[1].SelectedSet;
+            ClientData.ValCatalog = sortedItems[1].Catalog;
+            ClientData.ValCode = sortedItems[1].Code;
+            ClientData.ValCodeGroup = sortedItems[1].CodeGroup;
+            ClientData.Plant = sortedItems[1].Plant;
             context.binding.ClientData = ClientData;
             return '';
         }
