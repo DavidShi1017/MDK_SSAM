@@ -90,7 +90,7 @@ export default function InspectionPointsFDCUpdateDone(context) {
                     'ValidationRule': '',
                     'CreateLinks': createLinks,
                     'UpdateLinks': updateLinks,
-                    'DeleteLinks': updateLinks,
+                    //'DeleteLinks': updateLinks,
                 }}).catch(() => {
                     return Promise.resolve();
                 });
