@@ -5,6 +5,9 @@ export default function CodeValue(context) {
         return context.formatNumber(context.binding.ResultValue, '');
     } else {
         return ValueIfExists(context.binding.InspectionCode_Nav, '-', function(value) {
+            if(!context.binding.Valuation){
+                return '';
+            }
             return value.CodeDesc;
         });
     }
