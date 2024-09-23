@@ -137,6 +137,7 @@ export default async function InspectionCharacteristicsUpdateDoneEDT(context) {
                                         if(libVal.evalIsEmpty(valuation)){
                                             CodeGroup = 'CHECK';
                                             Code = 'R1';
+                                            InspectionCodeReadLink = `InspectionCodes(Plant='${row.OdataBinding.SelectedSetPlant}',SelectedSet='${row.OdataBinding.SelectedSet}',Catalog='${row.OdataBinding.Catalog}',CodeGroup='${row.OdataBinding.CodeGroup}',Code='${Code}')`;
                                         }
                                         //if (Code) { //Cannot set non-nullable property 'CodeGroup' of type 'string', because the value is unexpectedly null - So currently inspection code cannot be reverted to empty using deletelinks
                                             var createLinks = [];
