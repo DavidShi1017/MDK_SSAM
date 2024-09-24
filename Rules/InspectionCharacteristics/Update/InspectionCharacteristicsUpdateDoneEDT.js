@@ -198,8 +198,6 @@ export default async function InspectionCharacteristicsUpdateDoneEDT(context) {
                                                     'Code': Code,
                                                     'Catalog': Catalog,
                                                     'Remarks': remarks,
-                                                    'AfterAcceptance' : 'X',
-                                                    'AfterRejection' : 'X',
                                                 },
                                                 'CreateLinks': createLinks,
                                                 'UpdateLinks': updateLinks,
