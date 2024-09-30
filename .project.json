@@ -2,17 +2,17 @@
 	"Onboarding": {
 		"Schema": "sapmobilesvcs",
 		"TimeZone": "UTC",
-		"URL": "sapmobilesvcs://?AppId=SAP.SAM2310.200&ClientId=db543101-ecdb-4c62-81f2-ca7702f416bf&ServerUrl=https://asset-manager-bx1zfnve-rm1-sap-sam2310-200.cfapps.ap21.hana.ondemand.com&SapCloudPlatformEndpoint=https://asset-manager-bx1zfnve-rm1-sap-sam2310-200.cfapps.ap21.hana.ondemand.com&AuthorizationEndpointUrl=https://asset-manager-bx1zfnve-rm1-sap-sam2310-200.cfapps.ap21.hana.ondemand.com/oauth2/api/v1/authorize&RedirectUrl=https://asset-manager-bx1zfnve-rm1-sap-sam2310-200.cfapps.ap21.hana.ondemand.com&TokenUrl=https://asset-manager-bx1zfnve-rm1-sap-sam2310-200.cfapps.ap21.hana.ondemand.com/oauth2/api/v1/token&multiUser=false"
+		"URL": "sapmobilesvcs://?AppId=SAP.SAM2310.PRD&ClientId=d870e047-5618-4324-97c5-2abad2e4640f&ServerUrl=https://asset-manager-prd-uxzchguh-rm3-sap-sam2310-prd.cfapps.ap21.hana.ondemand.com&SapCloudPlatformEndpoint=https://asset-manager-prd-uxzchguh-rm3-sap-sam2310-prd.cfapps.ap21.hana.ondemand.com&AuthorizationEndpointUrl=https://asset-manager-prd-uxzchguh-rm3-sap-sam2310-prd.cfapps.ap21.hana.ondemand.com/oauth2/api/v1/authorize&RedirectUrl=https://asset-manager-prd-uxzchguh-rm3-sap-sam2310-prd.cfapps.ap21.hana.ondemand.com&TokenUrl=https://asset-manager-prd-uxzchguh-rm3-sap-sam2310-prd.cfapps.ap21.hana.ondemand.com/oauth2/api/v1/token&multiUser=false"
 	},
 	"CF": {
 		"Target": "https://api.cf.ap21.hana.ondemand.com",
-		"Organization": "32dc9554-1761-4b9d-b43c-e5397bd91d99",
-		"Space": "3627ef20-73e2-4a2b-bcc8-7b6dc7ededb5"
+		"Organization": "239e9028-6897-4a50-ac48-77e45523bba0",
+		"Space": "f483bdb6-d1a4-4407-a977-c0015bca483a"
 	},
 	"MobileService": {
 		"Type": "standard",
-		"AdminAPI": "https://mobile-service-cockpit-api.cfapps.ap21.hana.ondemand.com/cockpit/v1/org/32dc9554-1761-4b9d-b43c-e5397bd91d99/space/3627ef20-73e2-4a2b-bcc8-7b6dc7ededb5",
-		"AppId": "SAP.SAM2310.200",
+		"AdminAPI": "https://mobile-service-cockpit-api.cfapps.ap21.hana.ondemand.com/cockpit/v1/org/239e9028-6897-4a50-ac48-77e45523bba0/space/f483bdb6-d1a4-4407-a977-c0015bca483a",
+		"AppId": "SAP.SAM2310.PRD",
 		"Destination": [
 			"DEST_SAM2310_PPROP",
 			"DEST_SAM2310_ONLINE_PPROP"
