@@ -28,7 +28,7 @@ export default async function InspectionCharacteristicsQuantitativeOnValueChange
         valuationCell.clearValidation();
         let RemarksCell = context._control.getTable().getRowCellByName(context._control.getRow(), 'Remarks');
         RemarksCell.clearValidation();
-        if (value) {
+        if (value >= 0) {
             value = parseFloat(value);
             if ((binding.LowerLimitFlag === 'X' && value < binding.LowerLimit)) {
                 valueAccepted = false;
