@@ -53,6 +53,15 @@
                                 ],
                                 "OnPress": "/SAPAssetManager/Rules/OverviewPage/KPI/CompletedListViewNav.js",
                                 "CaptionLabel": "$(L, kpi_completed)"
+                            },{
+
+                                "MetricItems": [
+                                    {
+                                         "Value": "/SAPAssetManager/Rules/OverviewPage/KPI/TimeCountMonth.js"
+                                    }
+                                ],
+                                
+                                "CaptionLabel": "$(L, kpi_hours_month)"
                             },
                             {
 
@@ -63,15 +72,6 @@
                                 ],
                                 "OnPress": "/SAPAssetManager/Rules/OverviewPage/TimeCaptureSection/OnPressTimeCaptureSectionToday.js",
                                 "CaptionLabel": "$(L, kpi_hours)"
-                            },{
-
-                                "MetricItems": [
-                                    {
-                                         "Value": "/SAPAssetManager/Rules/OverviewPage/KPI/TimeCountMonth.js"
-                                    }
-                                ],
-                                
-                                "CaptionLabel": "$(L, kpi_hours_month)"
                             }
                         ]
                     },

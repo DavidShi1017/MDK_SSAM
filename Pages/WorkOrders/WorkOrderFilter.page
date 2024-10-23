@@ -42,6 +42,11 @@
                 {
                     "ReturnValue":"OrderId",
                     "DisplayValue":"/SAPAssetManager/Rules/WorkOrders/WorkOrderIdDisplayValue.js"
+                },
+                {
+                    "ReturnValue":"OrderId desc",
+                    "DisplayValue":"Work Order ID Desc",
+                    "Name": "OrderIdDesc"
                 }],
                 "_Name":"SortFilter",
                 "_Type":"Control.Type.FormCell.Sorter",
