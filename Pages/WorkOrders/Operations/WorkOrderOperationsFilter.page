@@ -43,6 +43,11 @@
                     "Name": "OrderId"
                 },
                 {
+                    "ReturnValue":"OrderId desc",
+                    "DisplayValue":"Work Order ID Desc",
+                    "Name": "OrderIdDesc"
+                },
+                {
                     "ReturnValue":"OperationNo",
                     "DisplayValue":"$(L,operation)",
                     "Name": "OperationNo"
