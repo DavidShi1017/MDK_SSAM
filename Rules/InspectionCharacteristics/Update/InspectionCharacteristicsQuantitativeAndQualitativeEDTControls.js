@@ -15,7 +15,7 @@ export default function InspectionCharacteristicsQuantitativeAndQualitativeEDTCo
     if (inspCharLib.isQuantitative(binding)) {
         if (inspCharLib.isCalculatedAndQuantitative(binding) || binding.AfterAcceptance === 'X' || binding.AfterRejection === 'X') {
             IsReadOnly = true;
-        }numbersAndPunctuation
+        }
         if (String(binding.ResultValue) === '0' && !binding['@sap.isLocal']) {
             return {
                 'Type': 'Number',
