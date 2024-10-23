@@ -12,17 +12,13 @@ export default function InspectionCharacteristicsQuantitativeAndQualitativeEDTCo
     if (binding.CharCategory && binding.CharCategory === 'X') {
         isMandatory = true;
     }
-    let device = 'Number';
-    if (IsIOS(context)) {
-        device = 'numbersAndPunctuation';
-    }
     if (inspCharLib.isQuantitative(binding)) {
         if (inspCharLib.isCalculatedAndQuantitative(binding) || binding.AfterAcceptance === 'X' || binding.AfterRejection === 'X') {
             IsReadOnly = true;
-        }
+        }numbersAndPunctuation
         if (String(binding.ResultValue) === '0' && !binding['@sap.isLocal']) {
             return {
-                'Type': device,
+                'Type': 'Number',
                 'Name': 'Quantitive',
                 'IsMandatory': isMandatory,
                 'IsReadOnly': IsReadOnly,
@@ -32,7 +28,7 @@ export default function InspectionCharacteristicsQuantitativeAndQualitativeEDTCo
             };
         }
         return {
-            'Type': device,
+            'Type': 'Number',
             'Name': 'Quantitive',
             'IsMandatory': isMandatory,
             'IsReadOnly': IsReadOnly,
