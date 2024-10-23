@@ -1,6 +1,5 @@
 import inspCharLib from './InspectionCharacteristics';
 import libVal from '../../Common/Library/ValidationLibrary';
-import IsIOS from '../../Common/IsIOS';
 /**
 * Describe this function...
 * @param {IContext} context
