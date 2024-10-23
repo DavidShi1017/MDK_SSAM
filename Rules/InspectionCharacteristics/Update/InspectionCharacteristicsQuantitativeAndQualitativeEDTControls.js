@@ -1,5 +1,6 @@
 import inspCharLib from './InspectionCharacteristics';
 import libVal from '../../Common/Library/ValidationLibrary';
+import IsIOS from '../../Common/IsIOS';
 /**
 * Describe this function...
 * @param {IContext} context
@@ -11,13 +12,17 @@ export default function InspectionCharacteristicsQuantitativeAndQualitativeEDTCo
     if (binding.CharCategory && binding.CharCategory === 'X') {
         isMandatory = true;
     }
+    let device = 'Number';
+    if (IsIOS(context)) {
+        device = 'numbersAndPunctuation';
+    }
     if (inspCharLib.isQuantitative(binding)) {
         if (inspCharLib.isCalculatedAndQuantitative(binding) || binding.AfterAcceptance === 'X' || binding.AfterRejection === 'X') {
             IsReadOnly = true;
         }
         if (String(binding.ResultValue) === '0' && !binding['@sap.isLocal']) {
             return {
-                'Type': 'Number',
+                'Type': device,
                 'Name': 'Quantitive',
                 'IsMandatory': isMandatory,
                 'IsReadOnly': IsReadOnly,
@@ -27,7 +32,7 @@ export default function InspectionCharacteristicsQuantitativeAndQualitativeEDTCo
             };
         }
         return {
-            'Type': 'Number',
+            'Type': device,
             'Name': 'Quantitive',
             'IsMandatory': isMandatory,
             'IsReadOnly': IsReadOnly,
