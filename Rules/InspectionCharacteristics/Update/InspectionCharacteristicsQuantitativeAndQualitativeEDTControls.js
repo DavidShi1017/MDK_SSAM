@@ -1,5 +1,6 @@
 import inspCharLib from './InspectionCharacteristics';
 import libVal from '../../Common/Library/ValidationLibrary';
+import IsIOS from '../../Common/IsIOS';
 /**
 * Describe this function...
 * @param {IContext} context
@@ -10,6 +11,10 @@ export default function InspectionCharacteristicsQuantitativeAndQualitativeEDTCo
     let IsReadOnly = false;
     if (binding.CharCategory && binding.CharCategory === 'X') {
         isMandatory = true;
+    }
+    let device = 'Number';
+    if (IsIOS(context)) {
+        device = 'Text';
     }
     if (inspCharLib.isQuantitative(binding)) {
         if (inspCharLib.isCalculatedAndQuantitative(binding) || binding.AfterAcceptance === 'X' || binding.AfterRejection === 'X') {
