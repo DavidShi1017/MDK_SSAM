@@ -22,7 +22,7 @@ export default function InspectionCharacteristicsQuantitativeAndQualitativeEDTCo
         }
         if (String(binding.ResultValue) === '0' && !binding['@sap.isLocal']) {
             return {
-                'Type': 'Number',
+                'Type': device,
                 'Name': 'Quantitive',
                 'IsMandatory': isMandatory,
                 'IsReadOnly': IsReadOnly,
@@ -32,7 +32,7 @@ export default function InspectionCharacteristicsQuantitativeAndQualitativeEDTCo
             };
         }
         return {
-            'Type': 'Number',
+            'Type': device,
             'Name': 'Quantitive',
             'IsMandatory': isMandatory,
             'IsReadOnly': IsReadOnly,
