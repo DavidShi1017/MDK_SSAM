@@ -28,7 +28,10 @@ export default function InspectionCharacteristicsQuantitativeAndQualitativeEDTCo
                 'IsReadOnly': IsReadOnly,
                 'OnValueChange': '/SAPAssetManager/Rules/InspectionCharacteristics/Update/InspectionCharacteristicsQuantitativeOnValueChangeEDT.js',
                 'Property': 'ResultValue',
-                'Parameters': {},
+                'Parameters': {
+                    'Value': '',
+                    },
+
             };
         }
         return {
