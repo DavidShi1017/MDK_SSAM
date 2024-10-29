@@ -22,7 +22,7 @@
                 "PreserveIconStackSpacing": false,
                 "AccessoryType": "disclosureIndicator",
                 "Title": "/SAPAssetManager/Rules/WorkOrders/Operations/InspectionPoints/TechnicalObjectIdAndDescription.js",
-                "StatusText": "#Property:InspCode_Nav/#Property:CodeDesc",
+                "StatusText": "/SAPAssetManager/Rules/WorkOrders/Operations/InspectionPoints/InspectionPointValuationDesc.js",
                 "SubstatusText": "#Property:InspValuation_Nav/#Property:ShortText",
                 "Subhead": "/SAPAssetManager/Rules/WorkOrders/InspectionLot/InspectionLotDescriptionOrId.js",
                 "OnPress": "/SAPAssetManager/Actions/WorkOrders/Operations/InspectionPointDetailsNav.action",

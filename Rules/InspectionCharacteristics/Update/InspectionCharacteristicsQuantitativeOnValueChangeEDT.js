@@ -4,6 +4,7 @@ import CommonLibrary from '../../Common/Library/CommonLibrary';
 import {validateDependentCharacteristics} from './InspectionCharacteristicsOnExtensionLoadedEDT';
 import InspectionCharacteristicsEDTLibrary from './InspectionCharacteristicsEDTLibrary';
 import libVal from '../../Common/Library/ValidationLibrary';
+
 /**
 * Describe this function...
 * @param {IClientAPI} context
@@ -29,7 +30,7 @@ export default async function InspectionCharacteristicsQuantitativeOnValueChange
         valuationCell.clearValidation();
         let RemarksCell = context._control.getTable().getRowCellByName(context._control.getRow(), 'Remarks');
         RemarksCell.clearValidation();
-        if (!libVal.evalIsEmpty(value)) {
+        if (!libVal.evalIsEmpty(value) && libVal.evalIsNumeric(value)) {
             value = parseFloat(value);
             if ((binding.LowerLimitFlag === 'X' && value < binding.LowerLimit)) {
                 valueAccepted = false;
