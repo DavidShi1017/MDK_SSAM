@@ -42,7 +42,7 @@ export default async function FinalizeCompletePageMessage(context) {
         }
         let orderType = binding.WOHeader.OrderType;
         if('KM01' === orderType || 'KM03' === orderType){
-            value = await context.read('/SAPAssetManager/Services/AssetManager.service', `MyNotificationHeaders('${binding.NotifNum}')`, [], '$expand=Items,Items/ItemCauses').then(results => {
+            value = await context.read('/SAPAssetManager/Services/AssetManager.service', `MyNotificationHeaders('${binding.WOHeader.NotificationNumber}')`, [], '$expand=Items,Items/ItemCauses').then(results => {
                 if (results && results.length > 0) {
                     let notif = results.getItem(0);
                     if(notif && notif.Items && notif.Items.length > 0){
@@ -74,7 +74,7 @@ export default async function FinalizeCompletePageMessage(context) {
                
                 //errorMessage = 'Notification Damage / Cause / Object Part Code is Missing';
                 //return showMessageErrorDialg(context, errorMessage);  
-                let notificationItem = libCom.getStateVariable(context, context.binding.OrderId + '-' + context.binding.NotifNum);
+                let notificationItem = libCom.getStateVariable(context, context.binding.OrderId + '-' + binding.WOHeader.NotificationNumber);
                 if(notificationItem){
                     if(notificationItem.itemDescription && notificationItem.causeCodeGroup 
                         && notificationItem.causeCode && notificationItem.objectPartCodeGroup 
