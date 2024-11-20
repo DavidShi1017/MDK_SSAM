@@ -27,6 +27,7 @@ export default async function FinalizeCompletePageMessage(context) {
         noStatusMessage = 'meter_action_has_not_been_performed_for_operation';
     
         let page = context.currentPage._resolvedCaption;
+        let caption = context.getPageProxy().getCaption();
         if(page === context.localizeText('complete_operation')){
             context.currentPage.controls[0].sections[1].value.items.forEach(item => {
                 if(item.keyName === context.localizeText('supervisor_name')){
