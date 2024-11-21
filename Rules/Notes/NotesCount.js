@@ -3,7 +3,12 @@ import LibVal from '../Common/Library/ValidationLibrary';
 
 export default function NotesCount(context) {
     
-    let page = context.getPageProxy()._page._definition.getName();
+    let page = '';
+    if (context.getPageProxy && context.getPageProxy()._page._definition.getName) {
+        page = context.getPageProxy()._page._definition.getName();
+    } else if (context.getPageProxy && context.getPageProxy()._page._definition.name) {
+        page = context.getPageProxy()._page._definition.name;
+    }
     let query = context.getPageProxy().binding['@odata.readLink'];
     if (page === 'MeasuringPointDetailsPage') {
         context._context.binding = context.getPageProxy().binding.WorkOrderTool[0];

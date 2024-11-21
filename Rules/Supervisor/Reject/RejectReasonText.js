@@ -27,7 +27,12 @@ export default function RejectReasonText(context) {
         });
     }
     if (PersonaLib.isFieldServiceTechnician(context)) {
-        let page = pageProxy._page._definition.getName();
+        let page = '';
+        if (pageProxy && pageProxy._page._definition.getName) {
+            page = pageProxy._page._definition.getName();
+        } else if (pageProxy && pageProxy._page._definition.name) {
+            page = pageProxy._page._definition.name;
+        }
         if (NoteLib.didSetNoteTypeTransactionFlagForPage(pageProxy, page)) {
             return NoteViewValue(pageProxy);
         }

@@ -2,7 +2,7 @@ import libCommon from '../../../Common/Library/CommonLibrary';
 
 export default function IsWONotificationComplete(context, binding) {
     if (binding) {
-        return context.read('/SAPAssetManager/Services/AssetManager.service', `MyNotificationHeaders('${binding.NotifNum}')`, [], '$expand=Items,Items/ItemCauses').then(results => {
+        return context.read('/SAPAssetManager/Services/AssetManager.service', `MyNotificationHeaders('${binding.WOHeader.NotificationNumber}')`, [], '$expand=Items,Items/ItemCauses').then(results => {
             if (results && results.length > 0) {
                 let notif = results.getItem(0);
                 if(notif && notif.Items && notif.Items.length > 0){

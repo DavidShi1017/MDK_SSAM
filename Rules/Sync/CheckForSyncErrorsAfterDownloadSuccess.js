@@ -46,7 +46,7 @@ export default function CheckForSyncErrorsAfterDownloadSuccess(context) {
                                     if (userFeaturesLib.isFeatureEnabled(context, context.getGlobalDefinition('/SAPAssetManager/Globals/Features/FOW.global').getValue())) {
                                         handleDownloadSuccessForFOW(context);
                                     }
-                                    if (context.getPageProxy()._page && context.getPageProxy()._page._definition && context.getPageProxy()._page._definition.getName() && context.getPageProxy()._page._definition.getName() !== 'CreateUpdatePage') {
+                                    if (context.getPageProxy()._page && context.getPageProxy()._page._definition && ((context.getPageProxy()._page._definition.getName() && context.getPageProxy()._page._definition.getName() !== 'CreateUpdatePage') || (context.getPageProxy()._page._definition.name && context.getPageProxy()._page._definition.name !== 'CreateUpdatePage'))) {
                                         context.getPageProxy().redraw();
                                     }
                                     return callRefreshAfterSync(context).then(() => {
