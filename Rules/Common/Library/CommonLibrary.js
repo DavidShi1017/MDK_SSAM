@@ -1535,7 +1535,8 @@ export default class {
      * @returns {String} ReadLink string with decoded key values
      */
     static decodeReadLink(readLink) {
-        let components = readLink.match(/([A-Za-z]+)='([^']+)'/g);
+        //let components = readLink.match(/([A-Za-z]+)='([^']+)'/g);
+        let components = readLink.match(/([A-z]+=)?'(\d|\w|%|-)+'/g);
         let entitySetName = readLink.slice(0, readLink.indexOf('('));
         let arr = [];
         if (components) {
