@@ -40,7 +40,7 @@ export default async function InspectionCharacteristicsPageMetadataGenerator(cli
     } else if (binding['@odata.type'] === '#sap_mobile.InspectionPoint' || binding['@odata.type'] === '#sap_mobile.EAMChecklistLink') {      
         if(binding.InspectionLot_Nav["@odata.type"] === '#sap_mobile.InspectionLot'){
             libCom.setStateVariable(clientAPI, binding.OrderId + "-" + binding.InspectionLot, binding.WOHeader_Nav);
-            entityset = binding['@odata.readLink'] + '/InspectionPoints_Nav';
+            entityset = binding.InspectionLot_Nav["@odata.type"] + '/InspectionPoints_Nav';
         }else{
             entityset = binding['@odata.readLink'];
         }
