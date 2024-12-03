@@ -37,12 +37,17 @@ export default async function InspectionCharacteristicsPageMetadataGenerator(cli
         }
     } else if (binding['@odata.type'] === '#sap_mobile.MyWorkOrderOperation') {
         entityset = binding['@odata.readLink'] + '/InspectionPoint_Nav';
-    } else if (binding['@odata.type'] === '#sap_mobile.InspectionPoint' || binding['@odata.type'] === '#sap_mobile.EAMChecklistLink') {
-        entityset = binding['@odata.readLink'];
+    } else if (binding['@odata.type'] === '#sap_mobile.InspectionPoint' || binding['@odata.type'] === '#sap_mobile.EAMChecklistLink') {      
+        if(binding.InspectionLot_Nav["@odata.type"] === '#sap_mobile.InspectionLot'){
+            libCom.setStateVariable(clientAPI, binding.OrderId + "-" + binding.InspectionLot, binding.WOHeader_Nav);
+            entityset = binding.InspectionLot_Nav["@odata.readLink"] + '/InspectionPoints_Nav';
+        }else{
+            entityset = binding['@odata.readLink'];
+        }
     }
     page.Controls[0].Sections = [];
     if (entityset) {
-        await read(clientAPI, entityset, [], '').then(async function(results) {
+        await read(clientAPI, entityset, [], '$orderby=EquipNum asc').then(async function(results) {
             bindings = [];
             sectionEquipment = '';
             sectionFunctionalLocation = '';

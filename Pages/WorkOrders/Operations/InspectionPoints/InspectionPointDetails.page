@@ -1,5 +1,6 @@
 {
 	"Caption": "$(L,inspection_point)",
+	"OnReturning" : "/SAPAssetManager/Rules/WorkOrders/InspectionLot/InspectionPointDetailsOnReturning.js",
 	"ActionBar":
 	{
 		"Items":
