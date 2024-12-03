@@ -21,8 +21,10 @@ export default class {
      * Get Page Name from context
      */
     static getPageName(context) {
-        if (context.getPageProxy) {
+        if (context.getPageProxy && context.getPageProxy()._page._definition.getName) {
             return context.getPageProxy()._page._definition.getName();
+        } else if (context.getPageProxy && context.getPageProxy()._page._definition.name) {
+            return context.getPageProxy()._page._definition.name;
         } else {
             return context._page._definition.getName();
         }
@@ -32,8 +34,10 @@ export default class {
      * Get Previous Page Name from context
      */
     static getPreviousPageName(context) {
-        if (context.getPageProxy) {
+        if (context.getPageProxy && context.getPageProxy().evaluateTargetPathForAPI('#Page:-Previous')._page._definition.getName) {
             return context.getPageProxy().evaluateTargetPathForAPI('#Page:-Previous')._page._definition.getName();
+        } else if (context.getPageProxy && context.getPageProxy().evaluateTargetPathForAPI('#Page:-Previous')._page._definition.name) {
+            return context.getPageProxy().evaluateTargetPathForAPI('#Page:-Previous')._page._definition.name;
         } else {
             return context.evaluateTargetPathForAPI('#Page:-Previous').exc_page._definition.getName();
         }

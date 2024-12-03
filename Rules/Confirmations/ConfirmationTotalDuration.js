@@ -131,7 +131,12 @@ function calculateDuration(confirmations) {
 }
 
 function getPageName(context) {
-    return context.getPageProxy()._page._definition.getName();
+    if (context.getPageProxy && context.getPageProxy()._page._definition.getName) {
+        return context.getPageProxy()._page._definition.getName();
+    } else if (context.getPageProxy && context.getPageProxy()._page._definition.name) {
+        return context.getPageProxy()._page._definition.name;
+    }
+    return context._page._definition.getName();
 }
 
 function getAssociatedDate(context) {
