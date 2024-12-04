@@ -44,6 +44,7 @@ export default async function InspectionCharacteristicsPageMetadataGenerator(cli
         }else{
             entityset = binding['@odata.readLink'];
         }
+        entityset = binding['@odata.readLink'];
     }
     page.Controls[0].Sections = [];
     if (entityset) {
