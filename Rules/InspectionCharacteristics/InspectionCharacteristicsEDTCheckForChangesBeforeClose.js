@@ -8,7 +8,7 @@ export default function InspectionCharacteristicsEDTCheckForChangesBeforeClose(c
     let sections = context.getPageProxy().getControls()[0].getSections();
     for (let section of sections) {
         if (section.getExtension() && section.getExtension().constructor && section.getExtension().constructor.name === 'EditableDataTableViewExtension') {
-            extension = section.getExtension();
+            let extension = section.getExtension();
             let values = extension.getUpdatedValues();
             if (values && values.length > 0) {
                 return context.executeAction(confirmCloseAction);
