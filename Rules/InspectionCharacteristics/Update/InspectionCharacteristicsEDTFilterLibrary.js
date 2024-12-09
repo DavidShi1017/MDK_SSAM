@@ -9,8 +9,8 @@ export default class {
         let count = 0;
         for (let section of sections) {
             section.setVisible(true);
-            if (section.getExtensions() && section.getExtensions()[0] && section.getExtensions()[0].constructor && section.getExtensions()[0].constructor.name === 'EditableDataTableViewExtension') {
-                let extension = section.getExtensions()[0];
+            if (section.getExtension() && section.getExtension().constructor && section.getExtension().constructor.name === 'EditableDataTableViewExtension') {
+                extension = section.getExtension();
                 if (extension) {
                     count = count + extension.getRowBindings().length;
                     extension.resetFilter();

@@ -7,8 +7,8 @@ export default function InspectionCharacteristicsEDTCheckForChangesBeforeClose(c
     const confirmCloseAction = '/SAPAssetManager/Actions/Page/ConfirmClosePage.action';
     let sections = context.getPageProxy().getControls()[0].getSections();
     for (let section of sections) {
-        if (section.getExtensions() && section.getExtensions()[0] && section.getExtensions()[0].constructor && section.getExtensions()[0].constructor.name === 'EditableDataTableViewExtension') {
-            let extension = section.getExtensions()[0];
+        if (section.getExtension() && section.getExtension().constructor && section.getExtension().constructor.name === 'EditableDataTableViewExtension') {
+            extension = section.getExtension();
             let values = extension.getUpdatedValues();
             if (values && values.length > 0) {
                 return context.executeAction(confirmCloseAction);

@@ -11,8 +11,8 @@ export default async function InspectionCharacteristicsUpdateWithNoValidationEDT
     if (sections && sections.length > 0) {
         const promises = [];
         for (let section of sections) {
-            if (section.getExtensions() && section.getExtensions()[0] && section.getExtensions()[0].constructor && section.getExtensions()[0].constructor.name === 'EditableDataTableViewExtension') {
-                let extension = section.getExtensions()[0];
+            if (section.getExtension() && section.getExtension().constructor && section.getExtension().constructor.name === 'EditableDataTableViewExtension') {
+                extension = section.getExtension();
                 if (extension) {
                     let valuations = InspectionValuationVar.getInspectionResultValuations();
                     let rows = extension.getUpdatedValues();
