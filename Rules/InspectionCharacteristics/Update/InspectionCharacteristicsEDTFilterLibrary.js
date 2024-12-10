@@ -1,5 +1,5 @@
 import { InspectionValuationVar } from '../../Common/Library/GlobalInspectionResults';
-import AppVersionInfo from '../UserProfile/AppVersionInfo';
+import AppVersionInfo from '../../UserProfile/AppVersionInfo';
 export default class {
     /*
     * resets the filter

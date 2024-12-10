@@ -2,7 +2,7 @@ import inspCharLib from './InspectionCharacteristics';
 import { SplitReadLink } from '../../Common/Library/ReadLinkUtils';
 import libVal from '../../Common/Library/ValidationLibrary';
 import { InspectionValuationVar } from '../../Common/Library/GlobalInspectionResults';
-import AppVersionInfo from '../UserProfile/AppVersionInfo';
+import AppVersionInfo from '../../UserProfile/AppVersionInfo';
 /**
 * Describe this function...
 * @param {IClientAPI} context

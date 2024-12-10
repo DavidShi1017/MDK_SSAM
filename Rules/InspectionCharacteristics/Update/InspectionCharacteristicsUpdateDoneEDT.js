@@ -6,7 +6,7 @@ import { InspectionValuationVar } from '../../Common/Library/GlobalInspectionRes
 import InspectionCharacteristicsUpdateValidationEDT, { validateDependentCharacteristics } from './InspectionCharacteristicsUpdateValidationEDT';
 import libCom from '../../Common/Library/CommonLibrary';
 import DocumentCreateBDS from '../../Documents/Create/DocumentCreateBDS';
-import AppVersionInfo from '../UserProfile/AppVersionInfo';
+import AppVersionInfo from '../../UserProfile/AppVersionInfo';
 /**
 * Describe this function...
 * @param {IClientAPI} context
