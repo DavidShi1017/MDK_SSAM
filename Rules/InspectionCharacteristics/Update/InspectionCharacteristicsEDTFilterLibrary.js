@@ -1,5 +1,5 @@
-import { InspectionValuationVar} from '../../Common/Library/GlobalInspectionResults';
-
+import { InspectionValuationVar } from '../../Common/Library/GlobalInspectionResults';
+import AppVersionInfo from '../UserProfile/AppVersionInfo';
 export default class {
     /*
     * resets the filter
@@ -7,15 +7,27 @@ export default class {
     static resetFilter(context) {
         let sections = context.getPageProxy().getControls()[0].getSections();
         let count = 0;
+        const appVersion = AppVersionInfo(context).split('.')[0];
+        let num = parseInt(appVersion);
         for (let section of sections) {
             section.setVisible(true);
-            if (section.getExtension() && section.getExtension().constructor && section.getExtension().constructor.name === 'EditableDataTableViewExtension') {
-                extension = section.getExtension();
-                if (extension) {
-                    count = count + extension.getRowBindings().length;
-                    extension.resetFilter();
+            let extension;
+            if (num >= 2410) {
+                if (section.getExtension() && section.getExtension().constructor && section.getExtension().constructor.name === 'EditableDataTableViewExtension') {
+                    extension = section.getExtension();
+                }
+            } else {
+                if (section.getExtensions() && section.getExtensions()[0] && section.getExtensions()[0].constructor && section.getExtensions()[0].constructor.name === 'EditableDataTableViewExtension') {
+                    extension = section.getExtensions()[0];
                 }
             }
+
+
+            if (extension) {
+                count = count + extension.getRowBindings().length;
+                extension.resetFilter();
+            }
+
         }
         if (count > 0) {
             context.setCaption(context.localizeText('record_results_x', [count]));
@@ -33,7 +45,7 @@ export default class {
         for (let index = 0; index < sections.length; index++) {
             //if (sections[index].getExtensions() && sections[index].getExtensions().length > 0 && sections[index].getExtensions()[0].constructor && sections[index].getExtensions()[0].constructor.name === 'EditableDataTableViewExtension') {
             if (sections[index]._context.element.definition._data.Class === 'EditableDataTableViewExtension' && sections[index].getExtensions() && sections[index].getExtensions().length > 0) {
-                this.filterSection(context, sections[index-1], sections[index], filter, count, filteredCount, false);
+                this.filterSection(context, sections[index - 1], sections[index], filter, count, filteredCount, false);
             }
         }
         if (count > 0) {
@@ -48,7 +60,7 @@ export default class {
     /*
     * filters sections
     */
-   /* eslint-disable no-unused-vars */
+    /* eslint-disable no-unused-vars */
     static filterSection(context, headerSection, section, filter, count, filteredCount, updateCaption) {
         let filterResults = this.filterEDT(section, filter);
         let filteredRows = filterResults.filteredRows;
@@ -57,13 +69,13 @@ export default class {
             if (filteredRows && filteredRows.length > 0) {
                 filteredCount = filteredCount + filteredRows.length;
                 section.getExtensions()[0].applyFilter(filteredRows);
-            } 
+            }
         }
         if (section.getVisible() !== filterResults.Visbility) {
             section.setVisible(filterResults.Visbility);
             headerSection.setVisible(filterResults.Visbility);
         }
-        
+
         if (updateCaption) {
             if (count > 0) {
                 if (filteredCount === 0) {
@@ -74,7 +86,7 @@ export default class {
             }
         }
     }
-    
+
     /*
     * filters sections
     */
@@ -95,7 +107,7 @@ export default class {
     /*
     * set header & edt section visibility 
     */
-     static setVisibility(context, visibility, index) {
+    static setVisibility(context, visibility, index) {
         let sections = context.getPageProxy().getControls()[0].getSections();
         for (let section of sections) {
             if (index === section._context.element._props.definition.data.ExtensionProperties.UserData.Index) {
@@ -128,9 +140,9 @@ export default class {
     * get user data 
     */
     static getUserData(context) {
-        let equipments  = [];
-        let functionalLocations  = [];
-        let operations  = [];
+        let equipments = [];
+        let functionalLocations = [];
+        let operations = [];
         let filterApplied = [];
         let sections = context.getPageProxy().getControls()[0].getSections();
         for (let section of sections) {
@@ -149,10 +161,10 @@ export default class {
                 }
                 filterApplied.push(section._context.element._props.definition.data.ExtensionProperties.UserData.FilterData.FilterApplied);
             }
-            
+
         }
         return {
-            'FilterData' : {
+            'FilterData': {
                 'Equipments': equipments,
                 'FunctionalLocations': functionalLocations,
                 'Operations': operations,
@@ -175,75 +187,75 @@ export default class {
             let extension = section.getExtensions()[0];
             if (extension) {
                 //if (extension[0].constructor && extension[0].constructor.name === 'EditableDataTableViewExtension') {
-                    let firstRow = extension.getRowBindings()[0];
-                    let rows = extension.getAllValues();
-                    count = rows.length;
-                    // __Status is a special property that won't be in an OData entity set. Handle this separately
-                    if (obj.FilterSeg) {
-                        let i = 0;
-                        for (let row of rows) {
-                            switch (obj.FilterSeg) {
-                                case 'Empty':
-                                    if (Object.prototype.hasOwnProperty.call(row.Properties, 'Valuation') && valuations[row.Properties.Valuation] === '') {
-                                        filteredRows.push(i);
-                                        extensionVisible = true;
-                                    }
-                                    break;
-                                case 'Error':
-                                    if (Object.prototype.hasOwnProperty.call(row.Properties, 'Valuation') && (valuations[row.Properties.Valuation] === 'R' || valuations[row.Properties.Valuation] === 'F')) {
-                                        filteredRows.push(i);
-                                        extensionVisible = true;
-                                    }
-                                    break;
-                                default:
-                                    // Default: show section
-                                    break;
-                            }
-                            i = i + 1;
+                let firstRow = extension.getRowBindings()[0];
+                let rows = extension.getAllValues();
+                count = rows.length;
+                // __Status is a special property that won't be in an OData entity set. Handle this separately
+                if (obj.FilterSeg) {
+                    let i = 0;
+                    for (let row of rows) {
+                        switch (obj.FilterSeg) {
+                            case 'Empty':
+                                if (Object.prototype.hasOwnProperty.call(row.Properties, 'Valuation') && valuations[row.Properties.Valuation] === '') {
+                                    filteredRows.push(i);
+                                    extensionVisible = true;
+                                }
+                                break;
+                            case 'Error':
+                                if (Object.prototype.hasOwnProperty.call(row.Properties, 'Valuation') && (valuations[row.Properties.Valuation] === 'R' || valuations[row.Properties.Valuation] === 'F')) {
+                                    filteredRows.push(i);
+                                    extensionVisible = true;
+                                }
+                                break;
+                            default:
+                                // Default: show section
+                                break;
                         }
-                    } else if (obj.Equipment) {
-                        let equipId = ''; 
-                        if (firstRow.InspectionPoint_Nav && firstRow.InspectionPoint_Nav.EquipNum) {
-                            equipId = firstRow.InspectionPoint_Nav.EquipNum;
-                        } else if (firstRow.InspectionLot_Nav && firstRow.InspectionLot_Nav.Equipment) {
-                            equipId = firstRow.InspectionLot_Nav.Equipment;
-                        } else if (firstRow.Equipment) {
-                            equipId = firstRow.Equipment;
-                        }
-                        if (obj.Equipment === equipId) {
-                            extensionVisible = true;
-                        } else {
-                            extensionVisible = false;
-                            count = 0;
-                            filteredRows = [];
-                        }
-                    } else if (obj.FuncLoc) {
-                        let FuncLoc = ''; 
-                        if (firstRow.InspectionPoint_Nav && firstRow.InspectionPoint_Nav.FuncLoc) {
-                            FuncLoc = firstRow.InspectionPoint_Nav.FuncLoc;
-                        } else if (firstRow.InspectionLot_Nav && firstRow.InspectionLot_Nav.FunctionalLocation) {
-                            FuncLoc = firstRow.InspectionLot_Nav.FunctionalLocation;
-                        } else if (firstRow.FunctionalLocation) {
-                            FuncLoc = firstRow.FunctionalLocation;
-                        }
-                        
-                        if (obj.FuncLoc === FuncLoc) {
-                            extensionVisible = true;
-                        } else {
-                            extensionVisible = false;
-                            count = 0;
-                            filteredRows = [];
-                        }
-                    } else if (obj.Operations) {
-                        let operationNo = (firstRow.EAMChecklist_Nav) ? firstRow.EAMChecklist_Nav.OperationNo:firstRow.InspectionPoint_Nav.OperationNo;
-                        if (obj.Operations === operationNo) {
-                            extensionVisible = true;
-                        } else {
-                            extensionVisible = false;
-                            count = 0;
-                            filteredRows = [];
-                        }
+                        i = i + 1;
                     }
+                } else if (obj.Equipment) {
+                    let equipId = '';
+                    if (firstRow.InspectionPoint_Nav && firstRow.InspectionPoint_Nav.EquipNum) {
+                        equipId = firstRow.InspectionPoint_Nav.EquipNum;
+                    } else if (firstRow.InspectionLot_Nav && firstRow.InspectionLot_Nav.Equipment) {
+                        equipId = firstRow.InspectionLot_Nav.Equipment;
+                    } else if (firstRow.Equipment) {
+                        equipId = firstRow.Equipment;
+                    }
+                    if (obj.Equipment === equipId) {
+                        extensionVisible = true;
+                    } else {
+                        extensionVisible = false;
+                        count = 0;
+                        filteredRows = [];
+                    }
+                } else if (obj.FuncLoc) {
+                    let FuncLoc = '';
+                    if (firstRow.InspectionPoint_Nav && firstRow.InspectionPoint_Nav.FuncLoc) {
+                        FuncLoc = firstRow.InspectionPoint_Nav.FuncLoc;
+                    } else if (firstRow.InspectionLot_Nav && firstRow.InspectionLot_Nav.FunctionalLocation) {
+                        FuncLoc = firstRow.InspectionLot_Nav.FunctionalLocation;
+                    } else if (firstRow.FunctionalLocation) {
+                        FuncLoc = firstRow.FunctionalLocation;
+                    }
+
+                    if (obj.FuncLoc === FuncLoc) {
+                        extensionVisible = true;
+                    } else {
+                        extensionVisible = false;
+                        count = 0;
+                        filteredRows = [];
+                    }
+                } else if (obj.Operations) {
+                    let operationNo = (firstRow.EAMChecklist_Nav) ? firstRow.EAMChecklist_Nav.OperationNo : firstRow.InspectionPoint_Nav.OperationNo;
+                    if (obj.Operations === operationNo) {
+                        extensionVisible = true;
+                    } else {
+                        extensionVisible = false;
+                        count = 0;
+                        filteredRows = [];
+                    }
+                }
                 //}
                 this.setFilterApplied(extension.context.clientAPI, extension.getUserData().Index);
             } else {
@@ -265,7 +277,7 @@ export default class {
                 }
             }
         });
-        return {'filteredRows': filteredRows, 'Visbility': extensionVisible, 'Count': count};
+        return { 'filteredRows': filteredRows, 'Visbility': extensionVisible, 'Count': count };
     }
     /*
     * filters the EDT

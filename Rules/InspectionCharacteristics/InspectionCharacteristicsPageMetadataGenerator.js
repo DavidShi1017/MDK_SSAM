@@ -5,7 +5,7 @@ import DocumentsIsVisible from '../Documents/DocumentsIsVisible';
 import IsAndroid from '../Common/IsAndroid';
 import SectionHeaderHeight from '../Extensions/SectionHeaderHeight';
 import libCom from '../Common/Library/CommonLibrary';
-import AppVersionInfo from '../UserProfile/AppVersionInfo';
+
 /**
 * Describe this function...
 * @param {IClientAPI} clientAPI
@@ -20,13 +20,6 @@ let edtHeight;
 let orderBy;
 export default async function InspectionCharacteristicsPageMetadataGenerator(clientAPI) {
 
-    const appVersion = AppVersionInfo(clientAPI).split('.')[0];
-    let num = parseInt(appVersion);
-    if(num >= 2410){
-        Logger.error('2410');
-    }else{
-        Logger.error('...');
-    }
     orderBy = '';
     edtHeight = 95;
     count = 0;

@@ -1,12 +1,12 @@
 import inspCharLib from './InspectionCharacteristics';
-import {SplitReadLink} from '../../Common/Library/ReadLinkUtils';
+import { SplitReadLink } from '../../Common/Library/ReadLinkUtils';
 import libVal from '../../Common/Library/ValidationLibrary';
 import InspectionCharacteristicsChangeSetOnSuccessEDT from './InspectionCharacteristicsChangeSetOnSuccessEDT';
-import { InspectionValuationVar} from '../../Common/Library/GlobalInspectionResults';
-import InspectionCharacteristicsUpdateValidationEDT, {validateDependentCharacteristics} from './InspectionCharacteristicsUpdateValidationEDT';
+import { InspectionValuationVar } from '../../Common/Library/GlobalInspectionResults';
+import InspectionCharacteristicsUpdateValidationEDT, { validateDependentCharacteristics } from './InspectionCharacteristicsUpdateValidationEDT';
 import libCom from '../../Common/Library/CommonLibrary';
 import DocumentCreateBDS from '../../Documents/Create/DocumentCreateBDS';
-
+import AppVersionInfo from '../UserProfile/AppVersionInfo';
 /**
 * Describe this function...
 * @param {IClientAPI} context
@@ -14,22 +14,33 @@ import DocumentCreateBDS from '../../Documents/Create/DocumentCreateBDS';
 export default async function InspectionCharacteristicsUpdateDoneEDT(context) {
     let sections = context.getPageProxy().getControls()[0].getSections();
     let extension;
+    const appVersion = AppVersionInfo(context).split('.')[0];
+    let num = parseInt(appVersion);
     if (sections && sections.length > 0) {
         let validateResults = [];
         for (let section of sections) {
 
-            
-            if (section.getExtension() && section.getExtension().constructor && section.getExtension().constructor.name === 'EditableDataTableViewExtension') {
-                extension = section.getExtension();
-                if (extension) {
-                    //validate all required chars and dependent chars
-                    let validateRows = extension.getValues(); //extension.getUpdatedValues();
-                    for (let i = 0; i < validateRows.length; i ++) {
-                        let validateRow = validateRows[i];
-                        validateResults.push(await InspectionCharacteristicsUpdateValidationEDT(context, extension, validateRow));
-                    }
+            if (num >= 2410) {
+                if (section.getExtension() && section.getExtension().constructor && section.getExtension().constructor.name === 'EditableDataTableViewExtension') {
+                    extension = section.getExtension();
+                }
+            } else {
+                if (section.getExtensions() && section.getExtensions()[0] && section.getExtensions()[0].constructor && section.getExtensions()[0].constructor.name === 'EditableDataTableViewExtension') {
+                    extension = section.getExtensions()[0];
                 }
             }
+
+
+
+            if (extension) {
+                //validate all required chars and dependent chars
+                let validateRows = extension.getValues(); //extension.getUpdatedValues();
+                for (let i = 0; i < validateRows.length; i++) {
+                    let validateRow = validateRows[i];
+                    validateResults.push(await InspectionCharacteristicsUpdateValidationEDT(context, extension, validateRow));
+                }
+            }
+
         }
 
         return Promise.all(validateResults).then((results) => {
@@ -37,17 +48,26 @@ export default async function InspectionCharacteristicsUpdateDoneEDT(context) {
         }).then(async () => {
             let dependentResults = [];
             for (let section of sections) {
-                if (section.getExtension() && section.getExtension().constructor && section.getExtension().constructor.name === 'EditableDataTableViewExtension') {
-                    extension = section.getExtension();
-                    if (extension) {
-                        //validate all dependent chars
-                        let validateRows = extension.getValues(); //extension.getUpdatedValues();
-                        for (let j = 0; j < validateRows.length; j ++) {
-                            let validateRow = validateRows[j];
-                            dependentResults.push(await validateDependentCharacteristics(context, extension, validateRow));
-                        }
+                if (num >= 2410) {
+                    if (section.getExtension() && section.getExtension().constructor && section.getExtension().constructor.name === 'EditableDataTableViewExtension') {
+                        extension = section.getExtension();
+                    }
+                } else {
+                    if (section.getExtensions() && section.getExtensions()[0] && section.getExtensions()[0].constructor && section.getExtensions()[0].constructor.name === 'EditableDataTableViewExtension') {
+                        extension = section.getExtensions()[0];
                     }
                 }
+
+
+                if (extension) {
+                    //validate all dependent chars
+                    let validateRows = extension.getValues(); //extension.getUpdatedValues();
+                    for (let j = 0; j < validateRows.length; j++) {
+                        let validateRow = validateRows[j];
+                        dependentResults.push(await validateDependentCharacteristics(context, extension, validateRow));
+                    }
+                }
+
             }
             return Promise.all(dependentResults).then((results) => {
                 return !results.includes(false) ? Promise.resolve() : Promise.reject();
@@ -55,56 +75,64 @@ export default async function InspectionCharacteristicsUpdateDoneEDT(context) {
                 let promises = [];
                 let valuations = InspectionValuationVar.getInspectionResultValuations();
                 for (let section of sections) {
-                    if (section.getExtension() && section.getExtension().constructor && section.getExtension().constructor.name === 'EditableDataTableViewExtension') {
-                        extension = section.getExtension();
-                        if (extension) {
-                            let rows = extension.getUpdatedValues();
-                            for (let i = 0; i < rows.length; i ++) {
-                                if (!extension.getRows()[i][2]._cell.IsReadOnly) { //check if the cell 'ResultValue' is enabled and process only the enabled values
-                                    let row = rows[i];
-                                    let quantitativeAction = '/SAPAssetManager/Actions/InspectionCharacteristics/Update/InspectionCharacteristicsQuantitativeUpdate.action';
-                                    let qualitativeAction = '/SAPAssetManager/Actions/InspectionCharacteristics/Update/InspectionCharacteristicsQualitativeUpdate.action';
-                                    let valuation = '';
-                                    let remarks = '';
-                                    if (Object.prototype.hasOwnProperty.call(row.Properties, 'Valuation')) {
-                                        valuation = valuations[row.Properties.Valuation];
+                    if (num >= 2410) {
+                        if (section.getExtension() && section.getExtension().constructor && section.getExtension().constructor.name === 'EditableDataTableViewExtension') {
+                            extension = section.getExtension();
+                        }
+                    } else {
+                        if (section.getExtensions() && section.getExtensions()[0] && section.getExtensions()[0].constructor && section.getExtensions()[0].constructor.name === 'EditableDataTableViewExtension') {
+                            extension = section.getExtensions()[0];
+                        }
+                    }
+
+                    if (extension) {
+                        let rows = extension.getUpdatedValues();
+                        for (let i = 0; i < rows.length; i++) {
+                            if (!extension.getRows()[i][2]._cell.IsReadOnly) { //check if the cell 'ResultValue' is enabled and process only the enabled values
+                                let row = rows[i];
+                                let quantitativeAction = '/SAPAssetManager/Actions/InspectionCharacteristics/Update/InspectionCharacteristicsQuantitativeUpdate.action';
+                                let qualitativeAction = '/SAPAssetManager/Actions/InspectionCharacteristics/Update/InspectionCharacteristicsQualitativeUpdate.action';
+                                let valuation = '';
+                                let remarks = '';
+                                if (Object.prototype.hasOwnProperty.call(row.Properties, 'Valuation')) {
+                                    valuation = valuations[row.Properties.Valuation];
+                                } else {
+                                    valuation = row.OdataBinding.Valuation;
+                                }
+
+                                if (!valuation) valuation = '';
+
+                                if (Object.prototype.hasOwnProperty.call(row.Properties, 'Remarks')) {
+                                    remarks = row.Properties.Remarks;
+                                } else {
+                                    remarks = row.OdataBinding.Remarks;
+                                }
+                                if (inspCharLib.isQuantitative(row.OdataBinding) || inspCharLib.isCalculatedAndQuantitative(row.OdataBinding)) {
+                                    let resultValue;
+                                    if (Object.prototype.hasOwnProperty.call(row.Properties, 'ResultValue')) {
+                                        resultValue = row.Properties.ResultValue;
                                     } else {
-                                        valuation = row.OdataBinding.Valuation;
+                                        resultValue = row.OdataBinding.ResultValue;
                                     }
 
-                                    if (!valuation) valuation = '';
+                                    if (!resultValue) resultValue = 0;
 
-                                    if (Object.prototype.hasOwnProperty.call(row.Properties, 'Remarks')) {
-                                        remarks = row.Properties.Remarks;
-                                    } else {
-                                        remarks = row.OdataBinding.Remarks;
-                                    }
-                                    if (inspCharLib.isQuantitative(row.OdataBinding) || inspCharLib.isCalculatedAndQuantitative(row.OdataBinding)) {
-                                        let resultValue;
-                                        if (Object.prototype.hasOwnProperty.call(row.Properties, 'ResultValue')) {
-                                            resultValue = row.Properties.ResultValue;
-                                        } else {
-                                            resultValue = row.OdataBinding.ResultValue;
-                                        }
-
-                                        if (!resultValue) resultValue = 0;
-                                    
-                                        const properties = {
-                                            'Target': {
-                                                'EntitySet': 'InspectionCharacteristics',
-                                                'Service': '/SAPAssetManager/Services/AssetManager.service',
-                                                'ReadLink': row.OdataBinding['@odata.readLink'],
-                                            },
-                                            'Headers':
-                                            {
-                                                'OfflineOData.TransactionID': row.OdataBinding.InspectionLot_Nav.InspectionLot,
-                                            },
-                                            'Properties': {
-                                                'ResultValue': resultValue,
-                                                'Valuation': valuation,
-                                                'Remarks': remarks,
-                                            },
-                                            'UpdateLinks':
+                                    const properties = {
+                                        'Target': {
+                                            'EntitySet': 'InspectionCharacteristics',
+                                            'Service': '/SAPAssetManager/Services/AssetManager.service',
+                                            'ReadLink': row.OdataBinding['@odata.readLink'],
+                                        },
+                                        'Headers':
+                                        {
+                                            'OfflineOData.TransactionID': row.OdataBinding.InspectionLot_Nav.InspectionLot,
+                                        },
+                                        'Properties': {
+                                            'ResultValue': resultValue,
+                                            'Valuation': valuation,
+                                            'Remarks': remarks,
+                                        },
+                                        'UpdateLinks':
                                             [{
                                                 'Property': 'InspValuation_Nav',
                                                 'Target': {
@@ -112,109 +140,109 @@ export default async function InspectionCharacteristicsUpdateDoneEDT(context) {
                                                     'ReadLink': `InspectionResultValuations('${valuation}')`,
                                                 },
                                             }],
-                                            'ValidationRule': '',
-                                        };
-                                        promises.push(context.executeAction({
-                                            'Name': quantitativeAction,
-                                            'Properties': properties,
-                                        }));
-                                    } else if (inspCharLib.isQualitative(row.OdataBinding)) {
-                                        let CodeGroup = '';
-                                        let Code = '';
-                                        let Catalog = '';
-                                        let InspectionCodeReadLink;
-                                        if (!libVal.evalIsEmpty(row.OdataBinding.InspectionCode_Nav)) {
-                                            InspectionCodeReadLink = row.OdataBinding.InspectionCode_Nav['@odata.readLink'];
-                                        }
-                                        if (Object.prototype.hasOwnProperty.call(row.Properties, 'Code') && row.Properties.Code) {
-                                            CodeGroup = SplitReadLink(row.Properties.Code).CodeGroup;
-                                            Code = SplitReadLink(row.Properties.Code).Code;
-                                            Catalog = SplitReadLink(row.Properties.Code).Catalog;
-                                            InspectionCodeReadLink = row.Properties.Code;
-                                        } else {
-                                            CodeGroup = row.OdataBinding.CodeGroup;
-                                            Code = row.OdataBinding.Code;
-                                            Catalog = row.OdataBinding.Catalog;
-                                        }
-                                        if(libVal.evalIsEmpty(valuation)){
-                                            CodeGroup = 'CHECK';
-                                            Code = 'R1';
-                                            InspectionCodeReadLink = `InspectionCodes(Plant='${row.OdataBinding.SelectedSetPlant}',SelectedSet='${row.OdataBinding.SelectedSet}',Catalog='${row.OdataBinding.Catalog}',CodeGroup='${row.OdataBinding.CodeGroup}',Code='${Code}')`;
-                                        }
-                                        //if (Code) { //Cannot set non-nullable property 'CodeGroup' of type 'string', because the value is unexpectedly null - So currently inspection code cannot be reverted to empty using deletelinks
-                                            var createLinks = [];
-                                            if (libVal.evalIsEmpty(row.OdataBinding.InspValuation_Nav)) {
-                                                createLinks.push({
-                                                    'Property': 'InspValuation_Nav',
-                                                    'Target':
-                                                    {
-                                                        'EntitySet': 'InspectionResultValuations',
-                                                        'ReadLink': `InspectionResultValuations('${valuation}')`,
-                                                    },
-                                                });
-                                            }
-                                            if (libVal.evalIsEmpty(row.OdataBinding.InspectionCode_Nav) && !libVal.evalIsEmpty(Code)) {
-                                                createLinks.push({
-                                                    'Property': 'InspectionCode_Nav',
-                                                    'Target':
-                                                    {
-                                                        'EntitySet': 'InspectionCodes',
-                                                        'ReadLink': row.Properties.Code,
-                                                    },
-                                                });
-                                            }
-                                            var updateLinks = [];
-                                            if (!libVal.evalIsEmpty(row.OdataBinding.InspValuation_Nav)) {
-                                                updateLinks.push({
-                                                    'Property': 'InspValuation_Nav',
-                                                    'Target':
-                                                    {
-                                                        'EntitySet': 'InspectionResultValuations',
-                                                        'ReadLink': `InspectionResultValuations('${valuation}')`,
-                                                    },
-                                                });
-                                            }
-                                            if (!libVal.evalIsEmpty(row.OdataBinding.InspectionCode_Nav) && !libVal.evalIsEmpty(Code)) {
-                                                updateLinks.push({
-                                                    'Property': 'InspectionCode_Nav',
-                                                    'Target':
-                                                    {
-                                                        'EntitySet': 'InspectionCodes',
-                                                        'ReadLink': InspectionCodeReadLink,
-                                                    },
-                                                });
-                                            }
-                                            const properties = {
-                                                'Target': {
-                                                    'EntitySet': 'InspectionCharacteristics',
-                                                    'Service': '/SAPAssetManager/Services/AssetManager.service',
-                                                    'ReadLink': row.OdataBinding['@odata.readLink'],
-                                                },
-                                                'Headers':
-                                                {
-                                                    'OfflineOData.TransactionID': row.OdataBinding.InspectionLot_Nav.InspectionLot,
-                                                },
-                                                'Properties': {
-                                                    'CodeGroup': CodeGroup,
-                                                    'Valuation': valuation,
-                                                    'Code': Code,
-                                                    'Catalog': Catalog,
-                                                    'Remarks': remarks,
-                                                },
-                                                'CreateLinks': createLinks,
-                                                'UpdateLinks': updateLinks,
-                                                'ValidationRule': '',
-                                            };
-                                            promises.push(context.executeAction({
-                                                'Name': qualitativeAction,
-                                                'Properties': properties,
-                                            }));
-                                        //}
+                                        'ValidationRule': '',
+                                    };
+                                    promises.push(context.executeAction({
+                                        'Name': quantitativeAction,
+                                        'Properties': properties,
+                                    }));
+                                } else if (inspCharLib.isQualitative(row.OdataBinding)) {
+                                    let CodeGroup = '';
+                                    let Code = '';
+                                    let Catalog = '';
+                                    let InspectionCodeReadLink;
+                                    if (!libVal.evalIsEmpty(row.OdataBinding.InspectionCode_Nav)) {
+                                        InspectionCodeReadLink = row.OdataBinding.InspectionCode_Nav['@odata.readLink'];
                                     }
+                                    if (Object.prototype.hasOwnProperty.call(row.Properties, 'Code') && row.Properties.Code) {
+                                        CodeGroup = SplitReadLink(row.Properties.Code).CodeGroup;
+                                        Code = SplitReadLink(row.Properties.Code).Code;
+                                        Catalog = SplitReadLink(row.Properties.Code).Catalog;
+                                        InspectionCodeReadLink = row.Properties.Code;
+                                    } else {
+                                        CodeGroup = row.OdataBinding.CodeGroup;
+                                        Code = row.OdataBinding.Code;
+                                        Catalog = row.OdataBinding.Catalog;
+                                    }
+                                    if (libVal.evalIsEmpty(valuation)) {
+                                        CodeGroup = 'CHECK';
+                                        Code = 'R1';
+                                        InspectionCodeReadLink = `InspectionCodes(Plant='${row.OdataBinding.SelectedSetPlant}',SelectedSet='${row.OdataBinding.SelectedSet}',Catalog='${row.OdataBinding.Catalog}',CodeGroup='${row.OdataBinding.CodeGroup}',Code='${Code}')`;
+                                    }
+                                    //if (Code) { //Cannot set non-nullable property 'CodeGroup' of type 'string', because the value is unexpectedly null - So currently inspection code cannot be reverted to empty using deletelinks
+                                    var createLinks = [];
+                                    if (libVal.evalIsEmpty(row.OdataBinding.InspValuation_Nav)) {
+                                        createLinks.push({
+                                            'Property': 'InspValuation_Nav',
+                                            'Target':
+                                            {
+                                                'EntitySet': 'InspectionResultValuations',
+                                                'ReadLink': `InspectionResultValuations('${valuation}')`,
+                                            },
+                                        });
+                                    }
+                                    if (libVal.evalIsEmpty(row.OdataBinding.InspectionCode_Nav) && !libVal.evalIsEmpty(Code)) {
+                                        createLinks.push({
+                                            'Property': 'InspectionCode_Nav',
+                                            'Target':
+                                            {
+                                                'EntitySet': 'InspectionCodes',
+                                                'ReadLink': row.Properties.Code,
+                                            },
+                                        });
+                                    }
+                                    var updateLinks = [];
+                                    if (!libVal.evalIsEmpty(row.OdataBinding.InspValuation_Nav)) {
+                                        updateLinks.push({
+                                            'Property': 'InspValuation_Nav',
+                                            'Target':
+                                            {
+                                                'EntitySet': 'InspectionResultValuations',
+                                                'ReadLink': `InspectionResultValuations('${valuation}')`,
+                                            },
+                                        });
+                                    }
+                                    if (!libVal.evalIsEmpty(row.OdataBinding.InspectionCode_Nav) && !libVal.evalIsEmpty(Code)) {
+                                        updateLinks.push({
+                                            'Property': 'InspectionCode_Nav',
+                                            'Target':
+                                            {
+                                                'EntitySet': 'InspectionCodes',
+                                                'ReadLink': InspectionCodeReadLink,
+                                            },
+                                        });
+                                    }
+                                    const properties = {
+                                        'Target': {
+                                            'EntitySet': 'InspectionCharacteristics',
+                                            'Service': '/SAPAssetManager/Services/AssetManager.service',
+                                            'ReadLink': row.OdataBinding['@odata.readLink'],
+                                        },
+                                        'Headers':
+                                        {
+                                            'OfflineOData.TransactionID': row.OdataBinding.InspectionLot_Nav.InspectionLot,
+                                        },
+                                        'Properties': {
+                                            'CodeGroup': CodeGroup,
+                                            'Valuation': valuation,
+                                            'Code': Code,
+                                            'Catalog': Catalog,
+                                            'Remarks': remarks,
+                                        },
+                                        'CreateLinks': createLinks,
+                                        'UpdateLinks': updateLinks,
+                                        'ValidationRule': '',
+                                    };
+                                    promises.push(context.executeAction({
+                                        'Name': qualitativeAction,
+                                        'Properties': properties,
+                                    }));
+                                    //}
                                 }
                             }
                         }
                     }
+
                 }
                 let attachments = libCom.getStateVariable(context, 'InspectionCharacteristicsAttachments');
                 let deletedAttachments = libCom.getStateVariable(context, 'DeletedInspectionCharacteristicsAttachments');
