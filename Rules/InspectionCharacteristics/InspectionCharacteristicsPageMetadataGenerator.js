@@ -6,6 +6,7 @@ import IsAndroid from '../Common/IsAndroid';
 import SectionHeaderHeight from '../Extensions/SectionHeaderHeight';
 import libCom from '../Common/Library/CommonLibrary';
 import MDKVersionInfo from '../UserProfile/MDKVersionInfo';
+import AppVersionInfo from '../UserProfile/AppVersionInfo';
 /**
 * Describe this function...
 * @param {IClientAPI} clientAPI
@@ -21,6 +22,7 @@ let orderBy;
 export default async function InspectionCharacteristicsPageMetadataGenerator(clientAPI) {
 
     const mdkVersion = MDKVersionInfo(clientAPI);
+    const appVersion = AppVersionInfo(clientAPI);
     orderBy = '';
     edtHeight = 95;
     count = 0;
