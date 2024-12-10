@@ -21,7 +21,7 @@ let orderBy;
 export default async function InspectionCharacteristicsPageMetadataGenerator(clientAPI) {
 
     const appVersion = AppVersionInfo(clientAPI).split('.')[0];
-    let num = parseInt(str);
+    let num = parseInt(appVersion);
     if(num >= 2410){
         Logger.error('2410');
     }else{
