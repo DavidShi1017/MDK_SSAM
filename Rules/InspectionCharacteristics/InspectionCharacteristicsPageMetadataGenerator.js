@@ -49,7 +49,7 @@ export default async function InspectionCharacteristicsPageMetadataGenerator(cli
     }
     page.Controls[0].Sections = [];
     if (entityset) {
-        await read(clientAPI, entityset, [], '$orderby=EquipNum asc').then(async function(results) {
+        await read(clientAPI, entityset, [], '').then(async function(results) {
             bindings = [];
             sectionEquipment = '';
             sectionFunctionalLocation = '';
