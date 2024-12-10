@@ -20,7 +20,7 @@ let edtHeight;
 let orderBy;
 export default async function InspectionCharacteristicsPageMetadataGenerator(clientAPI) {
 
-    const appVersion = AppVersionInfo(context).split('.')[0];
+    const appVersion = AppVersionInfo(clientAPI).split('.')[0];
     orderBy = '';
     edtHeight = 95;
     count = 0;
