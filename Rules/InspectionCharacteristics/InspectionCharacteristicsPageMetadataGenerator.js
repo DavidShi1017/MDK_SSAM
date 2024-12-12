@@ -17,7 +17,10 @@ let sectionEquipment;
 let sectionFunctionalLocation;
 let sectionOperation;
 let edtHeight;
+let orderBy;
 export default async function InspectionCharacteristicsPageMetadataGenerator(clientAPI) {
+
+    orderBy = '';
     edtHeight = 95;
     count = 0;
     sectionIndex = 0;
@@ -31,25 +34,23 @@ export default async function InspectionCharacteristicsPageMetadataGenerator(cli
     if (binding['@odata.type'] === '#sap_mobile.InspectionLot') {
         if (binding.InspectionPoints_Nav && binding.InspectionPoints_Nav.length > 0) {
             entityset = binding['@odata.readLink'] + '/InspectionPoints_Nav';
+            orderBy = '$orderby=EquipNum asc';
             libCom.setStateVariable(clientAPI, binding.OrderId + "-" + binding.InspectionLot, binding.WOHeader_Nav);
         } else {
             entityset = binding['@odata.readLink'];
         }
     } else if (binding['@odata.type'] === '#sap_mobile.MyWorkOrderOperation') {
         entityset = binding['@odata.readLink'] + '/InspectionPoint_Nav';
-    } else if (binding['@odata.type'] === '#sap_mobile.InspectionPoint' || binding['@odata.type'] === '#sap_mobile.EAMChecklistLink') {      
-        if(binding.InspectionLot_Nav["@odata.type"] === '#sap_mobile.InspectionLot'){
+        orderBy = '$orderby=EquipNum asc';
             libCom.setStateVariable(clientAPI, binding.OrderId + "-" + binding.InspectionLot, binding.WOHeader_Nav);
-            entityset = binding.InspectionLot_Nav["@odata.readLink"] + '/InspectionPoints_Nav';
-        }else{
-            entityset = binding['@odata.readLink'];
-        }
+    }  else if (binding['@odata.type'] === '#sap_mobile.InspectionPoint' || binding['@odata.type'] === '#sap_mobile.EAMChecklistLink') {      
+
         libCom.setStateVariable(clientAPI, binding.OrderId + "-" + binding.InspectionLot, binding.WOHeader_Nav);
         entityset = binding['@odata.readLink'];
     }
     page.Controls[0].Sections = [];
     if (entityset) {
-        await read(clientAPI, entityset, [], '$orderby=EquipNum asc').then(async function(results) {
+        await read(clientAPI, entityset, [], orderBy).then(async function(results) {
             bindings = [];
             sectionEquipment = '';
             sectionFunctionalLocation = '';
