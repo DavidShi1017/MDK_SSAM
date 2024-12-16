@@ -1,10 +1,19 @@
 {
     "Service": "/SAPAssetManager/Services/AssetManager.service",
     "StoreName": "SAMStore",
-    "DefiningRequests": [],
+    "DefiningRequests": [{
+    "Name": "WorkOrderHeaderSet",
+      "Service": "/SAPAssetManager/Services/AssetManager.service",
+      "Request": "MyWorkOrderHeaders",
+      "Parameters": {
+        "$filter": "Status eq 'OPEN'",
+        "$top": 1
+      }
+    }],
     "StoreEncryptionKey": "SAPTest123",
     "_Type": "Action.Type.ODataService.Initialize",
     "ActionResult": {
        "_Name": "result"
     }
 }
+ 
