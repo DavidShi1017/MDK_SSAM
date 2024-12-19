@@ -44,7 +44,6 @@ export default async function InspectionCharacteristicsPageMetadataGenerator(cli
         orderBy = '$orderby=EquipNum asc';
             libCom.setStateVariable(clientAPI, binding.OrderId + "-" + binding.InspectionLot, binding.WOHeader_Nav);
     }  else if (binding['@odata.type'] === '#sap_mobile.InspectionPoint' || binding['@odata.type'] === '#sap_mobile.EAMChecklistLink') {      
-
         libCom.setStateVariable(clientAPI, binding.OrderId + "-" + binding.InspectionLot, binding.WOHeader_Nav);
         entityset = binding['@odata.readLink'];
     }
