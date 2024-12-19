@@ -42,7 +42,7 @@ export default function InspectionCharacteristicsQuantitativeAndQualitativeEDTCo
             'OnValueChange': '/SAPAssetManager/Rules/InspectionCharacteristics/Update/InspectionCharacteristicsQuantitativeOnValueChangeEDT.js',
             'Property': 'ResultValue',
             'Parameters': {
-                'Value': binding.ResultValue,
+                'Value': binding.ResultValue.toString(),
             },
         };
 
