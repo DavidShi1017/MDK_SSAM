@@ -30,9 +30,9 @@ export default async function InspectionCharacteristicsTargetSpecification(conte
                 upperLimit = binding.UpperLimitFlag === 'X' ? binding.UpperLimit : '';
             }
 
-            if (lowerLimit && upperLimit) {
+            if (!isNaN(Number(lowerLimit)) && upperLimit) {
                 targetValueString += `${lowerLimit} ${uom} < ${upperLimit} ${uom}`;
-            } else if (lowerLimit && ValidationLibrary.evalIsEmpty(upperLimit)) {
+            } else if (!isNaN(Number(lowerLimit)) && ValidationLibrary.evalIsEmpty(upperLimit)) {
                 targetValueString += ` > ${lowerLimit} ${uom} `;
             } else if (ValidationLibrary.evalIsEmpty(lowerLimit) && upperLimit) {
                 targetValueString += ` < ${upperLimit} ${uom} `;
