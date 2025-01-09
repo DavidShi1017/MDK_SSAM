@@ -104,7 +104,7 @@
                         "Target": {
                             "EntitySet": "ActivityTypes",
                             "Service": "/SAPAssetManager/Services/AssetManager.service",
-                            "QueryOptions":"$orderby=ActivityType&$apply=groupby((OrderType))"
+                            "QueryOptions":"$orderby=ActivityType&$apply=groupby((OrderType), aggregate(ActivityType with countdistinct as Count))"
                         }
                     }
                 },
