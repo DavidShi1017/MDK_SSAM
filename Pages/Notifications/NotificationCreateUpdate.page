@@ -99,11 +99,12 @@
                     "Caption": "$(L,maintenance_activity_type)",
                     "Value": "{ActivityType}",
                     "PickerItems": {
-                        "DisplayValue": "{{#Property:ActivityType}} - {{#Property:ActivityTypeDescription}} - {{#Property:OrderType}}",
+                        "DisplayValue": "{{#Property:ActivityType}} - {{#Property:ActivityTypeDescription}}",
                         "ReturnValue": "{ActivityType}",
                         "Target": {
                             "EntitySet": "ActivityTypes",
-                            "Service": "/SAPAssetManager/Services/AssetManager.service"
+                            "Service": "/SAPAssetManager/Services/AssetManager.service",
+                            "QueryOptions":"$orderby=ActivityType"
                         }
                     }
                 },
