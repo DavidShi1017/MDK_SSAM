@@ -82,7 +82,7 @@
                     "_Name": "TypeLstPkr",
                     "_Type": "Control.Type.FormCell.ListPicker"
                 },
-                                {
+                    {
                     "_Name": "ActivityTypeListPicker",
                     "_Type": "Control.Type.FormCell.ListPicker",
                     "AllowMultipleSelection": false,
@@ -104,7 +104,7 @@
                         "Target": {
                             "EntitySet": "ActivityTypes",
                             "Service": "/SAPAssetManager/Services/AssetManager.service",
-                            "QueryOptions":"$orderby=ActivityType"
+                            "QueryOptions":"$orderby=ActivityType&$apply=groupby((OrderType))"
                         }
                     }
                 },
