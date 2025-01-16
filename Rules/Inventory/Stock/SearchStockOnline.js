@@ -1,3 +1,5 @@
+import ODataLibrary from "../../OData/ODataLibrary";
+
 /**
 * Describe this function...
 * @param {IClientAPI} context
@@ -13,7 +15,7 @@ export default function SearchStockOnline(context) {
     listPageProxy.getClientData().StockOnLine = StockOnLine;
     const stocksListOfflineSection = listPageProxy.getControls()[0].getSections()[0];
     const stocksListOnlineSection = listPageProxy.getControls()[0].getSections()[1];
-    return context.executeAction('/SAPAssetManager/Actions/OData/CreateOnlineOData.action')
+    return ODataLibrary.initializeOnlineService(context)
         .then(() => stocksListOfflineSection.setVisible(false))
         .then(() => stocksListOnlineSection.setVisible(true))
         .then(() => {

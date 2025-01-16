@@ -6,6 +6,7 @@ export default function RequiredFields(context) {
 
     //const required = ['NotificationDescription', 'TypeLstPkr', 'EquipHierarchyExtensionControl'];
     const required = ['NotificationDescription', 'TypeLstPkr','EquipHierarchyExtensionControl', 'MainWorkCenterListPicker', 'PlannerGroupListPicker','PlanningPlantLstPkr', 'WorkCenterPlantLstPkr'];
+    //const required = ['NotificationDescription', 'TypeLstPkr','ActivityTypeListPicker','EquipHierarchyExtensionControl', 'MainWorkCenterListPicker', 'PlannerGroupListPicker','PlanningPlantLstPkr', 'WorkCenterPlantLstPkr'];
 
     // eslint-disable-next-line brace-style
     if ((function() { try { return context.evaluateTargetPathForAPI('#Control:PartnerPicker1').visible; } catch (exc) { return false; } })()) {

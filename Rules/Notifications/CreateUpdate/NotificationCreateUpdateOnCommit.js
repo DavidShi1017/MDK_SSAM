@@ -44,6 +44,7 @@ export default function NotificationCreateUpdateOnCommit(clientAPI) {
     let mainWorkcenterPicker = clientAPI.getControls()[0].getControl('MainWorkCenterListPicker').getValue();
     let breakdownStart = ComLib.getControlProxy(clientAPI, 'BreakdownStartSwitch').getValue();
     let breakdownEnd = ComLib.getControlProxy(clientAPI, 'BreakdownEndSwitch').getValue();
+    //let activityType = clientAPI.getControls()[0].getControl('ActivityTypeListPicker').getValue();
     let notifCategoryPromise = NotificationLibrary.getNotificationCategory(clientAPI, type).then(notifCategory => {
         ComLib.setStateVariable(clientAPI, 'NotificationCategory', notifCategory);
         return notifCategory;
@@ -81,6 +82,7 @@ export default function NotificationCreateUpdateOnCommit(clientAPI) {
                 let notificationCreateProperties = {
                     'PlanningGroup': plannerGroup.length ? plannerGroup[0].ReturnValue : '',
                     'PlanningPlant': PlanningPlant.length ? PlanningPlant[0].ReturnValue : '',
+                    //'MaintenanceActivityType': activityType.length ? activityType[0].ReturnValue : '',
                     'NotificationNumber': notifNum,
                     'NotificationDescription': descr,
                     'NotificationType': type,
@@ -172,6 +174,7 @@ export default function NotificationCreateUpdateOnCommit(clientAPI) {
                 'PlanningGroup': group,
                 'PlanningPlant': PlanningPlant.length ? PlanningPlant[0].ReturnValue : '',
                 'MainWorkCenter': mainWorkcenterPicker.length? mainWorkcenterPicker[0].ReturnValue : '',//workcenter,
+                //'MaintenanceActivityType': activityType.length ? activityType[0].ReturnValue : '',
                 //'MainWorkCenterPlant': workCenterPlant,
                 'MainWorkCenterPlant': workCenterPlant.length ? workCenterPlant[0].ReturnValue : '',//NotificationLibrary.NotificationCreateMainWorkCenterPlant(clientAPI),
             };

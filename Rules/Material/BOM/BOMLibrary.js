@@ -2,6 +2,7 @@ import userFeaturesLib from '../../UserFeatures/UserFeaturesLibrary';
 import libCom from '../../Common/Library/CommonLibrary';
 import libVal from '../../Common/Library/ValidationLibrary';
 import Logger from '../../Log/Logger';
+import ODataLibrary from '../../OData/ODataLibrary';
 
 export default class {
     /**
@@ -118,7 +119,7 @@ export default class {
                 binding.OpenOnlineServiceAction = '/SAPAssetManager/Actions/OData/OpenOnlineService.action';
                 context.showActivityIndicator(context.localizeText('online_search_activityindicator_text'));
 
-                return context.executeAction('/SAPAssetManager/Actions/OData/CreateOnlineOData.action').then(function() {
+                return ODataLibrary.initializeOnlineService(context).then(function() {
                     return context.read('/SAPAssetManager/Services/OnlineAssetManager.service', bomEntitySet, [], bomQueryOptions).then(onlineBOMResult => {
                         binding.HC_ROOT_CHILDCOUNT = 0;
                         if (!libVal.evalIsEmpty(onlineBOMResult)) {

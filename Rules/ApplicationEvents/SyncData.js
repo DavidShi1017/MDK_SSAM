@@ -7,6 +7,7 @@ import Logger from '../Log/Logger';
 import appSettings from '../Common/Library/ApplicationSettings';
 import SDFIsFeatureEnabled from '../Forms/SDF/SDFIsFeatureEnabled';
 import updateOnlineXSUAATokenEntity from '../Forms/SDF/updateOnlineXSUAATokenEntity';
+import ODataLibrary from '../OData/ODataLibrary';
 
 export default async function SyncData(clientAPI) {
     clientAPI.getClientData().Error='';
@@ -35,7 +36,7 @@ export default async function SyncData(clientAPI) {
                     let param = libCom.getAppParam(clientAPI, deltaSyncConst, DownloadEffectedEntitiesConst);
                     if (!libVal.evalIsEmpty(param) && param === 'Y') {
                         let definingRequests = [];
-                        return clientAPI.executeAction('/SAPAssetManager/Actions/OData/CreateOnlineOData.action').then(function() {
+                        return ODataLibrary.initializeOnlineService(clientAPI).then(function() {
                             return clientAPI.read('/SAPAssetManager/Services/OnlineAssetManager.service', 'ModifiedEntities', [], '').then(function(ModifiedEntityResults) {
                                 if (ModifiedEntityResults && ModifiedEntityResults.length > 0) {
                                     for (let index = 0; index < ModifiedEntityResults.length; index++) {
