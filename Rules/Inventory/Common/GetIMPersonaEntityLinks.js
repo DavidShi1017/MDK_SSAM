@@ -1,6 +1,7 @@
 import ApplicationSettings from '../../Common/Library/ApplicationSettings';
 import Logger from '../../Log/Logger';
 import PersonaLibrary from '../../Persona/PersonaLibrary';
+import ODataLibrary from '../../OData/ODataLibrary';
 
 // TODO: make generic for all personas - tbd in 2310
 // this function is puts all IM entity set into app settings if IM persona is available for user
@@ -12,7 +13,7 @@ export default async function GetIMPersonaEntityLinks(context) {
             // we don't adding AppFeature to the query as far as we need all IM related entity sets
             let query = `$filter=UserPersona eq '${IMPersonaName}'`;
             
-            await context.executeAction('/SAPAssetManager/Actions/OData/CreateOnlineOData.action');
+            await ODataLibrary.initializeOnlineService(context);
             let imEntityLinks = await context.read('/SAPAssetManager/Services/OnlineAssetManager.service', 'PersonaFeatureEntityLinks', [], query);
             // remove duplicate entities, as we don't filter by AppFeature
             const imUniqueEntitySets = [...new Set(imEntityLinks.map(val => val.Entity))];

@@ -1,4 +1,6 @@
 import libCom from '../../Common/Library/CommonLibrary';
+import ODataLibrary from '../../OData/ODataLibrary';
+
 /**
 * Describe this function...
 * @param {IClientAPI} clientAPI
@@ -16,7 +18,7 @@ export default function SetAvailableQuantity(context) {
                 availableQuantityProperty.setValue(result.getItem(0).UnrestrictedQuantity);
             });
         } else {
-            context.executeAction('/SAPAssetManager/Actions/Parts/PartsCreateOnlineOData.action').then(function() {
+            ODataLibrary.initializeOnlineService(context).then(function() {
                 context.read('/SAPAssetManager/Services/OnlineAssetManager.service', context.getValue()[0].ReturnValue, [], '').then(result => {
                     availableQuantityProperty.setValue(result.getItem(0).UnrestrictedQuantity);
                 });

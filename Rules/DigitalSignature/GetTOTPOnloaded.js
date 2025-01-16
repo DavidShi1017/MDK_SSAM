@@ -1,8 +1,10 @@
 
 import Logger from '../Log/Logger';
+import ODataLibrary from '../OData/ODataLibrary';
+
 export default function GetTOTPOnLoaded(context) {
     context.showActivityIndicator(context.localizeText('create_device'));
-    return context.executeAction('/SAPAssetManager/Actions/OData/CreateOnlineOData.action').then(() => {
+    return ODataLibrary.initializeOnlineService(context).then(() => {
         return context.executeAction('/SAPAssetManager/Actions/OData/DigitalSignature/CreateTOTPDevice.action').then(() => {
             context.dismissActivityIndicator();
         }).catch((error) => {

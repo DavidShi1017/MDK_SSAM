@@ -1,11 +1,12 @@
 import checkDeviceregistration from './CheckDeviceCreation';
 import Logger from '../Log/Logger';
+import ODataLibrary from '../OData/ODataLibrary';
 
 export default function UnRegisterDevice(context) {
     return checkDeviceregistration(context).then(result => {
         if (result) {
             context.showActivityIndicator(context.localizeText('unregistering_device'));
-            return context.executeAction('/SAPAssetManager/Actions/OData/CreateOnlineOData.action').then(() => {
+            return ODataLibrary.initializeOnlineService(context).then(() => {
                 return context.executeAction('/SAPAssetManager/Actions/OData/DigitalSignature/DeleteTOTPDevice.action').then(() => {
                     context.dismissActivityIndicator();
                     return context.executeAction('/SAPAssetManager/Actions/OData/DigitalSignature/UsersPrefsTOTPDeviceDelete.action');

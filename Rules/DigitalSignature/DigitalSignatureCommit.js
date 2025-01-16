@@ -4,13 +4,14 @@
 */
 import Logger from '../Log/Logger';
 import libDigSig from '../DigitalSignature/DigitalSignatureLibrary';
+import ODataLibrary from '../OData/ODataLibrary';
 
 export default async function DigitalSignatureCommit(context) {
     if (!libDigSig.isDigitalSignatureEnabled) {
         return false;
     }
     try {
-        await context.executeAction('/SAPAssetManager/Actions/OData/CreateOnlineOData.action');
+        await ODataLibrary.initializeOnlineService(context);
         let signatures = await context.read('/SAPAssetManager/Services/AssetManager.service', 'UserPreferences', [], "$filter=PreferenceGroup eq 'DIG_SIG_SIGNKEY'");
         let errorEntities = await context.read('/SAPAssetManager/Services/AssetManager.service', 'ErrorArchive', [], '');
         if (signatures && signatures.length > 0) {

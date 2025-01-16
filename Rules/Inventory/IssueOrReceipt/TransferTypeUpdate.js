@@ -1,6 +1,7 @@
 import libCom from '../../Common/Library/CommonLibrary';
 import SetMaterialQuery from './SetMaterialQuery';
 import UpdateCaption from './UpdateCaption';
+import ODataLibrary from '../../OData/ODataLibrary';
 /**
 * Describe this function...
 * @param {IClientAPI} clientAPI
@@ -44,7 +45,7 @@ export default function OnlineSearchUpdate(clientAPI) {
             sLocPickerSpecifier.setQueryOptions(`$filter=StorageLocation ne '${userSLoc}'&$orderby=StorageLocation`);
             sLocPicker.setTargetSpecifier(sLocPickerSpecifier);
         }      
-        clientAPI.executeAction('/SAPAssetManager/Actions/Parts/PartsCreateOnlineOData.action').then(function() {
+        ODataLibrary.initializeOnlineService(clientAPI).then(function() {
             let availableQuantityProperty = clientAPI.getPageProxy().evaluateTargetPathForAPI('#Control:AvailableQuantity');
             if (clientAPI.binding) {
                 clientAPI.read('/SAPAssetManager/Services/OnlineAssetManager.service', clientAPI.binding['@odata.readLink'], [], '').then(result => {
