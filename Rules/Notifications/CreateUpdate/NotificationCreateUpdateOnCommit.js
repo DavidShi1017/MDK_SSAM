@@ -44,7 +44,7 @@ export default function NotificationCreateUpdateOnCommit(clientAPI) {
     let mainWorkcenterPicker = clientAPI.getControls()[0].getControl('MainWorkCenterListPicker').getValue();
     let breakdownStart = ComLib.getControlProxy(clientAPI, 'BreakdownStartSwitch').getValue();
     let breakdownEnd = ComLib.getControlProxy(clientAPI, 'BreakdownEndSwitch').getValue();
-    let activityType = clientAPI.getControls()[0].getControl('ActivityTypeListPicker').getValue();
+    //let activityType = clientAPI.getControls()[0].getControl('ActivityTypeListPicker').getValue();
     let notifCategoryPromise = NotificationLibrary.getNotificationCategory(clientAPI, type).then(notifCategory => {
         ComLib.setStateVariable(clientAPI, 'NotificationCategory', notifCategory);
         return notifCategory;
