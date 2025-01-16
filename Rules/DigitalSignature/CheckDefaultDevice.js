@@ -1,10 +1,11 @@
 import Logger from '../Log/Logger';
 import libcomm from '../Common/Library/CommonLibrary';
+import ODataLibrary from '../OData/ODataLibrary';
 
 
 export default function CheckDefaultDevice(context) {
     context.showActivityIndicator();
-    return context.executeAction('/SAPAssetManager/Actions/OData/CreateOnlineOData.action').then(() => {
+    return ODataLibrary.initializeOnlineService(context).then(() => {
         return context.read('/SAPAssetManager/Services/OnlineAssetManager.service', 'TOTPDevices', [], '$filter=DefaultDeviceFlag eq true')
         .then(result => {
             context.dismissActivityIndicator();

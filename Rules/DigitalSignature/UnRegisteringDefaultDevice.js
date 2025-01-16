@@ -1,8 +1,9 @@
 import Logger from '../Log/Logger';
+import ODataLibrary from '../OData/ODataLibrary';
 
 
 export default function UnRegisterDefaultDevice(context) {
-    return context.executeAction('/SAPAssetManager/Actions/OData/CreateOnlineOData.action').then(() => {
+    return ODataLibrary.initializeOnlineService(context).then(() => {
         return context.executeAction('/SAPAssetManager/Actions/OData/DigitalSignature/DeleteDefaultTOTPDevice.action').then(() => {
              return Promise.resolve(true);
         }).catch((error) => {

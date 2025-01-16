@@ -82,6 +82,32 @@
                     "_Name": "TypeLstPkr",
                     "_Type": "Control.Type.FormCell.ListPicker"
                 },
+                //     {
+                //     "_Name": "ActivityTypeListPicker",
+                //     "_Type": "Control.Type.FormCell.ListPicker",
+                //     "AllowMultipleSelection": false,
+                //     "IsPickerDismissedOnSelection": true,
+                //     "AllowDefaultValueIfOneItem": true,
+                //     "IsSearchCancelledAfterSelection": true,
+                //     "Search": {
+                //         "Enabled": true,
+                //         "Delay": 500,
+                //         "MinimumCharacterThreshold": 3,
+                //         "Placeholder": "$(L,search)",
+                //         "BarcodeScanner": true
+                //     },
+                //     "Caption": "$(L,maintenance_activity_type)",
+                //     "Value": "{ActivityType}",
+                //     "PickerItems": {
+                //         "DisplayValue": "{{#Property:ActivityType}} - {{#Property:ActivityTypeDescription}}",
+                //         "ReturnValue": "{ActivityType}",
+                //         "Target": {
+                //             "EntitySet": "ActivityTypes",
+                //             "Service": "/SAPAssetManager/Services/AssetManager.service",
+                //             "QueryOptions":"$orderby=ActivityType"
+                //         }
+                //     }
+                // },
                 {
                     "_Type": "Control.Type.FormCell.Extension",
                     "Module": "extension-HierarchyFramework",

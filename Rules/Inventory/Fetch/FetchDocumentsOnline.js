@@ -1,6 +1,7 @@
 import Logger from '../../Log/Logger';
 import triggerOnlineSearch from '../Search/TriggerOnlineSearch';
 import libCom from '../../Common/Library/CommonLibrary';
+import ODataLibrary from '../../OData/ODataLibrary';
 /**
 * Describe this function...
 * @param {IClientAPI} context
@@ -9,7 +10,7 @@ export default function FetchDocumentsOnline(context) {
     let downloadStarted = libCom.getStateVariable(context, 'DownloadIMDocsStarted');
     if (!downloadStarted) {
         context.updateProgressBanner(context.localizeText('initialize_online_service'));
-        return context.executeAction('/SAPAssetManager/Actions/OData/CreateOnlineOData.action').then(function() {
+        return ODataLibrary.initializeOnlineService(context).then(function() {
             context.updateProgressBanner(context.localizeText('open_online_service'));
             context.updateProgressBanner(context.localizeText('fetch_documents'));
             libCom.setStateVariable(context, 'Documents', []);

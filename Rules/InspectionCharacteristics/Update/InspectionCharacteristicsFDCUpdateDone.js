@@ -118,7 +118,7 @@ export default function InspectionCharacteristicsFDCUpdateDone(context) {
                         },
                     });
                 }
-                if (!libVal.evalIsEmpty(sectionBinding.InspectionCode_Nav) && !libVal.evalIsEmpty(section.getControl('QualitativeValue').getValue()[0])) {
+                if (!libVal.evalIsEmpty(sectionBinding.InspectionCode_Nav) && !libVal.evalIsEmpty(section.getControl('QualitativeValue').getValue()[0]) && section.getControl('QualitativeValue').visible) {
                     updateLinks.push({
                         'Property': 'InspectionCode_Nav',
                         'Target':
@@ -127,7 +127,7 @@ export default function InspectionCharacteristicsFDCUpdateDone(context) {
                             'ReadLink': section.getControl('QualitativeValue').getValue()[0].ReturnValue,
                         },
                     });
-                } else if (!libVal.evalIsEmpty(sectionBinding.InspectionCode_Nav) && !libVal.evalIsEmpty(section.getControl('QualitativeValueSegment').getValue()[0])) {
+                } else if (!libVal.evalIsEmpty(sectionBinding.InspectionCode_Nav) && !libVal.evalIsEmpty(section.getControl('QualitativeValueSegment').getValue()[0]) && section.getControl('QualitativeValueSegment').visible) {
                     updateLinks.push({
                         'Property': 'InspectionCode_Nav',
                         'Target':
