@@ -220,7 +220,7 @@ export function addHeaderSection(context, binding, page) {
                 
                 let buttons = getAttachmentButtons(context);
                 let link = await getAttachmentLink(context, binding);
-                let height = SectionHeaderHeight(context, buttons.length);
+                let height = SectionHeaderHeight(context, buttons.length) + 50;
                 if (link) {
                     page.Controls[0].Sections.push(
                         {
