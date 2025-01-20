@@ -241,6 +241,8 @@ export function addHeaderSection(context, binding, page) {
                                 'StatusText': statusText,
                                 'Buttons': buttons,
                                 'Link': link,
+                                "LineBreakMode": "Wrap",
+                                "NumberOfLines": 0
                             },
                             '_Type': 'Section.Type.Extension',
                             '_Name': 'SectionHeaderExtensionSection',
