@@ -263,6 +263,8 @@ export function addHeaderSection(context, binding, page) {
                                 'Footnote': footnote,
                                 'StatusText': statusText,
                                 'Buttons': buttons,
+                                "LineBreakMode": "Wrap",
+                                "NumberOfLines": 0
                             },
                             '_Type': 'Section.Type.Extension',
                             '_Name': 'SectionHeaderExtensionSection',
