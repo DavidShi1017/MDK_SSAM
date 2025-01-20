@@ -173,7 +173,7 @@ export function addHeaderSection(context, binding, page) {
             if (result && result.length > 0) {
 
                 if (result.getItem(0)['@odata.type'] === '#sap_mobile.MyEquipment') {
-                    headlineText = result.getItem(0).EquipId + ' - ' + result.getItem(0).EquipDesc + "<br>aaaaaaa";
+                    headlineText = result.getItem(0).EquipId + ' - ' + result.getItem(0).EquipDesc + "\\naaaaaaa";
                     subhead = "Tech ID: " + result.getItem(0).EquipId
                 } else if (result.getItem(0)['@odata.type'] === '#sap_mobile.MyFunctionalLocation') {
                     headlineText =  result.getItem(0).FuncLocId + ' - ' + result.getItem(0).FuncLocDesc;
