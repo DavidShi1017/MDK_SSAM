@@ -173,10 +173,11 @@ export function addHeaderSection(context, binding, page) {
 
                 if (result.getItem(0)['@odata.type'] === '#sap_mobile.MyEquipment') {
                     headlineText = result.getItem(0).EquipId + ' - ' + result.getItem(0).EquipDesc;
+                    headlineText = headlineText + "\n" + "Tech ID: " + result.getItem(0).EquipId
                 } else if (result.getItem(0)['@odata.type'] === '#sap_mobile.MyFunctionalLocation') {
                     headlineText =  result.getItem(0).FuncLocId + ' - ' + result.getItem(0).FuncLocDesc;
                 }
-    
+                
                 let plant = result.getItem(0).PlanningPlant;
                 if (plant) {
                     await read(context, `Plants('${plant}')`, [], '').then(function(plantResult) {
