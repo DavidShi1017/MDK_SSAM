@@ -173,7 +173,7 @@ export function addHeaderSection(context, binding, page) {
             if (result && result.length > 0) {
 
                 if (result.getItem(0)['@odata.type'] === '#sap_mobile.MyEquipment') {
-                    headlineText = result.getItem(0).EquipId + ' - ' + result.getItem(0).EquipDesc + "\\naaaaaaa";
+                    headlineText = result.getItem(0).EquipId + ' - ' + result.getItem(0).EquipDesc;
                     subhead = "Tech ID: " + result.getItem(0).EquipId
                 } else if (result.getItem(0)['@odata.type'] === '#sap_mobile.MyFunctionalLocation') {
                     headlineText =  result.getItem(0).FuncLocId + ' - ' + result.getItem(0).FuncLocDesc;
@@ -221,6 +221,7 @@ export function addHeaderSection(context, binding, page) {
                 let buttons = getAttachmentButtons(context);
                 let link = await getAttachmentLink(context, binding);
                 let height = SectionHeaderHeight(context, buttons.length);
+                bodyText = "aaaaaaa\n" +  bodyText;
                 if (link) {
                     page.Controls[0].Sections.push(
                         {
