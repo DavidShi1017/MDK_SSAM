@@ -479,7 +479,7 @@ export async function addEDTSection(context, binding, page) {
                         'Property': '',
                         'Parameters': {
                             'Value': 'Not Running',
-                            'OnPress': '/SAPAssetManager/Rules/InspectionCharacteristics/InspectionCharacteristicsNotRunningItem.js',
+                            'Action': '/SAPAssetManager/Rules/InspectionCharacteristics/InspectionCharacteristicsNotRunningItem.js',
                             'Style': 'Secondary',
                         },
                       },
