@@ -12,6 +12,9 @@ export default function InspectionCharacteristicsNotRunningItem(context) {
    
     let binding = context.binding;
     let newBinding = binding;
+    let valuationCell = context._control.getTable().getRowCellByName(context._control.getRow(), 'Valuation');
+    valuationCell.setValue(0);
+    
     let notifTypePromise = binding.EAMChecklist_Nav ? NotificationTypeLstPkrDefault(clientAPI, binding) : QMNotificationDefectType(clientAPI, binding);
     return notifTypePromise.then(type => {
         // Add HeaderFunctionLocation and HeaderEquipment to new binding
