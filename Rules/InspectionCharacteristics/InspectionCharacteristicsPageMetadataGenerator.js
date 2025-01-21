@@ -266,10 +266,7 @@ export function addHeaderSection(context, binding, page) {
                                 'Footnote': footnote,
                                 'StatusText': statusText,
                                 'Buttons': buttons,
-                                'Configuration': {
 
-                            'MaxLinesPerRow': 2,
-                            },
                             },
                             '_Type': 'Section.Type.Extension',
                             '_Name': 'SectionHeaderExtensionSection',
@@ -482,7 +479,7 @@ export async function addEDTSection(context, binding, page) {
                         'Property': '',
                         'Parameters': {
                             'Value': 'Not Running',
-                            'Action': '/SAPAssetManager/Rules/InspectionCharacteristics/InspectionCharacteristicsNotificationCreateEDTNav.js',
+                            'OnPress': '/SAPAssetManager/Rules/InspectionCharacteristics/InspectionCharacteristicsNotRunningItem.js',
                             'Style': 'Secondary',
                         },
                       },
