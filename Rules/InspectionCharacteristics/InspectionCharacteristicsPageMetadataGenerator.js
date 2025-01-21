@@ -174,7 +174,7 @@ export function addHeaderSection(context, binding, page) {
 
                 if (result.getItem(0)['@odata.type'] === '#sap_mobile.MyEquipment') {
                     headlineText = result.getItem(0).EquipId + ' - ' + result.getItem(0).EquipDesc;
-                    subhead = 'Tech ID: ' + result.getItem(0).EquipId + '  &#10;';
+                    subhead = 'Tech ID: ' + result.getItem(0).EquipId + '  ';
                 } else if (result.getItem(0)['@odata.type'] === '#sap_mobile.MyFunctionalLocation') {
                     headlineText =  result.getItem(0).FuncLocId + ' - ' + result.getItem(0).FuncLocDesc;
                 }
@@ -265,8 +265,6 @@ export function addHeaderSection(context, binding, page) {
                                 'Footnote': footnote,
                                 'StatusText': statusText,
                                 'Buttons': buttons,
-                                "LineBreakMode": "Wrap",
-                                "NumberOfLines": 0
                             },
                             '_Type': 'Section.Type.Extension',
                             '_Name': 'SectionHeaderExtensionSection',
