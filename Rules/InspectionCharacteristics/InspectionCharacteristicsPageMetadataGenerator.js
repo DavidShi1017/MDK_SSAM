@@ -148,7 +148,7 @@ export function addHeaderSection(context, binding, page) {
     let headlineText = '-';
     let bodyText = '-';
     let subhead = '';
-    let footnote = binding.InspectionLot;
+    let footnote = 'Lot: ' + binding.InspectionLot;
     var statusText = '-';
     if (equipment) {
         entityset = `MyEquipments('${equipment}')`;
@@ -221,28 +221,28 @@ export function addHeaderSection(context, binding, page) {
                 let buttons = getAttachmentButtons(context);
                 let link = await getAttachmentLink(context, binding);
                 let height = SectionHeaderHeight(context, buttons.length);
-                bodyText = "aaaaaaa\n" +  bodyText;
+                if(subhead){
+                    footnote = subhead + footnote;
+                }
                 if (link) {
                     page.Controls[0].Sections.push(
                         {
                             'Module': 'extension-SectionHeader',
                             'Control': 'SectionHeaderViewExtension',
                             'Class': 'SectionHeaderViewExtension',
-                            'Title': 'aaaaaa',
                             'Height': height,
+                            'Text': 'aaa',
                             'ExtensionProperties': {
                                 'UserData': {
                                     'Index': sectionIndex,
                                 },
                                 'HeadlineText': headlineText,
-                                'Subhead': subhead,
+                                'Text': 'aaa',
                                 'BodyText': bodyText,
                                 'Footnote': footnote,
                                 'StatusText': statusText,
                                 'Buttons': buttons,
                                 'Link': link,
-                                "LineBreakMode": "Wrap",
-                                "NumberOfLines": 0
                             },
                             '_Type': 'Section.Type.Extension',
                             '_Name': 'SectionHeaderExtensionSection',
