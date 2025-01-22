@@ -13,7 +13,7 @@ export default async function InspectionCharacteristicsNotRunningItem(context) {
     let style;
     let binding = context.binding;
     let newBinding = binding;
-    let valuationReadlink = '';
+    let valuationReadlink = 'A';
     let valueCell = context._control.getTable().getRowCellByName(context._control.getRow(), 'Quantitive');
     let valuationCell = context._control.getTable().getRowCellByName(context._control.getRow(), 'Valuation');
     let RemarksCell = context._control.getTable().getRowCellByName(context._control.getRow(), 'Remarks');
@@ -47,6 +47,32 @@ export default async function InspectionCharacteristicsNotRunningItem(context) {
         valueCell = context._control.getTable().getRowCellByName(context._control.getRow(), 'Qualitative');
         let readLink = context._control.getValue();
         //valuationCell.setValue(0);
+        let listPickerValue = '';
+        let listPickerDisplayValue = '';
+        listPickerValue = `InspectionCodes(Plant='${binding.SelectedSetPlant}',SelectedSet='${binding.SelectedSet}',Catalog='${binding.Catalog}',CodeGroup='${binding.CodeGroup}',Code='QM03')`;
+        listPickerDisplayValue = 'Not Operating';
+
+        valueCell.setValue(listPickerValue);
+        valueCell.setDisplayValue(listPickerDisplayValue);
+
+        binding.Valuation = 'A';
+        valuationStatus = binding.Valuation;
+        style = { FontColor: '107e3e' };
+
+        let valuation = await context.read('/SAPAssetManager/Services/AssetManager.service', valuationReadlink, [], '').then(valuationResult => {
+            if (valuationResult && valuationResult.getItem(0)) {
+                return valuationResult.getItem(0).ShortText;
+            }
+            return '';
+        });
+        valuationCell.clearValidation();
+        valuationCell.setValue(valuation);
+        if (style) {
+            valuationCell.setStyle(style);
+        }
+
+        let statusText = inspCharLib.checkEDTReadingCounts(context, context._control.getTable());
+        InspectionCharacteristicsEDTLibrary.findHeaderSection(clientAPI, context._control.getTable()).setStatusText(statusText);
     }
     
     
