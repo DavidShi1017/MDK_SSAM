@@ -13,7 +13,7 @@ export default async function InspectionCharacteristicsNotRunningItem(context) {
     let style;
     let binding = context.binding;
     let newBinding = binding;
-    let valuationReadlink = 'A';
+    let valuationReadlink = '';
     let valueCell = context._control.getTable().getRowCellByName(context._control.getRow(), 'Quantitive');
     let valuationCell = context._control.getTable().getRowCellByName(context._control.getRow(), 'Valuation');
     let RemarksCell = context._control.getTable().getRowCellByName(context._control.getRow(), 'Remarks');
@@ -58,7 +58,7 @@ export default async function InspectionCharacteristicsNotRunningItem(context) {
         binding.Valuation = 'A';
         valuationStatus = binding.Valuation;
         style = { FontColor: '107e3e' };
-
+        valuationReadlink = `InspectionResultValuations('A')`;
         let valuation = await context.read('/SAPAssetManager/Services/AssetManager.service', valuationReadlink, [], '').then(valuationResult => {
             if (valuationResult && valuationResult.getItem(0)) {
                 return valuationResult.getItem(0).ShortText;
