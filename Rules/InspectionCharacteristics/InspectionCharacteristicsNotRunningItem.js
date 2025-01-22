@@ -49,7 +49,7 @@ export default async function InspectionCharacteristicsNotRunningItem(context) {
         //valuationCell.setValue(0);
         let listPickerValue = '';
         let listPickerDisplayValue = '';
-        listPickerValue = `InspectionCodes(Plant='${binding.SelectedSetPlant}',SelectedSet='${binding.SelectedSet}',Catalog='${binding.Catalog}',CodeGroup='${binding.CodeGroup}',Code='QM03')`;
+        listPickerValue = `InspectionCodes(Plant='${binding.SelectedSetPlant}',SelectedSet='${binding.SelectedSet}',Catalog='${binding.Catalog}',CodeGroup='${binding.CodeGroup}',Code='N0')`;
         listPickerDisplayValue = 'Not Operating';
 
         valueCell.setValue(listPickerValue);
