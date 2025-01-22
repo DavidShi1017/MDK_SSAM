@@ -49,6 +49,13 @@ export default async function InspectionCharacteristicsNotRunningItem(context) {
         //valuationCell.setValue(0);
         let listPickerValue = '';
         let listPickerDisplayValue = '';
+        let filter = '$orderby=Code asc&$filter=(SelectedSet eq \'' + binding.SelectedSet + '\' and Plant eq \'' + binding.SelectedSetPlant + '\' and Catalog eq \'' + binding.Catalog + '\' and Code eq N0\')';
+        let CodeGroup = await context.read('/SAPAssetManager/Services/AssetManager.service', 'InspectionCodes', [], '').then(valuationResult => {
+            if (valuationResult && valuationResult.getItem(0)) {
+                return valuationResult.getItem(0).ShortText;
+            }
+            return '';
+        });
         listPickerValue = `InspectionCodes(Plant='${binding.SelectedSetPlant}',SelectedSet='${binding.SelectedSet}',Catalog='${binding.Catalog}',CodeGroup='${binding.CodeGroup}',Code='N0')`;
         listPickerDisplayValue = 'Not Operating';
 
