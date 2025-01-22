@@ -1,4 +1,4 @@
-
+import inspCharLib from './Update/InspectionCharacteristics';
 import common from '../Common/Library/CommonLibrary';
 import NotificationTypeLstPkrDefault from '../Notifications/NotificationTypePkrDefault';
 import QMNotificationDefectType from '../Notifications/QMNotificationDefectType';
