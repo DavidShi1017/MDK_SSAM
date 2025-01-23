@@ -87,6 +87,7 @@ export default async function InspectionCharacteristicsUpdateDoneEDT(context) {
 
                     if (extension) {
                         let rows = extension.getUpdatedValues();
+                        let controls = extension.getRows();
                         for (let i = 0; i < rows.length; i++) {
                             let cell = extension.getRows()[i][2]._cell;
                             if (!extension.getRows()[i][2]._cell.IsReadOnly) { //check if the cell 'ResultValue' is enabled and process only the enabled values
