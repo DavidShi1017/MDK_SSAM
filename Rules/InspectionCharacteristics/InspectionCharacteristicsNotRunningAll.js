@@ -24,14 +24,14 @@ export default async function InspectionCharacteristicsNotRunningAll(context) {
                 if (section.getExtension() && section.getExtension().constructor && section.getExtension().constructor.name === 'EditableDataTableViewExtension') {
                     extension = section.getExtension();
                 }
-                if (section.getExtension() && section.getExtension().constructor && section.getExtension().constructor.name === 'SectionHeaderExtensionSection') {
+                if (section.getExtension() && section.getExtension().constructor && section.getExtension().constructor.name === 'SectionHeaderViewExtension') {
                     extensionHeader = section.getExtension();
                 }
             } else {
                 if (section.getExtensions() && section.getExtensions()[0] && section.getExtensions()[0].constructor && section.getExtensions()[0].constructor.name === 'EditableDataTableViewExtension') {
                     extension = section.getExtensions()[0];
                 }
-                if (section.getExtensions() && section.getExtensions()[1] && section.getExtensions()[1].constructor && section.getExtensions()[1].constructor.name === 'SectionHeaderExtensionSection') {
+                if (section.getExtensions() && section.getExtensions()[1] && section.getExtensions()[1].constructor && section.getExtensions()[1].constructor.name === 'SectionHeaderViewExtension') {
                     extensionHeader = section.getExtensions()[1];
                 }
             }
