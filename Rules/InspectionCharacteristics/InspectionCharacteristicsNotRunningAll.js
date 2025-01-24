@@ -15,6 +15,7 @@ export default async function InspectionCharacteristicsNotRunningAll(context) {
     let sections = context.getPageProxy().getControls()[0].getSections();
     let extension;
     let extensionHeader;
+    let statusText;
     const appVersion = AppVersionInfo(context).split('.')[0];
     let num = parseInt(appVersion);
     if (sections && sections.length > 0) {
@@ -40,7 +41,7 @@ export default async function InspectionCharacteristicsNotRunningAll(context) {
                 let valuationStatus;
                 let style;
                 if(rows){
-                   
+                    statusText = context.localizeText('x_of_x_complete', [rows.length, rows.length]);
                     for (let i = 0; i < rows.length; i++) {
                         let valueCell = rows[i][3];
                         let valuationCell = rows[i][4];
@@ -112,7 +113,7 @@ export default async function InspectionCharacteristicsNotRunningAll(context) {
             }
         }
     }
-    let statusText = context.localizeText('x_of_x_complete', [i + 1, rows.length]);
+    
     if(extensionHeader){
         extensionHeader.setStatusText(statusText);
     }
