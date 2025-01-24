@@ -6,7 +6,7 @@ import PreloadHierarchyListPickerValues from '../HierarchyControl/PreloadHierarc
 import InspectionCharacteristicsEDTLibrary from './Update/InspectionCharacteristicsEDTLibrary';
 import AppVersionInfo from '../UserProfile/AppVersionInfo';
 export default async function InspectionCharacteristicsNotRunningAll(context) {
-    let clientAPI = context._control.getTable();
+    //let clientAPI = context._control.getTable();
     //common.setOnChangesetFlag(clientAPI, true);
     //common.resetChangeSetActionCounter(clientAPI);
     //common.setOnCreateUpdateFlag(clientAPI, 'CREATE');
