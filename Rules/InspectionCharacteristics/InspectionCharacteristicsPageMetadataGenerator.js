@@ -293,7 +293,7 @@ export function getAttachmentButtons(context) {
             },
             {
                 'Value': 'Not Running',
-                'Action': '/SAPAssetManager/Rules/InspectionCharacteristics/Update/AddAttachmentsNavEDT.js',
+                'Action': '/SAPAssetManager/Rules/InspectionCharacteristics/InspectionCharacteristicsNotRunningAll.js',
                 'Style': 'Secondary',
             },
         ];

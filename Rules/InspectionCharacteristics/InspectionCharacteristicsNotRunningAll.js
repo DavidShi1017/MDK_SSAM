@@ -5,7 +5,7 @@ import QMNotificationDefectType from '../Notifications/QMNotificationDefectType'
 import PreloadHierarchyListPickerValues from '../HierarchyControl/PreloadHierarchyListPickerValues';
 import InspectionCharacteristicsEDTLibrary from './Update/InspectionCharacteristicsEDTLibrary';
 import AppVersionInfo from '../UserProfile/AppVersionInfo';
-export default async function InspectionCharacteristicsNotRunningItem(context) {
+export default async function InspectionCharacteristicsNotRunningAll(context) {
     let clientAPI = context._control.getTable().context.clientAPI;
     //common.setOnChangesetFlag(clientAPI, true);
     //common.resetChangeSetActionCounter(clientAPI);
