@@ -68,9 +68,7 @@ export default async function InspectionCharacteristicsNotRunningAll(context) {
                                 if (style) {
                                     valuationCell.setStyle(style);
                                 }
-                        
-                                let statusText = inspCharLib.checkEDTReadingCounts(context, extension);
-                                InspectionCharacteristicsEDTLibrary.findHeaderSection(context, extensionHeader).setStatusText(statusText);
+
                             }else if(valueCell._cell.Name === 'Qualitative'){
                                 //valueCell = context._control.getTable().getRowCellByName(context._control.getRow(), 'Qualitative');
                                 //let readLink = context._control.getValue();
@@ -106,8 +104,7 @@ export default async function InspectionCharacteristicsNotRunningAll(context) {
                                     valuationCell.setStyle(style);
                                 }
                         
-                                let statusText = inspCharLib.checkEDTReadingCounts(context, extension);
-                                InspectionCharacteristicsEDTLibrary.findHeaderSection(context, extensionHeader).setStatusText(statusText);
+                                
                             }
                         }
                     }
@@ -115,7 +112,9 @@ export default async function InspectionCharacteristicsNotRunningAll(context) {
             }
         }
     }
-    
-    
+    let statusText = context.localizeText('x_of_x_complete', [i + 1, rows.length]);
+    if(extensionHeader){
+        extensionHeader.setStatusText(statusText);
+    }
     return clientAPI.getPageProxy().executeAction('');
 }
