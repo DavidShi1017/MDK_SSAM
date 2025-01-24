@@ -31,8 +31,8 @@ export default async function InspectionCharacteristicsNotRunningAll(context) {
                 if (section.getExtensions() && section.getExtensions()[0] && section.getExtensions()[0].constructor && section.getExtensions()[0].constructor.name === 'EditableDataTableViewExtension') {
                     extension = section.getExtensions()[0];
                 }
-                if (section.getExtensions() && section.getExtensions()[0] && section.getExtensions()[0].constructor && section.getExtensions()[0].constructor.name === 'SectionHeaderExtensionSection') {
-                    extensionHeader = section.getExtensions()[0];
+                if (section.getExtensions() && section.getExtensions()[1] && section.getExtensions()[1].constructor && section.getExtensions()[1].constructor.name === 'SectionHeaderExtensionSection') {
+                    extensionHeader = section.getExtensions()[1];
                 }
             }
             if (extension) {
@@ -72,8 +72,8 @@ export default async function InspectionCharacteristicsNotRunningAll(context) {
                                 let statusText = inspCharLib.checkEDTReadingCounts(context, context._control.getTable());
                                 InspectionCharacteristicsEDTLibrary.findHeaderSection(context, context._control.getTable()).setStatusText(statusText);
                             }else if(valueCell._cell.Name === 'Qualitative'){
-                                valueCell = context._control.getTable().getRowCellByName(context._control.getRow(), 'Qualitative');
-                                let readLink = context._control.getValue();
+                                //valueCell = context._control.getTable().getRowCellByName(context._control.getRow(), 'Qualitative');
+                                //let readLink = context._control.getValue();
                                 //valuationCell.setValue(0);
                                 let listPickerValue = '';
                                 let listPickerDisplayValue = '';
