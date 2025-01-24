@@ -69,8 +69,8 @@ export default async function InspectionCharacteristicsNotRunningAll(context) {
                                     valuationCell.setStyle(style);
                                 }
                         
-                                let statusText = inspCharLib.checkEDTReadingCounts(context, context._control.getTable());
-                                InspectionCharacteristicsEDTLibrary.findHeaderSection(context, context._control.getTable()).setStatusText(statusText);
+                                let statusText = inspCharLib.checkEDTReadingCounts(context, extension);
+                                InspectionCharacteristicsEDTLibrary.findHeaderSection(context, extensionHeader).setStatusText(statusText);
                             }else if(valueCell._cell.Name === 'Qualitative'){
                                 //valueCell = context._control.getTable().getRowCellByName(context._control.getRow(), 'Qualitative');
                                 //let readLink = context._control.getValue();
