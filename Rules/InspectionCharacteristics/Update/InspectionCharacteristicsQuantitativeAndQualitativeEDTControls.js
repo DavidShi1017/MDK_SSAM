@@ -1,6 +1,7 @@
 import inspCharLib from './InspectionCharacteristics';
 import libVal from '../../Common/Library/ValidationLibrary';
 import IsIOS from '../../Common/IsIOS';
+import libCom from '../../Common/Library/CommonLibrary';
 /**
 * Describe this function...
 * @param {IContext} context
@@ -16,6 +17,9 @@ export default function InspectionCharacteristicsQuantitativeAndQualitativeEDTCo
     if (IsIOS(context)) {
         device = 'Text';
     }
+    libCom.setStateVariable(context, 'SelectedSet', binding.SelectedSet);
+    libCom.setStateVariable(context, 'SelectedSetPlant', binding.SelectedSetPlant);
+    libCom.setStateVariable(context, 'Catalog', binding.Catalog);
     if (inspCharLib.isQuantitative(binding)) {
         if (inspCharLib.isCalculatedAndQuantitative(binding) || binding.AfterAcceptance === 'X' || binding.AfterRejection === 'X') {
             IsReadOnly = true;

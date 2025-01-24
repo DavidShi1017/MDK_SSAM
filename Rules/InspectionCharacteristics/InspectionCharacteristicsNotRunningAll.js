@@ -18,6 +18,9 @@ export default async function InspectionCharacteristicsNotRunningAll(context) {
     let statusText;
     const appVersion = AppVersionInfo(context).split('.')[0];
     let num = parseInt(appVersion);
+    let SelectedSet = common.getStateVariable(context, 'SelectedSet');
+    let SelectedSetPlant = common.getStateVariable(context, 'SelectedSetPlant');
+    let Catalog = common.getStateVariable(context, 'Catalog');
     if (sections && sections.length > 0) {
         for (let section of sections) {
 
@@ -76,14 +79,14 @@ export default async function InspectionCharacteristicsNotRunningAll(context) {
                                 //valuationCell.setValue(0);
                                 let listPickerValue = '';
                                 let listPickerDisplayValue = '';
-                                let filter = '$orderby=Code asc&$filter=(SelectedSet eq \'' + binding.SelectedSet + '\' and Plant eq \'' + binding.SelectedSetPlant + '\' and Catalog eq \'' + binding.Catalog + '\' and Code eq \'N0\')';
+                                let filter = '$orderby=Code asc&$filter=(SelectedSet eq \'' + SelectedSet + '\' and Plant eq \'' + SelectedSetPlant + '\' and Catalog eq \'' + Catalog + '\' and Code eq \'N0\')';
                                 let CodeGroup = await context.read('/SAPAssetManager/Services/AssetManager.service', 'InspectionCodes', [], filter).then(valuationResult => {
                                     if (valuationResult && valuationResult.getItem(0)) {
                                         return valuationResult.getItem(0).CodeGroup;
                                     }
                                     return '';
                                 });
-                                listPickerValue = `InspectionCodes(Plant='${binding.SelectedSetPlant}',SelectedSet='${binding.SelectedSet}',Catalog='${binding.Catalog}',CodeGroup='${CodeGroup}',Code='N0')`;
+                                listPickerValue = `InspectionCodes(Plant='${SelectedSetPlant}',SelectedSet='${SelectedSet}',Catalog='${Catalog}',CodeGroup='${CodeGroup}',Code='N0')`;
                                 listPickerDisplayValue = 'Not Operating';
                         
                                 valueCell.setValue(listPickerValue);
