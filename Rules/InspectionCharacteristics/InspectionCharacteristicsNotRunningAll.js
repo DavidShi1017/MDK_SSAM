@@ -31,7 +31,7 @@ export default async function InspectionCharacteristicsNotRunningAll(context) {
                 if (section.getExtensions() && section.getExtensions()[0] && section.getExtensions()[0].constructor && section.getExtensions()[0].constructor.name === 'EditableDataTableViewExtension') {
                     extension = section.getExtensions()[0];
                 }
-                if (section.getExtensions() && section.getExtensions()[0] && section.getExtensions()[1].constructor && section.getExtensions()[0].constructor.name === 'SectionHeaderViewExtension') {
+                if (section.getExtensions() && section.getExtensions()[0] && section.getExtensions()[0].constructor && section.getExtensions()[0].constructor.name === 'SectionHeaderViewExtension') {
                     extensionHeader = section.getExtensions()[0];
                 }
             }
