@@ -31,8 +31,8 @@ export default async function InspectionCharacteristicsNotRunningAll(context) {
                 if (section.getExtensions() && section.getExtensions()[0] && section.getExtensions()[0].constructor && section.getExtensions()[0].constructor.name === 'EditableDataTableViewExtension') {
                     extension = section.getExtensions()[0];
                 }
-                if (section.getExtensions() && section.getExtensions()[1] && section.getExtensions()[1].constructor && section.getExtensions()[1].constructor.name === 'SectionHeaderViewExtension') {
-                    extensionHeader = section.getExtensions()[1];
+                if (section.getExtensions() && section.getExtensions()[0] && section.getExtensions()[1].constructor && section.getExtensions()[0].constructor.name === 'SectionHeaderViewExtension') {
+                    extensionHeader = section.getExtensions()[0];
                 }
             }
             if (extension) {
@@ -106,8 +106,8 @@ export default async function InspectionCharacteristicsNotRunningAll(context) {
                                     valuationCell.setStyle(style);
                                 }
                         
-                                let statusText = inspCharLib.checkEDTReadingCounts(context, context._control.getTable());
-                                InspectionCharacteristicsEDTLibrary.findHeaderSection(context, context._control.getTable()).setStatusText(statusText);
+                                let statusText = inspCharLib.checkEDTReadingCounts(context, extension);
+                                InspectionCharacteristicsEDTLibrary.findHeaderSection(context, extensionHeader).setStatusText(statusText);
                             }
                         }
                     }
