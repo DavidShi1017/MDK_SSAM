@@ -6,7 +6,7 @@ import PreloadHierarchyListPickerValues from '../HierarchyControl/PreloadHierarc
 import InspectionCharacteristicsEDTLibrary from './Update/InspectionCharacteristicsEDTLibrary';
 import AppVersionInfo from '../UserProfile/AppVersionInfo';
 export default async function InspectionCharacteristicsNotRunningAll(context) {
-    let clientAPI = context._control.getTable().context.clientAPI;
+    let clientAPI = context._control.getTable();
     //common.setOnChangesetFlag(clientAPI, true);
     //common.resetChangeSetActionCounter(clientAPI);
     //common.setOnCreateUpdateFlag(clientAPI, 'CREATE');
@@ -14,6 +14,7 @@ export default async function InspectionCharacteristicsNotRunningAll(context) {
 
     let sections = context.getPageProxy().getControls()[0].getSections();
     let extension;
+    let extensionHeader;
     const appVersion = AppVersionInfo(context).split('.')[0];
     let num = parseInt(appVersion);
     if (sections && sections.length > 0) {
@@ -23,9 +24,15 @@ export default async function InspectionCharacteristicsNotRunningAll(context) {
                 if (section.getExtension() && section.getExtension().constructor && section.getExtension().constructor.name === 'EditableDataTableViewExtension') {
                     extension = section.getExtension();
                 }
+                if (section.getExtension() && section.getExtension().constructor && section.getExtension().constructor.name === 'SectionHeaderExtensionSection') {
+                    extensionHeader = section.getExtension();
+                }
             } else {
                 if (section.getExtensions() && section.getExtensions()[0] && section.getExtensions()[0].constructor && section.getExtensions()[0].constructor.name === 'EditableDataTableViewExtension') {
                     extension = section.getExtensions()[0];
+                }
+                if (section.getExtensions() && section.getExtensions()[0] && section.getExtensions()[0].constructor && section.getExtensions()[0].constructor.name === 'SectionHeaderExtensionSection') {
+                    extensionHeader = section.getExtensions()[0];
                 }
             }
             if (extension) {
@@ -63,7 +70,7 @@ export default async function InspectionCharacteristicsNotRunningAll(context) {
                                 }
                         
                                 let statusText = inspCharLib.checkEDTReadingCounts(context, context._control.getTable());
-                                InspectionCharacteristicsEDTLibrary.findHeaderSection(clientAPI, context._control.getTable()).setStatusText(statusText);
+                                InspectionCharacteristicsEDTLibrary.findHeaderSection(context, context._control.getTable()).setStatusText(statusText);
                             }else if(valueCell._cell.Name === 'Qualitative'){
                                 valueCell = context._control.getTable().getRowCellByName(context._control.getRow(), 'Qualitative');
                                 let readLink = context._control.getValue();
@@ -100,7 +107,7 @@ export default async function InspectionCharacteristicsNotRunningAll(context) {
                                 }
                         
                                 let statusText = inspCharLib.checkEDTReadingCounts(context, context._control.getTable());
-                                InspectionCharacteristicsEDTLibrary.findHeaderSection(clientAPI, context._control.getTable()).setStatusText(statusText);
+                                InspectionCharacteristicsEDTLibrary.findHeaderSection(context, context._control.getTable()).setStatusText(statusText);
                             }
                         }
                     }
