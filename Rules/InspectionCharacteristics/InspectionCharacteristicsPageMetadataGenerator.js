@@ -148,7 +148,7 @@ export function addHeaderSection(context, binding, page) {
     let headlineText = '-';
     let bodyText = '-';
     let subhead = '';
-    let footnote = 'Lot: ' + binding.InspectionLot;
+    let footnote = 'Inspection Lot: ' + binding.InspectionLot;
     var statusText = '-';
     if (equipment) {
         entityset = `MyEquipments('${equipment}')`;
@@ -174,7 +174,7 @@ export function addHeaderSection(context, binding, page) {
 
                 if (result.getItem(0)['@odata.type'] === '#sap_mobile.MyEquipment') {
                     headlineText = result.getItem(0).EquipId + ' - ' + result.getItem(0).EquipDesc;
-                    subhead = 'Tech ID: ' + result.getItem(0).EquipId + '  ';
+                    subhead = 'Tech ID: ' + result.getItem(0).TechnicalID + '  ';
                 } else if (result.getItem(0)['@odata.type'] === '#sap_mobile.MyFunctionalLocation') {
                     headlineText =  result.getItem(0).FuncLocId + ' - ' + result.getItem(0).FuncLocDesc;
                 }
