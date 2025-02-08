@@ -6,7 +6,7 @@
          "ReadLink": "#Property:OrderHeaderReadLink"
     },
     "Properties": {
-        "Phase": "X – Shutdown"
+        "ZSystemCondition": "X – Shutdown"
     },
     "Headers": {
         "OfflineOData.TransactionID": "#Property:OrderId"

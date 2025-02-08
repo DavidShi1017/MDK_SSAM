@@ -10,14 +10,14 @@ export default function WorkOrderShutdownOne(clientAPI) {
     if(binding){
         binding.OrderHeaderReadLink = "MyWorkOrderHeaders('" + binding.OrderId + "')";
         //return clientAPI.executeAction('/SAPAssetManager/Actions/WorkOrders/CreateUpdate/WorkOrderShutdown.action');
-        return context.executeAction({'Name': '/SAPAssetManager/Actions/WorkOrders/CreateUpdate/WorkOrderShutdown.action', 'Properties': {
+        return clientAPI.executeAction({'Name': '/SAPAssetManager/Actions/WorkOrders/CreateUpdate/WorkOrderShutdown.action', 'Properties': {
             'Target': {
                 'EntitySet': 'MyWorkOrderHeaders',
                 'Service': '/SAPAssetManager/Services/AssetManager.service',
                 'ReadLink': binding.OrderHeaderReadLink,
             },
             'Properties': {
-                'Phase': 'X – Shutdown'
+                'ZSystemCondition': 'X – Shutdown'
             },
         
         }});
