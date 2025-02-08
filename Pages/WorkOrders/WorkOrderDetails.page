@@ -50,13 +50,13 @@
 							"Styles": {
 								"Button": "FormCellSwitchStandard"
 							},
-							"Title": "$(L,discard)",
+							"Title": "$(L,shutdown)",
 							"Alignment": "Center",
 							"ButtonType": "Secondary",
 							"Semantic": "Normal",
 							"ImagePosition": "Trailing",
 							"Enabled": true,
-							"OnPress": "/SAPAssetManager/Rules/Common/DiscardAction.js"
+							"OnPress": "/SAPAssetManager/Rules/WorkOrders/CreateUpdate/WorkOrderShutdownOne.js"
 						}
 					],
 					"Separators": {
