@@ -3,7 +3,7 @@
     "Target": {
         "EntitySet": "MyWorkOrderHeaders",
         "Service": "/SAPAssetManager/Services/AssetManager.service",
-        "ReadLink": "{@odata.readLink}"
+         "ReadLink": "#Property:OrderHeaderReadLink"
     },
     "Properties": {
         "ZSystemCondition": "X – Shutdown"
@@ -14,7 +14,6 @@
   
     "OnSuccess": "/SAPAssetManager/Actions/CreateUpdateDelete/UpdateEntitySuccessMessage.action",
     "OnFailure": "/SAPAssetManager/Actions/CreateUpdateDelete/UpdateEntityFailureMessage.action",
-    "ValidationRule": "/SAPAssetManager/Rules/WorkOrders/CreateUpdate/WorkOrderCreateUpdateValidation.js",
     "ShowActivityIndicator": true,
     "ActivityIndicatorText" : "  "
 
