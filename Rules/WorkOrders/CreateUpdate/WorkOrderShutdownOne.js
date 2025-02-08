@@ -17,7 +17,7 @@ export default function WorkOrderShutdownOne(clientAPI) {
                 'ReadLink': binding.OrderHeaderReadLink,
             },
             'Properties': {
-                'ZSystemCondition': 'X – Shutdown'
+                'ZSystemCondition': 'X'
             },
         
         }});
