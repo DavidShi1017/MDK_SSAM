@@ -38,6 +38,39 @@
                     "_Name": "ObjectHeaderSectionTable",
                     "DataSubscriptions": ["PMMobileStatuses", "Confirmations", "MyWorkOrderOperations", "MeasurementDocuments", "UserPreferences", "UserTimeEntries"]
                 },
+                				{
+					"Controls": [
+						{
+							"_Type": "Control.Type.FormCell.Button",
+							"_Name": "DiscardButton",
+							"IsVisible": true,
+							"Separator": true,
+							"Styles": {
+								"Button": "FormCellSwitchStandard"
+							},
+							"Title": "$(L,shutdown)",
+							"Alignment": "Center",
+							"ButtonType": "Secondary",
+							"Semantic": "Normal",
+							"ImagePosition": "Trailing",
+							"Enabled": true,
+							"OnPress": "/SAPAssetManager/Rules/WorkOrders/CreateUpdate/WorkOrderShutdownOne.js"
+						}
+					],
+					"Separators": {
+						"TopSectionSeparator": false,
+						"BottomSectionSeparator": true,
+						"HeaderSeparator": true,
+						"FooterSeparator": true,
+						"ControlSeparator": true
+					},
+					"Visible": true,
+					"EmptySection": {
+						"FooterVisible": false
+					},
+					"_Type": "Section.Type.FormCell",
+					"_Name": "FormCellSection6"
+				},
                 {
                     "Module": "extension-QuickActionBarFramework",
                     "Control": "QuickActionBarViewExtension",
