@@ -301,14 +301,13 @@
                     "KeyAndValues": [
                         {
                             "KeyName": "$(L,system_condition)",
-                            "Value": "{UserStatusText}"
+                            "Value": "/SAPAssetManager/Rules/Common/DetailsPage/DetailsPageSystemCondition.js"
                         }
 
                     ],
                     "Layout": {
                         "NumberOfColumns": 2
                     },
-                    "Target": "/SAPAssetManager/Rules/Common/DetailsPage/DetailsPageSystemCondition.js",
                     "_Type": "Section.Type.KeyValue",
                     "_Name": "SystemCondition"
                 },
