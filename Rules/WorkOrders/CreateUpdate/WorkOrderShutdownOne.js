@@ -8,6 +8,18 @@ export default function WorkOrderShutdownOne(clientAPI) {
     let binding = clientAPI.binding;
 
     if(binding){
-        return clientAPI.executeAction('/SAPAssetManager/Actions/WorkOrders/CreateUpdate/WorkOrderShutdown.action');
+        binding.OrderHeaderReadLink = "MyWorkOrderHeaders('" + binding.OrderId + "')";
+        //return clientAPI.executeAction('/SAPAssetManager/Actions/WorkOrders/CreateUpdate/WorkOrderShutdown.action');
+        return context.executeAction({'Name': '/SAPAssetManager/Actions/WorkOrders/CreateUpdate/WorkOrderShutdown.action', 'Properties': {
+            'Target': {
+                'EntitySet': 'MyWorkOrderHeaders',
+                'Service': '/SAPAssetManager/Services/AssetManager.service',
+                'ReadLink': binding.OrderHeaderReadLink,
+            },
+            'Properties': {
+                'ZSystemCondition': 'X – Shutdown'
+            },
+        
+        }});
     }
 }
