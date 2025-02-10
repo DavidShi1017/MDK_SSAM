@@ -12,7 +12,7 @@
         "OfflineOData.TransactionID": "#Property:OrderId"
     },
   
-    "OnSuccess": "/SAPAssetManager/Actions/CreateUpdateDelete/UpdateEntitySuccessMessage.action",
+    
     "OnFailure": "/SAPAssetManager/Actions/CreateUpdateDelete/UpdateEntityFailureMessage.action",
     "ShowActivityIndicator": true,
     "ActivityIndicatorText" : "  "
