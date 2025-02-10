@@ -1,6 +1,7 @@
 import libCommon from '../../Common/Library/CommonLibrary';
 
 
+import ExecuteActionWithAutoSync from '../../ApplicationEvents/AutoSync/ExecuteActionWithAutoSync';
 
 export default function WorkOrderShutdownOne(clientAPI) {
     //Remove variable FollowUpFlagPage before create
@@ -22,7 +23,7 @@ export default function WorkOrderShutdownOne(clientAPI) {
         
         }}).then( result => {
             if(result){
-
+                return ExecuteActionWithAutoSync(clientAPI, '/SAPAssetManager/Actions/CreateUpdateDelete/UpdateEntitySuccessMessage.action');
             }
         });
     }
