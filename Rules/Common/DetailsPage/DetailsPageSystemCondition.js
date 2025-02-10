@@ -9,7 +9,7 @@ export default function DetailsPageSystemCondition(context) {
     }else{
         id = binding.WOHeader.OrderId;
     }
-    let filterQuery = `$filter='OrderId' eq '${id}'`;
+    let filterQuery = `$filter=OrderId eq '${id}'`;
     return context.read('/SAPAssetManager/Services/AssetManager.service', 'MyWorkOrderHeaders', [], filterQuery).then(function(result) {
         if (result && result.length > 0) {
            
