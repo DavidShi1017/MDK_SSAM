@@ -20,6 +20,10 @@ export default function WorkOrderShutdownOne(clientAPI) {
                 'ZSystemCondition': 'X'
             },
         
-        }});
+        }}).then( result => {
+            if(result){
+
+            }
+        });
     }
 }
