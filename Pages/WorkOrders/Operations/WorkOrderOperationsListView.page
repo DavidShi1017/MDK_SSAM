@@ -164,7 +164,7 @@
 			"_Type": "Control.Type.ToolbarItem",
 			"Caption": "$(L,system_condition)",
 			"Enabled": "/SAPAssetManager/Rules/WorkOrders/Operations/WorkOrderOperationsConfirmButtonEnabled.js",
-			"OnPress": "/SAPAssetManager/Rules/WorkOrders/Operations/WorkOrderOperationsConfirmNav.js"
+			"OnPress": "/SAPAssetManager/Rules/WorkOrders/Operations/WorkOrderOperationsShutdown.js"
 		},
 		{
 			"_Name": "RightSpace",
