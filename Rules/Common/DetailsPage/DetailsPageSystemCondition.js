@@ -11,8 +11,10 @@ export default function DetailsPageSystemCondition(context) {
     }
     let filterQuery = `$filter=OrderId eq '${id}'`;
     return context.read('/SAPAssetManager/Services/AssetManager.service', 'MyWorkOrderHeaders', [], filterQuery).then(function(result) {
-        if (result && result.length > 0) {
-           
+        if (result && result.length > 0 && result.getItem(0)) {
+           if(result.getItem(0).ZSystemCondition){
+                return result.getItem(0).ZSystemCondition + " - Shutdown";
+           }
         }
         return '-';
     });
