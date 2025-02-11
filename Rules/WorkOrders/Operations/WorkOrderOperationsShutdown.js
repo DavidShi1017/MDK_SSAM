@@ -22,7 +22,7 @@ export default function WorkOrderOperationsShutdown(context) {
 
     for (let i = 0; i < selectedOperations.length; i++) {
        
-        promiseArr.push(Shutdown(context, item, failedOperations, i));
+        promiseArr.push(Shutdown(context, failedOperations));
     }
 
     return Promise.all(promiseArr).then(() => {
@@ -33,7 +33,7 @@ export default function WorkOrderOperationsShutdown(context) {
     });
 }
 
-function Shutdown(context, item, failedOperations) {
+function Shutdown(context, failedOperations) {
 
     let beforeOperationChangeStatusPromise = Promise.resolve();
     return beforeOperationChangeStatusPromise.then(() => {       
@@ -55,8 +55,6 @@ function Shutdown(context, item, failedOperations) {
                         }
                     });
     }).catch((error) => {
-        item.error = error;
-        failedOperations.push(item);
         return null;
     });
 }
