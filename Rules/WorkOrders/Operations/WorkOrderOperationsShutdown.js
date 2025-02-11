@@ -5,7 +5,7 @@ import SupervisorLibrary from '../../Supervisor/SupervisorLibrary';
 import GenerateTimeEntryID from '../../TimeSheets/GenerateTimeEntryID';
 import TimeSheetsIsEnabled from '../../TimeSheets/TimeSheetsIsEnabled';
 import IsOperationLevelAssigmentType from './IsOperationLevelAssigmentType';
-
+import ExecuteActionWithAutoSync from '../../ApplicationEvents/AutoSync/ExecuteActionWithAutoSync';
 export default function WorkOrderOperationsShutdown(context) {
     context.getPageProxy().showActivityIndicator();
 
