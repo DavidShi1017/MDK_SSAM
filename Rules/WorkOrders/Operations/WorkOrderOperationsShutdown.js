@@ -20,7 +20,7 @@ export default function WorkOrderOperationsShutdown(context) {
     let promiseArr = [];
 
 
-    for (let i = 0; i < operationsConfirmations.length; i++) {
+    for (let i = 0; i < selectedOperations.length; i++) {
        
         promiseArr.push(Shutdown(context, item, failedOperations, i));
     }
