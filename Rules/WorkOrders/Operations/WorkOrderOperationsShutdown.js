@@ -21,8 +21,8 @@ export default function WorkOrderOperationsShutdown(context) {
 
 
     for (let i = 0; i < selectedOperations.length; i++) {
-       
-        promiseArr.push(Shutdown(context, failedOperations));
+        let item = selectedOperations[i];
+        promiseArr.push(Shutdown(context, failedOperations, item));
     }
 
     return Promise.all(promiseArr).then(() => {
@@ -33,7 +33,7 @@ export default function WorkOrderOperationsShutdown(context) {
     });
 }
 
-function Shutdown(context, failedOperations) {
+function Shutdown(context, failedOperations, item) {
 
     let beforeOperationChangeStatusPromise = Promise.resolve();
     return beforeOperationChangeStatusPromise.then(() => {       
