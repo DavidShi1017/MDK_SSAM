@@ -5,7 +5,7 @@
     "OnPress": "/SAPAssetManager/Rules/Equipment/EquipmentDetailsNav.js",
     "PreserveIconStackSpacing": false,
     "Subhead": "#Property:EquipId",
-    "Footnote": "#Property:TechnicalID",
+    "Footnote": "#Property:Equip_Nav/#Property:TechnicalID",
     "StatusText": "#Property:ObjectStatus_Nav/#Property:SystemStatus_Nav/#Property:StatusText",
     "Description": "/SAPAssetManager/Rules/Equipment/EquipmentTechnicalObjectId.js"
 }
