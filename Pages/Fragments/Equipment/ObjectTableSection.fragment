@@ -28,7 +28,7 @@
     "Target": {
         "EntitySet": "{{#Property:@odata.id}}/Equipment",
         "Service": "/SAPAssetManager/Services/AssetManager.service",
-        "QueryOptions": "$top=1&$select=ObjectStatus_Nav/SystemStatus_Nav/StatusText,EquipDesc,EquipId,TechnicalId,FuncLocId,EquipType,EquipCategory,PlanningPlant,WorkCenter,FunctionalLocation/FuncLocDesc&$orderby=EquipId&$expand=ObjectStatus_Nav/SystemStatus_Nav,EquipDocuments,FunctionalLocation"
+        "QueryOptions": "$top=1&$select=ObjectStatus_Nav/SystemStatus_Nav/StatusText,EquipDesc,EquipId,TechnicalID,FuncLocId,EquipType,EquipCategory,PlanningPlant,WorkCenter,FunctionalLocation/FuncLocDesc&$orderby=EquipId&$expand=ObjectStatus_Nav/SystemStatus_Nav,EquipDocuments,FunctionalLocation"
     },
     "_Type": "Section.Type.ObjectTable"
 }
