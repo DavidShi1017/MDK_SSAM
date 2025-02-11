@@ -35,7 +35,7 @@ export default function WorkOrderOperationsShutdown(context) {
 
 function Shutdown(context, item, failedOperations) {
 
-
+    let beforeOperationChangeStatusPromise = Promise.resolve();
     return beforeOperationChangeStatusPromise.then(() => {       
         context.binding.OrderHeaderReadLink = "MyWorkOrderHeaders('" + item.OrderId + "')";
                     //return clientAPI.executeAction('/SAPAssetManager/Actions/WorkOrders/CreateUpdate/WorkOrderShutdown.action');
