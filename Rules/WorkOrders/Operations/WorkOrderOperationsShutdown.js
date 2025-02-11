@@ -29,7 +29,7 @@ export default function WorkOrderOperationsShutdown(context) {
 
     }).finally(() => {
         context.getPageProxy().dismissActivityIndicator();
-        ExecuteActionWithAutoSync(clientAPI, '/SAPAssetManager/Actions/CreateUpdateDelete/UpdateEntitySuccessMessage.action');
+        ExecuteActionWithAutoSync(context, '/SAPAssetManager/Actions/CreateUpdateDelete/UpdateEntitySuccessMessage.action');
     });
 }
 
@@ -39,7 +39,7 @@ function Shutdown(context, failedOperations, item) {
     return beforeOperationChangeStatusPromise.then(() => {       
         context.binding.OrderHeaderReadLink = "MyWorkOrderHeaders('" + item.binding.OrderId + "')";
                     //return clientAPI.executeAction('/SAPAssetManager/Actions/WorkOrders/CreateUpdate/WorkOrderShutdown.action');
-                    return clientAPI.executeAction({'Name': '/SAPAssetManager/Actions/WorkOrders/CreateUpdate/WorkOrderShutdown.action', 'Properties': {
+                    return context.executeAction({'Name': '/SAPAssetManager/Actions/WorkOrders/CreateUpdate/WorkOrderShutdown.action', 'Properties': {
                         'Target': {
                             'EntitySet': 'MyWorkOrderHeaders',
                             'Service': '/SAPAssetManager/Services/AssetManager.service',
