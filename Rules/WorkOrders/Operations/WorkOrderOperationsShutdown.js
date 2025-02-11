@@ -28,7 +28,7 @@ export default function WorkOrderOperationsShutdown(context) {
     return Promise.all(promiseArr).then(() => {
 
     }).finally(() => {
-        //context.getPageProxy().dismissActivityIndicator();
+        context.getPageProxy().dismissActivityIndicator();
         ExecuteActionWithAutoSync(clientAPI, '/SAPAssetManager/Actions/CreateUpdateDelete/UpdateEntitySuccessMessage.action');
     });
 }
