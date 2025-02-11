@@ -406,7 +406,7 @@
                         "SubstatusText": "#Property:InspValuation_Nav/#Property:ShortText",
                         "Subhead": "/SAPAssetManager/Rules/WorkOrders/InspectionLot/InspectionLotDescriptionOrId.js",
                         "OnPress": "/SAPAssetManager/Actions/WorkOrders/Operations/InspectionPointDetailsNav.action",
-                        "Footnote": "#Property:Equip_Nav/#Property:TechnicalID",
+                        "Footnote": "/SAPAssetManager/Rules/Equipment/EquipmentTechnicalObjectId.js",
                         "Styles": {
                             "SubstatusText": "/SAPAssetManager/Rules/WorkOrders/Operations/InspectionPointValuationFont.js"
                         }
