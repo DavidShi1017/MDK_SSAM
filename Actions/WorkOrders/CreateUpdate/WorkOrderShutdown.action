@@ -8,9 +8,7 @@
     "Properties": {
         "ZSystemCondition": "X"
     },
-    "Headers": {
-        "OfflineOData.TransactionID": "#Property:OrderId"
-    },
+
   
     
     "OnFailure": "/SAPAssetManager/Actions/CreateUpdateDelete/UpdateEntityFailureMessage.action",
