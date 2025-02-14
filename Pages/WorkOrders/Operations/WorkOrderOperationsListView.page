@@ -159,6 +159,13 @@
 			"Enabled": "/SAPAssetManager/Rules/WorkOrders/Operations/WorkOrderOperationsConfirmButtonEnabled.js",
 			"OnPress": "/SAPAssetManager/Rules/WorkOrders/Operations/WorkOrderOperationsConfirmNav.js"
 		},
+				{
+			"_Name": "SystemconditionBtn",
+			"_Type": "Control.Type.ToolbarItem",
+			"Caption": "Shutdown",
+			"Enabled": "/SAPAssetManager/Rules/WorkOrders/Operations/WorkOrderOperationsConfirmButtonEnabled.js",
+			"OnPress": "/SAPAssetManager/Rules/WorkOrders/Operations/WorkOrderOperationsShutdown.js"
+		},
 		{
 			"_Name": "RightSpace",
 			"_Type": "Control.Type.ToolbarItem",

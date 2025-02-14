@@ -146,7 +146,8 @@ export function addHeaderSection(context, binding, page) {
     let floc = binding.FunctionalLocation;
     let headlineText = '-';
     let bodyText = '-';
-    let footnote = binding.InspectionLot;
+    let subhead = '';
+    let footnote = 'Inspection Lot: ' + binding.InspectionLot;
     var statusText = '-';
     if (equipment) {
         entityset = `MyEquipments('${equipment}')`;
@@ -172,10 +173,11 @@ export function addHeaderSection(context, binding, page) {
 
                 if (result.getItem(0)['@odata.type'] === '#sap_mobile.MyEquipment') {
                     headlineText = result.getItem(0).EquipId + ' - ' + result.getItem(0).EquipDesc;
+                    subhead = 'Tech ID: ' + result.getItem(0).TechnicalID + '       ';
                 } else if (result.getItem(0)['@odata.type'] === '#sap_mobile.MyFunctionalLocation') {
                     headlineText =  result.getItem(0).FuncLocId + ' - ' + result.getItem(0).FuncLocDesc;
                 }
-    
+                
                 let plant = result.getItem(0).PlanningPlant;
                 if (plant) {
                     await read(context, `Plants('${plant}')`, [], '').then(function(plantResult) {
@@ -218,6 +220,9 @@ export function addHeaderSection(context, binding, page) {
                 let buttons = getAttachmentButtons(context);
                 let link = await getAttachmentLink(context, binding);
                 let height = SectionHeaderHeight(context, buttons.length);
+                if(subhead){
+                    footnote = subhead + footnote;
+                }
                 if (link) {
                     page.Controls[0].Sections.push(
                         {
@@ -225,11 +230,13 @@ export function addHeaderSection(context, binding, page) {
                             'Control': 'SectionHeaderViewExtension',
                             'Class': 'SectionHeaderViewExtension',
                             'Height': height,
+                            'Text': 'aaa',
                             'ExtensionProperties': {
                                 'UserData': {
                                     'Index': sectionIndex,
                                 },
                                 'HeadlineText': headlineText,
+                                'Text': 'aaa',
                                 'BodyText': bodyText,
                                 'Footnote': footnote,
                                 'StatusText': statusText,
@@ -246,16 +253,19 @@ export function addHeaderSection(context, binding, page) {
                             'Module': 'extension-SectionHeader',
                             'Control': 'SectionHeaderViewExtension',
                             'Class': 'SectionHeaderViewExtension',
+                            
                             'Height': height,
                             'ExtensionProperties': {
                                 'UserData': {
                                     'Index': sectionIndex,
                                 },
                                 'HeadlineText': headlineText,
+                                'Subhead': subhead,
                                 'BodyText': bodyText,
                                 'Footnote': footnote,
                                 'StatusText': statusText,
                                 'Buttons': buttons,
+
                             },
                             '_Type': 'Section.Type.Extension',
                             '_Name': 'SectionHeaderExtensionSection',
@@ -278,6 +288,11 @@ export function getAttachmentButtons(context) {
             {
                 'Value': 'Add Attachment',
                 'Action': '/SAPAssetManager/Rules/InspectionCharacteristics/Update/AddAttachmentsNavEDT.js',
+                'Style': 'Secondary',
+            },
+            {
+                'Value': 'Not Running',
+                'Action': '/SAPAssetManager/Rules/InspectionCharacteristics/InspectionCharacteristicsNotRunningAll.js',
                 'Style': 'Secondary',
             },
         ];
@@ -402,6 +417,10 @@ export async function addEDTSection(context, binding, page) {
                         'PreferredWidth': 200,
                     },
                     {
+                        'HeaderName': 'Not Running',
+                        'PreferredWidth': 170,
+                    },
+                    {
                       'HeaderName': '$(L, value)',
                       'PreferredWidth': 200,
                     },
@@ -450,6 +469,19 @@ export async function addEDTSection(context, binding, page) {
                            'Value': '/SAPAssetManager/Rules/InspectionCharacteristics/Update/InspectionCharacteristicsTargetSpecification.js',
                         },
                      },
+                     {
+                        'Type': 'Button',
+                        'Name': 'NotRunning',
+                        'IsMandatory': false,
+                        'IsReadOnly': false,
+                        'OnValueChange': '',
+                        'Property': '',
+                        'Parameters': {
+                            'Value': 'Not Running',
+                            'Action': '/SAPAssetManager/Rules/InspectionCharacteristics/InspectionCharacteristicsNotRunningItem.js',
+                            'Style': 'Secondary',
+                        },
+                      },
                       '/SAPAssetManager/Rules/InspectionCharacteristics/Update/InspectionCharacteristicsQuantitativeAndQualitativeEDTControls.js',
                       {
                         'Type': 'Text',

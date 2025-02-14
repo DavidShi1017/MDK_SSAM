@@ -1,6 +1,7 @@
 import inspCharLib from './InspectionCharacteristics';
 import libVal from '../../Common/Library/ValidationLibrary';
 import IsIOS from '../../Common/IsIOS';
+import libCom from '../../Common/Library/CommonLibrary';
 /**
 * Describe this function...
 * @param {IContext} context
@@ -16,6 +17,7 @@ export default function InspectionCharacteristicsQuantitativeAndQualitativeEDTCo
     if (IsIOS(context)) {
         device = 'Text';
     }
+
     if (inspCharLib.isQuantitative(binding)) {
         if (inspCharLib.isCalculatedAndQuantitative(binding) || binding.AfterAcceptance === 'X' || binding.AfterRejection === 'X') {
             IsReadOnly = true;
@@ -72,10 +74,14 @@ export default function InspectionCharacteristicsQuantitativeAndQualitativeEDTCo
     } else if (inspCharLib.isQualitative(binding)) {
         let listPickerValue = '';
         let listPickerDisplayValue = '';
+        libCom.setStateVariable(context, 'SelectedSet', binding.SelectedSet);
+        libCom.setStateVariable(context, 'SelectedSetPlant', binding.SelectedSetPlant);
+        libCom.setStateVariable(context, 'Catalog', binding.Catalog);
         if(libVal.evalIsEmpty(binding.Valuation)){
             //listPickerValue = `InspectionCodes(Plant='${binding.SelectedSetPlant}',SelectedSet='${binding.SelectedSet}',Catalog='${binding.Catalog}',CodeGroup='${binding.CodeGroup}',Code='${binding.Code}')`;
             //isMandatory = true;
         }else{
+
             if (!libVal.evalIsEmpty(binding.InspectionCode_Nav) && !libVal.evalIsEmpty(binding.InspectionCode_Nav.CodeDesc)) {
                 //if (!libVal.evalIsEmpty(binding.SelectedSetPlant) && !libVal.evalIsEmpty(binding.SelectedSet) && !libVal.evalIsEmpty(binding.Catalog) && !libVal.evalIsEmpty(binding.CodeGroup) && !libVal.evalIsEmpty(binding.Code)) {
                     listPickerValue = `InspectionCodes(Plant='${binding.SelectedSetPlant}',SelectedSet='${binding.SelectedSet}',Catalog='${binding.Catalog}',CodeGroup='${binding.CodeGroup}',Code='${binding.Code}')`;

@@ -213,6 +213,10 @@
                 {
                     "KeyName": "$(L,reported_by)",
                     "Value": "/SAPAssetManager/Rules/Notifications/Details/NotificationDetailsReportedBy.js"
+                },
+                {
+                    "KeyName": "$(L,maintenance_activity_type)",
+                    "Value": "/SAPAssetManager/Rules/Notifications/Details/NotificationDetailsActivityType.js"
                 }
             ],
             "Target": {
