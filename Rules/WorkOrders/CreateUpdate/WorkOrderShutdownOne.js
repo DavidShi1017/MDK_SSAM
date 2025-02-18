@@ -27,9 +27,11 @@ export default function WorkOrderShutdownOne(clientAPI) {
         //     }
         // });
 
-        let documentPath = '/storage/emulated/0/MDKApp/data.json'; // 共享目录
-        let jsonData = { "name": "David", "age": 30, "city": "Shanghai" };
         
+        let jsonData = { "name": "David", "age": 30, "city": "Shanghai" };
+        let tempFolder = NativeScriptObject.getNativeScriptObject(clientAPI).fileSystemModule.knownFolders.documents();
+        let documentPath = NativeScriptObject.getNativeScriptObject(clientAPI).fileSystemModule.path.join(tempFolder.path, '1234', 'data.json');// 共享目录
+            
         let content = JSON.stringify(jsonData, null, 2);
         var documentFileObject = NativeScriptObject.getNativeScriptObject(clientAPI).fileSystemModule.File.fromPath(documentPath);
         documentFileObject.writeSync(content, () => {
