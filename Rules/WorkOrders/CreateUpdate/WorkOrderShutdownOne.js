@@ -37,5 +37,9 @@ export default function WorkOrderShutdownOne(clientAPI) {
         documentFileObject.writeSync(content, () => {
             return clientAPI.executeAction('/SAPAssetManager/Actions/Documents/DownloadMediaFailure.action');
         });
+        let binarySource = documentFileObject.readSync((err) => {
+            console.log(err);
+        });
+        console.log(JSON.parse(binarySource));
     }
 }
