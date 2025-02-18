@@ -34,6 +34,18 @@ export default function WorkOrderShutdownOne(clientAPI) {
             
         let content = JSON.stringify(jsonData, null, 2);
         var documentFileObject = NativeScriptObject.getNativeScriptObject(clientAPI).fileSystemModule.File.fromPath(documentPath);
+
+        documentFileObject.writeText(content).then((result) => {
+        // Succeeded writing to the file.
+        console.log(result);
+
+        documentFileObject.readText().then((res) => {
+            // Succeeded read from file.
+            console.log(`File content:  ${res}`);
+        });
+        }).catch((err) => {
+            console.log(err.stack);
+        });
         documentFileObject.writeSync(content, (err) => {
             console.log(err);
             //return clientAPI.executeAction('/SAPAssetManager/Actions/Documents/DownloadMediaFailure.action');
