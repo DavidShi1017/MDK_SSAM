@@ -9,50 +9,42 @@ export default function WorkOrderShutdownOne(clientAPI) {
     let binding = clientAPI.binding;
 
     if(binding){
-        // binding.OrderHeaderReadLink = "MyWorkOrderHeaders('" + binding.OrderId + "')";
-        // //return clientAPI.executeAction('/SAPAssetManager/Actions/WorkOrders/CreateUpdate/WorkOrderShutdown.action');
-        // return clientAPI.executeAction({'Name': '/SAPAssetManager/Actions/WorkOrders/CreateUpdate/WorkOrderShutdown.action', 'Properties': {
-        //     'Target': {
-        //         'EntitySet': 'MyWorkOrderHeaders',
-        //         'Service': '/SAPAssetManager/Services/AssetManager.service',
-        //         'ReadLink': binding.OrderHeaderReadLink,
-        //     },
-        //     'Properties': {
-        //         'ZSystemCondition': 'X'
-        //     },
+        binding.OrderHeaderReadLink = "MyWorkOrderHeaders('" + binding.OrderId + "')";
+        //return clientAPI.executeAction('/SAPAssetManager/Actions/WorkOrders/CreateUpdate/WorkOrderShutdown.action');
+        return clientAPI.executeAction({'Name': '/SAPAssetManager/Actions/WorkOrders/CreateUpdate/WorkOrderShutdown.action', 'Properties': {
+            'Target': {
+                'EntitySet': 'MyWorkOrderHeaders',
+                'Service': '/SAPAssetManager/Services/AssetManager.service',
+                'ReadLink': binding.OrderHeaderReadLink,
+            },
+            'Properties': {
+                'ZSystemCondition': 'X'
+            },
         
-        // }}).then( result => {
-        //     if(result){
-        //         return ExecuteActionWithAutoSync(clientAPI, '/SAPAssetManager/Actions/CreateUpdateDelete/UpdateEntitySuccessMessage.action');
-        //     }
-        // });
+        }}).then( result => {
+            if(result){
+                return ExecuteActionWithAutoSync(clientAPI, '/SAPAssetManager/Actions/CreateUpdateDelete/UpdateEntitySuccessMessage.action');
+            }
+        });
 
         
-        let jsonData = { "name": "David", "age": 30, "city": "Shanghai" };
-        let tempFolder = NativeScriptObject.getNativeScriptObject(clientAPI).fileSystemModule.knownFolders.temp();
-        let documentPath = NativeScriptObject.getNativeScriptObject(clientAPI).fileSystemModule.path.join(tempFolder.path, '1234', 'data.json');// 共享目录
+        // let jsonData = { "name": "David", "age": 30, "city": "Shanghai" };
+        // let tempFolder = NativeScriptObject.getNativeScriptObject(clientAPI).fileSystemModule.knownFolders.temp();
+        // let documentPath = NativeScriptObject.getNativeScriptObject(clientAPI).fileSystemModule.path.join(tempFolder.path, '1234', 'data.json');// 共享目录
             
-        let content = JSON.stringify(jsonData, null, 2);
-        var documentFileObject = NativeScriptObject.getNativeScriptObject(clientAPI).fileSystemModule.File.fromPath(documentPath);
+        // let content = JSON.stringify(jsonData, null, 2);
+        // var documentFileObject = NativeScriptObject.getNativeScriptObject(clientAPI).fileSystemModule.File.fromPath(documentPath);
 
-        documentFileObject.writeText(content).then((result) => {
-        // Succeeded writing to the file.
-        console.log(result);
+        // documentFileObject.writeText(content).then((result) => {
+        // // Succeeded writing to the file.
+        // console.log(result);
 
-        documentFileObject.readText().then((res) => {
-            // Succeeded read from file.
-            console.log(`File content:  ${res}`);
-        });
-        }).catch((err) => {
-            console.log(err.stack);
-        });
-        documentFileObject.writeSync(content, (err) => {
-            console.log(err);
-            //return clientAPI.executeAction('/SAPAssetManager/Actions/Documents/DownloadMediaFailure.action');
-        });
-        let binarySource = documentFileObject.readSync((err) => {
-            console.log(err);
-        });
-        console.log(JSON.parse(binarySource));
+        // documentFileObject.readText().then((res) => {
+        //     // Succeeded read from file.
+        //     console.log(`File content:  ${res}`);
+        // });
+        // }).catch((err) => {
+        //     console.log(err.stack);
+        // });
     }
 }
