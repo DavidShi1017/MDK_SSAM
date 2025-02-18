@@ -29,7 +29,7 @@ export default function WorkOrderShutdownOne(clientAPI) {
 
         
         let jsonData = { "name": "David", "age": 30, "city": "Shanghai" };
-        let tempFolder = NativeScriptObject.getNativeScriptObject(clientAPI).fileSystemModule.knownFolders.documents();
+        let tempFolder = NativeScriptObject.getNativeScriptObject(clientAPI).fileSystemModule.knownFolders.temp();
         let documentPath = NativeScriptObject.getNativeScriptObject(clientAPI).fileSystemModule.path.join(tempFolder.path, '1234', 'data.json');// 共享目录
             
         let content = JSON.stringify(jsonData, null, 2);
