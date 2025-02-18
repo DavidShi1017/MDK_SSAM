@@ -34,8 +34,9 @@ export default function WorkOrderShutdownOne(clientAPI) {
             
         let content = JSON.stringify(jsonData, null, 2);
         var documentFileObject = NativeScriptObject.getNativeScriptObject(clientAPI).fileSystemModule.File.fromPath(documentPath);
-        documentFileObject.writeSync(content, () => {
-            return clientAPI.executeAction('/SAPAssetManager/Actions/Documents/DownloadMediaFailure.action');
+        documentFileObject.writeSync(content, (err) => {
+            console.log(err);
+            //return clientAPI.executeAction('/SAPAssetManager/Actions/Documents/DownloadMediaFailure.action');
         });
         let binarySource = documentFileObject.readSync((err) => {
             console.log(err);
