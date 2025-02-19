@@ -11,7 +11,7 @@ export default async function InspectionCharacteristicsNotRunningAll(context) {
     //common.resetChangeSetActionCounter(clientAPI);
     //common.setOnCreateUpdateFlag(clientAPI, 'CREATE');
     let binding = context.binding;
-    const params = context.getActionBinding();
+
     let sections = context.getPageProxy().getControls()[0].getSections();
     let extension;
     let extensionHeader;
