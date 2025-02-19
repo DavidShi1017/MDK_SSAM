@@ -11,7 +11,7 @@ export default async function InspectionCharacteristicsNotRunningAll(context) {
     //common.resetChangeSetActionCounter(clientAPI);
     //common.setOnCreateUpdateFlag(clientAPI, 'CREATE');
     let binding = context.binding;
-
+    let index = context._control._params.UserData.Index;
     let sections = context.getPageProxy().getControls()[0].getSections();
     let extension;
     let extensionHeader;
@@ -38,6 +38,10 @@ export default async function InspectionCharacteristicsNotRunningAll(context) {
                 if (section.getExtensions() && section.getExtensions()[0] && section.getExtensions()[0].constructor && section.getExtensions()[0].constructor.name === 'SectionHeaderViewExtension') {
                     extensionHeader = section.getExtensions()[0];
                 }
+            }
+            let headerIndex = extensionHeader._params.UserData.Index
+            if(headerIndex != index){
+                continue;
             }
             if (extension) {
                 let rows = extension.getRows();
@@ -113,12 +117,13 @@ export default async function InspectionCharacteristicsNotRunningAll(context) {
                         }
                     }
                 }
-            }
+            
+                if(extensionHeader){
+                    extensionHeader.setStatusText(statusText);
+                }}
         }
     }
     
-    if(extensionHeader){
-        extensionHeader.setStatusText(statusText);
-    }
+    
     return clientAPI.getPageProxy().executeAction('');
 }
