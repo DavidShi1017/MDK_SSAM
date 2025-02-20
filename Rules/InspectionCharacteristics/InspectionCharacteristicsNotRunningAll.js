@@ -83,14 +83,14 @@ export default async function InspectionCharacteristicsNotRunningAll(context) {
                                 //valuationCell.setValue(0);
                                 let listPickerValue = '';
                                 let listPickerDisplayValue = '';
-                                let filter = '$orderby=Code asc&$filter=(SelectedSet eq \'' + SelectedSet + '\' and Plant eq \'' + SelectedSetPlant + '\' and Catalog eq \'' + Catalog + '\' and Code eq \'N0\')';
+                                let filter = '$orderby=Code asc&$filter=(SelectedSet eq \'' + SelectedSet + '\' and Plant eq \'' + SelectedSetPlant + '\' and Catalog eq \'' + Catalog + '\' and Code eq \'NR\')';
                                 let CodeGroup = await context.read('/SAPAssetManager/Services/AssetManager.service', 'InspectionCodes', [], filter).then(valuationResult => {
                                     if (valuationResult && valuationResult.getItem(0)) {
                                         return valuationResult.getItem(0).CodeGroup;
                                     }
                                     return '';
                                 });
-                                listPickerValue = `InspectionCodes(Plant='${SelectedSetPlant}',SelectedSet='${SelectedSet}',Catalog='${Catalog}',CodeGroup='${CodeGroup}',Code='N0')`;
+                                listPickerValue = `InspectionCodes(Plant='${SelectedSetPlant}',SelectedSet='${SelectedSet}',Catalog='${Catalog}',CodeGroup='${CodeGroup}',Code='NR')`;
                                 listPickerDisplayValue = 'Not Operating';
                         
                                 valueCell.setValue(listPickerValue);
