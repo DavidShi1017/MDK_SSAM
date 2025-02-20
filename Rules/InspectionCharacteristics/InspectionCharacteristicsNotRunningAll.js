@@ -51,8 +51,12 @@ export default async function InspectionCharacteristicsNotRunningAll(context) {
                 let valuationStatus;
                 let style;
                 if(rows){
-                    statusText = context.localizeText('x_of_x_complete', [rows.length, rows.length]);
+                    
                     for (let i = 0; i < rows.length; i++) {
+                        if(rows[i].length == 0){
+                            continue;
+                        }
+                        statusText = context.localizeText('x_of_x_complete', [rows.length, rows.length]);
                         let valueCell = rows[i][3];
                         let valuationCell = rows[i][4];
                         let RemarksCell = rows[i][5];
