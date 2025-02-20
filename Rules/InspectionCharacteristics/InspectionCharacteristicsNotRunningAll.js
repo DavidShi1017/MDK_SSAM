@@ -13,9 +13,8 @@ export default async function InspectionCharacteristicsNotRunningAll(context) {
     let binding = context.binding;
     let index = context._control._params.UserData.Index;
     let sections = context.getPageProxy().getControls()[0].getSections();
-    let extension;
-    let extensionHeader;
-    let statusText;
+
+    
     const appVersion = AppVersionInfo(context).split('.')[0];
     let num = parseInt(appVersion);
     let SelectedSet = common.getStateVariable(context, 'SelectedSet');
@@ -23,7 +22,9 @@ export default async function InspectionCharacteristicsNotRunningAll(context) {
     let Catalog = common.getStateVariable(context, 'Catalog');
     if (sections && sections.length > 0) {
         for (let section of sections) {
-
+            let extension;
+            let extensionHeader;
+            let statusText;
             if (num >= 2410) {
                 if (section.getExtension() && section.getExtension().constructor && section.getExtension().constructor.name === 'EditableDataTableViewExtension') {
                     extension = section.getExtension();
