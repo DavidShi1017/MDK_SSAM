@@ -47,16 +47,19 @@ export default async function InspectionCharacteristicsNotRunningAll(context) {
                 continue;
             }
             if (extension) {
+                let rowCount = 0;
                 let rows = extension.getRows();
                 let valuationStatus;
                 let style;
                 if(rows){
                     
                     for (let i = 0; i < rows.length; i++) {
-                        if(rows[i].length == 0){
+                        if(rows[i].length > 0){
+                            rowCount++;
+                        }else{
                             continue;
                         }
-                        statusText = context.localizeText('x_of_x_complete', [rows.length, rows.length]);
+                        
                         let valueCell = rows[i][3];
                         let valuationCell = rows[i][4];
                         let RemarksCell = rows[i][5];
@@ -126,8 +129,10 @@ export default async function InspectionCharacteristicsNotRunningAll(context) {
                 }
             
                 if(extensionHeader){
+                    statusText = context.localizeText('x_of_x_complete', [rowCount, rowCount]);
                     extensionHeader.setStatusText(statusText);
-                }}
+                }
+            }
         }
     }
     
