@@ -294,6 +294,10 @@ export function getAttachmentButtons(context) {
                 'Value': 'Not Running',
                 'Action': '/SAPAssetManager/Rules/InspectionCharacteristics/InspectionCharacteristicsNotRunningAll.js',
                 'Style': 'Secondary',
+                'Parameters': {
+                    'InspectionID': 0,  // 传递OData实体ID
+                    'CustomFlag': 'SPECIAL_CHECK'
+                }
             },
         ];
     }
