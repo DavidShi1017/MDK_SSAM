@@ -25,6 +25,8 @@ export default function WorkOrderShutdownOne(clientAPI) {
             if(result){
                 return ExecuteActionWithAutoSync(clientAPI, '/SAPAssetManager/Actions/CreateUpdateDelete/UpdateEntitySuccessMessage.action');
             }
+        }).catch(err => {
+            Logger.error("Shutdown error---->" + err);
         });
 
         
