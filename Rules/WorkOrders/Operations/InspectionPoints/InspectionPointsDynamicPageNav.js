@@ -48,7 +48,7 @@ export default function InspectionPointsDynamicPageNav(context) {
                         'Target': {
                             'EntitySet': 'InspectionPoints(InspectionLot=\'{InspectionLot}\',InspectionNode=\'{InspectionNode}\',SampleNum=\'{SampleNum}\')',
                             'Service': '/SAPAssetManager/Services/AssetManager.service',
-                            'QueryOptions': '$expand=InspectionChar_Nav',
+                            'QueryOptions': '$expand=InspectionChar_Nav&$orderby=EquipNum asc',
                         },
                         'OnSuccess': '/SAPAssetManager/Rules/WorkOrders/Operations/InspectionPoints/InspectionPointReviewCharacteristics.js',
                     },
