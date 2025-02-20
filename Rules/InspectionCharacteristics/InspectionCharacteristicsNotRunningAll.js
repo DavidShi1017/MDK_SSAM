@@ -39,6 +39,9 @@ export default async function InspectionCharacteristicsNotRunningAll(context) {
                     extensionHeader = section.getExtensions()[0];
                 }
             }
+            if(!extensionHeader){
+                continue;
+            }
             let headerIndex = extensionHeader._params.UserData.Index
             if(headerIndex != index){
                 continue;
