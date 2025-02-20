@@ -13,8 +13,8 @@ export default async function InspectionCharacteristicsNotRunningAll(context) {
     let binding = context.binding;
     let index = context._control._params.UserData.Index;
     let sections = context.getPageProxy().getControls()[0].getSections();
-
-    
+    let currentSectionHeader = context.getPageProxy().getControls()[0].getSections()[index * 2];
+    let currentSection = context.getPageProxy().getControls()[0].getSections()[index * 2 + 1];
     const appVersion = AppVersionInfo(context).split('.')[0];
     let num = parseInt(appVersion);
     let SelectedSet = common.getStateVariable(context, 'SelectedSet');
