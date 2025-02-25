@@ -17,6 +17,7 @@ export default function WorkOrderOperationSubPhase(context) {
             });
         }else{
             let binding = context.binding;
+            let id;
             if(binding.OrderId){
                 id = binding.OrderId
             }else{
