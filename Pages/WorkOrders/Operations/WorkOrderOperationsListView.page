@@ -105,7 +105,7 @@
 				"Footnote": "/SAPAssetManager/Rules/WorkOrders/Operations/WorkOrderDueDate.js",
 				"OnPress": "/SAPAssetManager/Rules/WorkOrders/Operations/Details/WorkOrderOperationDetailsNav.js",
 				"Subhead": "/SAPAssetManager/Rules/WorkOrders/Operations/WorkOrderOperationOrderAndPhase.js",
-				"SubstatusText": "/SAPAssetManager/Rules/WorkOrders/Operations/WorkOrderOperationSubPhase.js",
+				"SubstatusText": "test",
 				"StatusText": "/SAPAssetManager/Rules/WorkOrders/Operations/WorkOrderOperationsListViewFormat.js",
 				"ContextMenu": {
 					"PerformFirstActionWithFullSwipe": true,
