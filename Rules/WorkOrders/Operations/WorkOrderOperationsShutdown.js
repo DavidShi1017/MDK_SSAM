@@ -25,8 +25,12 @@ export default function WorkOrderOperationsShutdown(context) {
         promiseArr.push(Shutdown(context, failedOperations, item));
     }
 
-    return Promise.all(promiseArr).then(() => {
+    return Promise.all(promiseArr).then((result) => {
+        if(result){
 
+        }
+    }).catch((error) => {
+        return null;
     }).finally(() => {
         context.getPageProxy().dismissActivityIndicator();
         ExecuteActionWithAutoSync(context, '/SAPAssetManager/Actions/CreateUpdateDelete/UpdateEntitySuccessMessage.action');
