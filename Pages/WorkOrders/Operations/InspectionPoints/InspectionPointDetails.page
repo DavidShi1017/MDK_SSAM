@@ -47,7 +47,7 @@
 				},
 				"Target": {
 					"EntitySet": "{{#Property:@odata.readLink}}/Equip_Nav",
-					"QueryOptions": "$select=EquipDesc,EquipId"
+					"QueryOptions": "$select=EquipDesc,EquipId,TechnicalID"
 				},
 				"Visible": "/SAPAssetManager/Rules/WorkOrders/Operations/InspectionPoints/InspectionPointsEquipmentSectionIsVisible.js"
 			}

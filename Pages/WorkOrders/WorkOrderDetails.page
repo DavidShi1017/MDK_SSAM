@@ -235,6 +235,22 @@
                     }
                 },
                 {
+                    "KeyAndValues": [
+                        {
+                        "KeyName": "$(L,system_condition)",
+                        "Value": "/SAPAssetManager/Rules/Common/DetailsPage/DetailsPageSystemCondition.js"
+                        }
+
+                    ],
+                    "Layout": {
+                    "NumberOfColumns": 2
+                    },
+                    "_Type": "Section.Type.KeyValue",
+                    "_Name": "SystemCondition"
+                },
+
+
+                {
 					"_Type": "Section.Type.KeyValue",
 					"_Name": "WorkOrderOperationDetailsSection",
 					"Header": {

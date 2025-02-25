@@ -87,8 +87,10 @@ export default async function InspectionCharacteristicsUpdateDoneEDT(context) {
 
                     if (extension) {
                         let rows = extension.getUpdatedValues();
+                        let controls = extension.getRows();
                         for (let i = 0; i < rows.length; i++) {
-                            if (!extension.getRows()[i][2]._cell.IsReadOnly) { //check if the cell 'ResultValue' is enabled and process only the enabled values
+                            let cell = extension.getRows()[i][3]._cell;
+                            if (!extension.getRows()[i][3]._cell.IsReadOnly) { //check if the cell 'ResultValue' is enabled and process only the enabled values
                                 let row = rows[i];
                                 let quantitativeAction = '/SAPAssetManager/Actions/InspectionCharacteristics/Update/InspectionCharacteristicsQuantitativeUpdate.action';
                                 let qualitativeAction = '/SAPAssetManager/Actions/InspectionCharacteristics/Update/InspectionCharacteristicsQualitativeUpdate.action';
