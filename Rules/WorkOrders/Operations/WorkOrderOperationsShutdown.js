@@ -56,7 +56,7 @@ function Shutdown(context, failedOperations, item) {
                     
                     }}).then( result => {
                         if(result){
-                            libCommon.setStateVariable(clientAPI, id + 'ZSystemCondition', 'X');
+                            libCommon.setStateVariable(context, id + 'ZSystemCondition', 'X');
                             //return ExecuteActionWithAutoSync(clientAPI, '/SAPAssetManager/Actions/CreateUpdateDelete/UpdateEntitySuccessMessage.action');
                         }
                     });
