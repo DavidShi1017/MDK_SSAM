@@ -1,7 +1,7 @@
 import PhaseControlVisible from '../PhaseControl/PhaseControlVisible';
 import Logger from '../../Log/Logger';
 import libPhase from '../../PhaseModel/PhaseLibrary';
-
+import commonLib from '../../Common/Library/CommonLibrary';
 export default function WorkOrderOperationSubPhase(context) {
     return libPhase.isPhaseModelActiveInDataObject(context, context.binding).then(isPhaseOrder => { //Only display if phase order type
         if (isPhaseOrder && PhaseControlVisible(context) && context.binding) {
@@ -28,7 +28,12 @@ export default function WorkOrderOperationSubPhase(context) {
                 if (result && result.length > 0 && result.getItem(0)) {
                    if(result.getItem(0).ZSystemCondition){
                         return result.getItem(0).ZSystemCondition + " - Shutdown";
-                   }
+                   }else{
+                        let ZSystemCondition = commonLib.getStateVariable(context, id + 'ZSystemCondition');
+                        if(ZSystemCondition){
+                            return ZSystemCondition + " - Shutdown";
+                        }
+                    }
                 }
                 return '';
             });

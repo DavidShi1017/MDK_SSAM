@@ -1,3 +1,4 @@
+
 import commonLib from '../Library/CommonLibrary';
 
 export default async function DetailsPageSystemCondition(context) {
@@ -14,6 +15,11 @@ export default async function DetailsPageSystemCondition(context) {
         if (result && result.length > 0 && result.getItem(0)) {
            if(result.getItem(0).ZSystemCondition){
                 return result.getItem(0).ZSystemCondition + " - Shutdown";
+           }else{
+                let ZSystemCondition = commonLib.getStateVariable(context, id + 'ZSystemCondition');
+                if(ZSystemCondition){
+                    return ZSystemCondition + " - Shutdown";
+                }
            }
         }
         return '-';
