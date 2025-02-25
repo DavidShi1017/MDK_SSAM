@@ -15,7 +15,23 @@ export default function WorkOrderOperationSubPhase(context) {
                 Logger.error('EAMOverallStatusConfigs', error);
                 return '';
             });
+        }else{
+            let binding = context.binding;
+            if(binding.OrderId){
+                id = binding.OrderId
+            }else{
+                id = binding.WOHeader.OrderId;
+            }
+            let filterQuery = `$filter=OrderId eq '${id}'`;
+            return context.read('/SAPAssetManager/Services/AssetManager.service', 'MyWorkOrderHeaders', [], filterQuery).then(function(result) {
+                if (result && result.length > 0 && result.getItem(0)) {
+                   if(result.getItem(0).ZSystemCondition){
+                        return result.getItem(0).ZSystemCondition + " - Shutdown";
+                   }
+                }
+                return '';
+            });
         }
-        return '';
+        //return '';
     });
 }

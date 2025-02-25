@@ -9,18 +9,7 @@ export default async function DetailsPageSystemCondition(context) {
     }else{
         id = binding.WOHeader.OrderId;
     }
-
-
-    
     let filterQuery = `$filter=OrderId eq '${id}'`;
-    const odataValue = await context.read(
-        '/SAPAssetManager/Services/AssetManager.service',
-        'MyWorkOrderHeaders',
-        ['ZSystemCondition'],
-        `$filter=OrderId eq '${id}'`,
-        { "offline": false }
-    );
-    context.getLogger().log("实时服务端值: " + (odataValue.getItem(0)?.ZSystemCondition || '空'));
     return context.read('/SAPAssetManager/Services/AssetManager.service', 'MyWorkOrderHeaders', [], filterQuery).then(function(result) {
         if (result && result.length > 0 && result.getItem(0)) {
            if(result.getItem(0).ZSystemCondition){
