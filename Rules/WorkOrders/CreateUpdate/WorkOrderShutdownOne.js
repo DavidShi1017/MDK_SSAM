@@ -23,6 +23,7 @@ export default function WorkOrderShutdownOne(clientAPI) {
         
         }}).then( result => {
             if(result){
+                libCommon.setStateVariable(clientAPI, binding.OrderId + 'ZSystemCondition', 'X');
                 return ExecuteActionWithAutoSync(clientAPI, '/SAPAssetManager/Actions/CreateUpdateDelete/UpdateEntitySuccessMessage.action');
             }
         }).catch(err => {
