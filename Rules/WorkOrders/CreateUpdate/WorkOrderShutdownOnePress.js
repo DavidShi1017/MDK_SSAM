@@ -5,14 +5,14 @@ import ExecuteActionWithAutoSync from '../../ApplicationEvents/AutoSync/ExecuteA
 import NativeScriptObject from '../../Common/Library/NativeScriptObject';
 export default function WorkOrderShutdownOnePress(clientAPI) {
     //Remove variable FollowUpFlagPage before create
-    return context.executeAction(
+    return clientAPI.executeAction(
         {
             'Name': '/SAPAssetManager/Actions/Common/GenericWarningDialog.action',
             'Properties': {
                 'Title': 'Shutdown',
                 'Message': 'Do you want to Shutdown this Work Order?',
-                'OKCaption': context.localizeText('ok'),
-                'CancelCaption': context.localizeText('cancel'),
+                'OKCaption': clientAPI.localizeText('ok'),
+                'CancelCaption': clientAPI.localizeText('cancel'),
                 'OnOK': '/SAPAssetManager/Rules/WorkOrders/CreateUpdate/WorkOrderShutdownOne.js',
             },
         },
