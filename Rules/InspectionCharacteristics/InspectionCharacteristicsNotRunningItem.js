@@ -81,7 +81,7 @@ export default async function InspectionCharacteristicsNotRunningItem(context) {
         let statusText = inspCharLib.checkEDTReadingCounts(context, context._control.getTable());
         InspectionCharacteristicsEDTLibrary.findHeaderSection(clientAPI, context._control.getTable()).setStatusText(statusText);
     }
-    
+    //clientAPI.getPageProxy().redraw();
     
     return new Promise(resolve => {
         resolve({ "Success": true });
