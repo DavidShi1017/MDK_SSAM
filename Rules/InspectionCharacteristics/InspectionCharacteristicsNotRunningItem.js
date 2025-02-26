@@ -83,5 +83,7 @@ export default async function InspectionCharacteristicsNotRunningItem(context) {
     }
     
     
-    return Promise.resolve(true);
+    return new Promise(resolve => {
+        resolve({ "Success": true });
+    });
 }

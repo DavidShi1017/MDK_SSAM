@@ -138,5 +138,9 @@ export default async function InspectionCharacteristicsNotRunningAll(context) {
     }
     
     
-    return Promise.resolve(true);
+    context.getPageProxy().redraw();
+    
+    return new Promise(resolve => {
+        resolve({ "Success": true });
+    });
 }
