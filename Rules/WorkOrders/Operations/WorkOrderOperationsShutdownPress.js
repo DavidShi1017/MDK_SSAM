@@ -21,8 +21,8 @@ export default function WorkOrderOperationsShutdownPress(context) {
                 'Properties': {
                     'Title': 'Shutdown',
                     'Message': 'Do you want to Shutdown these Work Order?',
-                    'OKCaption': context.localizeText('ok'),
-                    'CancelCaption': context.localizeText('cancel'),
+                    'OKCaption': context.localizeText('yes'),
+                    'CancelCaption': context.localizeText('no'),
                     'OnOK': '/SAPAssetManager/Rules/WorkOrders/Operations/WorkOrderOperationsShutdown.js',
                 },
             },

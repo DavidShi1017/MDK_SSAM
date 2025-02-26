@@ -11,8 +11,8 @@ export default function WorkOrderShutdownOnePress(clientAPI) {
             'Properties': {
                 'Title': 'Shutdown',
                 'Message': 'Do you want to Shutdown this Work Order?',
-                'OKCaption': clientAPI.localizeText('ok'),
-                'CancelCaption': clientAPI.localizeText('cancel'),
+                'OKCaption': clientAPI.localizeText('yes'),
+                'CancelCaption': clientAPI.localizeText('no'),
                 'OnOK': '/SAPAssetManager/Rules/WorkOrders/CreateUpdate/WorkOrderShutdownOne.js',
             },
         },
