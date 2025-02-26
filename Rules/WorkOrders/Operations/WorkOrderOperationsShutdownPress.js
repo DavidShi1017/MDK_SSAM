@@ -6,7 +6,7 @@ import GenerateTimeEntryID from '../../TimeSheets/GenerateTimeEntryID';
 import TimeSheetsIsEnabled from '../../TimeSheets/TimeSheetsIsEnabled';
 import IsOperationLevelAssigmentType from './IsOperationLevelAssigmentType';
 import ExecuteActionWithAutoSync from '../../ApplicationEvents/AutoSync/ExecuteActionWithAutoSync';
-export default function WorkOrderOperationsShutdown(context) {
+export default function WorkOrderOperationsShutdownPress(context) {
     context.getPageProxy().showActivityIndicator();
 
     const selectedOperations = libCommon.getStateVariable(context, 'selectedOperations');
