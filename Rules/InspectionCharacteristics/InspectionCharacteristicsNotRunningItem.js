@@ -83,5 +83,5 @@ export default async function InspectionCharacteristicsNotRunningItem(context) {
     }
     
     
-    return clientAPI.getPageProxy().executeAction('');
+    return Promise.resolve(true);
 }
