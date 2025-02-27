@@ -34,14 +34,14 @@ export default async function InspectionCharacteristicsPageMetadataGenerator(cli
     if (binding['@odata.type'] === '#sap_mobile.InspectionLot') {
         if (binding.InspectionPoints_Nav && binding.InspectionPoints_Nav.length > 0) {
             entityset = binding['@odata.readLink'] + '/InspectionPoints_Nav';
-            //orderBy = '$orderby=EquipNum asc';
+            orderBy = '$orderby=EquipNum asc';
             libCom.setStateVariable(clientAPI, binding.OrderId + "-" + binding.InspectionLot, binding.WOHeader_Nav);
         } else {
             entityset = binding['@odata.readLink'];
         }
     } else if (binding['@odata.type'] === '#sap_mobile.MyWorkOrderOperation') {
         entityset = binding['@odata.readLink'] + '/InspectionPoint_Nav';
-        //orderBy = '$orderby=EquipNum asc';
+        orderBy = '$orderby=EquipNum asc';
             libCom.setStateVariable(clientAPI, binding.OrderId + "-" + binding.InspectionLot, binding.WOHeader_Nav);
     }  else if (binding['@odata.type'] === '#sap_mobile.InspectionPoint' || binding['@odata.type'] === '#sap_mobile.EAMChecklistLink') {      
         libCom.setStateVariable(clientAPI, binding.OrderId + "-" + binding.InspectionLot, binding.WOHeader_Nav);
