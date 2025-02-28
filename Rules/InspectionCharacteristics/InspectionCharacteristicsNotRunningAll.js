@@ -88,43 +88,43 @@ export default async function InspectionCharacteristicsNotRunningAll(context) {
                                 valuationCell.setStyle(style);
                             }
 
-                        }else if(valueCell._cell.Name === 'Qualitative'){
-                            //valueCell = context._control.getTable().getRowCellByName(context._control.getRow(), 'Qualitative');
-                            //let readLink = context._control.getValue();
-                            //valuationCell.setValue(0);
-                            let listPickerValue = '';
-                            let listPickerDisplayValue = '';
-                            let filter = '$orderby=Code asc&$filter=(SelectedSet eq \'' + SelectedSet + '\' and Plant eq \'' + SelectedSetPlant + '\' and Catalog eq \'' + Catalog + '\' and Code eq \'NR\')';
-                            let CodeGroup = await context.read('/SAPAssetManager/Services/AssetManager.service', 'InspectionCodes', [], filter).then(valuationResult => {
-                                if (valuationResult && valuationResult.getItem(0)) {
-                                    return valuationResult.getItem(0).CodeGroup;
-                                }
-                                return '';
-                            });
-                            listPickerValue = `InspectionCodes(Plant='${SelectedSetPlant}',SelectedSet='${SelectedSet}',Catalog='${Catalog}',CodeGroup='${CodeGroup}',Code='NR')`;
-                            listPickerDisplayValue = 'Not Operating';
+                        // }else if(valueCell._cell.Name === 'Qualitative'){
+                        //     //valueCell = context._control.getTable().getRowCellByName(context._control.getRow(), 'Qualitative');
+                        //     //let readLink = context._control.getValue();
+                        //     //valuationCell.setValue(0);
+                        //     let listPickerValue = '';
+                        //     let listPickerDisplayValue = '';
+                        //     let filter = '$orderby=Code asc&$filter=(SelectedSet eq \'' + SelectedSet + '\' and Plant eq \'' + SelectedSetPlant + '\' and Catalog eq \'' + Catalog + '\' and Code eq \'NR\')';
+                        //     let CodeGroup = await context.read('/SAPAssetManager/Services/AssetManager.service', 'InspectionCodes', [], filter).then(valuationResult => {
+                        //         if (valuationResult && valuationResult.getItem(0)) {
+                        //             return valuationResult.getItem(0).CodeGroup;
+                        //         }
+                        //         return '';
+                        //     });
+                        //     listPickerValue = `InspectionCodes(Plant='${SelectedSetPlant}',SelectedSet='${SelectedSet}',Catalog='${Catalog}',CodeGroup='${CodeGroup}',Code='NR')`;
+                        //     listPickerDisplayValue = 'Not Operating';
                     
-                            valueCell.setValue(listPickerValue);
-                            valueCell.setDisplayValue(listPickerDisplayValue);
+                        //     valueCell.setValue(listPickerValue);
+                        //     valueCell.setDisplayValue(listPickerDisplayValue);
                     
-                            binding.Valuation = 'A';
-                            valuationStatus = binding.Valuation;
-                            style = { FontColor: '107e3e' };
-                            valuationReadlink = `InspectionResultValuations('A')`;
-                            let valuation = await context.read('/SAPAssetManager/Services/AssetManager.service', valuationReadlink, [], '').then(valuationResult => {
-                                if (valuationResult && valuationResult.getItem(0)) {
-                                    return valuationResult.getItem(0).ShortText;
-                                }
-                                return '';
-                            });
-                            valuationCell.clearValidation();
-                            valuationCell.setValue(valuation);
-                            if (style) {
-                                valuationCell.setStyle(style);
-                            }
+                        //     binding.Valuation = 'A';
+                        //     valuationStatus = binding.Valuation;
+                        //     style = { FontColor: '107e3e' };
+                        //     valuationReadlink = `InspectionResultValuations('A')`;
+                        //     let valuation = await context.read('/SAPAssetManager/Services/AssetManager.service', valuationReadlink, [], '').then(valuationResult => {
+                        //         if (valuationResult && valuationResult.getItem(0)) {
+                        //             return valuationResult.getItem(0).ShortText;
+                        //         }
+                        //         return '';
+                        //     });
+                        //     valuationCell.clearValidation();
+                        //     valuationCell.setValue(valuation);
+                        //     if (style) {
+                        //         valuationCell.setStyle(style);
+                        //     }
                     
                             
-                        }
+                         }
                     }
                 }
             }
@@ -135,9 +135,10 @@ export default async function InspectionCharacteristicsNotRunningAll(context) {
             }
         }
         //}
+        extension.setEditable(true);
+        extension.getTable();
     }
-    extension.setEditable(true);
-    extension.getTable();
+
     //context.getPageProxy().redraw();
     
     context.executeAction('/SAPAssetManager/Actions/Common/AppUpdateSuccess.action');
