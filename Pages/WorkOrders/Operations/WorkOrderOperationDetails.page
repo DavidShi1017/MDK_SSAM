@@ -54,7 +54,7 @@
 							"Semantic": "Normal",
 							"ImagePosition": "Trailing",
 							"Enabled": true,
-							"OnPress": "/SAPAssetManager/Rules/WorkOrders/CreateUpdate/WorkOrderShutdownOne.js"
+							"OnPress": "/SAPAssetManager/Rules/WorkOrders/CreateUpdate/WorkOrderShutdownOnePress.js"
 						}
 					],
 					"Separators": {

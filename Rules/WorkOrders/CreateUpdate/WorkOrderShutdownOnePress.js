@@ -3,33 +3,21 @@ import libCommon from '../../Common/Library/CommonLibrary';
 
 import ExecuteActionWithAutoSync from '../../ApplicationEvents/AutoSync/ExecuteActionWithAutoSync';
 import NativeScriptObject from '../../Common/Library/NativeScriptObject';
-export default function WorkOrderShutdownOne(clientAPI) {
+export default function WorkOrderShutdownOnePress(clientAPI) {
     //Remove variable FollowUpFlagPage before create
-   
-    let binding = clientAPI.binding;
-
-    if(binding){
-        binding.OrderHeaderReadLink = "MyWorkOrderHeaders('" + binding.OrderId + "')";
-        //return clientAPI.executeAction('/SAPAssetManager/Actions/WorkOrders/CreateUpdate/WorkOrderShutdown.action');
-        return clientAPI.executeAction({'Name': '/SAPAssetManager/Actions/WorkOrders/CreateUpdate/WorkOrderShutdown.action', 'Properties': {
-            'Target': {
-                'EntitySet': 'MyWorkOrderHeaders',
-                'Service': '/SAPAssetManager/Services/AssetManager.service',
-                'ReadLink': binding.OrderHeaderReadLink,
-            },
+    return clientAPI.executeAction(
+        {
+            'Name': '/SAPAssetManager/Actions/Common/GenericWarningDialog.action',
             'Properties': {
-                'ZSystemCondition': 'X'
+                'Title': 'Shutdown',
+                'Message': 'Do you want to Shutdown this Work Order?',
+                'OKCaption': clientAPI.localizeText('yes'),
+                'CancelCaption': clientAPI.localizeText('no'),
+                'OnOK': '/SAPAssetManager/Rules/WorkOrders/CreateUpdate/WorkOrderShutdownOne.js',
             },
-        
-        }}).then( result => {
-            if(result){
-                libCommon.setStateVariable(clientAPI, binding.OrderId + 'ZSystemCondition', 'X');
-                return ExecuteActionWithAutoSync(clientAPI, '/SAPAssetManager/Actions/CreateUpdateDelete/UpdateEntitySuccessMessage.action');
-            }
-        }).catch(err => {
-            Logger.error("Shutdown error---->" + err);
-        });
-
+        },
+    );    
+    
         
         // let jsonData = { "name": "David", "age": 30, "city": "Shanghai" };
         // let tempFolder = NativeScriptObject.getNativeScriptObject(clientAPI).fileSystemModule.knownFolders.temp();
@@ -49,5 +37,5 @@ export default function WorkOrderShutdownOne(clientAPI) {
         // }).catch((err) => {
         //     console.log(err.stack);
         // });
-    }
+    
 }

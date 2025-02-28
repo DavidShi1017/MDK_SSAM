@@ -4,6 +4,7 @@ import NotificationTypeLstPkrDefault from '../Notifications/NotificationTypePkrD
 import QMNotificationDefectType from '../Notifications/QMNotificationDefectType';
 import PreloadHierarchyListPickerValues from '../HierarchyControl/PreloadHierarchyListPickerValues';
 import InspectionCharacteristicsEDTLibrary from './Update/InspectionCharacteristicsEDTLibrary';
+import {validateDependentCharacteristics} from './Update/InspectionCharacteristicsOnExtensionLoadedEDT';
 export default async function InspectionCharacteristicsNotRunningItem(context) {
     let clientAPI = context._control.getTable().context.clientAPI;
     //common.setOnChangesetFlag(clientAPI, true);
@@ -12,7 +13,7 @@ export default async function InspectionCharacteristicsNotRunningItem(context) {
     let valuationStatus;
     let style;
     let binding = context.binding;
-    let newBinding = binding;
+
     let valuationReadlink = '';
     let valueCell = context._control.getTable().getRowCellByName(context._control.getRow(), 'Quantitive');
     let valuationCell = context._control.getTable().getRowCellByName(context._control.getRow(), 'Valuation');
@@ -77,11 +78,13 @@ export default async function InspectionCharacteristicsNotRunningItem(context) {
         if (style) {
             valuationCell.setStyle(style);
         }
-
+        //validateDependentCharacteristics(context._control.getTable(), context.binding, true);
         let statusText = inspCharLib.checkEDTReadingCounts(context, context._control.getTable());
         InspectionCharacteristicsEDTLibrary.findHeaderSection(clientAPI, context._control.getTable()).setStatusText(statusText);
     }
+    //clientAPI.getPageProxy().redraw();
     
-    
-    return clientAPI.getPageProxy().executeAction('');
+    // return new Promise(resolve => {
+    //     resolve({ "Success": true });
+    // });
 }
