@@ -20,6 +20,8 @@ export default async function InspectionCharacteristicsNotRunningAll(context) {
     let SelectedSet = common.getStateVariable(context, 'SelectedSet');
     let SelectedSetPlant = common.getStateVariable(context, 'SelectedSetPlant');
     let Catalog = common.getStateVariable(context, 'Catalog');
+    let CodeGroup = common.getStateVariable(context, 'CodeGroup');
+    
     if (currentSectionHeader && currentSection) {
         //for (let section of sections) {
         let extension;
@@ -95,12 +97,12 @@ export default async function InspectionCharacteristicsNotRunningAll(context) {
                             let listPickerValue = '';
                             let listPickerDisplayValue = '';
                             let filter = '$orderby=Code asc&$filter=(SelectedSet eq \'' + SelectedSet + '\' and Plant eq \'' + SelectedSetPlant + '\' and Catalog eq \'' + Catalog + '\' and Code eq \'NR\')';
-                            let CodeGroup = await context.read('/SAPAssetManager/Services/AssetManager.service', 'InspectionCodes', [], filter).then(valuationResult => {
-                                if (valuationResult && valuationResult.getItem(0)) {
-                                    return valuationResult.getItem(0).CodeGroup;
-                                }
-                                return '';
-                            });
+                            // let CodeGroup = await context.read('/SAPAssetManager/Services/AssetManager.service', 'InspectionCodes', [], filter).then(valuationResult => {
+                            //     if (valuationResult && valuationResult.getItem(0)) {
+                            //         return valuationResult.getItem(0).CodeGroup;
+                            //     }
+                            //     return '';
+                            // });
                             listPickerValue = `InspectionCodes(Plant='${SelectedSetPlant}',SelectedSet='${SelectedSet}',Catalog='${Catalog}',CodeGroup='${CodeGroup}',Code='NR')`;
                             listPickerDisplayValue = 'Not Operating';
                     

@@ -77,6 +77,8 @@ export default function InspectionCharacteristicsQuantitativeAndQualitativeEDTCo
         libCom.setStateVariable(context, 'SelectedSet', binding.SelectedSet);
         libCom.setStateVariable(context, 'SelectedSetPlant', binding.SelectedSetPlant);
         libCom.setStateVariable(context, 'Catalog', binding.Catalog);
+        libCom.setStateVariable(context, 'CodeGroup', binding.CodeGroup);
+       
         if(libVal.evalIsEmpty(binding.Valuation)){
             //listPickerValue = `InspectionCodes(Plant='${binding.SelectedSetPlant}',SelectedSet='${binding.SelectedSet}',Catalog='${binding.Catalog}',CodeGroup='${binding.CodeGroup}',Code='${binding.Code}')`;
             //isMandatory = true;
