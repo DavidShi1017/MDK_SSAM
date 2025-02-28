@@ -140,7 +140,5 @@ export default async function InspectionCharacteristicsNotRunningAll(context) {
     
     //context.getPageProxy().redraw();
     
-    // return new Promise(resolve => {
-    //     resolve({ "Success": true });
-    // });
+    context.executeAction('/SAPAssetManager/Actions/Common/AppUpdateSuccess.action');
 }
