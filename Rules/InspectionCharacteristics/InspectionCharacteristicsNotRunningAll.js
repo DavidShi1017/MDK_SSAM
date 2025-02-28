@@ -90,7 +90,7 @@ export default async function InspectionCharacteristicsNotRunningAll(context) {
                                 valuationCell.setStyle(style);
                             }
 
-                        }else if(valueCell._cell.Name === 'Qualitative'){
+                        }//else if(valueCell._cell.Name === 'Qualitative'){
                             //valueCell = context._control.getTable().getRowCellByName(context._control.getRow(), 'Qualitative');
                             //let readLink = context._control.getValue();
                             //valuationCell.setValue(0);
@@ -126,7 +126,7 @@ export default async function InspectionCharacteristicsNotRunningAll(context) {
                             // }
                     
                             
-                        }
+                        //}
                     }
                 }
             }
