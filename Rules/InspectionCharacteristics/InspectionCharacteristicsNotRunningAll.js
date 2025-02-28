@@ -135,8 +135,8 @@ export default async function InspectionCharacteristicsNotRunningAll(context) {
             }
         }
         //}
-        extension.setEditable(true);
-        extension.getTable();
+        //extension.setEditable(true);
+        //extension.getTable();
     }
 
     //context.getPageProxy().redraw();
