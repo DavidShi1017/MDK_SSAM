@@ -75,18 +75,18 @@ export default async function InspectionCharacteristicsNotRunningAll(context) {
                             valuationStatus = binding.Valuation;
                             style = { FontColor: '107e3e' };
                     
-                            valuationReadlink = `InspectionResultValuations('${valuationStatus}')`;
-                            let valuation = await context.read('/SAPAssetManager/Services/AssetManager.service', valuationReadlink, [], '').then(valuationResult => {
-                                if (valuationResult && valuationResult.getItem(0)) {
-                                    return valuationResult.getItem(0).ShortText;
-                                }
-                                return '';
-                            });
-                            valuationCell.clearValidation();
-                            valuationCell.setValue(valuation);
-                            if (style) {
-                                valuationCell.setStyle(style);
-                            }
+                            // valuationReadlink = `InspectionResultValuations('${valuationStatus}')`;
+                            // let valuation = await context.read('/SAPAssetManager/Services/AssetManager.service', valuationReadlink, [], '').then(valuationResult => {
+                            //     if (valuationResult && valuationResult.getItem(0)) {
+                            //         return valuationResult.getItem(0).ShortText;
+                            //     }
+                            //     return '';
+                            // });
+                            // valuationCell.clearValidation();
+                            // valuationCell.setValue(valuation);
+                            // if (style) {
+                            //     valuationCell.setStyle(style);
+                            // }
 
                         // }else if(valueCell._cell.Name === 'Qualitative'){
                         //     //valueCell = context._control.getTable().getRowCellByName(context._control.getRow(), 'Qualitative');
