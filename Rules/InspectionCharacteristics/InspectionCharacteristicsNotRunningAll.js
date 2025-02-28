@@ -129,10 +129,10 @@ export default async function InspectionCharacteristicsNotRunningAll(context) {
                 }
             }
         
-            if(extensionHeader){
-                statusText = context.localizeText('x_of_x_complete', [rowCount, rowCount]);
-                extensionHeader.setStatusText(statusText);
-            }
+            // if(extensionHeader){
+            //     statusText = context.localizeText('x_of_x_complete', [rowCount, rowCount]);
+            //     extensionHeader.setStatusText(statusText);
+            // }
         }
         //}
     }
