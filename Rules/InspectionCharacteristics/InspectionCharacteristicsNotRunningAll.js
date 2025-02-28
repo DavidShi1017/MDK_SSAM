@@ -119,11 +119,11 @@ export default async function InspectionCharacteristicsNotRunningAll(context) {
                             //     }
                             //     return '';
                             // });
-                            valuationCell.clearValidation();
-                            valuationCell.setValue('Accepted');
-                            if (style) {
-                                valuationCell.setStyle(style);
-                            }
+                            // valuationCell.clearValidation();
+                            // valuationCell.setValue('Accepted');
+                            // if (style) {
+                            //     valuationCell.setStyle(style);
+                            // }
                     
                             
                         }
