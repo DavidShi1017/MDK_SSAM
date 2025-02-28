@@ -129,15 +129,15 @@ export default async function InspectionCharacteristicsNotRunningAll(context) {
                 }
             }
         
-            // if(extensionHeader){
-            //     statusText = context.localizeText('x_of_x_complete', [rowCount, rowCount]);
-            //     extensionHeader.setStatusText(statusText);
-            // }
+            if(extensionHeader){
+                statusText = context.localizeText('x_of_x_complete', [rowCount, rowCount]);
+                extensionHeader.setStatusText(statusText);
+            }
         }
         //}
     }
-    
-    
+    extension.setEditable(true);
+    extension.getTable();
     //context.getPageProxy().redraw();
     
     context.executeAction('/SAPAssetManager/Actions/Common/AppUpdateSuccess.action');
