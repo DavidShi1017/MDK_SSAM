@@ -94,25 +94,25 @@ export default async function InspectionCharacteristicsNotRunningAll(context) {
                             //valueCell = context._control.getTable().getRowCellByName(context._control.getRow(), 'Qualitative');
                             //let readLink = context._control.getValue();
                             //valuationCell.setValue(0);
-                            let listPickerValue = '';
-                            let listPickerDisplayValue = '';
-                            let filter = '$orderby=Code asc&$filter=(SelectedSet eq \'' + SelectedSet + '\' and Plant eq \'' + SelectedSetPlant + '\' and Catalog eq \'' + Catalog + '\' and Code eq \'NR\')';
+                            //let listPickerValue = '';
+                            //let listPickerDisplayValue = '';
+                            //let filter = '$orderby=Code asc&$filter=(SelectedSet eq \'' + SelectedSet + '\' and Plant eq \'' + SelectedSetPlant + '\' and Catalog eq \'' + Catalog + '\' and Code eq \'NR\')';
                             // let CodeGroup = await context.read('/SAPAssetManager/Services/AssetManager.service', 'InspectionCodes', [], filter).then(valuationResult => {
                             //     if (valuationResult && valuationResult.getItem(0)) {
                             //         return valuationResult.getItem(0).CodeGroup;
                             //     }
                             //     return '';
                             // });
-                            listPickerValue = `InspectionCodes(Plant='${SelectedSetPlant}',SelectedSet='${SelectedSet}',Catalog='${Catalog}',CodeGroup='${CodeGroup}',Code='NR')`;
-                            listPickerDisplayValue = 'Not Operating';
+                            //listPickerValue = `InspectionCodes(Plant='${SelectedSetPlant}',SelectedSet='${SelectedSet}',Catalog='${Catalog}',CodeGroup='${CodeGroup}',Code='NR')`;
+                            //listPickerDisplayValue = 'Not Operating';
                     
                             // valueCell.setValue(listPickerValue);
                             // valueCell.setDisplayValue(listPickerDisplayValue);
                     
-                            binding.Valuation = 'A';
-                            valuationStatus = binding.Valuation;
-                            style = { FontColor: '107e3e' };
-                            valuationReadlink = `InspectionResultValuations('A')`;
+                            //binding.Valuation = 'A';
+                            //valuationStatus = binding.Valuation;
+                            //style = { FontColor: '107e3e' };
+                            //valuationReadlink = `InspectionResultValuations('A')`;
                             // let valuation = await context.read('/SAPAssetManager/Services/AssetManager.service', valuationReadlink, [], '').then(valuationResult => {
                             //     if (valuationResult && valuationResult.getItem(0)) {
                             //         return valuationResult.getItem(0).ShortText;
@@ -131,10 +131,10 @@ export default async function InspectionCharacteristicsNotRunningAll(context) {
                 }
             }
         
-            if(extensionHeader){
-                statusText = context.localizeText('x_of_x_complete', [rowCount, rowCount]);
-                extensionHeader.setStatusText(statusText);
-            }
+            // if(extensionHeader){
+            //     statusText = context.localizeText('x_of_x_complete', [rowCount, rowCount]);
+            //     extensionHeader.setStatusText(statusText);
+            // }
         }
         //}
     }
