@@ -184,6 +184,7 @@ export default function OperationChangeStatusOptions(context) {
                                                 Logger.info(context.getGlobalDefinition('/SAPAssetManager/Globals/Logs/CategoryMobileStatus.global').getValue(), 'Assignment type is 4, trasfer is not supported.');
                                             } else if (statusElement.MobileStatus === APPROVE && element.RoleType === userRoleType) {
                                                 let postUpdateRule;
+                                                noConfirmations = false; //remove Confirmation check for APPROVE
                                                 if (libSuper.isAutoCompleteOnApprovalEnabled(context)) {
                                                     if('KM05' === orderType){
                                                         Logger.debug("The order type is KM05, need to check data...");
