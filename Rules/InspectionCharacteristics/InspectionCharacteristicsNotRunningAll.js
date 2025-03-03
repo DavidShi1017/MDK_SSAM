@@ -20,6 +20,8 @@ export default async function InspectionCharacteristicsNotRunningAll(context) {
     let SelectedSet = common.getStateVariable(context, 'SelectedSet');
     let SelectedSetPlant = common.getStateVariable(context, 'SelectedSetPlant');
     let Catalog = common.getStateVariable(context, 'Catalog');
+    let CodeGroup = common.getStateVariable(context, 'CodeGroup');
+    
     if (currentSectionHeader && currentSection) {
         //for (let section of sections) {
         let extension;
@@ -76,14 +78,14 @@ export default async function InspectionCharacteristicsNotRunningAll(context) {
                             style = { FontColor: '107e3e' };
                     
                             valuationReadlink = `InspectionResultValuations('${valuationStatus}')`;
-                            let valuation = await context.read('/SAPAssetManager/Services/AssetManager.service', valuationReadlink, [], '').then(valuationResult => {
-                                if (valuationResult && valuationResult.getItem(0)) {
-                                    return valuationResult.getItem(0).ShortText;
-                                }
-                                return '';
-                            });
+                            // let valuation = await context.read('/SAPAssetManager/Services/AssetManager.service', valuationReadlink, [], '').then(valuationResult => {
+                            //     if (valuationResult && valuationResult.getItem(0)) {
+                            //         return valuationResult.getItem(0).ShortText;
+                            //     }
+                            //     return '';
+                            // });
                             valuationCell.clearValidation();
-                            valuationCell.setValue(valuation);
+                            valuationCell.setValue('Accepted');
                             if (style) {
                                 valuationCell.setStyle(style);
                             }
@@ -95,12 +97,12 @@ export default async function InspectionCharacteristicsNotRunningAll(context) {
                             let listPickerValue = '';
                             let listPickerDisplayValue = '';
                             let filter = '$orderby=Code asc&$filter=(SelectedSet eq \'' + SelectedSet + '\' and Plant eq \'' + SelectedSetPlant + '\' and Catalog eq \'' + Catalog + '\' and Code eq \'NR\')';
-                            let CodeGroup = await context.read('/SAPAssetManager/Services/AssetManager.service', 'InspectionCodes', [], filter).then(valuationResult => {
-                                if (valuationResult && valuationResult.getItem(0)) {
-                                    return valuationResult.getItem(0).CodeGroup;
-                                }
-                                return '';
-                            });
+                            // let CodeGroup = await context.read('/SAPAssetManager/Services/AssetManager.service', 'InspectionCodes', [], filter).then(valuationResult => {
+                            //     if (valuationResult && valuationResult.getItem(0)) {
+                            //         return valuationResult.getItem(0).CodeGroup;
+                            //     }
+                            //     return '';
+                            // });
                             listPickerValue = `InspectionCodes(Plant='${SelectedSetPlant}',SelectedSet='${SelectedSet}',Catalog='${Catalog}',CodeGroup='${CodeGroup}',Code='NR')`;
                             listPickerDisplayValue = 'Not Operating';
                     
@@ -111,14 +113,14 @@ export default async function InspectionCharacteristicsNotRunningAll(context) {
                             valuationStatus = binding.Valuation;
                             style = { FontColor: '107e3e' };
                             valuationReadlink = `InspectionResultValuations('A')`;
-                            let valuation = await context.read('/SAPAssetManager/Services/AssetManager.service', valuationReadlink, [], '').then(valuationResult => {
-                                if (valuationResult && valuationResult.getItem(0)) {
-                                    return valuationResult.getItem(0).ShortText;
-                                }
-                                return '';
-                            });
+                            // let valuation = await context.read('/SAPAssetManager/Services/AssetManager.service', valuationReadlink, [], '').then(valuationResult => {
+                            //     if (valuationResult && valuationResult.getItem(0)) {
+                            //         return valuationResult.getItem(0).ShortText;
+                            //     }
+                            //     return '';
+                            // });
                             valuationCell.clearValidation();
-                            valuationCell.setValue(valuation);
+                            valuationCell.setValue('Accepted');
                             if (style) {
                                 valuationCell.setStyle(style);
                             }
@@ -140,7 +142,7 @@ export default async function InspectionCharacteristicsNotRunningAll(context) {
     
     //context.getPageProxy().redraw();
     
-    // return new Promise(resolve => {
-    //     resolve({ "Success": true });
-    // });
+    return new Promise(resolve => {
+        resolve({ "Success": true });
+    });
 }
