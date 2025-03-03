@@ -22,122 +22,122 @@ export default async function InspectionCharacteristicsNotRunningAll(context) {
     let Catalog = common.getStateVariable(context, 'Catalog');
     let CodeGroup = common.getStateVariable(context, 'CodeGroup');
     
-    // if (currentSectionHeader && currentSection) {
-    //     //for (let section of sections) {
-    //     let extension;
-    //     let extensionHeader;
-    //     let statusText;
-    //     if (num >= 2410) {
-    //         if (currentSection.getExtension() && currentSection.getExtension().constructor && currentSection.getExtension().constructor.name === 'EditableDataTableViewExtension') {
-    //             extension = currentSection.getExtension();
-    //         }
-    //         if (currentSectionHeader.getExtension() && currentSectionHeader.getExtension().constructor && currentSectionHeader.getExtension().constructor.name === 'SectionHeaderViewExtension') {
-    //             extensionHeader = currentSectionHeader.getExtension();
-    //         }
-    //     } else {
-    //         if (currentSection.getExtensions() && currentSection.getExtensions()[0] && currentSection.getExtensions()[0].constructor && currentSection.getExtensions()[0].constructor.name === 'EditableDataTableViewExtension') {
-    //             extension = currentSection.getExtensions()[0];
-    //         }
-    //         if (currentSectionHeader.getExtensions() && currentSectionHeader.getExtensions()[0] && currentSectionHeader.getExtensions()[0].constructor && currentSectionHeader.getExtensions()[0].constructor.name === 'SectionHeaderViewExtension') {
-    //             extensionHeader = currentSectionHeader.getExtensions()[0];
-    //         }
-    //     }
-    //     // if(!extensionHeader){
-    //     //     continue;
-    //     // }
-    //     // let headerIndex = extensionHeader._params.UserData.Index
-    //     // if(headerIndex != index){
-    //     //     continue;
-    //     // }
-    //     if (extension) {
-    //         let rowCount = 0;
-    //         let rows = extension.getRows();
-    //         let valuationStatus;
-    //         let style;
-    //         if(rows){
+    if (currentSectionHeader && currentSection) {
+        //for (let section of sections) {
+        let extension;
+        let extensionHeader;
+        let statusText;
+        if (num >= 2410) {
+            if (currentSection.getExtension() && currentSection.getExtension().constructor && currentSection.getExtension().constructor.name === 'EditableDataTableViewExtension') {
+                extension = currentSection.getExtension();
+            }
+            if (currentSectionHeader.getExtension() && currentSectionHeader.getExtension().constructor && currentSectionHeader.getExtension().constructor.name === 'SectionHeaderViewExtension') {
+                extensionHeader = currentSectionHeader.getExtension();
+            }
+        } else {
+            if (currentSection.getExtensions() && currentSection.getExtensions()[0] && currentSection.getExtensions()[0].constructor && currentSection.getExtensions()[0].constructor.name === 'EditableDataTableViewExtension') {
+                extension = currentSection.getExtensions()[0];
+            }
+            if (currentSectionHeader.getExtensions() && currentSectionHeader.getExtensions()[0] && currentSectionHeader.getExtensions()[0].constructor && currentSectionHeader.getExtensions()[0].constructor.name === 'SectionHeaderViewExtension') {
+                extensionHeader = currentSectionHeader.getExtensions()[0];
+            }
+        }
+        // if(!extensionHeader){
+        //     continue;
+        // }
+        // let headerIndex = extensionHeader._params.UserData.Index
+        // if(headerIndex != index){
+        //     continue;
+        // }
+        if (extension) {
+            let rowCount = 0;
+            let rows = extension.getRows();
+            let valuationStatus;
+            let style;
+            if(rows){
                 
-    //             for (let i = 0; i < rows.length; i++) {
-    //                 if(rows[i].length > 0){
-    //                     rowCount++;
-    //                 }else{
-    //                     continue;
-    //                 }
+                for (let i = 0; i < rows.length; i++) {
+                    if(rows[i].length > 0){
+                        rowCount++;
+                    }else{
+                        continue;
+                    }
                     
-    //                 let valueCell = rows[i][3];
-    //                 let valuationCell = rows[i][4];
-    //                 let RemarksCell = rows[i][5];
-    //                 if(valueCell && valueCell._cell){
-    //                     let valuationReadlink = '';
+                    let valueCell = rows[i][3];
+                    let valuationCell = rows[i][4];
+                    let RemarksCell = rows[i][5];
+                    if(valueCell && valueCell._cell){
+                        let valuationReadlink = '';
                         
-    //                     if(valueCell._cell.Name === 'Quantitive'){
+                        if(valueCell._cell.Name === 'Quantitive'){
                             
-    //                         valueCell.setValue(0);
-    //                         RemarksCell.setValue('NR');                       
-    //                         binding.Valuation = 'A';
-    //                         valuationStatus = binding.Valuation;
-    //                         style = { FontColor: '107e3e' };
+                            valueCell.setValue(0);
+                            RemarksCell.setValue('NR');                       
+                            binding.Valuation = 'A';
+                            valuationStatus = binding.Valuation;
+                            style = { FontColor: '107e3e' };
                     
-    //                         valuationReadlink = `InspectionResultValuations('${valuationStatus}')`;
-    //                         // let valuation = await context.read('/SAPAssetManager/Services/AssetManager.service', valuationReadlink, [], '').then(valuationResult => {
-    //                         //     if (valuationResult && valuationResult.getItem(0)) {
-    //                         //         return valuationResult.getItem(0).ShortText;
-    //                         //     }
-    //                         //     return '';
-    //                         // });
-    //                         valuationCell.clearValidation();
-    //                         valuationCell.setValue('Accepted');
-    //                         if (style) {
-    //                             valuationCell.setStyle(style);
-    //                         }
+                            valuationReadlink = `InspectionResultValuations('${valuationStatus}')`;
+                            // let valuation = await context.read('/SAPAssetManager/Services/AssetManager.service', valuationReadlink, [], '').then(valuationResult => {
+                            //     if (valuationResult && valuationResult.getItem(0)) {
+                            //         return valuationResult.getItem(0).ShortText;
+                            //     }
+                            //     return '';
+                            // });
+                            valuationCell.clearValidation();
+                            valuationCell.setValue('Accepted');
+                            if (style) {
+                                valuationCell.setStyle(style);
+                            }
 
-    //                     }//else if(valueCell._cell.Name === 'Qualitative'){
-    //                         //valueCell = context._control.getTable().getRowCellByName(context._control.getRow(), 'Qualitative');
-    //                         //let readLink = context._control.getValue();
-    //                         //valuationCell.setValue(0);
-    //                         //let listPickerValue = '';
-    //                         //let listPickerDisplayValue = '';
-    //                         //let filter = '$orderby=Code asc&$filter=(SelectedSet eq \'' + SelectedSet + '\' and Plant eq \'' + SelectedSetPlant + '\' and Catalog eq \'' + Catalog + '\' and Code eq \'NR\')';
-    //                         // let CodeGroup = await context.read('/SAPAssetManager/Services/AssetManager.service', 'InspectionCodes', [], filter).then(valuationResult => {
-    //                         //     if (valuationResult && valuationResult.getItem(0)) {
-    //                         //         return valuationResult.getItem(0).CodeGroup;
-    //                         //     }
-    //                         //     return '';
-    //                         // });
-    //                         //listPickerValue = `InspectionCodes(Plant='${SelectedSetPlant}',SelectedSet='${SelectedSet}',Catalog='${Catalog}',CodeGroup='${CodeGroup}',Code='NR')`;
-    //                         //listPickerDisplayValue = 'Not Operating';
+                        }//else if(valueCell._cell.Name === 'Qualitative'){
+                            //valueCell = context._control.getTable().getRowCellByName(context._control.getRow(), 'Qualitative');
+                            //let readLink = context._control.getValue();
+                            //valuationCell.setValue(0);
+                            //let listPickerValue = '';
+                            //let listPickerDisplayValue = '';
+                            //let filter = '$orderby=Code asc&$filter=(SelectedSet eq \'' + SelectedSet + '\' and Plant eq \'' + SelectedSetPlant + '\' and Catalog eq \'' + Catalog + '\' and Code eq \'NR\')';
+                            // let CodeGroup = await context.read('/SAPAssetManager/Services/AssetManager.service', 'InspectionCodes', [], filter).then(valuationResult => {
+                            //     if (valuationResult && valuationResult.getItem(0)) {
+                            //         return valuationResult.getItem(0).CodeGroup;
+                            //     }
+                            //     return '';
+                            // });
+                            //listPickerValue = `InspectionCodes(Plant='${SelectedSetPlant}',SelectedSet='${SelectedSet}',Catalog='${Catalog}',CodeGroup='${CodeGroup}',Code='NR')`;
+                            //listPickerDisplayValue = 'Not Operating';
                     
-    //                         // valueCell.setValue(listPickerValue);
-    //                         // valueCell.setDisplayValue(listPickerDisplayValue);
+                            // valueCell.setValue(listPickerValue);
+                            // valueCell.setDisplayValue(listPickerDisplayValue);
                     
-    //                         //binding.Valuation = 'A';
-    //                         //valuationStatus = binding.Valuation;
-    //                         //style = { FontColor: '107e3e' };
-    //                         //valuationReadlink = `InspectionResultValuations('A')`;
-    //                         // let valuation = await context.read('/SAPAssetManager/Services/AssetManager.service', valuationReadlink, [], '').then(valuationResult => {
-    //                         //     if (valuationResult && valuationResult.getItem(0)) {
-    //                         //         return valuationResult.getItem(0).ShortText;
-    //                         //     }
-    //                         //     return '';
-    //                         // });
-    //                         // valuationCell.clearValidation();
-    //                         // valuationCell.setValue('Accepted');
-    //                         // if (style) {
-    //                         //     valuationCell.setStyle(style);
-    //                         // }
+                            //binding.Valuation = 'A';
+                            //valuationStatus = binding.Valuation;
+                            //style = { FontColor: '107e3e' };
+                            //valuationReadlink = `InspectionResultValuations('A')`;
+                            // let valuation = await context.read('/SAPAssetManager/Services/AssetManager.service', valuationReadlink, [], '').then(valuationResult => {
+                            //     if (valuationResult && valuationResult.getItem(0)) {
+                            //         return valuationResult.getItem(0).ShortText;
+                            //     }
+                            //     return '';
+                            // });
+                            // valuationCell.clearValidation();
+                            // valuationCell.setValue('Accepted');
+                            // if (style) {
+                            //     valuationCell.setStyle(style);
+                            // }
                     
                             
-    //                     //}
-    //                 }
-    //             }
-    //         }
+                        //}
+                    }
+                }
+            }
         
-    //         // if(extensionHeader){
-    //         //     statusText = context.localizeText('x_of_x_complete', [rowCount, rowCount]);
-    //         //     extensionHeader.setStatusText(statusText);
-    //         // }
-    //     }
-    //     //}
-    // }
+            // if(extensionHeader){
+            //     statusText = context.localizeText('x_of_x_complete', [rowCount, rowCount]);
+            //     extensionHeader.setStatusText(statusText);
+            // }
+        }
+        //}
+    }
     
     
     //context.getPageProxy().redraw();
