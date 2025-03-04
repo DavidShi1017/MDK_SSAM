@@ -7,7 +7,7 @@ import TimeSheetsIsEnabled from '../../TimeSheets/TimeSheetsIsEnabled';
 import IsOperationLevelAssigmentType from './IsOperationLevelAssigmentType';
 import ExecuteActionWithAutoSync from '../../ApplicationEvents/AutoSync/ExecuteActionWithAutoSync';
 export default function WorkOrderOperationsShutdown(context) {
-    context.getPageProxy().showActivityIndicator();
+    //context.getPageProxy().showActivityIndicator();
     const selectedOperations = libCommon.getStateVariable(context, 'selectedOperations');
     let failedOperations = [];
     let promiseArr = [];
