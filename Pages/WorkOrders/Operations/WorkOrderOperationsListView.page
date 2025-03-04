@@ -163,7 +163,7 @@
 			"_Name": "SystemconditionBtn",
 			"_Type": "Control.Type.ToolbarItem",
 			"Caption": "Shutdown",
-			"Enabled": "/SAPAssetManager/Rules/WorkOrders/Operations/WorkOrderOperationsConfirmButtonEnabled.js",
+			"Enabled": true,
 			"OnPress": "/SAPAssetManager/Rules/WorkOrders/Operations/WorkOrderOperationsShutdownPress.js"
 		},
 		{
