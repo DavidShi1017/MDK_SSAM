@@ -71,7 +71,7 @@ export default async function InspectionCharacteristicsNotRunningAll(context) {
                         
                         if(valueCell._cell.Name === 'Quantitive'){
                             
-                            valueCell.setValue(0);
+                            valueCell.setValue('0');
                             RemarksCell.setValue('NR');                       
                             binding.Valuation = 'A';
                             valuationStatus = binding.Valuation;
@@ -140,7 +140,7 @@ export default async function InspectionCharacteristicsNotRunningAll(context) {
     }
     
     
-    //context.getPageProxy().redraw();
+    context.redraw();
     
     return new Promise(resolve => {
         resolve({ "Success": true });
