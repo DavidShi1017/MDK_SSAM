@@ -31,7 +31,9 @@ export default function WorkOrderOperationsShutdown(context) {
 }
 
 function Shutdown(context, failedOperations, item) {
-
+    if(!context.binding){
+        context.binding = context.getPageProxy().binding;
+    }
     let beforeOperationChangeStatusPromise = Promise.resolve();
     return beforeOperationChangeStatusPromise.then(() => {       
         context.binding.OrderHeaderReadLink = "MyWorkOrderHeaders('" + item.binding.OrderId + "')";
