@@ -32,7 +32,7 @@ export default function WorkOrderOperationsShutdown(context) {
 
 function Shutdown(context, failedOperations, item) {
     if(!context.binding){
-        context.binding = context.getPageProxy().binding;
+        context.binding = {};
     }
     let beforeOperationChangeStatusPromise = Promise.resolve();
     return beforeOperationChangeStatusPromise.then(() => {       
