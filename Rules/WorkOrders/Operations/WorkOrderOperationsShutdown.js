@@ -7,12 +7,12 @@ import TimeSheetsIsEnabled from '../../TimeSheets/TimeSheetsIsEnabled';
 import IsOperationLevelAssigmentType from './IsOperationLevelAssigmentType';
 import ExecuteActionWithAutoSync from '../../ApplicationEvents/AutoSync/ExecuteActionWithAutoSync';
 export default function WorkOrderOperationsShutdown(context) {
-    context.getPageProxy().showActivityIndicator();
+    
     const selectedOperations = libCommon.getStateVariable(context, 'selectedOperations');
     let failedOperations = [];
     let promiseArr = [];
 
-
+    context.getPageProxy().showActivityIndicator();
     for (let i = 0; i < selectedOperations.length; i++) {
         let item = selectedOperations[i];
         promiseArr.push(Shutdown(context, failedOperations, item));
@@ -34,14 +34,14 @@ function Shutdown(context, failedOperations, item) {
 
     let beforeOperationChangeStatusPromise = Promise.resolve();
     return beforeOperationChangeStatusPromise.then(() => {       
-        context.binding.OrderHeaderReadLink = "MyWorkOrderHeaders('" + item.binding.OrderId + "')";
-        context.binding.OrderId = item.binding.OrderId;
+        let OrderHeaderReadLink = "MyWorkOrderHeaders('" + item.binding.OrderId + "')";
+       // context.binding.OrderId = item.binding.OrderId;
                     //return clientAPI.executeAction('/SAPAssetManager/Actions/WorkOrders/CreateUpdate/WorkOrderShutdown.action');
                     return context.executeAction({'Name': '/SAPAssetManager/Actions/WorkOrders/CreateUpdate/WorkOrderShutdown.action', 'Properties': {
                         'Target': {
                             'EntitySet': 'MyWorkOrderHeaders',
                             'Service': '/SAPAssetManager/Services/AssetManager.service',
-                            'ReadLink': context.binding.OrderHeaderReadLink,
+                            'ReadLink': OrderHeaderReadLink,
                         },
                         'Properties': {
                             'ZSystemCondition': 'X'
