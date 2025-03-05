@@ -5,8 +5,8 @@ import { ResetBulkConfirmationQueue } from './BulkConfirmationQueue';
 
 export default function WorkOrderOperationListViewOnLoad(clientAPI) {
     ResetBulkConfirmationQueue(clientAPI);
-    if(!context.binding){
-        context.getPageProxy().setBinding({'key': 123});
+    if(!clientAPI.binding){
+        clientAPI.getPageProxy().setBinding({'key': 123});
     }
     setCaption(clientAPI).then(() => {
         let myOperationListView = libCommon.getStateVariable(clientAPI, 'MyOperationListView');
