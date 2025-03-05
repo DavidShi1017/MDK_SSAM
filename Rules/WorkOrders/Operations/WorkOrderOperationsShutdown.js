@@ -12,7 +12,9 @@ export default function WorkOrderOperationsShutdown(context) {
     let failedOperations = [];
     let promiseArr = [];
 
-
+    if(!context.binding){
+        context.getPageProxy().setBinding(item)
+    }
     for (let i = 0; i < selectedOperations.length; i++) {
         let item = selectedOperations[i];
         promiseArr.push(Shutdown(context, failedOperations, item));
@@ -31,9 +33,7 @@ export default function WorkOrderOperationsShutdown(context) {
 }
 
 function Shutdown(context, failedOperations, item) {
-    if(!context.binding){
-        context.binding = {};
-    }
+    
     let beforeOperationChangeStatusPromise = Promise.resolve();
     return beforeOperationChangeStatusPromise.then(() => {       
         context.binding.OrderHeaderReadLink = "MyWorkOrderHeaders('" + item.binding.OrderId + "')";
