@@ -15,10 +15,6 @@ export default function WorkOrderOperationsShutdownPress(context) {
         //context.getPageProxy().dismissActivityIndicator();
         return context.executeAction('/SAPAssetManager/Actions/WorkOrders/Operations/WorkOrderOperationsNoSelectedMessage.action');
     }else{
-        let actionBinding = {
-            selectedOperations,
-        };
-        context.getPageProxy().setActionBinding(actionBinding);
         return context.executeAction(
             {
                 'Name': '/SAPAssetManager/Actions/Common/GenericWarningDialog.action',
