@@ -13,7 +13,7 @@ export default function WorkOrderOperationsShutdown(context) {
     let promiseArr = [];
 
     if(!context.binding){
-        context.getPageProxy().setBinding(item)
+        context.getPageProxy().setBinding(selectedOperations)
     }
     for (let i = 0; i < selectedOperations.length; i++) {
         let item = selectedOperations[i];
