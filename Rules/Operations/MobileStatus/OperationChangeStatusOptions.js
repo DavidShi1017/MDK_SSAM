@@ -342,6 +342,9 @@ export default function OperationChangeStatusOptions(context) {
                                                         }else{       
                                                             popoverItems.push({'Status': statusElement.MobileStatus, 'Title': transitionText, 'OnPress': '/SAPAssetManager/Rules/WorkOrders/Operations/NavOnCompleteOperationPage.js', 'TransitionType': transitionType});                                             
                                                         }
+                                                    }else{
+                                                       popoverItems.push({'Status': statusElement.MobileStatus, 'Title': transitionText, 'OnPress': '/SAPAssetManager/Rules/WorkOrders/Operations/NavOnCompleteOperationPage.js', 'TransitionType': transitionType});                                             
+
                                                     }
                                                     
                                                 }
