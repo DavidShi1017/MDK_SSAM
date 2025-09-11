@@ -342,10 +342,11 @@ export default function OperationChangeStatusOptions(context) {
                                                         }else{       
                                                             popoverItems.push({'Status': statusElement.MobileStatus, 'Title': transitionText, 'OnPress': '/SAPAssetManager/Rules/WorkOrders/Operations/NavOnCompleteOperationPage.js', 'TransitionType': transitionType});                                             
                                                         }
-                                                    }else{
-                                                       popoverItems.push({'Status': statusElement.MobileStatus, 'Title': transitionText, 'OnPress': '/SAPAssetManager/Rules/WorkOrders/Operations/NavOnCompleteOperationPage.js', 'TransitionType': transitionType});                                             
-
                                                     }
+                                                    // else{
+                                                    //    popoverItems.push({'Status': statusElement.MobileStatus, 'Title': transitionText, 'OnPress': '/SAPAssetManager/Rules/WorkOrders/Operations/NavOnCompleteOperationPage.js', 'TransitionType': transitionType});                                             
+
+                                                    // }
                                                     
                                                 }
                                             } else if (statusElement.MobileStatus === TRANSFER && (element.RoleType === userRoleType || personaLib.isFieldServiceTechnician(context) || !libSuper.isSupervisorFeatureEnabled(context))) {
