@@ -15,16 +15,15 @@
 			"OnPress": "/SAPAssetManager/Rules/WorkOrders/CreateUpdate/WorkOrderCreateNav.js"
 		},
 		{
-			"Position": "right",
-			"Icon":"$(PLT,/SAPAssetManager/Images/menuicon.png,/SAPAssetManager/Images/menuicon.android.png)",
-			"OnPress": "/SAPAssetManager/Actions/Supervisor/SupervisorWorkOrderAddPopover.action",
-			"Visible": "/SAPAssetManager/Rules/Supervisor/SupervisorRole/IsSupervisorSectionVisibleForWO.js"
+			"Position": "Right",
+			"Text": "$(L,workorders_assign)",
+			"Visible": "/SAPAssetManager/Rules/Supervisor/SupervisorRole/IsSupervisorSectionVisibleForWO.js",
+			"OnPress": "/SAPAssetManager/Actions/Supervisor/Assign/WorkOrderAssignNav.action"
 		},
 		{
 			"Position": "right",
 			"Icon": "$(PLT,'',/SAPAssetManager/Images/filter.android.png)",
 			"Caption": "/SAPAssetManager/Rules/Filter/FilterButtonCaption.js",
-			"Visible": "/SAPAssetManager/Rules/WorkOrders/WorkOrderListViewFilterVisible.js",
             "OnPress": "/SAPAssetManager/Actions/WorkOrders/WorkOrderFilter.action"
 		}]
 	},

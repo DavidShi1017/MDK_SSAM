@@ -1132,12 +1132,12 @@ export class OperationConstants {
         if (useDataQuery) {
             let queryBuilder = context.dataQueryBuilder();
             queryBuilder.expand(expands);
-            queryBuilder.orderBy('OrderId,OperationNo,OperationMobileStatus_Nav/MobileStatus');
+            queryBuilder.orderBy('OrderId,OperationNo');
             return queryBuilder;
         }
         libCommon.setStateVariable(context, 'CustomListFilter', '');
         return '$expand=' + expands +
-            '&$orderby=OrderId,OperationNo,OperationMobileStatus_Nav/MobileStatus';
+            '&$orderby=OrderId,OperationNo';
     }
 
     static OperationListQueryOptions(context) {
@@ -1156,7 +1156,7 @@ export class OperationConstants {
         libCommon.setStateVariable(context, 'CustomListFilter', '');
         return ''
             + expands
-            + '&$orderby=OrderId,OperationNo,ObjectKey,OperationMobileStatus_Nav/MobileStatus';
+            + '&$orderby=OrderId,OperationNo';
     }
 
     static WCMOperationsFilter(context) {

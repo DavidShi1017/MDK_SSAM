@@ -28,6 +28,6 @@ export default function WorkOrderOperationsConfirmQueryOption(context) {
     }
     // queryBuilder.expand('InspectionPoint_Nav,WOObjectList_Nav,Tools,OperationMobileStatus_Nav,OperationLongText,WOHeader,UserTimeEntry_Nav,WOHeader/WOPriority,Employee_Nav,WOOprDocuments_Nav/Document,Confirmations,WOHeader/OrderMobileStatus_Nav,WOHeader/WOPartners,WOHeader/Notification,OperationMobileStatus_Nav/OverallStatusCfg_Nav');
     queryBuilder.expand('OperationLongText,WOHeader/WOPriority,WOHeader/Notification,OperationMobileStatus_Nav/OverallStatusCfg_Nav');
-    queryBuilder.orderBy('OperationNo,OrderId,ObjectKey,OperationMobileStatus_Nav/MobileStatus');
+    queryBuilder.orderBy('OrderId,OperationNo');
     return queryBuilder;
 }

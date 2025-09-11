@@ -10,6 +10,9 @@
         "CreateUserGUID": "",
         "CreateUserId": ""
     },
+    "RequestOptions": {
+        "UpdateMode": "Replace"
+    },
     "Target": {
         "EntitySet": "PMMobileStatuses",
         "Service": "/SAPAssetManager/Services/AssetManager.service",

@@ -21,7 +21,7 @@ export function redrawSelectionList(context) {
     CommonLibrary.setStateVariable(context, 'firstOpenMultiSelectMode', false);
     CommonLibrary.setStateVariable(context, 'selectAllActive', false, 'WorkOrderOperationsListViewPage');
 
-    pageProxy._page._redrawActionBar();
+    pageProxy.getActionBar().reset();
 
     pageProxy.showActivityIndicator();
     return pageProxy.getControl('SectionedTable').redraw().finally(() => {
