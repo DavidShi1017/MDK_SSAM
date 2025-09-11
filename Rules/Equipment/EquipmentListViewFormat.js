@@ -6,7 +6,7 @@ import {ValueIfExists} from '../Common/Library/Formatter';
  * @see EquipmentLibrary
  */
 export default function EquipmentListViewFormat(context) {
-    var section = context.getName();
+    const section = context?.getParent()?.getName();
     var property = context.getProperty();
     var value = '';
 

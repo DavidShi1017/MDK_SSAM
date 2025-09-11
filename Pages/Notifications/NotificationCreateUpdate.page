@@ -83,6 +83,32 @@
                     "_Type": "Control.Type.FormCell.ListPicker"
                 },
                 {
+                    "_Name": "ActivityTypeListPicker",
+                    "_Type": "Control.Type.FormCell.ListPicker",
+                    "AllowMultipleSelection": false,
+                    "IsPickerDismissedOnSelection": true,
+                    "AllowDefaultValueIfOneItem": true,
+                    "IsSearchCancelledAfterSelection": true,
+                    "Search": {
+                        "Enabled": true,
+                        "Delay": 500,
+                        "MinimumCharacterThreshold": 3,
+                        "Placeholder": "$(L,search)",
+                        "BarcodeScanner": true
+                    },
+                    "Caption": "$(L,maintenance_activity_type)",
+                    "Value": "{ActivityType}",
+                    "PickerItems": {
+                        "DisplayValue": "{{#Property:ActivityType}} - {{#Property:ActivityTypeDescription}}",
+                        "ReturnValue": "{ActivityType}",
+                        "Target": {
+                            "EntitySet": "ActivityTypes",
+                            "Service": "/SAPAssetManager/Services/AssetManager.service",
+                            "QueryOptions":"$orderby=ActivityType"
+                        }
+                    }
+                },
+                {
                     "_Type": "Control.Type.FormCell.Extension",
                     "Module": "extension-HierarchyFramework",
                     "Control": "HierarchyExtension",
@@ -646,6 +672,7 @@
                     "_Type": "Control.Type.FormCell.Note"
                 },
                 {
+                    "AllowDefaultValueIfOneItem": true,
                     "AllowMultipleSelection": false,
                     "IsPickerDismissedOnSelection": true,
                     "IsSearchCancelledAfterSelection": true,
@@ -658,7 +685,7 @@
                         "BarcodeScanner": true
                     },
                     "Caption": "$(L,part_group)",
-                    "PickerItems": "/SAPAssetManager/Rules/Notifications/Item/CreateUpdate/NotificationItemPartGroupPickerItems.js",
+                    "PickerItems": [],
                     "OnValueChange" : "/SAPAssetManager/Rules/Notifications/Item/CreateUpdate/NotificationItemCreateUpdatePart.js",
                     "_Name": "PartGroupLstPkr",
                     "_Type": "Control.Type.FormCell.ListPicker"
@@ -692,6 +719,7 @@
                     "_Type": "Control.Type.FormCell.ListPicker"
                 },
                 {
+                    "AllowDefaultValueIfOneItem": true,
                     "AllowMultipleSelection": false,
                     "IsPickerDismissedOnSelection": true,
                     "IsSearchCancelledAfterSelection": true,
@@ -703,7 +731,7 @@
                         "BarcodeScanner": true
                     },
                     "Caption": "$(L,damage_group)",
-                    "PickerItems": "/SAPAssetManager/Rules/Notifications/Item/CreateUpdate/NotificationItemPartGroupPickerItems.js",
+                    "PickerItems": [],
                     "OnValueChange" : "/SAPAssetManager/Rules/Notifications/Item/CreateUpdate/NotificationItemCreateUpdateDamage.js",
                     "_Name": "DamageGroupLstPkr",
                     "_Type": "Control.Type.FormCell.ListPicker"
@@ -751,6 +779,7 @@
                     "_Type": "Control.Type.FormCell.Note"
                 },
                 {
+                    "AllowDefaultValueIfOneItem": true,
                     "AllowMultipleSelection": false,
                     "IsPickerDismissedOnSelection": true,
                     "IsSearchCancelledAfterSelection": true,
@@ -764,7 +793,7 @@
                     "IsEditable": false,
                     "Caption": "$(L,cause_group)",
                     "Value": "{CauseCodeGroup}",
-                    "PickerItems": "/SAPAssetManager/Rules/Notifications/Item/CreateUpdate/NotificationItemPartGroupPickerItems.js",
+                    "PickerItems": [],
                     "OnValueChange" : "/SAPAssetManager/Rules/Notifications/Item/Cause/CreateUpdate/NotificationItemCauseCreateUpdateCode.js",
                     "_Name": "CauseGroupLstPkr",
                     "_Type": "Control.Type.FormCell.ListPicker"

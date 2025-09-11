@@ -63,7 +63,7 @@ export default function WorkOrderOperationsListViewQueryOption(context) {
             }
             queryBuilder.expand(expand);
             queryBuilder.filter("(OrderId eq '" + context.getPageProxy().getBindingObject().OrderId + "' and sap.entityexists(InspectionPoint_Nav))");
-            queryBuilder.orderBy('OperationNo,OrderId,ObjectKey,OperationMobileStatus_Nav/MobileStatus');
+            queryBuilder.orderBy('OperationNo,OrderId');
             if (filter) {
                 queryBuilder.filter().and(filter);
             }
@@ -85,7 +85,7 @@ export default function WorkOrderOperationsListViewQueryOption(context) {
         if (queryBuilder) {
             queryBuilder.expand('OperationMobileStatus_Nav,Confirmations,Employee_Nav');
             queryBuilder.expand('WOHeader/OrderMobileStatus_Nav'); //Required for operation status changes
-            queryBuilder.orderBy('OrderId,OperationNo,ObjectKey,OperationMobileStatus_Nav/MobileStatus');
+            queryBuilder.orderBy('OrderId,OperationNo');
 
             if (userFeaturesLib.isFeatureEnabled(context, context.getGlobalDefinition('/SAPAssetManager/Globals/Features/QM.global').getValue())) {
                 queryBuilder.expand('InspectionPoint_Nav');
@@ -99,7 +99,7 @@ export default function WorkOrderOperationsListViewQueryOption(context) {
             if (userFeaturesLib.isFeatureEnabled(context, context.getGlobalDefinition('/SAPAssetManager/Globals/Features/QM.global').getValue()) && CommonLibrary.isDefined(context.binding) && CommonLibrary.isDefined(context.binding['@odata.type']) && context.binding['@odata.type'] === '#sap_mobile.InspectionLot') {
                 queryBuilder.expand('WOHeader/InspectionLot_Nav,WOObjectList_Nav,Tools,OperationMobileStatus_Nav,OperationLongText,WOHeader,WOHeader/UserTimeEntry_Nav,UserTimeEntry_Nav,WOHeader/WOPriority,Employee_Nav');
                 queryBuilder.filter("(OrderId eq '" + context.getPageProxy().getBindingObject().OrderId + "' and sap.entityexists(InspectionPoint_Nav))");
-                queryBuilder.orderBy('OperationNo,OrderId,ObjectKey,OperationMobileStatus_Nav/MobileStatus');
+                queryBuilder.orderBy('OperationNo,OrderId');
                 if (filter) {
                     queryBuilder.filter().and(filter);
                 }

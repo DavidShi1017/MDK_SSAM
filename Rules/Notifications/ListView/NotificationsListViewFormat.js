@@ -3,7 +3,7 @@ import OffsetODataDate from '../../Common/Date/OffsetODataDate';
 import libMobile from '../../MobileStatus/MobileStatusLibrary';
 
 export default function NotificationsListViewFormat(context) {
-    var section = context.getName();
+    const section = context?.getParent()?.getName();
     var property = context.getProperty();
     var binding = context.binding.NotificationHeader_Nav ? context.binding.NotificationHeader_Nav : context.binding;
     var value = '';

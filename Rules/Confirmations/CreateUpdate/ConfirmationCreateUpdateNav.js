@@ -36,11 +36,8 @@ export default function ConfirmationCreateUpdateNav(context, override, defaultSt
     //set the CHANGSET flag to true
     libCommon.setOnChangesetFlag(context, true);
     libCommon.resetChangeSetActionCounter(context);
-    if (context.constructor.name === 'SectionedTableProxy') {
-        context.getPageProxy().setActionBinding(mConfirmation);
-    } else {
-        context.setActionBinding(mConfirmation);
-    }
+    context.getPageProxy().setActionBinding(mConfirmation);
+
     ///CreateUpdateConfirmation needs confirmation args in client data
     context.getClientData().confirmationArgs = mConfirmation;
     libCommon.setStateVariable(context, 'FinalConfirmationIsCompletingWorkOrder', false);
