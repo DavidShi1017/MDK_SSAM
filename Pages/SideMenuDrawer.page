@@ -711,7 +711,7 @@
 			"_Type": "Control.Type.SideDrawer",
 			"DataSubscriptions": "/SAPAssetManager/Rules/Common/DataSubscriptions.js",
 			"_Name": "SideDrawer0",
-			"DrawerButton": "$(PLT,/SAPAssetManager/Images/sidemenu.pdf,/SAPAssetManager/Images/sidemenu.android.png)",
+			"DrawerButton":"$(PLT,sap-icon://menu2, sap-icon://menu2)",
 			"AlwaysShowDrawerButton": true,
 			"ClearHistory": true,
 			"Styles": {

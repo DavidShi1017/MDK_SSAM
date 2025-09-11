@@ -64,11 +64,11 @@ export default class {
      * @returns {object} object with entity set and query options
      */
     static getBOMEntitySetAndQueryOptions(context, binding) {
-        const dataType = binding['@odata.type'];
+        const dataType = binding?.['@odata.type'] ? binding?.['@odata.type'] : context.getPageProxy()?.binding?.['@odata.type'];
         const isIndirectBOMType = this.getBOMType(binding) === this.typeIndirect;
 
         let bomEntitySet = isIndirectBOMType ? 'MaterialBOMs' : '';
-        let bomFilter = `${isIndirectBOMType ? `MaterialNum eq '${binding.ConstType}'` : ''}`;
+        let bomFilter = isIndirectBOMType ? `MaterialNum eq '${binding?.ConstType ? binding?.ConstType: context.getPageProxy()?.binding?.ConstType}'` : '';
         let bomQueryOptions = '$expand=BOMHeader_Nav/BOMItems_Nav&$filter=' + bomFilter;
         let bomItemsOnlineFilter = '';
 
@@ -76,11 +76,11 @@ export default class {
             switch (dataType) {
                 case context.getGlobalDefinition('/SAPAssetManager/Globals/ODataTypes/Equipment.global').getValue():
                     bomEntitySet = 'EquipmentBOMs';
-                    bomFilter = `EquipId eq '${binding.EquipId}'`;
+                    bomFilter = `EquipId eq '${binding?.EquipId ? binding?.EquipId: context.getPageProxy()?.binding?.EquipId}'`;
                     break;
                 case context.getGlobalDefinition('/SAPAssetManager/Globals/ODataTypes/FunctionalLocation.global').getValue():
                     bomEntitySet = 'FunctionalLocationBOMs';
-                    bomFilter = `FuncLocIdIntern eq '${binding.FuncLocIdIntern}'`;
+                    bomFilter = `FuncLocIdIntern eq '${binding?.FuncLocIdIntern ? binding?.FuncLocIdIntern: context.getPageProxy()?.binding?.FuncLocIdIntern}'`;
                     break;
             }
 
@@ -103,7 +103,8 @@ export default class {
      */
     static BOMPageNav(context) {
         const self = this;
-        const binding = context.binding;
+        let binding = context.binding;
+        binding = binding?.['@odata.type'] ? binding : context.getPageProxy()?.binding;
         binding.Online = false;
 
         const {bomEntitySet, bomQueryOptions, bomItemsOnlineFilter} = this.getBOMEntitySetAndQueryOptions(context, binding);
@@ -111,7 +112,7 @@ export default class {
         return context.read('/SAPAssetManager/Services/AssetManager.service', bomEntitySet, [], bomQueryOptions).then(bomResult => {
             if (!libVal.evalIsEmpty(bomResult)) {
                 binding.HC_ROOT_CHILDCOUNT = bomResult.getItem(0).BOMHeader_Nav.BOMItems_Nav.length;
-                context.getPageProxy().setActionBinding(context.binding);
+                context.getPageProxy().setActionBinding(binding);
                 return context.executeAction('/SAPAssetManager/Actions/HierarchyControl/BOMHierarchyControlPageNav.action');
             } else {
                 binding.Online = true;

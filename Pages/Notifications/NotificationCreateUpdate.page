@@ -672,6 +672,7 @@
                     "_Type": "Control.Type.FormCell.Note"
                 },
                 {
+                    "AllowDefaultValueIfOneItem": true,
                     "AllowMultipleSelection": false,
                     "IsPickerDismissedOnSelection": true,
                     "IsSearchCancelledAfterSelection": true,
@@ -684,7 +685,7 @@
                         "BarcodeScanner": true
                     },
                     "Caption": "$(L,part_group)",
-                    "PickerItems": "/SAPAssetManager/Rules/Notifications/Item/CreateUpdate/NotificationItemPartGroupPickerItems.js",
+                    "PickerItems": [],
                     "OnValueChange" : "/SAPAssetManager/Rules/Notifications/Item/CreateUpdate/NotificationItemCreateUpdatePart.js",
                     "_Name": "PartGroupLstPkr",
                     "_Type": "Control.Type.FormCell.ListPicker"
@@ -718,6 +719,7 @@
                     "_Type": "Control.Type.FormCell.ListPicker"
                 },
                 {
+                    "AllowDefaultValueIfOneItem": true,
                     "AllowMultipleSelection": false,
                     "IsPickerDismissedOnSelection": true,
                     "IsSearchCancelledAfterSelection": true,
@@ -729,7 +731,7 @@
                         "BarcodeScanner": true
                     },
                     "Caption": "$(L,damage_group)",
-                    "PickerItems": "/SAPAssetManager/Rules/Notifications/Item/CreateUpdate/NotificationItemPartGroupPickerItems.js",
+                    "PickerItems": [],
                     "OnValueChange" : "/SAPAssetManager/Rules/Notifications/Item/CreateUpdate/NotificationItemCreateUpdateDamage.js",
                     "_Name": "DamageGroupLstPkr",
                     "_Type": "Control.Type.FormCell.ListPicker"
@@ -777,6 +779,7 @@
                     "_Type": "Control.Type.FormCell.Note"
                 },
                 {
+                    "AllowDefaultValueIfOneItem": true,
                     "AllowMultipleSelection": false,
                     "IsPickerDismissedOnSelection": true,
                     "IsSearchCancelledAfterSelection": true,
@@ -790,7 +793,7 @@
                     "IsEditable": false,
                     "Caption": "$(L,cause_group)",
                     "Value": "{CauseCodeGroup}",
-                    "PickerItems": "/SAPAssetManager/Rules/Notifications/Item/CreateUpdate/NotificationItemPartGroupPickerItems.js",
+                    "PickerItems": [],
                     "OnValueChange" : "/SAPAssetManager/Rules/Notifications/Item/Cause/CreateUpdate/NotificationItemCauseCreateUpdateCode.js",
                     "_Name": "CauseGroupLstPkr",
                     "_Type": "Control.Type.FormCell.ListPicker"

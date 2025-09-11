@@ -21,15 +21,19 @@ export default class {
      * Get Page Name from context
      */
     static getPageName(context) {
-        if (context.getPageProxy && context.getPageProxy()._page._definition.getName) {
-            return context.getPageProxy()._page._definition.getName();
-        } else if (context.getPageProxy && context.getPageProxy()._page._definition.name) {
-            return context.getPageProxy()._page._definition.name;
+        let pageDefinition;
+        if (context.getPageProxy) {
+            pageDefinition = context.getPageProxy()._page._definition;
         } else {
-            return context._page._definition.getName();
+            pageDefinition = context._page._definition;
         }
-    }
 
+        if (pageDefinition) {
+            return pageDefinition.name;
+        }
+
+        return '';
+    }
     /**
      * Get Previous Page Name from context
      */
