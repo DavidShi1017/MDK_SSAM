@@ -38,7 +38,7 @@ export default function ChangeMobileStatus(context, ObjectKey, ObjectType, Mobil
 			break;
 		default:
 			break;
-	}
+	} 
 	return context.executeAction({'Name': '/SAPAssetManager/Actions/Common/MobileStatusUpdate.action', 'Properties': {
 		'Properties': {
 			'ObjectKey': ObjectKey,
