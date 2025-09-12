@@ -8,15 +8,15 @@ export default function NoteCaption(context) {
         if (isReviewRequired) {
             return context.localizeText('notes');
         } else {
-            if(binding.WOHeader){
-                let orderType = binding.WOHeader.OrderType;
-                if('KM01' === orderType || 'KM03' === orderType){
-                    return context.localizeText('notes');
-                }else{
-                    return context.localizeText('supervisor_name');
-                }
-            }
-            return context.localizeText('supervisor_name');
+            // if(binding.WOHeader){
+            //     let orderType = binding.WOHeader.OrderType;
+            //     if('KM01' === orderType || 'KM03' === orderType){
+            //         return context.localizeText('notes');
+            //     }else{
+            //         return context.localizeText('supervisor_name');
+            //     }
+            // }
+            return context.localizeText('notes');
         }
     });
 }

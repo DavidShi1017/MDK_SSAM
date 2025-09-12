@@ -342,12 +342,37 @@ export default function OperationChangeStatusOptions(context) {
                                                         }else{       
                                                             popoverItems.push({'Status': statusElement.MobileStatus, 'Title': transitionText, 'OnPress': '/SAPAssetManager/Rules/WorkOrders/Operations/NavOnCompleteOperationPage.js', 'TransitionType': transitionType});                                             
                                                         }
-                                                    }
-                                                    // else{
-                                                    //    popoverItems.push({'Status': statusElement.MobileStatus, 'Title': transitionText, 'OnPress': '/SAPAssetManager/Rules/WorkOrders/Operations/NavOnCompleteOperationPage.js', 'TransitionType': transitionType});                                             
+                                                    }else if('KM05' === orderType){
+                                                        if(noConfirmations){
+                                                            Logger.debug("No confirmations in order...");
+                                                            popoverItems.push({'Status': statusElement.MobileStatus, 'Title': transitionText, 'TransitionType': transitionType, 'OnPress': {
+                                                                'Name': '/SAPAssetManager/Actions/Common/GenericErrorDialog.action',
+                                                                'Properties': {
+                                                                    'Title': context.localizeText('validation_warning'),
+                                                                    'Message': 'Time Confirmation has not been added. Please Check',
+                                                                    'OKCaption': context.localizeText('close'),
+                                                                },
+                                                            }});
+                                                        }else{
+                                                            if(pointCount === totalCount){
+                                                                WorkOrderCompletionLibrary.getInstance().setIsAutoCompleteOnApprovalFlag(context, true);
+                                                                postUpdateRule = '/SAPAssetManager/Rules/Supervisor/ApprovalPostUpdate.js';
+                                                                popoverItems.push({'Status': statusElement.MobileStatus, 'Title': transitionText, 'OnPress': mobileStatusOverride(context, statusElement, 'OperationMobileStatus_Nav', postUpdateRule), 'TransitionType': transitionType});
+                                                            }else{
+                                                                popoverItems.push({'Status': statusElement.MobileStatus, 'Title': transitionText, 'TransitionType': transitionType, 'OnPress': {
+                                                                    'Name': '/SAPAssetManager/Actions/Common/GenericErrorDialog.action',
+                                                                    'Properties': {
+                                                                        'Title': context.localizeText('validation_warning'),
+                                                                        'Message': 'There is a missing Inspection Point. Please Check',
+                                                                        'OKCaption': context.localizeText('close'),
+                                                                    },
+                                                                }});
+                                                            }
+                                                        }
+                                                    }else{
+                                                        popoverItems.push({'Status': statusElement.MobileStatus, 'Title': transitionText, 'OnPress': '/SAPAssetManager/Rules/WorkOrders/Operations/NavOnCompleteOperationPage.js', 'TransitionType': transitionType});                                             
 
-                                                    // }
-                                                    
+                                                     }
                                                 }
                                             } else if (statusElement.MobileStatus === TRANSFER && (element.RoleType === userRoleType || personaLib.isFieldServiceTechnician(context) || !libSuper.isSupervisorFeatureEnabled(context))) {
                                                 // Prepend warning dialog to transfer status change
