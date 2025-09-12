@@ -355,9 +355,9 @@ export default function OperationChangeStatusOptions(context) {
                                                             }});
                                                         }else{
                                                             if(pointCount === totalCount){
-                                                                WorkOrderCompletionLibrary.getInstance().setIsAutoCompleteOnApprovalFlag(context, true);
-                                                                postUpdateRule = '/SAPAssetManager/Rules/Supervisor/ApprovalPostUpdate.js';
-                                                                popoverItems.push({'Status': statusElement.MobileStatus, 'Title': transitionText, 'OnPress': mobileStatusOverride(context, statusElement, 'OperationMobileStatus_Nav', postUpdateRule), 'TransitionType': transitionType});
+                                                                // WorkOrderCompletionLibrary.getInstance().setIsAutoCompleteOnApprovalFlag(context, true);
+                                                                // postUpdateRule = '/SAPAssetManager/Rules/Supervisor/ApprovalPostUpdate.js';
+                                                                popoverItems.push({'Status': statusElement.MobileStatus, 'Title': transitionText, 'OnPress': '/SAPAssetManager/Rules/WorkOrders/Operations/NavOnCompleteOperationPage.js', 'TransitionType': transitionType});                
                                                             }else{
                                                                 popoverItems.push({'Status': statusElement.MobileStatus, 'Title': transitionText, 'TransitionType': transitionType, 'OnPress': {
                                                                     'Name': '/SAPAssetManager/Actions/Common/GenericErrorDialog.action',
