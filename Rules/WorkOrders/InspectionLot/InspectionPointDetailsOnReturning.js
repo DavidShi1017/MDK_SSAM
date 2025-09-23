@@ -7,9 +7,9 @@ export default function InspectionPointDetailsOnReturning(context) {
         return context.read('/SAPAssetManager/Services/AssetManager.service', readLink, [], '$expand=InspectionPoints_Nav').then ((inspectionLotObject) => {
             if (inspectionLotObject.length > 0) {
                 CommonLibrary.setStateVariable(context, context.binding.OrderId, inspectionLotObject);
-                return context.setActionBarItemVisible(0, true);
+                //return context.setActionBarItemVisible(0, true);
             } else {
-                return context.setActionBarItemVisible(0, true);
+                //return context.setActionBarItemVisible(0, true);
             }
         });
     }
