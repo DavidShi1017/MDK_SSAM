@@ -7,7 +7,7 @@ export default function ConfirmationCreateFromOperation(context) {
 
     let status = OperationMobileStatus(context);
     let woStarted = libCom.getAppParam(context, 'MOBILESTATUS', context.getGlobalDefinition('/SAPAssetManager/Globals/MobileStatus/ParameterNames/StartParameterName.global').getValue());
-    if(status === woStarted){
+    if(status !== woStarted){
         return context.executeAction(
             {
                 'Name': '/SAPAssetManager/Actions/Common/GenericErrorDialog.action',
