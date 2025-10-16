@@ -5,20 +5,21 @@ import OperationMobileStatus from '../../MobileStatus/OperationMobileStatus';
 // Sets default order, operation and current datetime to binding before navigation to confirmation creation
 export default function ConfirmationCreateFromOperation(context) {
 
-    let status = OperationMobileStatus(context);
-    let woStarted = libCom.getAppParam(context, 'MOBILESTATUS', context.getGlobalDefinition('/SAPAssetManager/Globals/MobileStatus/ParameterNames/StartParameterName.global').getValue());
-    if(status !== woStarted){
-        return context.executeAction(
-            {
-                'Name': '/SAPAssetManager/Actions/Common/GenericErrorDialog.action',
-                'Properties': {
-                    'Title': context.localizeText('validation_warning'),
-                    'Message': 'test',
-                    'OKCaption': context.localizeText('close'),
-                },
-            },
-        );
-    }else{
+    // let status = OperationMobileStatus(context);
+    // let woStarted = libCom.getAppParam(context, 'MOBILESTATUS', context.getGlobalDefinition('/SAPAssetManager/Globals/MobileStatus/ParameterNames/StartParameterName.global').getValue());
+    // let woStartedLocalizeText = context.localizeText(woStarted) 
+    // if(status !== woStartedLocalizeText){
+    //     return context.executeAction(
+    //         {
+    //             'Name': '/SAPAssetManager/Actions/Common/GenericErrorDialog.action',
+    //             'Properties': {
+    //                 'Title': context.localizeText('validation_warning'),
+    //                 'Message': 'test',
+    //                 'OKCaption': context.localizeText('close'),
+    //             },
+    //         },
+    //     );
+    // }else{
         let currentDate = new Date();
         let hours = currentDate.getHours();
         let minutes = currentDate.getMinutes();
@@ -44,6 +45,6 @@ export default function ConfirmationCreateFromOperation(context) {
         };
 
         return ConfirmationCreateUpdateNav(context, override, odataDate.date(), odataDate.date());
-    }
+    //}
 
 }
