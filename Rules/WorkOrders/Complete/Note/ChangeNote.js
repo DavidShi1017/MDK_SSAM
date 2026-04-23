@@ -1,3 +1,14 @@
+/*
+*&---------------------------------------------------------------------*
+*&                         MODIFICATION HISTORY                        *
+*&---------------------------------------------------------------------*
+*&    Date     | Modified By | Description                             *
+*&---------------------------------------------------------------------*
+*& 23.04.2026    JBATALLONES   SRV000879 / CRQ000305 / CHG00032371     *
+*&                             Reverted changes. Logic is retained     *
+*&                             and commented out for future reference. *
+*&---------------------------------------------------------------------*
+*/
 import libCommon from '../../../Common/Library/CommonLibrary';
 import { NoteLibrary as NoteLib, TransactionNoteType} from '../../../Notes/NoteLibrary';
 import Constants from '../../../Common/Library/ConstantsLibrary';
@@ -28,23 +39,37 @@ export default function ChangeNote(context) {
         if (note && note.NewTextString) {
             libCommon.setStateVariable(context, Constants.noteStateVariable, note); 
             let page = context.currentPage._resolvedCaption;
-            
-            // if(page === context.localizeText('complete_operation') && (context.binding.WOHeader.OrderType === 'KM05' || context.binding.WOHeader.OrderType === 'KM02')){
-            //     return context.executeAction('/SAPAssetManager/Actions/Notes/NoteNameUpdateNav.action');
-            // }else{
-            //     return context.executeAction('/SAPAssetManager/Actions/Notes/NoteUpdateNav.action');
-            // }
-             return context.executeAction('/SAPAssetManager/Actions/Notes/NoteUpdateNav.action');
-        } else {
+// BEGIN of DEL - SRV000879 -  JBATALLONES - 23.04.2026
+// Reverted changes. Logic is retained and commented out for future reference
+//            // if(page === context.localizeText('complete_operation') && (context.binding.WOHeader.OrderType === 'KM05' || context.binding.WOHeader.OrderType === 'KM02')){
+//            //     return context.executeAction('/SAPAssetManager/Actions/Notes/NoteNameUpdateNav.action');
+//            // }else{
+//            //     return context.executeAction('/SAPAssetManager/Actions/Notes/NoteUpdateNav.action');
+//            // }
+//             return context.executeAction('/SAPAssetManager/Actions/Notes/NoteUpdateNav.action');
+// END of DEL - SRV000879 -  JBATALLONES - 23.04.2026
+            if(page === context.localizeText('complete_operation') && (context.binding.WOHeader.OrderType === 'KM05' || context.binding.WOHeader.OrderType === 'KM02')){
+                return context.executeAction('/SAPAssetManager/Actions/Notes/NoteNameUpdateNav.action');
+            }else{
+                return context.executeAction('/SAPAssetManager/Actions/Notes/NoteUpdateNav.action');
+            }
+} else {
             libCommon.setOnCreateUpdateFlag(context, 'CREATE');
             libCommon.setOnChangesetFlag(context, false);
             let page = context.currentPage._resolvedCaption;
-            // if(page === context.localizeText('complete_operation') && (context.binding.WOHeader.OrderType === 'KM05' || context.binding.WOHeader.OrderType === 'KM02')){
-            //     return context.executeAction('/SAPAssetManager/Actions/Notes/NoteNameCreateNav.action');
-            // }else{
-            //     return context.executeAction('/SAPAssetManager/Actions/Notes/NoteCreateNav.action');
-            // }
-           return context.executeAction('/SAPAssetManager/Actions/Notes/NoteCreateNav.action');
+// BEGIN of DEL - SRV000879 -  JBATALLONES - 23.04.2026
+// Reverted changes. Logic is retained and commented out for future reference
+//            // if(page === context.localizeText('complete_operation') && (context.binding.WOHeader.OrderType === 'KM05' || context.binding.WOHeader.OrderType === 'KM02')){
+//            //     return context.executeAction('/SAPAssetManager/Actions/Notes/NoteNameCreateNav.action');
+//            // }else{
+//            //     return context.executeAction('/SAPAssetManager/Actions/Notes/NoteCreateNav.action');
+//            // }
+//           return context.executeAction('/SAPAssetManager/Actions/Notes/NoteCreateNav.action');
+            if(page === context.localizeText('complete_operation') && (context.binding.WOHeader.OrderType === 'KM05' || context.binding.WOHeader.OrderType === 'KM02')){
+                return context.executeAction('/SAPAssetManager/Actions/Notes/NoteNameCreateNav.action');
+            }else{
+                return context.executeAction('/SAPAssetManager/Actions/Notes/NoteCreateNav.action');
+            }
         }
     });
 }

@@ -1,3 +1,14 @@
+/*
+*&---------------------------------------------------------------------*
+*&                         MODIFICATION HISTORY                        *
+*&---------------------------------------------------------------------*
+*&    Date     | Modified By | Description                             *
+*&---------------------------------------------------------------------*
+*& 23.04.2026    JBATALLONES   SRV000879 / CRQ000305 / CHG00032371     *
+*&                             Reverted changes. Logic is retained     *
+*&                             and commented out for future reference. *
+*&---------------------------------------------------------------------*
+*/
 import mobileStatusOverride from '../../MobileStatus/MobileStatusUpdateOverride';
 import common from '../../Common/Library/CommonLibrary';
 import libOpMobile from './OperationMobileStatusLibrary';
@@ -342,37 +353,45 @@ export default function OperationChangeStatusOptions(context) {
                                                         }else{       
                                                             popoverItems.push({'Status': statusElement.MobileStatus, 'Title': transitionText, 'OnPress': '/SAPAssetManager/Rules/WorkOrders/Operations/NavOnCompleteOperationPage.js', 'TransitionType': transitionType});                                             
                                                         }
-                                                    }else if('KM05' === orderType){
-                                                        if(noConfirmations){
-                                                            Logger.debug("No confirmations in order...");
-                                                            popoverItems.push({'Status': statusElement.MobileStatus, 'Title': transitionText, 'TransitionType': transitionType, 'OnPress': {
-                                                                'Name': '/SAPAssetManager/Actions/Common/GenericErrorDialog.action',
-                                                                'Properties': {
-                                                                    'Title': context.localizeText('validation_warning'),
-                                                                    'Message': 'Time Confirmation has not been added. Please Check',
-                                                                    'OKCaption': context.localizeText('close'),
-                                                                },
-                                                            }});
-                                                        }else{
-                                                            if(pointCount === totalCount){
-                                                                // WorkOrderCompletionLibrary.getInstance().setIsAutoCompleteOnApprovalFlag(context, true);
-                                                                // postUpdateRule = '/SAPAssetManager/Rules/Supervisor/ApprovalPostUpdate.js';
-                                                                popoverItems.push({'Status': statusElement.MobileStatus, 'Title': transitionText, 'OnPress': '/SAPAssetManager/Rules/WorkOrders/Operations/NavOnCompleteOperationPage.js', 'TransitionType': transitionType});                
-                                                            }else{
-                                                                popoverItems.push({'Status': statusElement.MobileStatus, 'Title': transitionText, 'TransitionType': transitionType, 'OnPress': {
-                                                                    'Name': '/SAPAssetManager/Actions/Common/GenericErrorDialog.action',
-                                                                    'Properties': {
-                                                                        'Title': context.localizeText('validation_warning'),
-                                                                        'Message': 'There is a missing Inspection Point. Please Check',
-                                                                        'OKCaption': context.localizeText('close'),
-                                                                    },
-                                                                }});
-                                                            }
-                                                        }
-                                                    }else{
-                                                        popoverItems.push({'Status': statusElement.MobileStatus, 'Title': transitionText, 'OnPress': '/SAPAssetManager/Rules/WorkOrders/Operations/NavOnCompleteOperationPage.js', 'TransitionType': transitionType});                                             
+                                                    }                                                    // else{
+                                                    // else{
+                                                    //    popoverItems.push({'Status': statusElement.MobileStatus, 'Title': transitionText, 'OnPress': '/SAPAssetManager/Rules/WorkOrders/Operations/NavOnCompleteOperationPage.js', 'TransitionType': transitionType});                                             
 
-                                                     }
+                                                    // }
+// BEGIN of DEL - SRV000879 -  JBATALLONES - 23.04.2026
+//                                                    Revert the changes; however, per functional requirements, all changes should still be retained in the system. Therefore, only comment them out.
+//                                                    else if('KM05' === orderType){
+//                                                        if(noConfirmations){
+//                                                            Logger.debug("No confirmations in order...");
+//                                                            popoverItems.push({'Status': statusElement.MobileStatus, 'Title': transitionText, 'TransitionType': transitionType, 'OnPress': {
+//                                                                'Name': '/SAPAssetManager/Actions/Common/GenericErrorDialog.action',
+//                                                                'Properties': {
+//                                                                    'Title': context.localizeText('validation_warning'),
+//                                                                    'Message': 'Time Confirmation has not been added. Please Check',
+//                                                                    'OKCaption': context.localizeText('close'),
+//                                                                },
+//                                                            }});
+//                                                        }else{
+//                                                           if(pointCount === totalCount){
+//                                                                // WorkOrderCompletionLibrary.getInstance().setIsAutoCompleteOnApprovalFlag(context, true);
+//                                                                // postUpdateRule = '/SAPAssetManager/Rules/Supervisor/ApprovalPostUpdate.js';
+//                                                                popoverItems.push({'Status': statusElement.MobileStatus, 'Title': transitionText, 'OnPress': '/SAPAssetManager/Rules/WorkOrders/Operations/NavOnCompleteOperationPage.js', 'TransitionType': transitionType});                
+//                                                            }else{
+//                                                                popoverItems.push({'Status': statusElement.MobileStatus, 'Title': transitionText, 'TransitionType': transitionType, 'OnPress': {
+//                                                                    'Name': '/SAPAssetManager/Actions/Common/GenericErrorDialog.action',
+//                                                                    'Properties': {
+//                                                                        'Title': context.localizeText('validation_warning'),
+//                                                                        'Message': 'There is a missing Inspection Point. Please Check',
+//                                                                        'OKCaption': context.localizeText('close'),
+//                                                                    },
+//                                                                }});
+//                                                            }
+//                                                        }
+//                                                    }else{
+//                                                        popoverItems.push({'Status': statusElement.MobileStatus, 'Title': transitionText, 'OnPress': '/SAPAssetManager/Rules/WorkOrders/Operations/NavOnCompleteOperationPage.js', 'TransitionType': transitionType});                                             
+//
+//                                                     }
+// END of DEL - SRV000879 -  JBATALLONES - 23.04.2026
                                                 }
                                             } else if (statusElement.MobileStatus === TRANSFER && (element.RoleType === userRoleType || personaLib.isFieldServiceTechnician(context) || !libSuper.isSupervisorFeatureEnabled(context))) {
                                                 // Prepend warning dialog to transfer status change

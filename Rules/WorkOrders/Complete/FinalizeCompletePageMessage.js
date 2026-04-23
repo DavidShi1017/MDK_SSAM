@@ -26,20 +26,20 @@ export default async function FinalizeCompletePageMessage(context) {
         message = 'meter_action_has_not_been_performed_for_operation_no_status';
         noStatusMessage = 'meter_action_has_not_been_performed_for_operation';
     
-        //let page = context.currentPage._resolvedCaption;
-        //let caption = context.getPageProxy().getCaption();
-        // if(page === context.localizeText('complete_operation')){
-        //     context.currentPage.controls[0].sections[1].value.items.forEach(item => {
-        //         if(item.keyName === context.localizeText('supervisor_name')){
-        //             let descr = item.value;
-        //             if(descr === ''){
-        //                 errorMessage = 'Supervisor Name is required';
-        //                 return showMessageErrorDialg(context, errorMessage);
-        //             }
-        //         }
-        //     });
+        let page = context.currentPage._resolvedCaption;
+        let caption = context.getPageProxy().getCaption();
+         if(page === context.localizeText('complete_operation')){
+             context.currentPage.controls[0].sections[1].value.items.forEach(item => {
+                 if(item.keyName === context.localizeText('supervisor_name')){
+                     let descr = item.value;
+                     if(descr === ''){
+                         errorMessage = 'Supervisor Name is required';
+                         return showMessageErrorDialg(context, errorMessage);
+                     }
+                 }
+             });
             
-        // }
+         }
         let orderType = binding.WOHeader.OrderType;
         if('KM01' === orderType || 'KM03' === orderType){
             value = await context.read('/SAPAssetManager/Services/AssetManager.service', `MyNotificationHeaders('${binding.WOHeader.NotificationNumber}')`, [], '$expand=Items,Items/ItemCauses').then(results => {
